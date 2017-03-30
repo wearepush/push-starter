@@ -30,9 +30,9 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "APIHOST": "redux-starter.herokuapp.com",
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": "",
-        "HOST": "redux-starter.herokuapp.com"
+        "HOST": "wearepush-redux-starter.herokuapp.com"
       }
     },
     "start-local": {
@@ -41,7 +41,7 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
         "PORT": 8080,
-        "APIHOST": "redux-starter.herokuapp.com",
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": "",
         "HOST": "localhost"
       }
@@ -52,7 +52,7 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 8080,
-        "APIHOST": "redux-starter.herokuapp.com",
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       }
     },
@@ -62,7 +62,7 @@
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src",
         "PORT": 8008,
-        "APIHOST": "redux-starter.herokuapp.com",
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       }
     },
@@ -71,8 +71,8 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "APIHOST": "redux-starter.herokuapp.com",
-        "HOST": "redux-starter.herokuapp.com",
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
+        "HOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       }
     },
@@ -81,7 +81,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "APIHOST": "redux-starter.herokuapp.com",
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       }
     }
