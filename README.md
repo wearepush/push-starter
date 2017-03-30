@@ -1,6 +1,6 @@
 # React Redux Universal Hot Example
 
-[![Demo on Heroku](https://img.shields.io/badge/demo-heroku-brightgreen.svg?style=flat-square)](http://redux-starter.herokuapp.com)
+[![Demo on Heroku](https://img.shields.io/badge/demo-heroku-brightgreen.svg?style=flat-square)](https://wearepush-redux-starter.herokuapp.com/)
 
 ## Installation
 
@@ -33,6 +33,8 @@ npm run test
 ```
 
 ## Deployment on Heroku
+
+0. Add heroku `heroku git:remote -a wearepush-redux-starter`
 
 To get this project to work on Heroku, you need to:
 
