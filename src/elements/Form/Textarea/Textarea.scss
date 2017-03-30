@@ -1,0 +1,45 @@
+//@import "../../../stylesheets/variables";
+//@import "../../../stylesheets/mixins";
+//
+//$textarea: 'textarea';
+//
+//.#{$textarea} {
+//
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: flex-start;
+//
+//  -webkit-appearance: none;
+//
+//  @include breakpoint('phone-max') {
+//    flex-direction: column;
+//  }
+//
+//  label{
+//    min-width: 95px;
+//    font-size: 12px;
+//    line-height: 14px;
+//    color: #4A4A4A;
+//    margin: 0;
+//    padding-top: 8px;
+//    @include font-base-light;
+//    font-weight: normal;
+//
+//    @include breakpoint('phone-max') {
+//      padding-top: 0;
+//      padding-bottom: 5px;
+//    }
+//  }
+//
+//  &__wrapper{
+//    width: 100%;
+//    max-width: 300px;
+//  }
+//
+//  .form-control{
+//    max-width: 395px;
+//    min-height: 78px;
+//    max-height: 135px;
+//    width: 100% !important;
+//  }
+//}

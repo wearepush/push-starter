@@ -1,0 +1,8 @@
+$row: 'row';
+
+.#{$row} {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 100%;
+}

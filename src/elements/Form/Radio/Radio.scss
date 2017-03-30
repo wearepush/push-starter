@@ -1,0 +1,151 @@
+@import "../../../stylesheets/variables";
+@import "../../../stylesheets/mixins";
+
+.radio {
+  position: relative;
+  cursor: pointer;
+
+  &--auth {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 0 0 rem(36);
+    font-size: rem(13);
+
+    span {
+      text-transform: uppercase;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 3px;
+      width: rem(22);
+      height: rem(22);
+      border: 1px solid #ccc;
+    }
+
+    i {
+      position: absolute;
+      width: rem(16);
+      height: rem(16);
+      top: rem(4);
+      left: rem(2);
+      color: #f00;
+      opacity: 0;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: rem(13);
+      line-height: rem(22);
+      color: #000;
+      opacity: .35;
+    }
+  }
+
+  &--circle {
+    display: block;
+    overflow: hidden;
+    padding: rem(15) rem(60) rem(17) rem(46);
+    line-height: rem(18);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: rem(13);
+      margin: rem(-8px) 0 0;
+      width: rem(16);
+      height: rem(16);
+      border: 1px solid #ccc;
+      border-radius: 50%;
+
+      // @include media($screen-tablet){
+      //   left: rem(10);
+      // }
+    }
+
+    // @include media($screen-tablet-max) {
+    //   padding-left: rem(35);
+    // }
+
+    img {
+      position: relative;
+      top: rem(5);
+      margin: 0 rem(5) 0 0;
+    }
+
+    span {
+      font-size: rem(14);
+      line-height: rem(16);
+      letter-spacing: 0.3px;
+      opacity: 0.35;
+    }
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: rem(17);
+      margin: rem(-4) 0 0;
+      width: rem(8);
+      min-width: rem(8);
+      height: rem(8);
+      border-radius: 50%;
+      background: #000;
+      background-image: none;
+      color: #000;
+      opacity: 0;
+
+      // @include media($screen-tablet){
+      //   left: rem(14);
+
+      // }
+
+      &:before {
+        content: '';
+      }
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type=radio]:checked + i,
+  input[type=radio]:checked ~ span {
+    opacity: 1;
+  }
+
+  &--gender {
+    display: inline-block;
+    margin: 0 rem(5);
+    padding: rem(10);
+    min-width: rem(135);
+    border: 1px solid #ff0;
+    border-radius: 20px;
+    letter-spacing: rem(0.33);
+    font-size: rem(13);
+    background-color: #fff;
+
+    &.active {
+      color: #fff;
+      border: 1px solid transparent;
+      background: #f00;
+    }
+
+    &:hover {
+      color: #fff;
+      border: 1px solid transparent;
+      background: #f0f;
+    }
+
+    i {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+//@import "../../../stylesheets/variables";
+//@import "../../../stylesheets/mixins";
+//
+//.input-file{
+//
+//  &>div{
+//    display: inline-block;
+//    width: auto !important;
+//    height: auto !important;
+//    border: none !important;
+//    border-radius: 0 !important;
+//    cursor: pointer;
+//  }
+//
+//  strong{
+//    font-weight: normal;
+//    color: $color-havelock-blue;
+//    font-size: 12px;
+//    line-height: 14px;
+//    @include font-base-light;
+//  }
+//  span{
+//    font-weight: normal;
+//    color: $color-dusty;
+//    font-size: 12px;
+//    line-height: 14px;
+//    @include font-base-light;
+//  }
+//}

@@ -1,0 +1,12 @@
+@import "../../../stylesheets/variables";
+@import "../../../stylesheets/mixins";
+
+$formError: 'formError';
+
+.#{$formError} {
+  color: $color-flamingo;
+  margin-top: 10px;
+  text-align: left;
+  white-space: pre;
+}
+

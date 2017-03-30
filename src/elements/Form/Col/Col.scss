@@ -1,0 +1,16 @@
+$col: 'col';
+
+.#{$col} {
+  flex: 1;
+
+  padding-right: 10px;
+  padding-left: 10px;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
