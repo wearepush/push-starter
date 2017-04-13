@@ -7,9 +7,9 @@ import ReactDOM from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
-import { Router, browserHistory, hashHistory } from 'react-router';
+import { Router, browserHistory, hashHistory, applyRouterMiddleware } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-connect';
-import useScroll from 'scroll-behavior/lib/useStandardScroll';
+import useScroll from 'react-router-scroll';
 import getRoutes from './routes';
 import { supportsHistory } from 'history/lib/DOMUtils';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -17,16 +17,28 @@ import createLogger from 'redux-logger';
 
 const historyStrategy = supportsHistory() ? browserHistory : hashHistory;
 const client = new ApiClient();
-const scroll_history = useScroll(() => historyStrategy)();
 const dest = document.getElementById('content');
 const logger = createLogger();
-const store = createStore(scroll_history, client, window.__data, logger);
-const history = syncHistoryWithStore(scroll_history, store);
+const store = createStore(historyStrategy, client, window.__data, logger);
+const history = syncHistoryWithStore(historyStrategy, store);
 
 const component = (
   <Router
     render={props =>
-      <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />
+      <ReduxAsyncConnect
+        {...props}
+        helpers={{ client }}
+        filter={item => !item.deferred}
+        render={applyRouterMiddleware(useScroll((prevProps, { location, routes }) => {
+          if (routes.some(route => route.ignoreScrollBehavior)) {
+            return false;
+          }
+          if (prevProps && `${location.pathname}${location.search}` !== `${prevProps.location.pathname}${prevProps.location.search}`) {
+            return [0, 0];
+          }
+          return true;
+        }))}
+      />
     }
     history={history}
   >
