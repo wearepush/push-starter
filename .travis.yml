@@ -3,10 +3,7 @@ dist: trusty
 language: node_js
 
 node_js:
-  - "4.0"
-  - "4"
-  - "5"
-  - "stable"
+  - "7"
 
 addons:
   apt:
@@ -29,7 +26,9 @@ before_script:
 script:
   - npm run lint
   - npm test
-  - npm run test-node
 
 env:
   - TRAVIS=travis CXX=g++-4.8
+
+cache:
+  yarn: true
