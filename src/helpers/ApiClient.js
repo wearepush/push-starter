@@ -14,7 +14,7 @@ function formatUrl(path, direct_url = false) {
 class _ApiClient {
   constructor(req) {
     methods.forEach((method) => {
-      this[method] = (path, { params, data, headers, attachments, direct_url } = {}) => new Promise((resolve, reject) => {
+      this[method] = (path, { params, data, headers, attachments, direct_url, handleProgress, getBackRequest } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path, direct_url));
         if (params) {
           request.query(params);
@@ -69,6 +69,14 @@ class _ApiClient {
 
         if (data && !attachments) {
           request.send(data);
+        }
+
+        if (handleProgress) {
+          request.on('progress', handleProgress);
+        }
+
+        if (getBackRequest) {
+          getBackRequest(request);
         }
 
         request.end((err, res = {}) => {
