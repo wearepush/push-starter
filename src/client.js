@@ -13,7 +13,7 @@ import useScroll from 'react-router-scroll';
 import getRoutes from './routes';
 import { supportsHistory } from 'history/lib/DOMUtils';
 import { syncHistoryWithStore } from 'react-router-redux';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 
 const historyStrategy = supportsHistory() ? browserHistory : hashHistory;
 const client = new ApiClient();

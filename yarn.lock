@@ -960,7 +960,7 @@ babel-register@^6.23.0, babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.6.1, babel-runtime@~6.x.x:
+babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.6.1:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -2061,6 +2061,10 @@ dom-helpers@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-2.4.0.tgz#9bb4b245f637367b1fa670274272aa28fe06c367"
 
+dom-helpers@^3.0.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.2.1.tgz#3203e07fed217bd1f424b019735582fc37b2825a"
+
 dom-serialize@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/dom-serialize/-/dom-serialize-2.2.1.tgz#562ae8999f44be5ea3076f5419dcd59eb43ac95b"
@@ -2786,12 +2790,6 @@ flatten@^1.0.2:
 flow-bin@^0.34.0:
   version "0.34.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.34.0.tgz#093ed36981e8fafc39d16f0b0878d0968aa80fad"
-
-flux-standard-action@^0.6.0:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/flux-standard-action/-/flux-standard-action-0.6.1.tgz#6f34211b94834ea1c3cc30f4e7afad3d0fbf71a2"
-  dependencies:
-    lodash.isplainobject "^3.2.0"
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -3890,10 +3888,6 @@ lodash._basecreate@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/lodash._basecreate/-/lodash._basecreate-3.0.3.tgz#1bc661614daa7fc311b7d03bf16806a0213cf821"
 
-lodash._basefor@^3.0.0:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/lodash._basefor/-/lodash._basefor-3.0.3.tgz#7550b4e9218ef09fad24343b612021c79b4c20c2"
-
 lodash._bindcallback@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
@@ -4001,26 +3995,11 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
-lodash.isplainobject@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-3.2.0.tgz#9a8238ae16b200432960cd7346512d0123fbf4c5"
-  dependencies:
-    lodash._basefor "^3.0.0"
-    lodash.isarguments "^3.0.0"
-    lodash.keysin "^3.0.0"
-
 lodash.keys@^3.0.0, lodash.keys@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
   dependencies:
     lodash._getnative "^3.0.0"
-    lodash.isarguments "^3.0.0"
-    lodash.isarray "^3.0.0"
-
-lodash.keysin@^3.0.0:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.keysin/-/lodash.keysin-3.0.8.tgz#22c4493ebbedb1427962a54b445b2c8a767fb47f"
-  dependencies:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
@@ -4089,7 +4068,7 @@ lodash@^3.8.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.0.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.5.1, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.0.1, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.5.1, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5621,19 +5600,20 @@ reduce-reducers@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-0.1.2.tgz#fa1b4718bc5292a71ddd1e5d839c9bea9770f14b"
 
-redux-actions@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-0.9.1.tgz#a72767654bc21424c3df3f6240780ffa8872783c"
+redux-actions@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-2.0.1.tgz#8bae89938987bd0a446c509dfdac6b64e770765a"
   dependencies:
-    flux-standard-action "^0.6.0"
+    invariant "^2.2.1"
+    lodash "^4.13.1"
     reduce-reducers "^0.1.0"
 
-redux-connect@^2.4.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/redux-connect/-/redux-connect-2.4.1.tgz#e98c94d1bde51a8343a80e97239bffec729e77db"
+redux-connect@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/redux-connect/-/redux-connect-5.1.0.tgz#6e95f71135c117bc4028ca6eee4c3b079e2e419a"
   dependencies:
-    babel-runtime "~6.x.x"
-    redux-actions "^0.9.1"
+    babel-runtime "^6.20.0"
+    redux-actions "^2.0.1"
 
 redux-form@6.4.3:
   version "6.4.3"
@@ -5649,9 +5629,9 @@ redux-form@6.4.3:
     lodash-es "^4.17.3"
     shallowequal "^0.2.2"
 
-redux-logger@^2.7.4:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-2.10.2.tgz#3c5a5f0a6f32577c1deadf6655f257f82c6c3937"
+redux-logger@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.1.tgz#ae8ae4c3c55ed3dd7aa31509f0856c5d3751057a"
   dependencies:
     deep-diff "0.3.4"
 
@@ -5965,17 +5945,18 @@ sax@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
 
-scroll-behavior@^0.3.2:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.3.4.tgz#ea97ed081a6983402d25c1a3647f3e3d4e32c8ea"
-  dependencies:
-    dom-helpers "^2.4.0"
-
 scroll-behavior@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.7.0.tgz#8e65ac4ea9c15f93319e482350852b64ef1e296d"
   dependencies:
     dom-helpers "^2.4.0"
+
+scroll-behavior@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.9.3.tgz#e48bcc8af364f3f07176e8dbca3968bd5e71557b"
+  dependencies:
+    dom-helpers "^3.0.0"
+    invariant "^2.2.1"
 
 semver-diff@^2.0.0:
   version "2.1.0"
