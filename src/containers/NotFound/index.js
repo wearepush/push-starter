@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './index.scss';
 import Helmet from 'react-helmet';
 import config from 'config';
+import styles from './index.scss';
 
 export default function NotFound() {
   return (

@@ -4,16 +4,16 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from './redux/create';
-import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
 import { Router, browserHistory, hashHistory, applyRouterMiddleware } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-connect';
-import { useScroll } from 'react-router-scroll';
-import getRoutes from './routes';
-import { supportsHistory } from 'history/lib/DOMUtils';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
+import { useScroll } from 'react-router-scroll';
+import { supportsHistory } from 'history/lib/DOMUtils';
+import createStore from './redux/create';
+import ApiClient from './helpers/ApiClient';
+import getRoutes from './routes';
 
 const historyStrategy = supportsHistory() ? browserHistory : hashHistory;
 const client = new ApiClient();
