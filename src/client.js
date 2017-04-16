@@ -9,7 +9,7 @@ import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
 import { Router, browserHistory, hashHistory, applyRouterMiddleware } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-connect';
-import useScroll from 'react-router-scroll';
+import { useScroll } from 'react-router-scroll';
 import getRoutes from './routes';
 import { supportsHistory } from 'history/lib/DOMUtils';
 import { syncHistoryWithStore } from 'react-router-redux';
