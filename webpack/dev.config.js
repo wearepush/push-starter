@@ -1,3 +1,5 @@
+process.noDeprecation = true;
+
 require('babel-polyfill');
 
 // Webpack config for development

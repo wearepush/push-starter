@@ -1,3 +1,5 @@
+process.noDeprecation = true;
+
 require('babel-polyfill');
 
 // Webpack config for creating the production bundle.
@@ -43,7 +45,8 @@ module.exports = {
             options: {
               strip: ['debug']
             }
-          }, {
+          },
+          {
             loader: 'babel-loader'
           }
         ],
@@ -52,17 +55,17 @@ module.exports = {
 
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          loader: 'css-loader',
+          use: 'css-loader',
         }),
       },
 
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          loader: [
+          use: [
             {
               loader: 'css-loader',
               query: {
