@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import * as authActions from 'redux/modules/auth';
 
 // import ReactDOM from 'react-dom';
@@ -12,7 +12,7 @@ import * as authActions from 'redux/modules/auth';
 // const client = new ApiClient();
 
 describe('Auth', () => {
-  console.log(authActions.logIn)
+  console.log(authActions.logIn);
   // const mockStore = {
   //   info: {
   //     load: () => {},
