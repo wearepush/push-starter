@@ -37,13 +37,6 @@ export default class Html extends Component {
           {head.link.toComponent()}
           {head.script.toComponent()}
 
-          <link rel="manifest" href="/manifest.json" />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="application-name" content="React Hot" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="apple-mobile-web-app-title" content="React Hot" />
-
           <link rel="shortcut icon" href="/favicons/favicon.ico" />
           <meta name="msapplication-TileImage" content="/favicons/192x192.png" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png" />

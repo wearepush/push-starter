@@ -17,9 +17,6 @@ var bootstrapEntryPoints = require('./../webpack.bootstrap.config.js');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
@@ -182,33 +179,7 @@ module.exports = {
       }
     }),
 
-    webpackIsomorphicToolsPlugin,
-
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/pwa.js'
-    }),
-
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'react-redux-universal-hot-example',
-      filename: '../service-worker.js',
-      maximumFileSizeToCacheInBytes: 8388608,
-
-      // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
-      stripPrefix: assetsPath + '/',
-
-      directoryIndex: '/',
-      verbose: true,
-      navigateFallback: '/dist/index.html',
-      runtimeCaching: [{
-        urlPattern: /\/api\/widget\/load(.*)/,
-        handler: 'networkFirst',
-        options: {
-          debug: true
-        }
-      }]
-    })
+    webpackIsomorphicToolsPlugin
 
   ]
 };
