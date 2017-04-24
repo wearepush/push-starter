@@ -8,6 +8,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var strip = require('strip-loader');
 
 var projectRootPath = path.resolve(__dirname, '../');
@@ -71,7 +72,7 @@ module.exports = {
               query: {
                 modules: true,
                 importLoaders: 2,
-                sourceMap: true,
+                sourceMap: false,
                 localIdentName: '[local]__[hash:base64:5]'
               }
             },
@@ -94,8 +95,8 @@ module.exports = {
               loader: 'sass-loader',
               query: {
                 outputStyle: 'expanded',
-                sourceMap: true,
-                sourceMapContents: true,
+                sourceMap: false,
+                // sourceMapContents: true,
               }
             }
           ]
@@ -158,6 +159,8 @@ module.exports = {
       // disable: false,
       allChunks: true
     }),
+
+    new OptimizeCssAssetsPlugin(),
 
     new webpack.DefinePlugin({
       'process.env': {

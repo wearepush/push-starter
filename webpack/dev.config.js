@@ -115,6 +115,15 @@ module.exports = {
           },
           {
             loader: 'postcss-loader',
+            options: {
+              plugins: function() {
+                return [
+                  autoprefixer({
+                    browsers: ['last 2 version']
+                  })
+                ];
+              }
+            }
           },
           {
             loader: 'sass-loader',
@@ -160,15 +169,6 @@ module.exports = {
       __SERVER__: false,
       __DEVELOPMENT__: true,
       __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
-    }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [
-          autoprefixer({
-            browsers: ['last 2 version']
-          })
-        ]
-      }
     }),
     webpackIsomorphicToolsPlugin.development()
   ]
