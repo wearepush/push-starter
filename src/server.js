@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/server';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
-import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
@@ -18,14 +17,6 @@ import { Provider } from 'react-redux';
 import getRoutes from './routes';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-let targetUrl = '';
-
-if (config.apiPort && config.apiPort !== '') {
-  targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
-} else {
-  targetUrl = 'http://' + config.apiHost;
-}
-
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
@@ -35,7 +26,7 @@ app.disable('x-powered-by');
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicons/favicon.ico')));
 
-app.use(Express.static(path.join(__dirname, '..', 'static'), {etag: false}));
+app.use(Express.static(path.join(__dirname, '..', 'static'), { etag: false }));
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -52,7 +43,11 @@ app.use((req, res) => {
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+      ReactDOM.renderToString(
+        <Html
+          assets={webpackIsomorphicTools.assets()}
+          store={store}
+        />));
   }
 
   if (__DISABLE_SSR__) {
@@ -68,7 +63,11 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
+      loadOnServer({
+        ...renderProps,
+        store,
+        helpers: { client }
+      }).then(() => {
         const component = (
           <Provider store={store} key="provider">
             <ReduxAsyncConnect {...renderProps} />
@@ -77,7 +76,12 @@ app.use((req, res) => {
 
         res.status(200);
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} is_home_page={req.url === '/'} component={component} store={store}/>));
+          ReactDOM.renderToString(
+            <Html
+              assets={webpackIsomorphicTools.assets()}
+              component={component}
+              store={store}
+            />));
       });
     } else {
       res.status(404).send('Not found');

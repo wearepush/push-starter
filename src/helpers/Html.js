@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
@@ -29,20 +30,13 @@ export default class Html extends Component {
     const head = Helmet.rewind();
     const ie = '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
     return (
-      <html lang="en-us">
+      <html lang="en">
         <head>
           {head.base.toComponent()}
           {head.title.toComponent()}
           {head.meta.toComponent()}
           {head.link.toComponent()}
           {head.script.toComponent()}
-
-          <link rel="manifest" href="/manifest.json" />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="application-name" content="React Hot" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="apple-mobile-web-app-title" content="React Hot" />
 
           <link rel="shortcut icon" href="/favicons/favicon.ico" />
           <meta name="msapplication-TileImage" content="/favicons/192x192.png" />
@@ -74,7 +68,8 @@ export default class Html extends Component {
           {assets.styles && Object.keys(assets.styles).map(style =>
             <link
               href={assets.styles[style]} key={style} media="screen, projection"
-              rel="stylesheet" type="text/css" charSet="UTF-8" />
+              rel="stylesheet" type="text/css" charSet="UTF-8"
+            />
           )}
 
           {/* (will be present only in development mode) */}
@@ -82,8 +77,8 @@ export default class Html extends Component {
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} /> : null}
         </head>
         <body>
-          <div dangerouslySetInnerHTML={{__html: ie}} />
-          <div id="content" dangerouslySetInnerHTML={{__html: content}} style={{ height: '100%', minHeight: 0 }} />
+          <div dangerouslySetInnerHTML={{ __html: ie }} />
+          <div id="content" dangerouslySetInnerHTML={{ __html: content }} style={{ height: '100%', minHeight: 0 }} />
           {store &&
             <script
               dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}
@@ -94,9 +89,11 @@ export default class Html extends Component {
 
           {/* (will be present only in development mode) */}
           {assets.styles && Object.keys(assets.styles).length === 0 ?
-              <script dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} />
+            <script
+              dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }}
+            />
             :
-              null
+            null
           }
         </body>
       </html>

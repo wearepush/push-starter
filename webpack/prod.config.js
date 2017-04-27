@@ -1,3 +1,5 @@
+process.noDeprecation = true;
+
 require('babel-polyfill');
 
 // Webpack config for creating the production bundle.
@@ -6,6 +8,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var strip = require('strip-loader');
 
 var projectRootPath = path.resolve(__dirname, '../');
@@ -16,9 +19,6 @@ var bootstrapEntryPoints = require('./../webpack.bootstrap.config.js');
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
-
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -46,7 +46,8 @@ module.exports = {
             options: {
               strip: ['debug']
             }
-          }, {
+          },
+          {
             loader: 'babel-loader'
           }
         ],
@@ -55,23 +56,23 @@ module.exports = {
 
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader',
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
         }),
       },
 
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
             {
               loader: 'css-loader',
               query: {
                 modules: true,
                 importLoaders: 2,
-                sourceMap: true,
+                sourceMap: false,
                 localIdentName: '[local]__[hash:base64:5]'
               }
             },
@@ -94,8 +95,8 @@ module.exports = {
               loader: 'sass-loader',
               query: {
                 outputStyle: 'expanded',
-                sourceMap: true,
-                sourceMapContents: true,
+                sourceMap: false,
+                // sourceMapContents: true,
               }
             }
           ]
@@ -159,6 +160,8 @@ module.exports = {
       allChunks: true
     }),
 
+    new OptimizeCssAssetsPlugin(),
+
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
@@ -182,33 +185,7 @@ module.exports = {
       }
     }),
 
-    webpackIsomorphicToolsPlugin,
-
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/pwa.js'
-    }),
-
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'react-redux-universal-hot-example',
-      filename: '../service-worker.js',
-      maximumFileSizeToCacheInBytes: 8388608,
-
-      // Ensure all our static, local assets are cached.
-      staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
-      stripPrefix: assetsPath + '/',
-
-      directoryIndex: '/',
-      verbose: true,
-      navigateFallback: '/dist/index.html',
-      runtimeCaching: [{
-        urlPattern: /\/api\/widget\/load(.*)/,
-        handler: 'networkFirst',
-        options: {
-          debug: true
-        }
-      }]
-    })
+    webpackIsomorphicToolsPlugin
 
   ]
 };

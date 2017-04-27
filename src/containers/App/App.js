@@ -30,8 +30,14 @@ export default class App extends Component {
   static propTypes = {
     children: PropTypes.object,
     history: PropTypes.object, // eslint-disable-line
+    pushState: PropTypes.func.isRequired,
     user: PropTypes.object,
-    pushState: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    children: null,
+    history: null,
+    user: null
   };
 
   componentWillReceiveProps(nextProps) {
