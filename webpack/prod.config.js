@@ -21,7 +21,7 @@ var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: false,
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
@@ -160,8 +160,6 @@ module.exports = {
       allChunks: true
     }),
 
-    new OptimizeCssAssetsPlugin(),
-
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
@@ -179,6 +177,8 @@ module.exports = {
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
     // optimizations
+    new OptimizeCssAssetsPlugin(),
+
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -186,6 +186,5 @@ module.exports = {
     }),
 
     webpackIsomorphicToolsPlugin
-
   ]
 };
