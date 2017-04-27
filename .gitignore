@@ -14,5 +14,7 @@ webpack-assets.json
 webpack-stats.json
 npm-debug.log
 
+*.log
+
 *.sublime-workspace
 *.sublime-project
