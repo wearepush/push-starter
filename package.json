@@ -67,7 +67,7 @@
       }
     },
     "build": {
-      "command": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+      "command": "webpack --colors --display-error-details --config webpack/prod.config.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -76,7 +76,7 @@
       }
     },
     "build-local": {
-      "command": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+      "command": "webpack --colors --display-error-details --config webpack/prod.config.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
