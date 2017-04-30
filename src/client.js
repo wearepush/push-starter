@@ -11,6 +11,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import { useScroll } from 'react-router-scroll';
 import { supportsHistory } from 'history/lib/DOMUtils';
+import { CookiesProvider } from 'react-cookie';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
@@ -47,9 +48,11 @@ const component = (
 );
 
 ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store} key="provider">
+      {component}
+    </Provider>
+  </CookiesProvider>,
   dest
 );
 

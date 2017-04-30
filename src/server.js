@@ -11,6 +11,8 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { CookiesProvider } from 'react-cookie';
+import cookiesMiddleware from 'universal-cookie-express';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import Html from './helpers/Html';
@@ -24,8 +26,8 @@ const server = new http.Server(app);
 app.disable('etag');
 app.disable('x-powered-by');
 app.use(compression());
+app.use(cookiesMiddleware());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicons/favicon.ico')));
-
 app.use(Express.static(path.join(__dirname, '..', 'static'), { etag: false }));
 
 app.use((req, res) => {
@@ -47,7 +49,9 @@ app.use((req, res) => {
         <Html
           assets={webpackIsomorphicTools.assets()}
           store={store}
-        />));
+        />
+      )
+    );
   }
 
   if (__DISABLE_SSR__) {
@@ -69,9 +73,11 @@ app.use((req, res) => {
         helpers: { client }
       }).then(() => {
         const component = (
-          <Provider store={store} key="provider">
-            <ReduxAsyncConnect {...renderProps} />
-          </Provider>
+          <CookiesProvider cookies={req.universalCookies}>
+            <Provider store={store} key="provider">
+              <ReduxAsyncConnect {...renderProps} />
+            </Provider>
+          </CookiesProvider>
         );
 
         res.status(200);
@@ -81,7 +87,9 @@ app.use((req, res) => {
               assets={webpackIsomorphicTools.assets()}
               component={component}
               store={store}
-            />));
+            />
+          )
+        );
       });
     } else {
       res.status(404).send('Not found');
