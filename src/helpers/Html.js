@@ -16,8 +16,8 @@ import Helmet from 'react-helmet';
 export default class Html extends Component {
   static propTypes = {
     assets: PropTypes.object,
-    component: PropTypes.node,
-    store: PropTypes.object
+    component: PropTypes.node.isRequired,
+    store: PropTypes.object.isRequired
   };
 
   static defaultProps = {
