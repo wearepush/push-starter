@@ -5,8 +5,8 @@ import { getCx } from 'utils/cx';
 import styles from './Container.scss';
 
 type Props = {
-  className?: string | {},
-  children: any,
+  className?: string | {};
+  children: any;
 };
 
 export default class Container extends Component {
