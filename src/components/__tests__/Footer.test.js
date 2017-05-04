@@ -7,6 +7,5 @@ test('<Footer />', () => {
   const footer = shallow(
     <Footer />
   );
-
   expect(footer.find('div').length).toBe(1);
 });
