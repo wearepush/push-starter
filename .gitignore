@@ -6,15 +6,26 @@
 .AppleDouble
 .LSOverride
 
+# Node
 node_modules/
-dist/
+npm-debug.log
+
 *.iml
 .DB
-webpack-assets.json
-webpack-stats.json
-npm-debug.log
 
 *.log
 
+# Dist
+dist/
+
+# Webpack
+webpack-assets.json
+webpack-stats.json
+
+# Sublime
+
 *.sublime-workspace
 *.sublime-project
+
+# Tests
+coverage/

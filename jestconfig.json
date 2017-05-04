@@ -1,0 +1,14 @@
+{
+  "moduleFileExtensions": [
+    "jsx",
+    "js",
+    "json"
+  ],
+  "moduleNameMapper": {
+    "^.*\\.(css|scss|sass)$": "identity-obj-proxy"
+  },
+  "moduleDirectories": ["node_modules", "src"],
+  "testEnvironment": "node",
+  "coverageDirectory": "./coverage/",
+  "collectCoverage": true
+}

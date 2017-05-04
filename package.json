@@ -9,7 +9,12 @@
     "url": ""
   },
   "homepage": "",
-  "keywords": [],
+  "keywords": [
+    "react",
+    "redux",
+    "webpack",
+    "css-modules"
+  ],
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run start-prod\"",
@@ -20,9 +25,10 @@
     "lint": "eslint -c .eslintrc src",
     "postinstall": "npm run build",
     "start-dev": "better-npm-run start-dev",
-    "test": "jest",
     "watch-client": "better-npm-run watch-client",
-    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\""
+    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\"",
+    "test": "jest --config jestconfig.json",
+    "watch:test": "jest --watch --config jestconfig.json"
   },
   "betterScripts": {
     "start-prod": {
@@ -154,6 +160,7 @@
     "eslint-plugin-react": "^6.10.3",
     "expect": "^1.20.2",
     "extract-text-webpack-plugin": "^2.1.0",
+    "identity-obj-proxy": "^3.0.0",
     "file-loader": "^0.11.1",
     "flow-bin": "^0.45.0",
     "html-webpack-plugin": "^2.28.0",
