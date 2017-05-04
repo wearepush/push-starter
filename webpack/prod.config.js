@@ -14,7 +14,7 @@ var strip = require('strip-loader');
 var projectRootPath = path.resolve(__dirname, '../');
 var assetsPath = path.resolve(projectRootPath, './static/dist');
 var host = process.env.HOST || '';
-var bootstrapEntryPoints = require('./../webpack.bootstrap.config.js');
+var bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');

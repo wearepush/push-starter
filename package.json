@@ -1,18 +1,20 @@
 {
   "name": "redux-starter",
-  "description": "",
+  "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
   "author": "",
   "license": "MIT",
   "version": "0.0.2",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/wearepush/redux-starter"
   },
-  "homepage": "",
+  "homepage": "https://wearepush-redux-starter.herokuapp.com",
   "keywords": [
     "react",
     "redux",
     "webpack",
+    "jest",
+    "enzyme",
     "css-modules"
   ],
   "main": "bin/server.js",

@@ -10,14 +10,14 @@ var autoprefixer = require('autoprefixer');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
-var bootstrapEntryPoints = require('./../webpack.bootstrap.config.js');
+var bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
 
 // // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
 module.exports = {
-  devtool: 'eval', // 'eval-cheap-module-source-map' || 'inline-source-map'
+  devtool: 'inline-source-map', // 'eval-cheap-module-source-map' || 'inline-source-map'
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
