@@ -14,7 +14,7 @@ module.exports = Object.assign({
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT || '',
-  apiTokenKey: 'access-token',
+  apiTokenKey: 'token',
   apiSSL: true,
   tokenExpire: 14, // in days
   meta: {

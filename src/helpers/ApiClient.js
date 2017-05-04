@@ -25,12 +25,7 @@ class _ApiClient {
           if (server_cookies) {
             const token = cookieServer.getServer(server_cookies, config.apiTokenKey);
             if (token) {
-              // request.set('uid', uid);
-              // request.set('client', client);
-              // request.set(config.apiTokenKey, token);
-              // request.set('token-type', 'Bearer');
-              request.set('AUTHORIZATION', token);
-              // request.query({ auth_token: token });
+              request.set('Authorization', `Bearer ${token}`);
             }
           }
         } else if (__CLIENT__) {
@@ -38,12 +33,7 @@ class _ApiClient {
           const token = cookie.load(config.apiTokenKey);
 
           if (token) {
-            // request.set('uid', uid);
-            // request.set('client', client);
-            // request.set(config.apiTokenKey, token);
-            // request.set('token-type', 'Bearer');
-            request.set('AUTHORIZATION', token);
-            // request.query({ auth_token: token });
+            request.set('Authorization', `Bearer ${token}`);
           }
         }
 

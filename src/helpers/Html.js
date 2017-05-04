@@ -86,7 +86,7 @@ export default class Html extends Component {
               charSet="UTF-8"
             />
           }
-          {assets.javascript && <script src={assets.javascript.main} charSet="UTF-8" />}
+          {assets.javascript && <script async src={assets.javascript.main} charSet="UTF-8" />}
 
           {/* (will be present only in development mode) */}
           {assets.styles && Object.keys(assets.styles).length === 0 ?
