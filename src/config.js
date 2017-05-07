@@ -26,7 +26,7 @@ module.exports = Object.assign({
       },
       title: 'Redux Starter - Home',
       meta: [
-        { name: 'description', content: 'Redux Starter!' },
+        { name: 'description', content: 'Redux Starter' },
         { charset: 'utf-8' },
         { property: 'og:site_name', content: 'Redux Starter' },
         { property: 'og:locale', content: 'en_US' },

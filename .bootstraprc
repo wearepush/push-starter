@@ -103,7 +103,7 @@ styles:
   # Components w/ JavaScript
   modals: false
   tooltip: false
-  popovers: true
+  popovers: false
   carousel: false
 
   # Utility classes
