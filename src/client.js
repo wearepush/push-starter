@@ -26,20 +26,22 @@ const history = syncHistoryWithStore(historyStrategy, store);
 const component = (
   <Router
     render={props =>
-      <ReduxAsyncConnect
-        {...props}
-        helpers={{ client }}
-        filter={item => !item.deferred}
-        render={applyRouterMiddleware(useScroll((prevProps, { location, routes }) => {
-          if (routes.some(route => route.ignoreScrollBehavior)) {
-            return false;
-          }
-          if (prevProps && `${location.pathname}${location.search}` !== `${prevProps.location.pathname}${prevProps.location.search}`) {
-            return [0, 0];
-          }
-          return true;
-        }))}
-      />
+      (
+        <ReduxAsyncConnect
+          {...props}
+          helpers={{ client }}
+          filter={item => !item.deferred}
+          render={applyRouterMiddleware(useScroll((prevProps, { location, routes }) => {
+            if (routes.some(route => route.ignoreScrollBehavior)) {
+              return false;
+            }
+            if (prevProps && `${location.pathname}${location.search}` !== `${prevProps.location.pathname}${prevProps.location.search}`) {
+              return [0, 0];
+            }
+            return true;
+          }))}
+        />
+      )
     }
     history={history}
   >
