@@ -5,7 +5,6 @@ require('babel-polyfill');
 // Webpack config for creating the production bundle.
 var path = require('path');
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -69,23 +68,22 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
-              query: {
+              options: {
                 modules: true,
-                importLoaders: 2,
+                importLoaders: 3,
                 sourceMap: false,
                 localIdentName: '[hash:base64:5]'
               }
             },
             {
               loader: 'postcss-loader',
-              query: {
-                browsers: 'last 2 version',
-                plugins: function () {
-                  return [
-                    require('precss'),
-                    require('autoprefixer')
-                  ];
-                }
+              options: {
+                plugins: () => [
+                  require('precss'),
+                  require('autoprefixer')({
+                    browsers: ['last 2 version']
+                  })
+                ]
               }
             },
             {
@@ -93,7 +91,7 @@ module.exports = {
             },
             {
               loader: 'sass-loader',
-              query: {
+              options: {
                 outputStyle: 'expanded',
                 sourceMap: false,
                 // sourceMapContents: true,

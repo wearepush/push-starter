@@ -6,7 +6,6 @@ require('babel-polyfill');
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
@@ -58,7 +57,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               sourceMap: '',
-              importLoaders: 1,
+              importLoaders: 2,
               modules: true,
               localIdentName: '[local]__[hash:base64:5]', // [name]__
             },
@@ -66,13 +65,11 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: function() {
-                return [
-                  autoprefixer({
-                    browsers: ['last 2 version']
-                  })
-                ];
-              }
+              plugins: () => [
+                require('autoprefixer')({
+                  browsers: ['last 2 version']
+                })
+              ]
             }
           },
           {
