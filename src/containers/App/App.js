@@ -6,28 +6,29 @@ import Helmet from 'react-helmet';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import config from 'config';
 import { Header, Footer } from 'components';
-import { object, func, instanceOf } from 'prop-types';
-import { withCookies, Cookies } from 'react-cookie';
+import { object, func } from 'prop-types';
 import styles from './App.scss';
+
+const mapStateToProps = st => ({
+  user: st.auth.user
+});
+const mapDispatchToProps = {
+  pushState: push
+};
 
 class App extends Component {
   static propTypes = {
     children: object,
-    cookies: instanceOf(Cookies).isRequired,
-    history: object, // eslint-disable-line
+    // history: object, // eslint-disable-line
     pushState: func.isRequired,
-    user: object,
+    user: object
   };
 
   static defaultProps = {
     children: null,
-    history: null,
+    // history: null,
     user: null
   };
-
-  componentDidMount() {
-    console.log(this.props.cookies);
-  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
@@ -60,15 +61,4 @@ export default asyncConnect([{
     }
     return Promise.all(promises);
   }
-}])(
-  connect(
-    state => ({
-      user: state.auth.user
-    }),
-    {
-      pushState: push
-    }
-  )(
-    withCookies(App)
-  )
-);
+}])(connect(mapStateToProps, mapDispatchToProps)(App));
