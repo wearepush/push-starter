@@ -33,7 +33,6 @@ module.exports = {
   },
   module: {
     rules: [
-
       {
         enforce: "pre",
         test: /\.js$/,
@@ -59,7 +58,7 @@ module.exports = {
               sourceMap: true,
               importLoaders: 2,
               modules: true,
-              localIdentName: '[local]__[hash:base64:5]', // [name]__
+              localIdentName: '[local]__[hash:base64:5]',
             },
           },
           {
@@ -73,19 +72,19 @@ module.exports = {
             }
           },
           {
-            loader: 'sass-loader',
+            loader: 'sass-loader'
           },
         ],
       },
 
       {
         test: /\.(woff|woff2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: 'url-loader?limit=10000',
+        use: 'url-loader?limit=10000'
       },
 
       {
         test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-        use: 'file-loader',
+        use: 'file-loader'
       },
 
       {

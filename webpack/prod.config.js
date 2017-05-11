@@ -36,7 +36,6 @@ module.exports = {
   },
   module: {
     rules: [
-
       {
         test: /\.js?$/,
         use: [
@@ -57,7 +56,7 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader',
+          use: 'css-loader'
         }),
       },
 
@@ -87,15 +86,10 @@ module.exports = {
               }
             },
             {
-              loader: 'resolve-url-loader',
+              loader: 'resolve-url-loader'
             },
             {
-              loader: 'sass-loader',
-              options: {
-                outputStyle: 'expanded',
-                sourceMap: false,
-                // sourceMapContents: true,
-              }
+              loader: 'sass-loader'
             }
           ]
         })
@@ -175,13 +169,19 @@ module.exports = {
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
     // optimizations
-    new OptimizeCssAssetsPlugin(),
-
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+    // https://github.com/NMFR/optimize-css-assets-webpack-plugin
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        discardComments: {removeAll: true }
       }
     }),
+
+    // uglifyJs is in package.json as '-p' param for build
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
 
     webpackIsomorphicToolsPlugin
   ]
