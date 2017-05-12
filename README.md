@@ -8,31 +8,31 @@
 ## Installation
 
 ```bash
-npm install
+yarn
 ```
 
 ## Dev Server
 
 ```bash
-npm run dev
+yarn run dev
 ```
 
 ## Prod Server
 
 ```bash
-npm run dev
+yarn run dev
 ```
 
 ## Build
 
 ```bash
-npm run build
+yarn run build
 ```
 
 ## Test
 
 ```bash
-npm run test
+yarn run test
 ```
 
 ## Deployment on Heroku
