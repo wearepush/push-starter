@@ -46,7 +46,9 @@
     "react/forbid-prop-types": 0,
     "no-useless-constructor": 0,
     "jsx-a11y/label-has-for": 0,
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "object-curly-spacing": 0,
+    "arrow-parens": 0
   },
   "plugins": [
     "react",
