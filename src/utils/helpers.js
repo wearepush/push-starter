@@ -90,7 +90,7 @@ export function getDeviceType() {
 
 /* eslint-disable */
 // https://learn.javascript.ru/cookie#функция-getcookie-name
-function getCookie(name) {
+export function getCookie(name) {
   if (!executionEnvironment().canUseDOM) return;
 
   var matches = document.cookie.match(new RegExp(
@@ -100,7 +100,7 @@ function getCookie(name) {
 }
 
 // https://learn.javascript.ru/cookie#функция-setcookie-name-value-options
-function setCookie(name, value, options) {
+export function setCookie(name, value, options) {
   if (!executionEnvironment().canUseDOM) return;
 
   options = options || {};
@@ -132,7 +132,7 @@ function setCookie(name, value, options) {
 }
 
 // https://learn.javascript.ru/cookie#функция-deletecookie-name
-function deleteCookie(name) {
+export function deleteCookie(name) {
   setCookie(name, "", {
     expires: -1
   })
