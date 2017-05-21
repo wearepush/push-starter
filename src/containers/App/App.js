@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-connect';
 import Helmet from 'react-helmet';
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
-import config from 'config';
-import { Header, Footer } from 'components';
 import { object, func } from 'prop-types';
+import { isLoaded as isAuthLoaded, load as loadAuth } from './../../redux/modules/auth';
+import config from './../../config';
+import { Header, Footer } from './../../components';
 import styles from './App.scss';
 
 const mapStateToProps = st => ({

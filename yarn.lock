@@ -1282,6 +1282,10 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
+builtins@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/builtins/-/builtins-0.0.7.tgz#355219cd6cf18dbe7c01cc7fd2dce765cfdc549a"
+
 bytes@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.3.0.tgz#d5b680a165b6201739acb611542aabc2d8ceb070"
@@ -6633,6 +6637,15 @@ universal-cookie@^2.0.0, universal-cookie@^2.0.1:
     is-node "^1.0.2"
     object-assign "^4.1.0"
 
+universal-webpack@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/universal-webpack/-/universal-webpack-0.3.9.tgz#a78de3a112affeba8c50bbbf412b7b6c8f37cea6"
+  dependencies:
+    colors "^1.1.2"
+    fs-extra "^0.30.0"
+    minimist "^1.2.0"
+    validate-npm-package-name "^2.2.2"
+
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
@@ -6701,6 +6714,12 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
+
+validate-npm-package-name@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/validate-npm-package-name/-/validate-npm-package-name-2.2.2.tgz#f65695b22f7324442019a3c7fa39a6e7fd299085"
+  dependencies:
+    builtins "0.0.7"
 
 vary@~1.1.0:
   version "1.1.1"

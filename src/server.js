@@ -19,92 +19,95 @@ import Html from './helpers/Html';
 import getRoutes from './routes';
 import config from './config';
 
-const pretty = new PrettyError();
-const app = new Express();
-const server = new http.Server(app);
 
-app.disable('etag');
-app.disable('x-powered-by');
-app.use(compression());
-app.use(cookiesMiddleware());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicons/favicon.ico')));
-app.use(Express.static(path.join(__dirname, '..', 'static'), { etag: false }));
+export default function(parameters) { // eslint-disable-line
+  const pretty = new PrettyError();
+  const app = new Express();
+  const server = new http.Server(app);
 
-app.use((req, res) => {
-  if (__DEVELOPMENT__) {
-    // Do not cache webpack stats: the script file would change since
-    // hot module replacement is enabled in the development env
-    webpackIsomorphicTools.refresh();
-  }
-  const client = new ApiClient(req);
-  const browser_history = createHistory(req.originalUrl);
+  app.disable('etag');
+  app.disable('x-powered-by');
+  app.use(compression());
+  app.use(cookiesMiddleware());
+  app.use(favicon(path.join(__dirname, '..', 'static', 'favicons/favicon.ico')));
+  app.use(Express.static(path.join(__dirname, '..', 'static'), { etag: false }));
 
-  const store = createStore(browser_history, client);
-
-  const history = syncHistoryWithStore(browser_history, store);
-
-  function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(
-        <Html
-          assets={webpackIsomorphicTools.assets()}
-          store={store}
-        />
-      )
-    );
-  }
-
-  if (__DISABLE_SSR__) {
-    hydrateOnClient();
-    return;
-  }
-
-  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
-    if (redirectLocation) {
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
-      res.status(500);
-      hydrateOnClient();
-    } else if (renderProps) {
-      loadOnServer({
-        ...renderProps,
-        store,
-        helpers: { client }
-      }).then(() => {
-        const component = (
-          <CookiesProvider cookies={req.universalCookies}>
-            <Provider store={store} key="provider">
-              <ReduxAsyncConnect {...renderProps} />
-            </Provider>
-          </CookiesProvider>
-        );
-
-        res.status(200);
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(
-            <Html
-              assets={webpackIsomorphicTools.assets()}
-              component={component}
-              store={store}
-            />
-          )
-        );
-      });
-    } else {
-      res.status(404).send('Not found');
+  app.use((req, res) => {
+    if (__DEVELOPMENT__) {
+      // Do not cache webpack stats: the script file would change since
+      // hot module replacement is enabled in the development env
+      webpackIsomorphicTools.refresh();
     }
-  });
-});
+    const client = new ApiClient(req);
+    const browser_history = createHistory(req.originalUrl);
 
-if (config.port) {
-  server.listen(config.port, (err) => {
-    if (err) {
-      console.error(err);
-    }
-    console.info('----\n==> ✅  %s is running, talking to API server.', config.meta.title);
-    console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+    const store = createStore(browser_history, client);
+
+    const history = syncHistoryWithStore(browser_history, store);
+
+    // function hydrateOnClient() {
+    //   res.send('<!doctype html>\n' +
+    //     ReactDOM.renderToString(
+    //       <Html
+    //         assets={webpackIsomorphicTools.assets()}
+    //         store={store}
+    //       />
+    //     )
+    //   );
+    // }
+
+    // if (__DISABLE_SSR__) {
+    //   hydrateOnClient();
+    //   return;
+    // }
+
+    match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+      if (redirectLocation) {
+        res.redirect(redirectLocation.pathname + redirectLocation.search);
+      } else if (error) {
+        console.error('ROUTER ERROR:', pretty.render(error));
+        res.status(500);
+        // hydrateOnClient();
+      } else if (renderProps) {
+        loadOnServer({
+          ...renderProps,
+          store,
+          helpers: { client }
+        }).then(() => {
+          const component = (
+            <CookiesProvider cookies={req.universalCookies}>
+              <Provider store={store} key="provider">
+                <ReduxAsyncConnect {...renderProps} />
+              </Provider>
+            </CookiesProvider>
+          );
+
+          res.status(200);
+          res.send('<!doctype html>\n' +
+            ReactDOM.renderToString(
+              <Html
+                assets={webpackIsomorphicTools.assets()}
+                component={component}
+                store={store}
+              />
+            )
+          );
+        });
+      } else {
+        res.status(404).send('Not found');
+      }
+    });
   });
-} else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
+
+  if (config.port) {
+    server.listen(config.port, (err) => {
+      if (err) {
+        console.error(err);
+      }
+      console.info('----\n==> ✅  %s is running, talking to API server.', config.meta.title);
+      console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+    });
+  } else {
+    console.error('==>     ERROR: No PORT environment variable has been specified');
+  }
 }

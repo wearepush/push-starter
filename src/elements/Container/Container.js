@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { getCx } from 'utils/cx';
+import { getCx } from './../../utils/cx';
 import styles from './Container.scss';
 
 type Props = {

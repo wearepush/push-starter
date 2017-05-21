@@ -1,7 +1,7 @@
 import superagent from 'superagent';
-import config from 'config';
 import cookie from 'react-cookie';
-import cookieServer from 'utils/cookie';
+import config from './../config';
+import cookieServer from './../utils/cookie';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, direct_url = false) {
