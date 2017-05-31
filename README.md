@@ -25,17 +25,17 @@ The starter boilerplate includes the following technologies:
 ## Installation
 
 ```bash
-yarn install
+yarn
 ```
 
 ## Running Dev Server
 
 ```bash
-npm run dev:start
+npm run dev
 ```
 
 ## Running Prod Server
 
 ```bash
-npm run prod:start
+npm run prod
 ```
