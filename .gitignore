@@ -1,31 +1,6 @@
-# Webstorm
+yarn.lock
+react-redux-styled-hot-universal.iml
 .idea/
-
-# OSX
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Node
 node_modules/
-npm-debug.log
-
-*.iml
-.DB
-
-*.log
-
-# Dist
-dist/
-
-# Webpack
-webpack-assets.json
-webpack-stats.json
-
-# Sublime
-
-*.sublime-workspace
-*.sublime-project
-
-# Tests
-coverage/
+static/assets
+static/server
