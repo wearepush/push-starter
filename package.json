@@ -1,8 +1,7 @@
 {
   "name": "redux-starter",
-  "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
-  "version": "0.0.4",
   "description": "",
+  "version": "0.0.4",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -42,7 +41,6 @@
     "enzyme",
     "css-modules"
   ],
-  "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "compression": "^1.6.2",
@@ -63,7 +61,6 @@
     "redux-connect": "^5.1.0",
     "redux-immutablejs": "^0.0.8",
     "serve-favicon": "^2.4.3",
-    "styled-components": "^1.4.3",
     "superagent": "^3.5.2"
   },
   "devDependencies": {

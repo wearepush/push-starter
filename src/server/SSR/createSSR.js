@@ -1,5 +1,4 @@
 import React from 'react';
-import styleSheet from 'styled-components/lib/models/StyleSheet';
 import { loadOnServer } from 'redux-connect';
 import { renderToString } from 'react-dom/server';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -28,9 +27,7 @@ export default function createSSR(assets) {
           res.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
           loadOnServer({ ...renderProps, store }).then(() => {
-            const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
-            const content = renderToString(<Html {...{ renderProps, store, assets, styles }} />);
-
+            const content = renderToString(<Html {...{ renderProps, store, assets }} />);
             res.send(`<!doctype html>\n${content}`);
           });
         } else {
