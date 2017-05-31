@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 import { element } from 'prop-types';
 import Landing from 'app/modules/landing/components/Landing';
 

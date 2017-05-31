@@ -1,18 +1,16 @@
-import React, {
-  Component
-} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-connect';
 
 export default class Root extends Component {
   static propTypes = {
-    store: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    routes: React.PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.object,
+    store: object.isRequired,
+    history: object.isRequired,
+    routes: oneOfType([
+      array,
+      object,
     ]).isRequired
   };
 

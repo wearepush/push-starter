@@ -1,6 +1,4 @@
-import React, {
-  PureComponent
-} from 'react';
+import React, { PureComponent } from 'react';
 import Container from 'app/components/Container';
 import Wrapper from './Wrapper';
 

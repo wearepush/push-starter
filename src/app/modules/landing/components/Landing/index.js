@@ -1,6 +1,4 @@
-import React, {
-  PureComponent
-} from 'react';
+import React, { PureComponent } from 'react';
 import { element } from 'prop-types';
 import Header from 'app/components/Header';
 import Footer from 'app/components/Footer';

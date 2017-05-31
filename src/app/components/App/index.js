@@ -1,6 +1,4 @@
-import React, {
-  PureComponent
-} from 'react';
+import React, { PureComponent } from 'react';
 import { element } from 'prop-types';
 import 'app/styles/global';
 import Wrapper from './Wrapper';

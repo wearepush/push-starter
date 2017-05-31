@@ -1,7 +1,5 @@
-import React, {
-  Component
-} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { object, string } from 'prop-types';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { ReduxAsyncConnect } from 'redux-connect';
@@ -9,10 +7,10 @@ import appConfig from '../../app/config';
 
 export default class Html extends Component {
   static propTypes = {
-    store: PropTypes.object.isRequired,
-    renderProps: PropTypes.object.isRequired,
-    assets: PropTypes.object.isRequired,
-    styles: PropTypes.string.isRequired
+    store: object.isRequired,
+    renderProps: object.isRequired,
+    assets: object.isRequired,
+    styles: string.isRequired
   };
 
   render() {
