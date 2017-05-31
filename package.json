@@ -98,12 +98,12 @@
     "rimraf": "^2.5.2",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
-    "universal-webpack": "^0.2.6",
-    "url-loader": "^0.5.7",
+    "universal-webpack": "^0.3.9",
+    "url-loader": "^0.5.8",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.4",
     "webpack-hot-middleware": "^2.18.0",
-    "webpack-merge": "^0.14.0"
+    "webpack-merge": "^4.1.0"
   },
   "repository": {
   }
