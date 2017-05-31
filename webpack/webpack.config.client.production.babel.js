@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import getBaseConfig from './webpack.config.client';
 import CleanPlugin        from 'clean-webpack-plugin';
 
@@ -29,6 +30,45 @@ const config = {
     chunkFilename: '[name].[chunkhash].js'
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 3,
+                sourceMap: false,
+                localIdentName: '[local]__[hash:base64:5]'
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('precss'),
+                  require('autoprefixer')({
+                    browsers: ['last 2 version']
+                  })
+                ]
+              }
+            },
+            {
+              loader: 'resolve-url-loader'
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        })
+      }
+    ]
+  },
+
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor'],
@@ -39,6 +79,13 @@ const config = {
       [path.relative(baseConfig.context, baseConfig.output.path)],
       { root: baseConfig.context }
     ),
+
+    // css files from the extract-text-plugin loader
+    new ExtractTextPlugin({
+      filename: '[name]-[chunkhash].css',
+      // disable: false,
+      allChunks: true
+    }),
 
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
