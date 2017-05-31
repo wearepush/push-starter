@@ -1,7 +1,7 @@
 {
-  "name": "school",
+  "name": "",
   "version": "0.0.1",
-  "description": "English School",
+  "description": "",
   "scripts": {
     "start": "npm run dev:start",
     "dev:start": "run-p dev:client:build dev:server:prepare dev:server:build dev:server:delay",
@@ -19,25 +19,16 @@
   "betterScripts": {
     "prod:server:start": {
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "PORT": 8080,
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
+        "APIPORT": ""
       },
       "command": "node ./src/server/start.babel.js"
     }
   },
-  "author": "Roman Krasevych <krasevych@gmail.com>",
+  "author": "",
   "keywords": [
-    "react",
-    "isomorphic",
-    "universal",
-    "styled components",
-    "webpack",
-    "express",
-    "hot reloading",
-    "react-hot-reloader",
-    "redux",
-    "starter",
-    "boilerplate",
-    "babel"
   ],
   "license": "MIT",
   "dependencies": {
@@ -115,7 +106,5 @@
     "webpack-merge": "^0.14.0"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/krasevych/react-redux-styled-hot-universal"
   }
 }

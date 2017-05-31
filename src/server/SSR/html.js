@@ -40,8 +40,8 @@ export default class Html extends Component {
         <body>
           <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
           <script dangerouslySetInnerHTML={{ __html: initialState }} />
-          {isProd && <script src={assets.javascript.vendor} />}
-          <script src={assets.javascript.main} />
+          {isProd && <script defer src={assets.javascript.vendor} />}
+          <script defer src={assets.javascript.main} />
         </body>
       </html>
     );

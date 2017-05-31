@@ -57,7 +57,9 @@ const config = {
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
+        NODE_ENV: JSON.stringify('development'),
+        APIHOST: `"${process.env.APIHOST}"`,
+        APIPORT: `"${process.env.APIPORT}"`
       },
       __CLIENT__: true,
       __SERVER__: false
