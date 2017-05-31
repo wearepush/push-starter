@@ -1,7 +1,7 @@
 import React, {
-  Component,
-  PropTypes
+  Component
 } from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { ReduxAsyncConnect } from 'redux-connect';

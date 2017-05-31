@@ -1,7 +1,7 @@
 import React, {
-  PropTypes,
   PureComponent
 } from 'react';
+import PropTypes from 'prop-types';
 import Header from 'app/components/Header';
 import Footer from 'app/components/Footer';
 import Wrapper from './Wrapper';

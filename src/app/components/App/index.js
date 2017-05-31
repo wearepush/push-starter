@@ -1,7 +1,7 @@
 import React, {
-  PropTypes,
   PureComponent
 } from 'react';
+import PropTypes from 'prop-types';
 import 'app/styles/global';
 import Wrapper from './Wrapper';
 
