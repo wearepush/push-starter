@@ -1,13 +1,13 @@
 import React, {
   PureComponent
 } from 'react';
-import PropTypes from 'prop-types';
+import { element } from 'prop-types';
 import 'app/styles/global';
 import Wrapper from './Wrapper';
 
 export default class App extends PureComponent {
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: element.isRequired
   };
 
   render() {

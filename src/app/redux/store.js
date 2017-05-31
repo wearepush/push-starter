@@ -1,16 +1,14 @@
-import thunkMiddleware from 'redux-thunk';
 import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createReducer from './reducer';
+import createMiddleware from './middleware/clientMiddleware';
 
-export default function configureStore(history, initialState = {}) {
+export default function configureStore(history, client, initialState = {}) {
   const reducer = createReducer();
 
-  const middlewares = [
-    thunkMiddleware,
-    routerMiddleware(history)
-  ];
+  const reduxRouterMiddleware = routerMiddleware(history);
+  const middlewares = [createMiddleware(client), reduxRouterMiddleware];
 
   const composeEnhancers =
     (global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&

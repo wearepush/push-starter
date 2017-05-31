@@ -10,7 +10,6 @@ const vendor = [
   'react-dom',
   'redux',
   'react-redux',
-  'redux-thunk',
   'immutable',
   'redux-immutablejs',
   'react-router',
@@ -19,8 +18,7 @@ const vendor = [
   'react-hot-loader',
   'styled-components',
   // 'lodash',
-  // 'react-form',
-  // 'react-helmet'
+  'react-helmet'
 ];
 
 
@@ -53,7 +51,9 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
-      }
+      },
+      __CLIENT__: true,
+      __SERVER__: false
     })
   ]
 };

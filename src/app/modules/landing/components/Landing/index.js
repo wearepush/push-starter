@@ -1,14 +1,14 @@
 import React, {
   PureComponent
 } from 'react';
-import PropTypes from 'prop-types';
+import { element } from 'prop-types';
 import Header from 'app/components/Header';
 import Footer from 'app/components/Footer';
 import Wrapper from './Wrapper';
 
 export default class Landing extends PureComponent {
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: element.isRequired
   };
 
   render() {

@@ -1,8 +1,10 @@
 export default {
   development: {
-    isProd: false
+    isProd: false,
+    apiSSL: false
   },
   production: {
-    isProd: true
+    isProd: true,
+    apiSSL: true
   }
 }[process.env.NODE_ENV || 'development'];

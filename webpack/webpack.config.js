@@ -56,7 +56,7 @@ const config = {
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
 
     new webpack.LoaderOptionsPlugin({
       options: {
