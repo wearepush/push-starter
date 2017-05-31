@@ -30,45 +30,6 @@ const config = {
     chunkFilename: '[name].[chunkhash].js'
   },
 
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 3,
-                sourceMap: false,
-                localIdentName: '[local]__[hash:base64:5]'
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [
-                  require('precss'),
-                  require('autoprefixer')({
-                    browsers: ['last 2 version']
-                  })
-                ]
-              }
-            },
-            {
-              loader: 'resolve-url-loader'
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
-        })
-      }
-    ]
-  },
-
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor'],

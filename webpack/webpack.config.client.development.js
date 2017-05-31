@@ -48,39 +48,7 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: babelOptions
-      },
-
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              importLoaders: 2,
-              modules: true,
-              localIdentName: '[local]__[hash:base64:5]',
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [
-                require('autoprefixer')({
-                  browsers: ['last 2 version']
-                })
-              ]
-            }
-          },
-          {
-            loader: 'sass-loader'
-          },
-        ],
       }
-
     ]
   },
 
