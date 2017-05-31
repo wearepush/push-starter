@@ -1,3 +1,5 @@
+process.noDeprecation = true;
+
 import path from 'path';
 import webpack from 'webpack';
 import reporter from 'postcss-reporter';
@@ -23,7 +25,7 @@ const config = {
         enforce: 'pre',
         test: /\.js?$/,
         exclude: /node_modules/,
-        use: 'eslint-loader'
+        loader: 'eslint-loader'
       },
       {
         test: /\.js?$/,
