@@ -15,7 +15,6 @@ The starter boilerplate includes the following technologies:
 | [Babel](http://babeljs.io)                                                        | Babel is a JavaScript compiler              |
 | [Webpack](http://webpack.github.io)                                               | Module bundler                       |
 | [Universal Webpack](https://www.npmjs.com/package/universal-webpack)              | Helps setting up universal Webpack build: the one that's working both on client and server                                                |
-| [Styled Components](https://github.com/styled-components/styled-components)       | Style your components in powerful ways                               |
 | [Redux](http://redux.js.org/)                                                     | Redux is a predictable state container for JavaScript apps                           |
 | [Redux Immutable](https://github.com/gajus/redux-immutablejs)                     | Redux & Immutable integration                                                          |
 | [React Router Redux](https://github.com/reactjs/react-router-redux)               | Simple bindings to keep react-router and redux in sync                                        |

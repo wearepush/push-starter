@@ -16,7 +16,6 @@ const vendor = [
   'react-router-redux',
   'redux-connect',
   'react-hot-loader',
-  'styled-components',
   'react-helmet'
 ];
 
