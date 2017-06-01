@@ -43,7 +43,7 @@ const config = {
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin({
-      filename: '[name]-[chunkhash].css',
+      filename: '[name].[chunkhash].css',
       // disable: false,
       allChunks: true
     }),
