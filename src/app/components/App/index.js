@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { element } from 'prop-types';
-import 'app/styles/global';
-import Wrapper from './Wrapper';
 
 export default class App extends PureComponent {
   static propTypes = {
@@ -12,9 +10,9 @@ export default class App extends PureComponent {
     const { children } = this.props;
 
     return (
-      <Wrapper>
+      <div>
         {children}
-      </Wrapper>
+      </div>
     );
   }
 }

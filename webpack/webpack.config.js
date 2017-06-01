@@ -2,8 +2,6 @@ process.noDeprecation = true;
 
 import path from 'path';
 import webpack from 'webpack';
-import reporter from 'postcss-reporter';
-import cssNext from 'postcss-cssnext';
 
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
@@ -41,17 +39,55 @@ const config = {
         use: 'file-loader'
       },
       {
-        test: /\.(css)$/,
-        use: [
-          'style-loader',
+        test: /\.(scss)$/,
+        use:
+        [{
+          loader: 'style-loader'
+        },
+        {
+          loader : 'css-loader',
+          options:
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              sourceMap: true
-            }
+            sourceMap: true,
+            importLoaders: 2,
+            modules: true,
+            localIdentName: '[local]__[hash:base64:5]'
           }
-        ]
+        },
+        {
+          loader : 'postcss-loader',
+          options:
+          {
+            sourceMap : true
+          }
+        },
+        {
+          loader : 'sass-loader',
+          options:
+          {
+            outputStyle       : 'expanded',
+            sourceMap         : true,
+            sourceMapContents : true
+          }
+        }]
+      },
+      {
+        test: /\.(css)$/,
+        use:
+        [{
+          loader: 'style-loader'
+        },
+        {
+          loader : 'css-loader',
+          options:
+          {
+            importLoaders : 2,
+            sourceMap     : true
+          }
+        },
+        {
+          loader : 'postcss-loader'
+        }]
       }
     ]
   },
@@ -59,22 +95,10 @@ const config = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.NoEmitOnErrorsPlugin(),
-
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: __dirname,
-        postcss: [
-          cssNext({
-            browsers: ['last 1 version']
-          }),
-          reporter
-        ]
-      }
-    })
   ],
 
   resolve: {
-    extensions: ['*', '.js', '.css', '.html'],
+    extensions: ['*', '.js', '.html'],
     modules: ['src', 'node_modules'],
     alias: {
       app: path.resolve(rootFolder, 'src/app')

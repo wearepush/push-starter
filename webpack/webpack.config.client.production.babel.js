@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import getBaseConfig from './webpack.config.client';
 import CleanPlugin        from 'clean-webpack-plugin';
 
@@ -16,7 +17,6 @@ const vendor = [
   'react-router-redux',
   'redux-connect',
   'react-hot-loader',
-  'styled-components',
   'react-helmet'
 ];
 
@@ -40,6 +40,13 @@ const config = {
       [path.relative(baseConfig.context, baseConfig.output.path)],
       { root: baseConfig.context }
     ),
+
+    // css files from the extract-text-plugin loader
+    new ExtractTextPlugin({
+      filename: '[name]-[chunkhash].css',
+      // disable: false,
+      allChunks: true
+    }),
 
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
