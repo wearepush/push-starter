@@ -1,7 +1,7 @@
 import superagent from 'superagent';
-import cookie from 'react-cookie';
+// import cookie from 'react-cookie';
 import config from '../app/config';
-import cookieServer from '../utils/cookie';
+// import cookieServer from '../utils/cookie';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {
@@ -11,7 +11,7 @@ function formatUrl(path, directUrl = false) {
 }
 
 class _ApiClient {
-  constructor(req) {
+  constructor(req) { // eslint-disable-line
     methods.forEach((method) => {
       this[method] = (path, {
         params,
@@ -26,21 +26,20 @@ class _ApiClient {
         if (params) {
           request.query(params);
         }
-
-        if (__SERVER__) {
-          const serverCookies = req.get('cookie');
-          if (serverCookies) {
-            const token = cookieServer.getServer(serverCookies, config.apiTokenKey);
-            if (token) {
-              request.set('Authorization', `Bearer ${token}`);
-            }
-          }
-        } else if (__CLIENT__) {
-          const token = cookie.load(config.apiTokenKey);
-          if (token) {
-            request.set('Authorization', `Bearer ${token}`);
-          }
-        }
+        // if (__SERVER__) {
+        //   const serverCookies = req.get('cookie');
+        //   if (serverCookies) {
+        //     const token = cookieServer.getServer(serverCookies, config.apiTokenKey);
+        //     if (token) {
+        //       request.set('Authorization', `Bearer ${token}`);
+        //     }
+        //   }
+        // } else if (__CLIENT__) {
+        //   const token = cookie.load(config.apiTokenKey);
+        //   if (token) {
+        //     request.set('Authorization', `Bearer ${token}`);
+        //   }
+        // }
 
         if (!attachments) {
           request.set('Content-Type', 'application/json');
@@ -73,7 +72,6 @@ class _ApiClient {
         if (getBackRequest) {
           getBackRequest(request);
         }
-
         request.end((err, res = {}) => {
           if (err) {
             return reject(res.body, err, request.xhr);

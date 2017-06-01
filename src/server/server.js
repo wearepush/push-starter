@@ -18,11 +18,12 @@ export default function (parameters) {
   app.use(favicon(path.join(__dirname, '..', 'favicons', 'favicon.ico')));
   app.get('*', createSSR(parameters.chunks()));
 
-  app.listen(port, (err) => {
+  app.listen(port, (err) => { // eslint-disable-line
     if (err) {
       return console.error(err);
     }
 
     console.info(`Listening at ${host}:${port}`);
+
   });
 }

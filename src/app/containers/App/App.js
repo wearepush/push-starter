@@ -2,16 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-connect';
-import Helmet from 'react-helmet';
+// import Helmet from 'react-helmet';
 import { object, func } from 'prop-types';
 import { isLoaded as isAuthLoaded, load as loadAuth } from '../../redux/modules/auth';
 import { Header, Footer } from '../../components';
-import config from './config';
+// import config from '../../config';
 import styles from './App.scss';
 
-const mapStateToProps = st => ({
-  user: st.auth.user
+const mapAsyncConnect = [{
+  promise: ({ store: { dispatch, getState } }) => {
+    const promises = [];
+    const state = getState();
+    const reduxAsyncConnect = state.get('reduxAsyncConnect');
+    const auth = state.get('auth');
+
+    if (!reduxAsyncConnect.get('loaded') && !isAuthLoaded(reduxAsyncConnect) && !auth.get('error')) {
+      promises.push(
+        dispatch(loadAuth())
+        .then(() => {}, () => {})
+        .catch(err => console.log(err))
+      );
+    }
+    return Promise.all(promises);
+  }
+}];
+
+const mapStateToProps = state => ({
+  user: state.getIn(['auth', 'user'])
 });
+
 const mapDispatchToProps = {
   pushState: push
 };
@@ -19,14 +38,14 @@ const mapDispatchToProps = {
 class App extends Component {
   static propTypes = {
     children: object,
-    // history: object, // eslint-disable-line
+    history: object,  // eslint-disable-line
     pushState: func.isRequired,
     user: object
   };
 
   static defaultProps = {
     children: null,
-    // history: null,
+    history: null,
     user: null
   };
 
@@ -43,7 +62,6 @@ class App extends Component {
   render() {
     return (
       <div className={styles.app}>
-        <Helmet {...config.meta.head} />
         <Header />
         <div className={styles.app__container}>{this.props.children}</div>
         <Footer />
@@ -52,22 +70,6 @@ class App extends Component {
   }
 }
 
-export default asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    const state = getState();
-    const reduxAsyncConnect = state.get('reduxAsyncConnect');
-    const auth = state.get('auth');
-
-    if (!reduxAsyncConnect.get('loaded') && !isAuthLoaded(reduxAsyncConnect) && !auth.get('error')) {
-      promises.push(
-        dispatch(
-          loadAuth()
-          .then(() => {}, () => {})
-          .catch(err => console.log(err))
-        )
-      );
-    }
-    return Promise.all(promises);
-  }
-}])(connect(mapStateToProps, mapDispatchToProps)(App));
+export default asyncConnect(mapAsyncConnect)(
+  connect(mapStateToProps, mapDispatchToProps)(App)
+);

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { Provider } from 'react-redux';

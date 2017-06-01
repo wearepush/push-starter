@@ -43,6 +43,6 @@ export function isLoaded(store) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.get('tokens')
+    promise: client => client.get('/load')
   };
 }

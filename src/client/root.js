@@ -7,8 +7,8 @@ import { ReduxAsyncConnect } from 'redux-connect';
 export default class Root extends Component {
   static propTypes = {
     store: object.isRequired,
-    history: object.isRequired,
-    routes: oneOfType([
+    history: object.isRequired, // eslint-disable-line
+    routes: oneOfType([ // eslint-disable-line
       array,
       object,
     ]).isRequired
