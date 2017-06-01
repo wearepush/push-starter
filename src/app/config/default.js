@@ -1,13 +1,13 @@
 export default {
   server: {
-    host: 'http://localhost',
-    port: 3005
+    host: process.env.HOST || 'http://localhost',
+    port: process.env.PORT || 8080
   },
 
   webpack: {
     server: {
-      host: 'http://localhost',
-      port: 3001
+      host: process.env.HOST || 'http://localhost',
+      port: process.env.PORT || 3001
     }
   }
 };

@@ -14,7 +14,7 @@
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
     "dev:server:build": "webpack --config ./webpack/webpack.config.server.development.babel.js --watch --colors --display-error-details",
     "dev:server:delay": "run-s delay dev:server:start",
-    "dev:server:start": "nodemon ./src/server/start.babel.js --watch ./static/server",
+    "dev:server:start": "better-npm-run dev:server:start",
     "dev:client:build": "babel-node ./webpack/webpack-dev-server.js",
     "delay": "node ./node_modules/npm-delay 20000",
     "prod": "npm-run-all prod:client:build prod:server:build prod:server:start",
@@ -23,13 +23,22 @@
     "prod:server:start": "better-npm-run prod:server:start",
     "lint": "eslint -c .eslintrc src",
     "test": "jest --config jestconfig.json",
-    "watch:test": "jest --watch --config jestconfig.json"
+    "watch:test": "jest --watch --config jestconfig.json",
+    "postinstall": "npm-run-all prod:client:build prod:server:build"
   },
   "betterScripts": {
+    "dev:server:start": {
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 8080,
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
+        "APIPORT": ""
+      },
+      "command": "nodemon ./src/server/start.babel.js --watch ./static/server"
+    },
     "prod:server:start": {
       "env": {
         "NODE_ENV": "production",
-        "PORT": 8080,
         "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       },
@@ -126,5 +135,9 @@
     "webpack-dev-server": "^2.4.4",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
+  },
+  "engines": {
+    "node": "7.1.0",
+    "yarn": "0.24.5"
   }
 }
