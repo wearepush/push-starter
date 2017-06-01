@@ -56,8 +56,17 @@ export default asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {
     const promises = [];
     const state = getState();
-    if (!state.reduxAsyncConnect.loaded && !isAuthLoaded(state) && !state.auth.error) {
-      promises.push(dispatch(loadAuth()));
+    const reduxAsyncConnect = state.get('reduxAsyncConnect');
+    const auth = state.get('auth');
+
+    if (!reduxAsyncConnect.get('loaded') && !isAuthLoaded(reduxAsyncConnect) && !auth.get('error')) {
+      promises.push(
+        dispatch(
+          loadAuth()
+          .then(() => {}, () => {})
+          .catch(err => console.log(err))
+        )
+      );
     }
     return Promise.all(promises);
   }

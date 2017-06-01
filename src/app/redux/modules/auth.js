@@ -1,23 +1,35 @@
+import { fromJS } from 'immutable';
+
 const LOAD = 'auth/LOAD';
 const LOAD_SUCCESS = 'auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'auth/LOAD_FAIL';
 
-
-const initialState = {
+const initialState = fromJS({
   loading: false,
   loaded: false,
   loggingIn: false,
   user: null
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
-      return { ...state, loading: true };
+      return state.withMutations((mutableState) => {
+        mutableState.set('loading', true);
+      });
     case LOAD_SUCCESS:
-      return { ...state, loading: false, loaded: true, user: action.result, error: null };
+      return state.withMutations((mutableState) => {
+        mutableState.set('loading', false);
+        mutableState.set('loaded', true);
+        mutableState.set('user', fromJS(action.result));
+        mutableState.set('error', null);
+      });
     case LOAD_FAIL:
-      return { ...state, loading: false, loaded: false, error: action.error };
+      return state.withMutations((mutableState) => {
+        mutableState.set('loading', false);
+        mutableState.set('loaded', false);
+        mutableState.set('error', fromJS(action.error));
+      });
     default:
       return state;
   }
@@ -25,13 +37,12 @@ export default function reducer(state = initialState, action = {}) {
 
 
 export function isLoaded(store) {
-  return !!store.auth && !!store.auth.user;
+  return !!store.getIn(['auth', 'user']);
 }
 
 export function load() {
-  return dispatch =>
-    dispatch({
-      types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-      promise: client => client.get('tokens')
-    });
+  return {
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    promise: client => client.get('tokens')
+  };
 }
