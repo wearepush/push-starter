@@ -21,6 +21,7 @@
     "prod:client:build": "webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details",
     "prod:server:build": "webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
     "prod:server:start": "better-npm-run prod:server:start",
+    "lint": "eslint -c .eslintrc src",
     "test": "jest --config jestconfig.json",
     "watch:test": "jest --watch --config jestconfig.json"
   },
