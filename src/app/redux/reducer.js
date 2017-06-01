@@ -7,13 +7,15 @@ import {
 } from 'redux-connect';
 
 import routeReducer from './routing';
+import auth from './modules/auth';
 
 setToImmutableStateFunc(mutableState => fromJS(mutableState));
 setToMutableStateFunc(immutableState => immutableState.toJS());
 
 export default function createReducer() {
   return combineReducers({
+    routing: routeReducer,
     reduxAsyncConnect,
-    routing: routeReducer
+    auth
   });
 }
