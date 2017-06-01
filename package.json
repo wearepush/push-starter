@@ -14,7 +14,9 @@
     "prod:start": "npm-run-all prod:client:build prod:server:build prod:server:start",
     "prod:client:build": "webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details",
     "prod:server:build": "webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
-    "prod:server:start": "better-npm-run prod:server:start"
+    "prod:server:start": "better-npm-run prod:server:start",
+    "test": "jest --config jestconfig.json",
+    "watch:test": "jest --watch --config jestconfig.json"
   },
   "betterScripts": {
     "prod:server:start": {
@@ -29,6 +31,7 @@
   },
   "author": "",
   "keywords": [
+    "jest"
   ],
   "license": "MIT",
   "dependencies": {
@@ -37,6 +40,7 @@
     "express": "^4.15.3",
     "global": "^4.3.1",
     "immutable": "^3.8.1",
+    "jest": "^20.0.4",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
@@ -105,6 +109,5 @@
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
   },
-  "repository": {
-  }
+  "repository": {}
 }
