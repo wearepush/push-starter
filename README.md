@@ -47,11 +47,9 @@ npm run prod
 
 ## Deployment on Heroku
 
-0. Add heroku `heroku git:remote -a wearepush-redux-starter`
-
 To get this project to work on Heroku, you need to:
 
-1. Remove the `"PORT": 8080` line from the `betterScripts` / `start-prod` section of `package.json`.
+1. Add heroku `heroku git:remote -a wearepush-redux-starter`
 2. `heroku config:set NODE_ENV=production`
 3. `heroku config:set NODE_PATH=./src`
 4. `heroku config:set NPM_CONFIG_PRODUCTION=false`
