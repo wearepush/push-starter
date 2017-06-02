@@ -10,7 +10,6 @@
   "homepage": "https://wearepush-redux-starter.herokuapp.com",
   "scripts": {
     "start": "npm run dev",
-
     "dev": "run-p dev:client:build dev:server:prepare dev:server:build dev:server:delay",
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
     "dev:server:build": "webpack --config ./webpack/webpack.config.server.development.babel.js --watch --colors --display-error-details",
@@ -18,18 +17,15 @@
     "dev:server:start": "better-npm-run dev:server:start",
     "dev:client:build": "better-npm-run dev:client:build",
     "delay": "node ./node_modules/npm-delay 20000",
-
     "prod": "npm-run-all prod:client:build prod:server:build prod:server:start",
     "prod:client:build": "better-npm-run prod:client:build",
     "prod:server:build": "webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
     "prod:server:start": "better-npm-run prod:server:start",
-
     "prod:heroku": "npm-run-all prod:heroku:client:build prod:heroku:server:build prod:heroku:server:start",
     "prod:heroku:client:build": "better-npm-run prod:heroku:client:build",
     "prod:heroku:server:build": "webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
     "prod:heroku:server:start": "better-npm-run prod:heroku:server:start",
     "heroku-prebuild": "npm-run-all prod:heroku:client:build prod:heroku:server:build",
-
     "lint": "eslint -c .eslintrc src",
     "test": "jest --config jestconfig.json",
     "watch:test": "jest --watch --config jestconfig.json"
@@ -54,7 +50,6 @@
       },
       "command": "nodemon ./src/server/start.babel.js --watch ./static/server"
     },
-
     "prod:client:build": {
       "env": {
         "NODE_ENV": "production",
@@ -62,7 +57,7 @@
         "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       },
-      "command": "webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details"
+      "command": "webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details -p"
     },
     "prod:server:start": {
       "env": {
@@ -72,9 +67,8 @@
         "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       },
-      "command": "node ./src/server/start.babel.js"
+      "command": "node ./src/server/start.babel.js -p"
     },
-
     "prod:heroku:client:build": {
       "env": {
         "NODE_ENV": "production",
@@ -82,7 +76,7 @@
         "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       },
-      "command": "webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details"
+      "command": "webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details -p"
     },
     "prod:heroku:server:start": {
       "env": {
@@ -109,6 +103,7 @@
     "global": "^4.3.1",
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
+    "optimize-css-assets-webpack-plugin": "^1.3.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-cookie": "^2.0.7",

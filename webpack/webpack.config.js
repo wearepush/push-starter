@@ -65,6 +65,7 @@ const config = {
           loader : 'sass-loader',
           options:
           {
+            data: '@import "./src/app/stylesheets/common.scss";',
             outputStyle       : 'expanded',
             sourceMap         : true,
             sourceMapContents : true

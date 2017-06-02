@@ -2,8 +2,9 @@ import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import CleanPlugin from 'clean-webpack-plugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import getBaseConfig from './webpack.config.client';
-import CleanPlugin        from 'clean-webpack-plugin';
 
 const baseConfig = getBaseConfig({ development: false });
 const vendor = [
@@ -31,6 +32,12 @@ const config = {
   },
 
   plugins: [
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        discardComments: {removeAll: true }
+      }
+    }),
+
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor'],
       minChunks: Infinity
@@ -48,11 +55,11 @@ const config = {
       allChunks: true
     }),
 
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compressor: {
+    //     warnings: false
+    //   }
+    // }),
 
     new webpack.DefinePlugin({
       'process.env': {
