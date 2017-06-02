@@ -98,7 +98,7 @@ const config = {
   ],
 
   resolve: {
-    extensions: ['*', '.js', '.html'],
+    extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
     alias: {
       app: path.resolve(rootFolder, 'src/app')
