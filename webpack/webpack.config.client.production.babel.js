@@ -1,4 +1,3 @@
-import 'babel-register';
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
