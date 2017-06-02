@@ -39,6 +39,15 @@
     "prod:server:start": {
       "env": {
         "NODE_ENV": "production",
+        "PORT": 8080,
+        "APIHOST": "wearepush-redux-starter.herokuapp.com",
+        "APIPORT": ""
+      },
+      "command": "node ./src/server/start.babel.js"
+    },
+    "prod:heroku:server:start": {
+      "env": {
+        "NODE_ENV": "production",
         "APIHOST": "wearepush-redux-starter.herokuapp.com",
         "APIPORT": ""
       },
