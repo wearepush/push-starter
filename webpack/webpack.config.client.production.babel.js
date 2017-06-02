@@ -57,6 +57,8 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
+        SSL: `"${process.env.SSL}"`,
+        APISSL: `"${process.env.APISSL}"`,
         APIHOST: `"${process.env.APIHOST}"`,
         APIPORT: `"${process.env.APIPORT}"`
       },
