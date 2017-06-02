@@ -25,7 +25,7 @@
     "prod:heroku:client:build": "better-npm-run prod:heroku:client:build",
     "prod:heroku:server:build": "webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
     "prod:heroku:server:start": "better-npm-run prod:heroku:server:start",
-    "heroku-prebuild": "npm install -g npm-run-all && npm-run-all prod:heroku:client:build prod:heroku:server:build",
+    "heroku-prebuild": "npm install -g npm-run-all better-npm-run && npm-run-all prod:heroku:client:build prod:heroku:server:build",
     "lint": "eslint -c .eslintrc src",
     "test": "jest --config jestconfig.json",
     "watch:test": "jest --watch --config jestconfig.json"
