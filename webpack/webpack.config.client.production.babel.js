@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const getBaseConfig = require('./webpack.config.client');
-const CleanPlugin = require('clean-webpack-plugin');
+import path from 'path';
+import webpack from 'webpack';
+import merge from 'webpack-merge';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import getBaseConfig from './webpack.config.client';
+import CleanPlugin        from 'clean-webpack-plugin';
 
 const baseConfig = getBaseConfig({ development: false });
 const vendor = [
@@ -69,4 +69,4 @@ const config = {
   ]
 };
 
-module.exports = merge(baseConfig, config);
+export default merge(baseConfig, config);
