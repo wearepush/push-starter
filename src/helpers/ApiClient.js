@@ -1,13 +1,12 @@
 import superagent from 'superagent';
-// import cookie from 'react-cookie';
 import config from '../app/config';
-// import cookieServer from '../utils/cookie';
+import { getCookieServer, getCookie } from '../utils/cookie';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {
   if (directUrl) return path;
-  const adjustedPath = path[0] !== '/' ? `/${path}` : path; // eslint-disable-line
-  return 'http' + (config.apiSSL ? 's' : '') + '://' + config.apiHost + (config.apiPort ? ':' + config.apiPort : '') + adjustedPath;  // eslint-disable-line
+  const adjustedPath = path[0] !== '/' ? `/${path}` : path;
+  return config.apiHost + (config.apiPort ? ':' + config.apiPort : '') + adjustedPath;
 }
 
 class _ApiClient {
@@ -26,20 +25,21 @@ class _ApiClient {
         if (params) {
           request.query(params);
         }
-        // if (__SERVER__) {
-        //   const serverCookies = req.get('cookie');
-        //   if (serverCookies) {
-        //     const token = cookieServer.getServer(serverCookies, config.apiTokenKey);
-        //     if (token) {
-        //       request.set('Authorization', `Bearer ${token}`);
-        //     }
-        //   }
-        // } else if (__CLIENT__) {
-        //   const token = cookie.load(config.apiTokenKey);
-        //   if (token) {
-        //     request.set('Authorization', `Bearer ${token}`);
-        //   }
-        // }
+
+        if (__SERVER__) {
+          const serverCookies = req.get('cookie');
+          if (serverCookies) {
+            const token = getCookieServer(serverCookies, config.apiTokenKey);
+            if (token) {
+              request.set('Authorization', `Bearer ${token}`);
+            }
+          }
+        } else if (__CLIENT__) {
+          const token = getCookie(config.apiTokenKey);
+          if (token) {
+            request.set('Authorization', `Bearer ${token}`);
+          }
+        }
 
         if (!attachments) {
           request.set('Content-Type', 'application/json');
@@ -56,7 +56,7 @@ class _ApiClient {
         if (attachments) {
           if (attachments && typeof attachments === 'object') {
             Object.keys(attachments).forEach((c) => {
-              typeof attachments[c] !== 'object' ? request.field(c, attachments[c]) : request.attach(c, attachments[c]); // eslint-disable-line
+              typeof attachments[c] !== 'object' ? request.field(c, attachments[c]) : request.attach(c, attachments[c]);
             });
           }
         }
