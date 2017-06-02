@@ -16,7 +16,7 @@
     "dev:server:delay": "run-s delay dev:server:start",
     "dev:server:start": "better-npm-run dev:server:start",
     "dev:client:build": "better-npm-run dev:client:build",
-    "delay": "node ./node_modules/npm-delay 20000",
+    "delay": "node ./node_modules/npm-delay 500",
     "prod": "npm-run-all prod:client:build prod:server:build prod:server:start",
     "prod:client:build": "better-npm-run prod:client:build",
     "prod:server:build": "webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",

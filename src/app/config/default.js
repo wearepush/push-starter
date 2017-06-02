@@ -6,6 +6,10 @@ const apiHost = prefixHost + (process.env.APIHOST || 'localhost');
 const apiPort = process.env.APIPORT || '';
 
 export default {
+  apiPort,
+  apiHost,
+  apiTokenKey: 'token',
+
   server: {
     host,
     port: port || 8080,
