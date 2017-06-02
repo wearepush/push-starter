@@ -1,4 +1,4 @@
-import { executionEnvironment } from '../app/utils/helpres';
+import { executionEnvironment } from '../app/utils/helpers';
 
 /* eslint-disable */
 
@@ -12,7 +12,6 @@ export function  getCookieServer(string, name) {
 
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-
 
 // https://learn.javascript.ru/cookie#функция-getcookie-name
 export function getCookie(name) {
