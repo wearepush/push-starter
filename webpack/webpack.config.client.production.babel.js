@@ -9,6 +9,7 @@ const baseConfig = getBaseConfig({ development: false });
 const vendor = [
   'react',
   'react-dom',
+  'prop-types',
   'redux',
   'react-redux',
   'immutable',
