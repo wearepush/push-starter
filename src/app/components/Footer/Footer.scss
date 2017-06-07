@@ -6,4 +6,10 @@ $footer: 'footer';
 .#{$footer} {
   background: red;
   display: flex;
+
+  &__minion {
+    background: url(./minion2.jpeg) no-repeat;
+    height: 100px;
+    width: 100px;
+  }
 }
