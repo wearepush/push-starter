@@ -2,7 +2,9 @@ process.noDeprecation = true;
 
 import path from 'path';
 import webpack from 'webpack';
+// import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+// const extractSCSS = new ExtractTextPlugin('./src/app/stylesheets/common.scss');
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
   context: rootFolder,
@@ -65,7 +67,6 @@ const config = {
           loader : 'sass-loader',
           options:
           {
-            data: '@import "./src/app/stylesheets/common.scss";',
             outputStyle       : 'expanded',
             sourceMap         : true,
             sourceMapContents : true
@@ -95,7 +96,7 @@ const config = {
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
 
   resolve: {

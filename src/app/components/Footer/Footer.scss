@@ -1,4 +1,9 @@
-.footer {
+// @import "../../stylesheets/variables";
+// @import "../../stylesheets/mixins";
+
+$footer: 'footer';
+
+.#{$footer} {
   background: red;
   display: flex;
 }

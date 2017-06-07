@@ -5,9 +5,9 @@ import { asyncConnect } from 'redux-connect';
 // import Helmet from 'react-helmet';
 import { object, func } from 'prop-types';
 import { isLoaded as isAuthLoaded, load as loadAuth } from '../../redux/modules/auth';
+import styles from './App.scss';
 import { Header, Footer } from '../../components';
 // import config from '../../config';
-import styles from './App.scss';
 
 const mapAsyncConnect = [{
   promise: ({ store: { dispatch, getState } }) => {
