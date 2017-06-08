@@ -18,12 +18,14 @@ class Input extends PureComponent {
   }
 
   render() {
-    const { type, input, meta: {}, ...rest } = this.props; // eslint-disable-line
+    const { type, input, meta: {touched, error}, ...rest } = this.props; // eslint-disable-line
     return (
-      <input
-        {...rest}
-        {...input}
-      />
+      <div>
+        <input
+          {...rest}
+          {...input}
+        />
+      </div>
     );
   }
 }

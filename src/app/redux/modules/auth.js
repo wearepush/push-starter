@@ -4,11 +4,12 @@ const LOAD = 'auth/LOAD';
 const LOAD_SUCCESS = 'auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'auth/LOAD_FAIL';
 
+const LOGIN = 'auth/LOGIN';
+// const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
+// const LOGIN_FAIL = 'auth/LOGIN_FAIL';
+
 const initialState = fromJS({
-  loading: false,
   loaded: false,
-  loggingIn: false,
-  user: null
 });
 
 export default function reducer(state = initialState, action = {}) {
@@ -18,6 +19,7 @@ export default function reducer(state = initialState, action = {}) {
         mutableState.set('loading', true);
       });
     case LOAD_SUCCESS:
+      console.log(action.result);
       return state.withMutations((mutableState) => {
         mutableState.set('loading', false);
         mutableState.set('loaded', true);
@@ -30,11 +32,33 @@ export default function reducer(state = initialState, action = {}) {
         mutableState.set('loaded', false);
         mutableState.set('error', fromJS(action.error));
       });
+    case LOGIN:
+      return state.withMutations((mutableState) => {
+        mutableState.set('loggingIn', true);
+        mutableState.set('user', action.name);
+      });
+    // case LOGIN_SUCCESS:
+    //   return state.withMutations((mutableState) => {
+    //     mutableState.set('loggingIn', false);
+    //     mutableState.set('user', action.result);
+    //   });
+    // case LOGIN_FAIL:
+    //   return state.withMutations((mutableState) => {
+    //     mutableState.set('loggingIn', false);
+    //     mutableState.set('user', null);
+    //     mutableState.set('loginError', action.error);
+    //   });
     default:
       return state;
   }
 }
 
+export function login(name) {
+  return {
+    types: LOGIN,
+    name
+  };
+}
 
 export function isLoaded(store) {
   return !!store.getIn(['auth', 'user']);
