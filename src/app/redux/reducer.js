@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import { reducer as form } from 'redux-form';
 import { combineReducers } from 'redux-immutablejs';
 import {
   setToImmutableStateFunc,
@@ -15,6 +16,7 @@ setToMutableStateFunc(immutableState => immutableState.toJS());
 export default function createReducer() {
   return combineReducers({
     routing: routeReducer,
+    form,
     reduxAsyncConnect,
     auth
   });
