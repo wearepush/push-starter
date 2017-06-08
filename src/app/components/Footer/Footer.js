@@ -13,7 +13,6 @@ export default class Footer extends PureComponent {
           target="_blank"
           rel="noopener noreferrer"
         >Github</a>
-        <div className={styles.footer__minion} />
       </div>
     );
   }
