@@ -1,11 +1,17 @@
 const validate = values => {
   const errors = {};
-  if (!values.email) {
+
+  const email = values.get('email');
+
+  if (values && !email) {
     errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
     errors.email = 'Invalid email address';
   }
-  // console.log(values);
+
+
+  // const members = values.get('members');
+
 
   if (!values.members || !values.members.length) {
     errors.members = {_error: 'At least one member must be entered'};
@@ -13,17 +19,18 @@ const validate = values => {
     const membersArrayErrors = [];
     values.members.forEach((member, memberIndex) => {
       const memberErrors = {};
-      if (!member || !member.firstName) {
-        memberErrors.firstName = 'Required';
+      if (!member || !member.email) {
+        memberErrors.email = 'Required';
         membersArrayErrors[memberIndex] = memberErrors;
       }
     });
-
-    if (membersArrayErrors.length) {
+    // console.log(membersArrayErrors);
+    if (membersArrayErrors.length > 0) {
+      // console.log(membersArrayErrors);
       errors.members = membersArrayErrors;
     }
-    console.log(membersArrayErrors);
   }
+
   return errors;
 };
 

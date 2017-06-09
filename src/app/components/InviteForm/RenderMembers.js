@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { any, object } from 'prop-types';
+import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
 import RenderField from './RenderField';
 
@@ -26,7 +27,7 @@ export default class RenderMembers extends Component {
             label="email"
           />
         </div>
-        <button type="button" onClick={() => fields.push({})}>Add Member</button>
+        <button type="button" onClick={() => fields.push(fromJS({}))}>Add Member</button>
         {submitFailed && error && <span>{error}</span>}
         {fields.map((member, index) => (
           <div key={index}>

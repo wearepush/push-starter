@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { reducer as form } from 'redux-form';
+import { reducer as form } from 'redux-form/immutable';
 import { combineReducers } from 'redux-immutablejs';
 import {
   setToImmutableStateFunc,
