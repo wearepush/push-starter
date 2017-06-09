@@ -49,7 +49,9 @@
     "jsx-a11y/label-has-for": 0,
     "linebreak-style": 0,
     "object-curly-spacing": 0,
-    "arrow-parens": 0
+    "arrow-parens": 0,
+    "react/no-array-index-key": 0,
+    "jsx-a11y/no-static-element-interactions": 0
   },
   "plugins": [
     "react",
