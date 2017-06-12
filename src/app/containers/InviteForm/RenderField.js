@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { any, string, object } from 'prop-types';
+import React, { PureComponent } from 'react';
+import { string, object } from 'prop-types';
 
-export default class RenderField extends Component {
+export default class RenderField extends PureComponent {
   static propTypes = {
     label: string,
     meta: object,
-    input: any,
-    type: any,
+    input: object,
+    type: string,
   };
 
   static defaultProps = {
     label: '',
     meta: null,
     input: null,
-    type: null,
+    type: '',
   };
 
   render() {

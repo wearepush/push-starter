@@ -4,7 +4,8 @@ import { isLoaded as isAuthLoaded, load as loadAuth } from '../redux/modules/aut
 import {
   App,
   Home,
-  NotFound
+  NotFound,
+  InviteForm
 } from '../containers';
 
 export default (store) => {
@@ -46,7 +47,7 @@ export default (store) => {
       <Route component={App}>
         { /* Home (main) route */ }
         <IndexRoute component={Home} />
-
+        <Route path="invitations" component={InviteForm} />
         <Route onEnter={loggedRedirect} />
         <Route onEnter={requireLogin} />
       </Route>

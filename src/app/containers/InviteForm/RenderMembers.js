@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { any, object } from 'prop-types';
+import React, { PureComponent } from 'react';
+import { object } from 'prop-types';
 import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
 import RenderField from './RenderField';
 
-export default class RenderMembers extends Component {
+export default class RenderMembers extends PureComponent {
   static propTypes = {
-    fields: any,
+    fields: object,
     meta: object,
   }
 
@@ -15,19 +15,23 @@ export default class RenderMembers extends Component {
     meta: null,
   }
 
+  componentDidMount() {
+    const { fields } = this.props;
+    fields.push(fromJS({}));
+    fields.push(fromJS({}));
+    fields.push(fromJS({}));
+  }
+
   render() {
-    const { fields, meta: {error, submitFailed} } = this.props;
+    const { fields, meta: { error, submitFailed } } = this.props;
     return (
       <div>
-        <div>
-          <Field
-            name="email"
-            type="text"
-            component={RenderField}
-            label="email"
-          />
-        </div>
-        <button type="button" onClick={() => fields.push(fromJS({}))}>Add Member</button>
+        <button
+          type="button"
+          onClick={() => fields.push(fromJS({}))}
+        >
+          add email
+        </button>
         {submitFailed && error && <span>{error}</span>}
         {fields.map((member, index) => (
           <div key={index}>
@@ -38,10 +42,10 @@ export default class RenderMembers extends Component {
             />
             <div>
               <Field
-                name={`${member}.firstName`}
+                name={`${member}.email`}
                 type="text"
                 component={RenderField}
-                label="First Name"
+                label="email"
               />
             </div>
           </div>

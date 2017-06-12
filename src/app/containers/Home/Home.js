@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { InviteForm } from 'app/components';
+import React, { PureComponent } from 'react';
 
-export default class Home extends Component {
+export default class Home extends PureComponent {
   render() {
     return (
       <div>
-        <InviteForm />
+        Home
       </div>
     );
   }
