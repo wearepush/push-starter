@@ -1,58 +1,54 @@
-/*eslint-disable*/
 import React, { PureComponent } from 'react';
 import {connect} from 'react-redux';
 import { fromJS } from 'immutable';
-import { FieldArray, reduxForm, isValid, getFormValues, isPristine } from 'redux-form/immutable';
+import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
 import validate from './validate';
 import RenderMembers from './RenderMembers';
 
+const formName = 'fieldArrays';
+
 const mapToForm = {
-  form: 'fieldArrays',
+  form: formName,
   initialValues: fromJS({
-    emails: [{}, {}]
+    emails: [{}]
   }),
   validate
 };
 
-const mapStateToProps = (state) => { // eslint-disable-line
-  return {
-    valid: isValid('fieldArrays')(state),
-    formValues: getFormValues('fieldArrays')(state)
-  };
-};
+const mapDispatchToProps = {};
+
+const mapStateToProps = (state) => ({
+  formValues: getFormValues(formName)(state),
+  valid: isValid(formName)(state)
+});
 
 class FieldArraysForm extends PureComponent {
   static propTypes = {
+    change: func.isRequired,
+    dispatch: func.isRequired,
     handleSubmit: func,
-    change: func,
-    dispatch: func,
     formValues: object,
-    pristine: bool,
-    submitting: bool,
+    submitting: bool.isRequired,
     valid: bool.isRequired
   };
 
   static defaultProps = {
     handleSubmit: undefined,
-    valid: false,
-    submitting: false,
+    formValues: null
   };
 
   componentWillReceiveProps(nextProps) {
-    const { valid, formValues, dispatch, change } = nextProps;
-    console.log('????????');
+    const { valid, dispatch, change } = nextProps;
+    const { formValues } = this.props;
 
-
-    if(valid && formValues) {
-      console.log('!!!!!!!!!', valid);
-      formValues.set('emails', formValues.get('emails').push(fromJS({})))
-
-      // dispatch(
-      //   change('emails',
-      //     formValues.get('emails').push(fromJS({}))
-      //   )
-      // );
+    if (valid && formValues) {
+      dispatch(
+        change('emails',
+          formValues.get('emails')
+          .push(fromJS({}))
+        )
+      );
     }
   }
 
@@ -64,7 +60,7 @@ class FieldArraysForm extends PureComponent {
     const { handleSubmit, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <FieldArray name="emails"  component={RenderMembers} />
+        <FieldArray name="emails" component={RenderMembers} />
         <div>
           <button type="submit" disabled={submitting}>Submit</button>
         </div>
@@ -73,7 +69,6 @@ class FieldArraysForm extends PureComponent {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  () => ({})
-)(reduxForm(mapToForm)(FieldArraysForm));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  reduxForm(mapToForm)(FieldArraysForm)
+);
