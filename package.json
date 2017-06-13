@@ -151,7 +151,7 @@
     "expect": "^1.20.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
-    "flow-bin": "^0.47.0",
+    "flow-bin": "^0.48.0",
     "jest": "^20.0.4",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
@@ -168,7 +168,7 @@
     "universal-webpack": "^0.3.9",
     "url-loader": "^0.5.8",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.4",
+    "webpack-dev-server": "^2.4.5",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
   },
