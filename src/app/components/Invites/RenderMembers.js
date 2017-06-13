@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { fromJS } from 'immutable';
@@ -35,11 +34,6 @@ export default class RenderMembers extends Component {
         {submitFailed && error && <span>{error}</span>}
         {fields.map((member, index) => (
           <div key={index}>
-            <button
-              type="button"
-              title="Remove Member"
-              onClick={() => fields.remove(index)}
-            />
             <div>
               <Field
                 name={`${member}.email`}
@@ -48,6 +42,13 @@ export default class RenderMembers extends Component {
                 label={`email.${index}`}
               />
             </div>
+            <button
+              type="button"
+              title="Remove Member"
+              onClick={() => fields.remove(index)}
+            >
+              x
+            </button>
           </div>
         ))}
         {error && <span className="error">{error}</span>}

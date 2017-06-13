@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-connect';
-// import Helmet from 'react-helmet';
 import { object, func } from 'prop-types';
-import { isLoaded as isAuthLoaded, load as loadAuth } from '../../redux/modules/auth';
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'app/redux/modules/auth';
+import { Header, Footer } from 'app/components';
 import styles from './App.scss';
-import { Header, Footer } from '../../components';
-// import config from '../../config';
 
 const mapAsyncConnect = [{
   promise: ({ store: { dispatch, getState } }) => {

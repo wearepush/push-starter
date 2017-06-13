@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => ({
   valid: isValid(formName)(state)
 });
 
-class FieldArraysForm extends PureComponent {
+class Invites extends PureComponent {
   static propTypes = {
     change: func.isRequired,
     dispatch: func.isRequired,
@@ -70,5 +70,5 @@ class FieldArraysForm extends PureComponent {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  reduxForm(mapToForm)(FieldArraysForm)
+  reduxForm(mapToForm)(Invites)
 );

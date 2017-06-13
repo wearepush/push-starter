@@ -1,16 +1,12 @@
-/*eslint-disable*/
 import React, { PureComponent } from 'react';
-import { FieldArray, reduxForm, isInvalid } from 'redux-form/immutable';
-import { connect } from 'react-redux';
-import { string, object, func } from 'prop-types';
+import { string, object } from 'prop-types';
 
 export default class RenderField extends PureComponent {
   static propTypes = {
     label: string,
     meta: object,
     input: object,
-    type: string,
-    onClick: func
+    type: string
   };
 
   static defaultProps = {
@@ -21,7 +17,7 @@ export default class RenderField extends PureComponent {
   };
 
   render() {
-    const { input, label, type, meta: {touched, error}, onClick, values } = this.props;
+    const { input, label, type, meta: { touched, error } } = this.props;
     return (
       <div>
         <input

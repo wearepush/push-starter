@@ -5,7 +5,7 @@ import {
   App,
   Home,
   NotFound,
-  InviteForm
+  Invite
 } from '../containers';
 
 export default (store) => {
@@ -47,7 +47,7 @@ export default (store) => {
       <Route component={App}>
         { /* Home (main) route */ }
         <IndexRoute component={Home} />
-        <Route path="invitations" component={InviteForm} />
+        <Route path="invite" component={Invite} />
         <Route onEnter={loggedRedirect} />
         <Route onEnter={requireLogin} />
       </Route>

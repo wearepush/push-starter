@@ -1,10 +1,19 @@
 import React, { PureComponent } from 'react';
 import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Form } from '../../elements';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const mapStateToProps = state => ({}); // eslint-disable-line
+
+const mapToProps = {
+};
+
+const mapToForm = {
+  form: 'SignInForm',
+};
 
 class SignIn extends PureComponent {
   static propTypes = {
@@ -57,11 +66,6 @@ class SignIn extends PureComponent {
   }
 }
 
-const mapToProps = {}; // eslint-disable-line
-
-
-export default connect(() => ({}), mapToProps)(
-  reduxForm({
-    form: 'SignInForm',
-  })(SignIn)
+export default connect(mapStateToProps, mapToProps)(
+  reduxForm(mapToForm)(SignIn)
 );
