@@ -1,7 +1,7 @@
 # STRUCTURE
 
 Pages folder
-
+```
 └── pages
 | └── PageName
 | | | index.js
@@ -13,9 +13,10 @@ Pages folder
 | |  ...
 |
 ...
+```
 
 Common folder
-
+```
 └── common
 | └── components
 | |  |
@@ -25,10 +26,10 @@ Common folder
 | |  ...
 |
 ...
-
+```
 
 Components folder for Common and Pages
-
+```
 └── components
 │  index.js
 │  └── ComponentName
@@ -39,9 +40,10 @@ Components folder for Common and Pages
 |  |
 |  ...
 ...
+```
 
 Containers folder  for Common and Pages
-
+```
 └── containers
 │  index.js
 │  └── ContainerName
@@ -52,19 +54,20 @@ Containers folder  for Common and Pages
 |  |
 |  ...
 ...
-
+```
 
 Config folder
-
+```
 ...
 └── config
 │  │  index.js
 │  │  environment.js
 │  │  default.js
 |  ...
+```
 
 Redux folder
-
+```
 ...
 └── redux
 │  │  index.js
@@ -78,26 +81,28 @@ Redux folder
 │  │  routing.js
 │  │  store.js
 |  ...
-
+```
 
 Routes
-
+```
 ...
 | routes.js - index point for routes
 |  ...
-
+```
 
 Helpers
-
+```
 ...
 └── helpers
 |  ...
+```
 
 Client
-
+```
 ...
 └── client
 | | root.js - entry point for application
 | | index.js - entry point for routes
 | | html.js - entry point for html
 |  ...
+```
