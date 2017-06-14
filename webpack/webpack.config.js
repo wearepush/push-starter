@@ -2,9 +2,7 @@ process.noDeprecation = true;
 
 import path from 'path';
 import webpack from 'webpack';
-// import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-// const extractSCSS = new ExtractTextPlugin('./src/app/stylesheets/common.scss');
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
   context: rootFolder,
@@ -103,7 +101,10 @@ const config = {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
     alias: {
-      app: path.resolve(rootFolder, 'src/app')
+      app: path.resolve(rootFolder, 'src/app'),
+      pages: path.resolve(rootFolder, 'src/app/pages'),
+      components: path.resolve(rootFolder, 'src/app/components'),
+      elements: path.resolve(rootFolder, 'src/app/elements')
     }
   }
 };

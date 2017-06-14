@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { fromJS } from 'immutable';
-import { Field } from 'redux-form/immutable';
-import RenderField from './RenderField';
+import { Input } from 'elements';
 
-export default class RenderMembers extends Component {
+export default class Members extends Component {
   static propTypes = {
     fields: object,
     meta: object,
-  }
+  };
 
   static defaultProps = {
     fields: null,
     meta: null,
-  }
-
-  constructor() {
-    super();
-    this.addFields = this.addFields.bind(this);
-  }
-
-  addFields() {
-    const { fields } = this.props;
-    if (fields.length < 10) {
-      fields.push(fromJS({}));
-    }
-  }
+  };
 
   render() {
     const { fields, meta: { error, submitFailed } } = this.props;
@@ -35,11 +21,9 @@ export default class RenderMembers extends Component {
         {fields.map((member, index) => (
           <div key={index}>
             <div>
-              <Field
+              <Input
                 name={`${member}.email`}
-                type="text"
-                component={RenderField}
-                label={`email.${index}`}
+                type="email"
               />
             </div>
             <button

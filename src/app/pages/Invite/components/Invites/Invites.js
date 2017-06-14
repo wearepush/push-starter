@@ -4,14 +4,14 @@ import { fromJS } from 'immutable';
 import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
 import validate from './validate';
-import RenderMembers from './RenderMembers';
+import Members from './Members';
 
 const formName = 'fieldArrays';
 
 const mapToForm = {
   form: formName,
   initialValues: fromJS({
-    emails: [{}]
+    emails: [{}, {}, {}]
   }),
   validate
 };
@@ -59,10 +59,20 @@ class Invites extends PureComponent {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <FieldArray name="emails" component={RenderMembers} />
+      <form
+        onSubmit={handleSubmit(this.onSubmit)}
+      >
+        <FieldArray
+          name="emails"
+          component={Members}
+        />
         <div>
-          <button type="submit" disabled={submitting}>Submit</button>
+          <button
+            type="submit"
+            disabled={submitting}
+          >
+            Submit
+          </button>
         </div>
       </form>
     );

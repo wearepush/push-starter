@@ -1,1 +1,2 @@
-export * as Form from './Form';
+export Button from './Button/Button';
+export Input from './Input/Input';

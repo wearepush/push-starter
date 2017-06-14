@@ -1,33 +1,35 @@
 import React, { PureComponent } from 'react';
-import { string, object } from 'prop-types';
+import { string, object, func } from 'prop-types';
 import { Field } from 'redux-form/immutable';
 
 class Input extends PureComponent {
   static propTypes = {
-    // name: string,
     type: string,
     input: object,
     meta: object,
+    onClick: func
   }
 
   static defaultProps = {
-    // name: '',
     type: 'text',
     input: null,
     meta: null,
+    onClick: undefined
   }
 
   render() {
-    const { type, input, meta: {touched, error}, ...rest } = this.props; // eslint-disable-line
+    const { type, input, meta: { touched, error }, ...rest } = this.props; // eslint-disable-line
     return (
       <div>
         <input
+          type={type}
           {...rest}
           {...input}
         />
+        {touched && error && <span>{error}</span>}
       </div>
     );
   }
 }
 
-export default props=> <Field {...props} component={Input} />; // eslint-disable-line
+export default props => <Field {...props} component={Input} />;

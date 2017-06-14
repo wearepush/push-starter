@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { Form } from '../../elements';
+import { Input, Button } from 'elements';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -49,18 +49,26 @@ class SignIn extends PureComponent {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <h1>Sign In</h1>
-        <Form.Input
-          name="username"
-          type="text"
-          placeholder="User name"
-        />
-        <Form.Input
-          name="password"
-          type="password"
-          placeholder="password"
-        />
-        {error && <strong>{error}</strong>}
-        <Form.Button type="submit">sign in</Form.Button>
+        <div>
+          <Input
+            name="username"
+            type="text"
+            placeholder="User name"
+          />
+        </div>
+        <div>
+          <Input
+            name="password"
+            type="password"
+            placeholder="password"
+          />
+        </div>
+        {error && <div>{error}</div>}
+        <Button
+          type="submit"
+        >
+          sign in
+        </Button>
       </form>
     );
   }
