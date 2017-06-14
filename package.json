@@ -119,6 +119,7 @@
     "redux-connect": "^5.1.0",
     "redux-form": "^6.7.0",
     "redux-immutablejs": "^0.0.8",
+    "semantic-ui-react": "^0.68.5",
     "serve-favicon": "^2.4.3",
     "superagent": "^3.5.2"
   },

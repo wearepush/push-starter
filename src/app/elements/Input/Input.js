@@ -1,29 +1,29 @@
 import React, { PureComponent } from 'react';
-import { string, object, func } from 'prop-types';
+import { string, object } from 'prop-types';
 import { Field } from 'redux-form/immutable';
+import { Input as InputUI } from 'semantic-ui-react';
 
 class Input extends PureComponent {
   static propTypes = {
     type: string,
     input: object,
-    meta: object,
-    onClick: func
+    meta: object
   };
 
   static defaultProps = {
     type: 'text',
     input: null,
-    meta: null,
-    onClick: undefined
+    meta: null
   };
 
   render() {
-    const { type, input, meta: { touched, error }, ...rest } = this.props; // eslint-disable-line
+    const { type, input, meta: { touched, error }, ...rest } = this.props;
     return (
       <div>
-        <input
-          {...rest}
+        <InputUI
+          error={touched && !!error}
           {...input}
+          {...rest}
         />
         {touched && error && <span>{error}</span>}
       </div>

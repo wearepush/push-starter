@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-connect';
 import { object, func } from 'prop-types';
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'app/redux/modules/auth';
-import { Header, Footer } from 'app/components';
+import { Container } from 'semantic-ui-react';
+
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'modules/auth';
+import { Header, Footer } from 'components';
+
 import styles from './App.scss';
 
 const mapAsyncConnect = [{
@@ -59,11 +62,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.app}>
+      <Container className={styles.app}>
         <Header />
         <div className={styles.app__container}>{this.props.children}</div>
         <Footer />
-      </div>
+      </Container>
     );
   }
 }

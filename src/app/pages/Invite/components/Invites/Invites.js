@@ -65,6 +65,7 @@ class Invites extends PureComponent {
             <div>
               <Input
                 name={`${member}.email`}
+                placeholder="Email"
                 type="email"
               />
             </div>

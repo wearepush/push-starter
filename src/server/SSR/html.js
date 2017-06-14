@@ -65,6 +65,7 @@ export default class Html extends Component {
           <meta name="msapplication-TileImage" content="/favicons/apple-touch-icon-144x144.png" />
           <meta name="theme-color" content="#ffffff" />
 
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" />
           <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
