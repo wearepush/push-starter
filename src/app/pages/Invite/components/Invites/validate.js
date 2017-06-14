@@ -1,3 +1,5 @@
+import memoize from 'lru-memoize';
+
 const validate = values => {
   const errors = {};
 
@@ -25,4 +27,4 @@ const validate = values => {
   return errors;
 };
 
-export default validate;
+export default memoize(10)(validate);

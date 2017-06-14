@@ -4,7 +4,7 @@ Pages folder
 ```
 └── pages
 | └── PageName
-| | | index.js
+| | | index.js - route
 | | └── components
 | | |  |
 | | |  ...
@@ -15,20 +15,7 @@ Pages folder
 ...
 ```
 
-Common folder
-```
-└── common
-| └── components
-| |  |
-| |  ...
-| └── containers
-| |  |
-| |  ...
-|
-...
-```
-
-Components folder for Common and Pages
+Components folder
 ```
 └── components
 │  index.js
@@ -42,14 +29,14 @@ Components folder for Common and Pages
 ...
 ```
 
-Containers folder  for Common and Pages
+Elements folder
 ```
-└── containers
+└── elements
 │  index.js
-│  └── ContainerName
-│  │  │  ContainerName.js
-│  │  │  ContainerName.scss
-│  │  │  ContainerName.test.js
+│  └── ElementName
+│  │  │  ElementName.js
+│  │  │  ElementName.scss
+│  │  │  ElementName.test.js
 │  │  │  ...
 |  |
 |  ...

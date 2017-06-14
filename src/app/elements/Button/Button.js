@@ -5,7 +5,7 @@ export default class Button extends Component {
   static propTypes = {
     type: string,
     children: node,
-  }
+  };
 
   static defaultProps = {
     type: 'button',
@@ -13,9 +13,11 @@ export default class Button extends Component {
   };
 
   render() {
-    const { type, children } = this.props;
+    const { children, ...rest } = this.props;
     return (
-      <button type={type}>
+      <button
+        {...rest}
+      >
         {children}
       </button>
     );

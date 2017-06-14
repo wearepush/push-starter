@@ -8,21 +8,20 @@ class Input extends PureComponent {
     input: object,
     meta: object,
     onClick: func
-  }
+  };
 
   static defaultProps = {
     type: 'text',
     input: null,
     meta: null,
     onClick: undefined
-  }
+  };
 
   render() {
     const { type, input, meta: { touched, error }, ...rest } = this.props; // eslint-disable-line
     return (
       <div>
         <input
-          type={type}
           {...rest}
           {...input}
         />

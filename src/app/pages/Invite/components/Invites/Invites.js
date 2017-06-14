@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
+import { Button, Input } from 'elements';
 import validate from './validate';
-import Members from './Members';
 
 const formName = 'fieldArrays';
 
@@ -56,6 +56,32 @@ class Invites extends PureComponent {
     console.log(data.toJS());
   }
 
+  rednderMembers = ({ fields, meta: { error, submitFailed } }) => { // eslint-disable-line
+    return (
+      <div>
+        {submitFailed && error && <span>{error}</span>}
+        {fields.map((member, index) => (
+          <div key={index}>
+            <div>
+              <Input
+                name={`${member}.email`}
+                type="email"
+              />
+            </div>
+            <Button
+              type="button"
+              title="Remove Member"
+              onClick={() => fields.remove(index)}
+            >
+              x
+            </Button>
+          </div>
+        ))}
+        {error && <span className="error">{error}</span>}
+      </div>
+    );
+  }
+
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
@@ -64,15 +90,15 @@ class Invites extends PureComponent {
       >
         <FieldArray
           name="emails"
-          component={Members}
+          component={this.rednderMembers}
         />
         <div>
-          <button
+          <Button
             type="submit"
             disabled={submitting}
           >
             Submit
-          </button>
+          </Button>
         </div>
       </form>
     );

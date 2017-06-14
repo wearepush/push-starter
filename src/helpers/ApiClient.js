@@ -1,6 +1,6 @@
 import superagent from 'superagent';
-import config from '../app/config';
-import { getCookieServer, getCookie } from '../utils/cookie';
+import { getCookieServer, getCookie } from 'utils/cookie';
+import config from 'config';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {
@@ -10,7 +10,7 @@ function formatUrl(path, directUrl = false) {
 }
 
 class _ApiClient {
-  constructor(req) { // eslint-disable-line
+  constructor(req) {
     methods.forEach((method) => {
       this[method] = (path, {
         params,

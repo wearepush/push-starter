@@ -19,7 +19,6 @@ export default function reducer(state = initialState, action = {}) {
         mutableState.set('loading', true);
       });
     case LOAD_SUCCESS:
-      console.log(action.result);
       return state.withMutations((mutableState) => {
         mutableState.set('loading', false);
         mutableState.set('loaded', true);

@@ -1,4 +1,4 @@
-import { executionEnvironment } from '../app/utils/helpers';
+import { executionEnvironment } from 'utils/helpers';
 
 /* eslint-disable */
 
