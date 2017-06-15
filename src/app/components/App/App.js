@@ -5,18 +5,18 @@ import { asyncConnect } from 'redux-connect';
 import { object, func } from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'modules/auth';
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'modules/auth'; // eslint-disable-line
 import { Header, Footer } from 'components';
 
 import styles from './App.scss';
 
 const mapAsyncConnect = [{
-  promise: ({ store: { dispatch, getState } }) => {
+  promise: ({ store: { dispatch, getState } }) => { // eslint-disable-line
     const promises = [];
+    /*
     const state = getState();
     const reduxAsyncConnect = state.get('reduxAsyncConnect');
     const auth = state.get('auth');
-
     if (!reduxAsyncConnect.get('loaded') && !isAuthLoaded(reduxAsyncConnect) && !auth.get('error')) {
       promises.push(
         dispatch(loadAuth())
@@ -24,6 +24,8 @@ const mapAsyncConnect = [{
         .catch(err => console.log(err))
       );
     }
+    */
+
     return Promise.all(promises);
   }
 }];
