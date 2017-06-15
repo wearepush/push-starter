@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { string, node } from 'prop-types';
 import { Button as ButtonUI } from 'semantic-ui-react';
 
-export default class Button extends Component {
-  static propTypes = {
-    type: string,
-    children: node,
-  };
+const Button = ({
+  children,
+  ...rest
+}) => (
+  <ButtonUI
+    {...rest}
+  >
+    {children}
+  </ButtonUI>
+);
 
-  static defaultProps = {
-    type: 'button',
-    children: null
-  };
+Button.propTypes = {
+  type: string,
+  children: node
+};
 
-  render() {
-    const { children, ...rest } = this.props;
-    return (
-      <ButtonUI
-        {...rest}
-      >
-        {children}
-      </ButtonUI>
-    );
-  }
-}
+Button.defaultProps = {
+  type: 'button',
+  children: null
+};
 
+export default Button;

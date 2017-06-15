@@ -1,34 +1,33 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { string, object } from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import { Input as InputUI } from 'semantic-ui-react';
 
-class Input extends PureComponent {
-  static propTypes = {
-    type: string,
-    input: object,
-    meta: object
-  };
+const Input = ({
+  input,
+  meta: { touched, error },
+  ...rest
+}) => (
+  <div>
+    <InputUI
+      error={touched && !!error}
+      {...input}
+      {...rest}
+    />
+    {touched && error && <span>{error}</span>}
+  </div>
+);
 
-  static defaultProps = {
-    type: 'text',
-    input: null,
-    meta: null
-  };
+Input.propTypes = {
+  input: object.isRequired,
+  meta: object.isRequired,
+  type: string.isRequired
+};
 
-  render() {
-    const { type, input, meta: { touched, error }, ...rest } = this.props;
-    return (
-      <div>
-        <InputUI
-          error={touched && !!error}
-          {...input}
-          {...rest}
-        />
-        {touched && error && <span>{error}</span>}
-      </div>
-    );
-  }
-}
+Input.defaultProps = {
+  input: null,
+  meta: null,
+  type: 'text'
+};
 
 export default props => <Field {...props} component={Input} />;
