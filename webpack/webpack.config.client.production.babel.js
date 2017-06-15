@@ -19,7 +19,9 @@ const vendor = [
   'react-router-redux',
   'redux-connect',
   'react-hot-loader',
-  'react-helmet'
+  'react-helmet',
+  'redux-form',
+  'semantic-ui-react'
 ];
 
 
@@ -56,6 +58,7 @@ const config = {
       allChunks: true
     }),
 
+    // we are usign -p in productuin
     // new webpack.optimize.UglifyJsPlugin({
     //   compressor: {
     //     warnings: false
