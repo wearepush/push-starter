@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { string, node } from 'prop-types';
+import { Button as ButtonUI } from 'semantic-ui-react';
 
 export default class Button extends Component {
   static propTypes = {
@@ -15,11 +16,11 @@ export default class Button extends Component {
   render() {
     const { children, ...rest } = this.props;
     return (
-      <button
+      <ButtonUI
         {...rest}
       >
         {children}
-      </button>
+      </ButtonUI>
     );
   }
 }

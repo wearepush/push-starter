@@ -4,8 +4,8 @@ import { fromJS } from 'immutable';
 import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
 import { Button, Input } from 'elements';
+import { Form } from 'semantic-ui-react';
 import validate from './validate';
-
 const formName = 'fieldArrays';
 
 const mapToForm = {
@@ -61,14 +61,12 @@ class Invites extends PureComponent {
       <div>
         {submitFailed && error && <span>{error}</span>}
         {fields.map((member, index) => (
-          <div key={index}>
-            <div>
-              <Input
-                name={`${member}.email`}
-                placeholder="Email"
-                type="email"
-              />
-            </div>
+          <Form.Field key={index}>
+            <Input
+              name={`${member}.email`}
+              placeholder="Email"
+              type="email"
+            />
             <Button
               type="button"
               title="Remove Member"
@@ -76,9 +74,9 @@ class Invites extends PureComponent {
             >
               x
             </Button>
-          </div>
+          </Form.Field>
         ))}
-        {error && <span className="error">{error}</span>}
+        {error && <span>{error}</span>}
       </div>
     );
   }
@@ -86,22 +84,25 @@ class Invites extends PureComponent {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <form
+      <Form
         onSubmit={handleSubmit(this.onSubmit)}
       >
         <FieldArray
           name="emails"
           component={this.rednderMembers}
         />
-        <div>
+        <Form.Field>
+          Choose 3 or more friends for the best chance at getting free groceries
+        </Form.Field>
+        <Form.Field>
           <Button
             type="submit"
             disabled={submitting}
           >
-            Submit
+            Send
           </Button>
-        </div>
-      </form>
+        </Form.Field>
+      </Form>
     );
   }
 }
