@@ -4,11 +4,11 @@ import { renderToString } from 'react-dom/server';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createMemoryHistory, match } from 'react-router';
 
-import ApiClient from '../../helpers/ApiClient';
+import routes from 'routes';
+import { createSelectLocationState } from 'utils';
 import Html from './html';
-import routes from '../../app/routes';
+import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../app/redux/store';
-import { createSelectLocationState } from '../../app/utils';
 
 export default function createSSR(assets) {
   return (req, res) => {

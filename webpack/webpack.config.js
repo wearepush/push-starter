@@ -107,7 +107,8 @@ const config = {
       elements: path.resolve(rootFolder, 'src/app/elements'),
       utils: path.resolve(rootFolder, 'src/app/utils'),
       config: path.resolve(rootFolder, 'src/app/config'),
-      modules: path.resolve(rootFolder, 'src/app/redux/modules')
+      modules: path.resolve(rootFolder, 'src/app/redux/modules'),
+      routes: path.resolve(rootFolder, 'src/app/routes')
     }
   }
 };

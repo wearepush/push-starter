@@ -5,13 +5,13 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { ReduxAsyncConnect } from 'redux-connect';
 import Helmet from 'react-helmet';
-import appConfig from '../../app/config';
+import appConfig from 'config';
 
 export default class Html extends Component {
   static propTypes = {
-    store: object.isRequired,
+    assets: object.isRequired,
     renderProps: object.isRequired,
-    assets: object.isRequired
+    store: object.isRequired
   };
 
   render() {
