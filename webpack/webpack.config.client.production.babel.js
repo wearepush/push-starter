@@ -24,9 +24,8 @@ const vendor = [
   'semantic-ui-react'
 ];
 
-
 const config = {
-  devtool: 'source-map',
+  devtool: false,
   entry: { vendor },
 
   output: {

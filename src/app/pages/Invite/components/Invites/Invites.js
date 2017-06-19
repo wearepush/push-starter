@@ -4,8 +4,10 @@ import { fromJS } from 'immutable';
 import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
 import { Button, Input } from 'elements';
-import { Form } from 'semantic-ui-react';
+import { Form, Container, Message } from 'semantic-ui-react';
 import validate from './validate';
+import s from './Invite.scss';
+
 const formName = 'fieldArrays';
 
 const mapToForm = {
@@ -18,7 +20,7 @@ const mapToForm = {
 
 const mapDispatchToProps = {};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   formValues: getFormValues(formName)(state),
   valid: isValid(formName)(state)
 });
@@ -26,34 +28,72 @@ const mapStateToProps = (state) => ({
 class Invites extends PureComponent {
   static propTypes = {
     change: func.isRequired,
-    dispatch: func.isRequired,
+    // dispatch: func.isRequired,
     handleSubmit: func,
-    formValues: object,
+    formValues: object, // eslint-disable-line
+    emailValues: object, // eslint-disable-line
     submitting: bool.isRequired,
-    valid: bool.isRequired
+    // valid: bool.isRequired
   };
 
   static defaultProps = {
     handleSubmit: undefined,
-    formValues: null
+    formValues: {}
   };
 
-  componentWillReceiveProps(nextProps) {
-    const { valid, dispatch, change } = nextProps;
-    const { formValues } = this.props;
+  constructor() {
+    super();
+    this.state = {
+      formSent: false
+    };
 
-    if (valid && formValues) {
-      dispatch(
-        change('emails',
-          formValues.get('emails')
-          .push(fromJS({}))
-        )
-      );
-    }
+    this.handleAddMember = ::this.handleAddMember;
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   const { valid, dispatch, change } = nextProps;
+  //   const { formValues } = this.props;
+
+  //   if (valid && formValues) {
+  //     dispatch(
+  //       change('emails',
+  //         formValues.get('emails')
+  //         .push(fromJS({}))
+  //       )
+  //     );
+  //   }
+  // }
 
   onSubmit = (data) => {
     console.log(data.toJS());
+  }
+
+  getValidEmailLength(field = 'email') {
+    const { formValues } = this.props;
+    const emails = formValues.get('emails').toJS();
+    const emailsLength = emails.length;
+    let i;
+    let num = 0;
+
+    for (i = 0; i < emailsLength; i++) {
+      const email = emails[i][field];
+      if (email && this.isEmail(email)) num += 1;
+    }
+
+    return num;
+  }
+
+  isEmail(value) {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+  }
+
+  handleAddMember() {
+    const { change, formValues } = this.props;
+    const emails = formValues.get('emails');
+
+    change('emails',
+      emails.push(fromJS({}))
+    );
   }
 
   rednderMembers = ({ fields, meta: { error, submitFailed } }) => { // eslint-disable-line
@@ -61,7 +101,7 @@ class Invites extends PureComponent {
       <div>
         {submitFailed && error && <span>{error}</span>}
         {fields.map((member, index) => (
-          <Form.Field key={index}>
+          <Form.Field key={index} className={s.invites__field}>
             <Input
               name={`${member}.email`}
               placeholder="Email"
@@ -70,43 +110,83 @@ class Invites extends PureComponent {
             <Button
               type="button"
               title="Remove Member"
+              color="red"
               onClick={() => fields.remove(index)}
+              basic
             >
               x
             </Button>
           </Form.Field>
         ))}
-        {error && <span>{error}</span>}
+        {/*error && <span>{error}</span>*/}
       </div>
+    );
+  }
+
+  renderMembersTips() {
+    const validEmails = this.getValidEmailLength();
+
+    return (
+      <Message
+        {...(validEmails < 3 ? { warning: true } : { success: true })}
+        visible
+        header={`You chose ${validEmails} ` + (validEmails !== 1 ? 'friends' : 'friend')}
+        content={
+          !validEmails
+            ? 'Enter your friend email'
+            : validEmails < 3
+              ? 'Enter more for the best chances'
+              : ''
+        }
+      />
     );
   }
 
   render() {
     const { handleSubmit, submitting } = this.props;
+
     return (
-      <Form
-        onSubmit={handleSubmit(this.onSubmit)}
-      >
-        <FieldArray
-          name="emails"
-          component={this.rednderMembers}
-        />
-        <Form.Field>
-          Choose 3 or more friends for the best chance at getting free groceries
-        </Form.Field>
-        <Form.Field>
-          <Button
-            type="submit"
-            disabled={submitting}
-          >
-            Send
-          </Button>
-        </Form.Field>
-      </Form>
+      <Container text>
+        <div className={s.invites__ttl}>Enter email address to send free deliveries to your friends</div>
+        <Form
+          onSubmit={handleSubmit(this.onSubmit)}
+        >
+          <FieldArray
+            name="emails"
+            component={this.rednderMembers}
+          />
+          <Form.Field>
+            Choose 3 or more friends for the best chance at getting free groceries
+          </Form.Field>
+          <Form.Field>
+            {this.renderMembersTips()}
+          </Form.Field>
+          <Form.Field>
+            <Button
+              type="button"
+              disabled={submitting}
+              style={{ width: '100%' }}
+              onClick={this.handleAddMember}
+            >
+              Add friend
+            </Button>
+          </Form.Field>
+          <Form.Field>
+            <Button
+              type="submit"
+              color="green"
+              style={{ width: '100%' }}
+              disabled={submitting}
+            >
+              Send
+            </Button>
+          </Form.Field>
+        </Form>
+      </Container>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  reduxForm(mapToForm)(Invites)
+export default reduxForm(mapToForm)(
+  connect(mapStateToProps, mapDispatchToProps)(Invites)
 );

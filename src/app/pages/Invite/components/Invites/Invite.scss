@@ -1,0 +1,18 @@
+.invites {
+  &__ttl {
+    margin-bottom: 10px;
+  }
+
+  &__field {
+    display: flex;
+    align-items: flex-start;
+
+    > div {
+      flex-grow: 1;
+    }
+
+    button {
+      margin: 0 0 0 10px !important;
+    }
+  }
+}
