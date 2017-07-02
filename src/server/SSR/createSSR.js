@@ -19,7 +19,7 @@ export default function createSSR(assets) {
       selectLocationState: createSelectLocationState('routing')
     });
 
-    match({ history, routes: routes(), location: req.url },
+    match({ history, routes: routes(store), location: req.url },
       (err, redirectLocation, renderProps) => {
         if (err) {
           res.status(500).send(err.message);

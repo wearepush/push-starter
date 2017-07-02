@@ -25,13 +25,13 @@ const renderApp = renderProps => render(
 );
 
 match(
-  { history, routes: getRoutes() },
+  { history, routes: getRoutes(store) },
   (error, redirectLocation, renderProps) => renderApp(renderProps)
 );
 
 if (module.hot) {
   module.hot.accept('../app/routes', () => {
     const nextRoutes = require('../app/routes');
-    renderApp({ routes: nextRoutes() });
+    renderApp({ routes: nextRoutes(store) });
   });
 }
