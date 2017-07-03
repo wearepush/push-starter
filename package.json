@@ -157,7 +157,7 @@
     "jest": "^20.0.4",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
-    "npm-delay": "^1.0.1",
+    "npm-delay": "^1.0.4",
     "npm-run-all": "^4.0.2",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "postcss-loader": "^2.0.6",
@@ -171,7 +171,7 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0",
-    "webpack-hot-middleware": "^2.18.0",
+    "webpack-hot-middleware": "^2.18.1",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
