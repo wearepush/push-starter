@@ -7,6 +7,14 @@
   "plugins": [
     ["transform-runtime"],
     ["add-module-exports"],
-    ["transform-decorators-legacy"]
-  ]
+    ["transform-decorators-legacy"],
+    ["transform-flow-strip-types"]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "typecheck"
+      ]
+    }
+  }
 }
