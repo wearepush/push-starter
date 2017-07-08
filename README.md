@@ -56,3 +56,9 @@ To get this project to work on Heroku, you need to:
 4. `heroku config:set NPM_CONFIG_PRODUCTION=false`
 5. `heroku config:set NODE_MODULES_CACHE=false`
   * This is to enable webpack to run the build on deploy.
+
+
+## Contributing
+
+We are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
+If you would like to submit a pull request, please make an effort to follow the guide in [docs/CONTRIBUTING.md](CONTRIBUTING.md).
