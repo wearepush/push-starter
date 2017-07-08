@@ -1,3 +1,4 @@
+// @flow
 import { fromJS } from 'immutable';
 
 const LOAD = 'auth/LOAD';
@@ -8,12 +9,23 @@ const LOGIN = 'auth/LOGIN';
 // const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 // const LOGIN_FAIL = 'auth/LOGIN_FAIL';
 
-const initialState = fromJS({
-  loaded: false,
-});
+type State = {
+  error: any,
+  loading: boolean,
+  loaded: boolean,
+  user: any
+};
 
-export default function reducer(state = initialState, action = {}) {
+const initialState: State = {
+  loading: false,
+  loaded: false,
+};
+
+const initialImmutableState = fromJS(initialState);
+
+export default function reducer(state = initialImmutableState, action = {}) {
   switch (action.type) {
+
     case LOAD:
       return state.withMutations((mutableState) => {
         mutableState.set('loading', true);
@@ -31,6 +43,7 @@ export default function reducer(state = initialState, action = {}) {
         mutableState.set('loaded', false);
         mutableState.set('error', fromJS(action.error));
       });
+
     case LOGIN:
       return state.withMutations((mutableState) => {
         mutableState.set('loggingIn', true);
