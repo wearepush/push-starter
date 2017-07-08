@@ -5,27 +5,29 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { ReduxAsyncConnect } from 'redux-connect';
 import Helmet from 'react-helmet';
-import appConfig from 'config';
+
+import config from 'config';
 
 export default class Html extends Component {
   static propTypes = {
     assets: object.isRequired,
+    history: object.isRequired,
     renderProps: object.isRequired,
     store: object.isRequired
   };
 
   render() {
     const {
-      store,
+      assets,
+      history,
       renderProps,
-      assets
+      store,
     } = this.props;
-
-    const { isProd } = appConfig;
+    const { pathname } = history.getCurrentLocation();
+    const { isProd, host } = config;
     const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`;
     const head = Helmet.rewind();
     const ie = '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
-
     const content = renderToString(
       <Provider store={store}>
         <ReduxAsyncConnect {...renderProps} />
@@ -39,7 +41,10 @@ export default class Html extends Component {
           {head.meta.toComponent()}
           {head.link.toComponent()}
           {head.script.toComponent()}
-
+          <meta charSet="utf-8" />
+          <meta name="robots" content="INDEX,FOLLOW" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+          {/* favicons */}
           <link rel="shortcut icon" href="/favicons/favicon.ico" />
           <meta name="msapplication-TileImage" content="/favicons/192x192.png" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png" />
@@ -64,10 +69,33 @@ export default class Html extends Component {
           <meta name="msapplication-TileColor" content="#62bf7c" />
           <meta name="msapplication-TileImage" content="/favicons/apple-touch-icon-144x144.png" />
           <meta name="theme-color" content="#ffffff" />
-
+          {/*
+          <title></title>
+          <meta name="description" content="" />
+          */}
+          {/* facebook */}
+          <meta property="author" content="wearepush" />
+          <meta property="og:site_name" content="wearepush.co" />
+          <meta property="og:locale" content="en_US" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={host + pathname} />
+          <meta property="og:image" content="/logo.jpg" />
+          {/*
+          <meta property="og:title" content="" />
+          <meta property="og:description" content="" />
+          */}
+          {/* twitter */}
+          <meta property="twitter:site" content="wearepush.co" />
+          <meta property="twitter:domain" content="wearepush.co" />
+          <meta property="twitter:creator" content="wearepush" />
+          <meta property="twitter:card" content="summary" />
+          <meta property="twitter:image:src" content="/logo.jpg" />
+          {/*
+          <meta property="twitter:title" content="" />
+          <meta property="twitter:description" content="" />
+          */}
+          {/* styles */}
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {isProd && assets.styles && Object.keys(assets.styles).map(
             style => <link href={assets.styles[style]} key={style} rel="stylesheet" type="text/css" charSet="UTF-8" />

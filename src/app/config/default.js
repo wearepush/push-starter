@@ -6,6 +6,8 @@ const apiHost = prefixHost + (process.env.APIHOST || 'localhost');
 const apiPort = process.env.APIPORT || '';
 
 export default {
+  host: host + (port ? `:${port}` : ''),
+  port,
   apiPort,
   apiHost,
   apiTokenKey: 'token',

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
+import { Form, Container } from 'semantic-ui-react';
+
 import { Input, Button } from 'elements';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -27,7 +29,7 @@ class SignIn extends PureComponent {
   };
 
   onSubmit = (values) => { // eslint-disable-line
-    return sleep(1000).then(() => {
+    return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
         throw new SubmissionError({
           username: 'User does not exist',
@@ -47,29 +49,34 @@ class SignIn extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <h1>Sign In</h1>
-        <div>
-          <Input
-            name="username"
-            type="text"
-            placeholder="User name"
-          />
-        </div>
-        <div>
-          <Input
-            name="password"
-            type="password"
-            placeholder="password"
-          />
-        </div>
-        {error && <div>{error}</div>}
-        <Button
-          type="submit"
+      <Container text>
+        <Form
+          onSubmit={handleSubmit(this.onSubmit)}
         >
-          sign in
-        </Button>
-      </form>
+          <Form.Field>
+            <Input
+              name="username"
+              type="text"
+              placeholder="Username"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Input
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Field>
+          {error && <div>{error}</div>}
+          <Form.Field>
+            <Button
+              type="submit"
+            >
+              Sign In!
+            </Button>
+          </Form.Field>
+        </Form>
+      </Container>
     );
   }
 }

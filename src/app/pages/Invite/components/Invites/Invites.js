@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immutable';
 import { func, bool, object } from 'prop-types';
-import { Button, Input } from 'elements';
 import { Form, Container, Message } from 'semantic-ui-react';
+
+import { Button, Input } from 'elements';
 import validate from './validate';
 import s from './Invite.scss';
 
@@ -28,12 +29,10 @@ const mapStateToProps = state => ({
 class Invites extends PureComponent {
   static propTypes = {
     change: func.isRequired,
-    // dispatch: func.isRequired,
     handleSubmit: func,
     formValues: object, // eslint-disable-line
     emailValues: object, // eslint-disable-line
     submitting: bool.isRequired,
-    // valid: bool.isRequired
   };
 
   static defaultProps = {
@@ -49,20 +48,6 @@ class Invites extends PureComponent {
 
     this.handleAddMember = ::this.handleAddMember;
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   const { valid, dispatch, change } = nextProps;
-  //   const { formValues } = this.props;
-
-  //   if (valid && formValues) {
-  //     dispatch(
-  //       change('emails',
-  //         formValues.get('emails')
-  //         .push(fromJS({}))
-  //       )
-  //     );
-  //   }
-  // }
 
   onSubmit = (data) => {
     console.log(data.toJS());
@@ -118,7 +103,6 @@ class Invites extends PureComponent {
             </Button>
           </Form.Field>
         ))}
-        {/*error && <span>{error}</span>*/}
       </div>
     );
   }

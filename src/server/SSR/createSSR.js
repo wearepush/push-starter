@@ -27,7 +27,7 @@ export default function createSSR(assets) {
           res.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
           loadOnServer({ ...renderProps, store }).then(() => {
-            const content = renderToString(<Html {...{ renderProps, store, assets }} />);
+            const content = renderToString(<Html {...{ renderProps, store, assets, history }} />);
             res.send(`<!doctype html>\n${content}`);
           });
         } else {
