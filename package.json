@@ -116,14 +116,14 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.1",
     "redux-connect": "^5.1.0",
-    "redux-form": "^6.8.0",
+    "redux-form": "^7.0.0",
     "redux-immutablejs": "^0.0.8",
     "semantic-ui-react": "^0.71.0",
     "serve-favicon": "^2.4.3",
     "superagent": "^3.5.2"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.1",
+    "autoprefixer": "^7.1.2",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
@@ -167,11 +167,11 @@
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "universal-webpack": "^0.3.9",
+    "universal-webpack": "^0.3.11",
     "url-loader": "^0.5.9",
-    "webpack": "^3.1.0",
+    "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1",
-    "webpack-hot-middleware": "^2.18.1",
+    "webpack-hot-middleware": "^2.18.2",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
