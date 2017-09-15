@@ -2,6 +2,7 @@ process.noDeprecation = true;
 
 import path from 'path';
 import webpack from 'webpack';
+import Dotenv from 'dotenv-webpack';
 
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
@@ -93,6 +94,9 @@ const config = {
   },
 
   plugins: [
+    new Dotenv({
+      systemvars: true
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.NoEmitOnErrorsPlugin()
   ],
