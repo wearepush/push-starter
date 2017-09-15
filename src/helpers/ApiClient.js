@@ -1,5 +1,4 @@
 import superagent from 'superagent';
-import { getCookieServer, getCookie } from 'utils/cookie';
 import config from 'config';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -10,7 +9,7 @@ function formatUrl(path, directUrl = false) {
 }
 
 class _ApiClient {
-  constructor(req) {
+  constructor() { // we can get an access to req
     methods.forEach((method) => {
       this[method] = (path, {
         params,
@@ -24,21 +23,6 @@ class _ApiClient {
         const request = superagent[method](formatUrl(path, directUrl));
         if (params) {
           request.query(params);
-        }
-
-        if (__SERVER__) {
-          const serverCookies = req.get('cookie');
-          if (serverCookies) {
-            const token = getCookieServer(serverCookies, config.apiTokenKey);
-            if (token) {
-              request.set('Authorization', `Bearer ${token}`);
-            }
-          }
-        } else if (__CLIENT__) {
-          const token = getCookie(config.apiTokenKey);
-          if (token) {
-            request.set('Authorization', `Bearer ${token}`);
-          }
         }
 
         if (!attachments) {
