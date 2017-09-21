@@ -11,7 +11,6 @@ const baseConfig = getBaseConfig({
 
 const babelOptions = {
   plugins: [
-    ['transform-decorators-legacy'],
     ['react-transform', {
       transforms: [{
         transform: 'react-transform-hmr',

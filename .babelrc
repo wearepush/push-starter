@@ -6,7 +6,6 @@
   ],
   "plugins": [
     ["add-module-exports"],
-    ["transform-decorators-legacy"],
     ["flow-runtime"]
   ]
 }
