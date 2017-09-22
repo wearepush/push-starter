@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import React from 'react';
 import { fromJS } from 'immutable';
 import { render } from 'react-dom';
