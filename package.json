@@ -99,8 +99,6 @@
     "optimize-css-assets-webpack-plugin": "^3.1.1",
     "postcss-loader": "^2.0.6",
     "react-addons-test-utils": "^15.6.0",
-    "react-transform-catch-errors": "^1.0.2",
-    "react-transform-hmr": "^1.0.4",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",

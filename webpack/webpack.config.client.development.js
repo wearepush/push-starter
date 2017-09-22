@@ -9,21 +9,6 @@ const baseConfig = getBaseConfig({
   css_bundle: true
 });
 
-const babelOptions = {
-  plugins: [
-    ['react-transform', {
-      transforms: [{
-        transform: 'react-transform-hmr',
-        imports: ['react'],
-        locals: ['module']
-      }, {
-        transform: 'react-transform-catch-errors',
-        imports: ['react', 'redbox-react']
-      }]
-    }]
-  ]
-};
-
 const config = {
   devtool: 'cheap-module-eval-source-map',
   performance: { hints: false },
@@ -45,8 +30,7 @@ const config = {
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: babelOptions
+        loader: 'babel-loader'
       }
     ]
   },
