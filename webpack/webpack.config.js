@@ -41,8 +41,7 @@ const config = {
       },
       {
         test: /\.(scss)$/,
-        use:
-        [{
+        use: [{
           loader: 'style-loader'
         },
         {
@@ -57,37 +56,32 @@ const config = {
         },
         {
           loader : 'postcss-loader',
-          options:
-          {
-            sourceMap : true
+          options: {
+            sourceMap: true
           }
         },
         {
           loader : 'sass-loader',
-          options:
-          {
-            outputStyle       : 'expanded',
-            sourceMap         : true,
-            sourceMapContents : true
+          options: {
+            outputStyle: 'expanded',
+            sourceMap: true
           }
         }]
       },
       {
         test: /\.(css)$/,
-        use:
-        [{
+        use: [{
           loader: 'style-loader'
         },
         {
           loader : 'css-loader',
-          options:
-          {
-            importLoaders : 2,
-            sourceMap     : true
+          options: {
+            importLoaders: 2,
+            sourceMap: true
           }
         },
         {
-          loader : 'postcss-loader'
+          loader: 'postcss-loader'
         }]
       }
     ]
