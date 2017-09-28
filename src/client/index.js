@@ -2,7 +2,7 @@ import 'babel-polyfill';
 
 import React from 'react';
 import { fromJS } from 'immutable';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { match, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -19,7 +19,7 @@ const store = configureStore(browserHistory, client, initialState);
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: createSelectLocationState('routing')
 });
-const renderApp = renderProps => render(
+const hydrateApp = renderProps => hydrate(
   <AppContainer>
     <Root {...{ store, history, ...renderProps }} />
   </AppContainer>,
@@ -28,12 +28,12 @@ const renderApp = renderProps => render(
 
 match(
   { history, routes: getRoutes(store) },
-  (error, redirectLocation, renderProps) => renderApp(renderProps)
+  (error, redirectLocation, renderProps) => hydrateApp(renderProps)
 );
 
 if (module.hot) {
   module.hot.accept('../app/routes', () => {
     const nextRoutes = require('../app/routes');
-    renderApp({ routes: nextRoutes(store) });
+    hydrateApp({ routes: nextRoutes(store) });
   });
 }
