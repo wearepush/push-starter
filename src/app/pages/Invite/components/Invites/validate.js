@@ -1,6 +1,6 @@
 import memoize from 'lru-memoize';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   if (values) {

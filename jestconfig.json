@@ -10,5 +10,8 @@
   "moduleDirectories": ["node_modules", "src", "app"],
   "testEnvironment": "node",
   "coverageDirectory": "./coverage/",
-  "collectCoverage": true
+  "collectCoverage": true,
+  "setupFiles": [
+    "./enzyme"
+  ]
 }

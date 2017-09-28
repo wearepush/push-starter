@@ -30,14 +30,15 @@ class Invites extends PureComponent {
   static propTypes = {
     change: func.isRequired,
     handleSubmit: func,
-    formValues: object, // eslint-disable-line
-    emailValues: object, // eslint-disable-line
+    formValues: object,
+    emailValues: object,
     submitting: bool.isRequired,
   };
 
   static defaultProps = {
     handleSubmit: undefined,
-    formValues: {}
+    formValues: {},
+    emailValues: {},
   };
 
   constructor() {
@@ -60,16 +61,12 @@ class Invites extends PureComponent {
     let i;
     let num = 0;
 
-    for (i = 0; i < emailsLength; i++) {
+    for (i = 0; i < emailsLength; i += 1) {
       const email = emails[i][field];
-      if (email && this.isEmail(email)) num += 1;
+      if (email && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) num += 1;
     }
 
     return num;
-  }
-
-  isEmail(value) {
-    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
   }
 
   handleAddMember() {
@@ -86,7 +83,7 @@ class Invites extends PureComponent {
       <div>
         {submitFailed && error && <span>{error}</span>}
         {fields.map((member, index) => (
-          <Form.Field key={index} className={s.invites__field}>
+          <Form.Field key={index.toString()} className={s.invites__field}>
             <Input
               name={`${member}.email`}
               placeholder="Email"

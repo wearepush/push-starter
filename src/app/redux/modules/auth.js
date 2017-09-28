@@ -25,7 +25,6 @@ const initialImmutableState = fromJS(initialState);
 
 export default function reducer(state = initialImmutableState, action = {}) {
   switch (action.type) {
-
     case LOAD:
       return state.withMutations((mutableState) => {
         mutableState.set('loading', true);

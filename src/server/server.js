@@ -25,6 +25,5 @@ export default function (parameters) {
     }
 
     console.info(`Listening at ${host}:${port}`);
-
   });
 }
