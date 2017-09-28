@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-connect';
 
-export default class Root extends Component {
-  static propTypes = {
-    store: object.isRequired,
-    history: object.isRequired, // eslint-disable-line
-    routes: oneOfType([ // eslint-disable-line
-      array,
-      object,
-    ]).isRequired
-  };
+const Root = props => (
+  <Provider store={props.store}>
+    <Router
+      key={module.hot && new Date()}
+      render={rstProps => <ReduxAsyncConnect {...rstProps} />}
+      {...props}
+    />
+  </Provider>
+);
 
-  render() {
-    const { store } = this.props;
+Root.propTypes = {
+  store: object.isRequired,
+  history: object.isRequired,
+  routes: oneOfType([
+    array,
+    object,
+  ]).isRequired
+};
 
-    return (
-      <Provider store={store}>
-        <Router
-          key={module.hot && new Date()}
-          render={props => <ReduxAsyncConnect {...props} />}
-          {...this.props}
-        />
-      </Provider>
-    );
-  }
-}
+export default Root;

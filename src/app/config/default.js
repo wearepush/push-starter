@@ -25,7 +25,6 @@ export default {
   apiSsl,
   apiPort,
   apiHost,
-  apiTokenKey: 'token',
 
   server: {
     ssl,
