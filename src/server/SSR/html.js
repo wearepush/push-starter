@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
-import { ReduxAsyncConnect } from 'redux-connect';
 import Helmet from 'react-helmet';
+import { RouterContext } from 'react-router';
 
 import config from 'config';
 
@@ -30,7 +30,7 @@ export default class Html extends Component {
     const ie = '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
     const content = renderToString(
       <Provider store={store}>
-        <ReduxAsyncConnect {...renderProps} />
+        <RouterContext {...renderProps} />
       </Provider>
     );
     return (

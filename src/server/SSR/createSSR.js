@@ -1,5 +1,4 @@
 import React from 'react';
-import { loadOnServer } from 'redux-connect';
 import { renderToString } from 'react-dom/server';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createMemoryHistory, match } from 'react-router';
@@ -26,10 +25,8 @@ export default function createSSR(assets) {
         } else if (redirectLocation) {
           res.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
-          loadOnServer({ ...renderProps, store }).then(() => {
-            const content = renderToString(<Html {...{ renderProps, store, assets, history }} />);
-            res.send(`<!doctype html>\n${content}`);
-          });
+          const content = renderToString(<Html {...{ renderProps, store, assets, history }} />);
+          res.send(`<!doctype html>\n${content}`);
         } else {
           res.status(404).send('Not found');
         }
