@@ -5,7 +5,7 @@ React boilerplate, used best practices and focus on performance
 [![Dependency Status](https://david-dm.org/wearepush/redux-starter.svg?style=flat-square)](https://david-dm.org/wearepush/redux-starter)
 [![devDependency Status](https://david-dm.org/wearepush/redux-starter/dev-status.svg?style=flat-square)](https://david-dm.org/wearepush/redux-starter?type=dev)
 [![Demo on Heroku](https://img.shields.io/badge/demo-heroku-brightgreen.svg?style=flat-square)](https://wearepush-redux-starter.herokuapp.com/)
-
+[![NSP Status](https://nodesecurity.io/orgs/push/projects/995b22bd-6b80-431e-801e-63995e4d36f4/badge)](https://nodesecurity.io/orgs/push/projects/995b22bd-6b80-431e-801e-63995e4d36f4)
 ---
 
 ## About
