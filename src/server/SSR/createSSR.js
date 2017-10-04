@@ -1,10 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { syncHistoryWithStore } from 'react-router-redux';
 import { createMemoryHistory, match } from 'react-router';
 
 import routes from 'routes';
-import { createSelectLocationState } from 'utils';
 import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../app/redux/store';
@@ -14,9 +12,7 @@ export default function createSSR(assets) {
     const memoryHistory = createMemoryHistory(req.url);
     const client = new ApiClient(req);
     const store = configureStore(memoryHistory, client);
-    const history = syncHistoryWithStore(memoryHistory, store, {
-      selectLocationState: createSelectLocationState('routing')
-    });
+    const history = memoryHistory;
 
     match({ history, routes: routes(store), location: req.url },
       (err, redirectLocation, renderProps) => {

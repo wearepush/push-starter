@@ -5,20 +5,17 @@ import { fromJS } from 'immutable';
 import { hydrate } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { match, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
 
 import ApiClient from '../helpers/ApiClient';
 import Root from './root';
 import getRoutes from '../app/routes';
 import configureStore from '../app/redux/store';
-import { createSelectLocationState } from '../app/utils';
 
 const client = new ApiClient();
 const initialState = fromJS(window.__INITIAL_STATE__);
 const store = configureStore(browserHistory, client, initialState);
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: createSelectLocationState('routing')
-});
+const history = browserHistory;
+
 const hydrateApp = renderProps => hydrate(
   <AppContainer>
     <Root {...{ store, history, ...renderProps }} />

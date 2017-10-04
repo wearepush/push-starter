@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { object, func } from 'prop-types';
+import { object } from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'modules/auth'; // eslint-disable-line
 import { Header, Footer } from 'components';
 
 import styles from './App.scss';
@@ -13,16 +11,13 @@ const mapStateToProps = state => ({
   user: state.getIn(['auth', 'user'])
 });
 
-const mapDispatchToProps = {
-  pushState: push
-};
+const mapDispatchToProps = {};
 
 class App extends Component {
   static propTypes = {
     children: object,
     history: object,  // eslint-disable-line
-    pushState: func.isRequired,
-    user: object
+    user: object // eslint-disable-line
   };
 
   static defaultProps = {
@@ -30,16 +25,6 @@ class App extends Component {
     history: null,
     user: null
   };
-
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
-      // login
-      this.props.pushState('/');
-    } else if (this.props.user && !nextProps.user) {
-      // logout
-      this.props.pushState('/');
-    }
-  }
 
   render() {
     return (
