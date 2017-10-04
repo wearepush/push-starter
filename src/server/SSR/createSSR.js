@@ -1,31 +1,36 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { createMemoryHistory, match } from 'react-router';
+import StaticRouter from 'react-router-dom/StaticRouter';
+import { renderRoutes } from 'react-router-config';
+import { Provider } from 'react-redux';
 
-import routes from 'routes';
+import getRoutes from 'routes';
 import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../app/redux/store';
 
 export default function createSSR(assets) {
   return (req, res) => {
-    const memoryHistory = createMemoryHistory(req.url);
+    const context = {};
     const client = new ApiClient(req);
-    const store = configureStore(memoryHistory, client);
-    const history = memoryHistory;
-
-    match({ history, routes: routes(store), location: req.url },
-      (err, redirectLocation, renderProps) => {
-        if (err) {
-          res.status(500).send(err.message);
-        } else if (redirectLocation) {
-          res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-        } else if (renderProps) {
-          const content = renderToString(<Html {...{ renderProps, store, assets, history }} />);
-          res.send(`<!doctype html>\n${content}`);
-        } else {
-          res.status(404).send('Not found');
-        }
-      });
+    const store = configureStore(client);
+    const component = (
+      <Provider store={store}>
+        <StaticRouter
+          location={req.url}
+          context={context}
+        >
+          {renderRoutes(getRoutes(store))}
+        </StaticRouter>
+      </Provider>
+    );
+    const content = renderToString(
+      <Html
+        assets={assets}
+        component={component}
+        store={store}
+      />
+    );
+    res.send(`<!doctype html>\n${content}`);
   };
 }

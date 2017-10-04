@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import styles from './Header.scss';
 

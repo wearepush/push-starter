@@ -1,9 +1,5 @@
 export default {
-  getIndexRoute(nextState, cb) {
-    require.ensure([], (require) => {
-      cb(null, {
-        component: require('./containers/Home'),
-      });
-    });
-  },
+  path: '/',
+  exact: true,
+  component: require('./containers/Home')
 };

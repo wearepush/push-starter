@@ -1,20 +1,22 @@
 import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 
-const Root = props => (
-  <Provider store={props.store}>
-    <Router
-      key={module.hot && new Date()}
-      {...props}
-    />
+const Root = ({
+  routes,
+  store
+}) => (
+  <Provider store={store}>
+    <BrowserRouter>
+      {renderRoutes(routes)}
+    </BrowserRouter>
   </Provider>
 );
 
 Root.propTypes = {
   store: object.isRequired,
-  history: object.isRequired,
   routes: oneOfType([
     array,
     object,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
@@ -15,13 +16,13 @@ const mapDispatchToProps = {};
 
 class App extends Component {
   static propTypes = {
-    children: object,
+    route: object,
     history: object,  // eslint-disable-line
     user: object // eslint-disable-line
   };
 
   static defaultProps = {
-    children: null,
+    route: null,
     history: null,
     user: null
   };
@@ -30,7 +31,9 @@ class App extends Component {
     return (
       <Container className={styles.app}>
         <Header />
-        <div className={styles.app__container}>{this.props.children}</div>
+        <div className={styles.app__container}>
+          {renderRoutes(this.props.route.routes)}
+        </div>
         <Footer />
       </Container>
     );

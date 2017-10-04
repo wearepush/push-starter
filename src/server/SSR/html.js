@@ -1,38 +1,29 @@
 /* eslint-disable react/no-danger */
 import React, { Component } from 'react';
-import { object } from 'prop-types';
-import { Provider } from 'react-redux';
+import { object, node } from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { RouterContext } from 'react-router';
 
 import config from 'config';
 
 export default class Html extends Component {
   static propTypes = {
     assets: object.isRequired,
-    history: object.isRequired,
-    renderProps: object.isRequired,
+    component: node.isRequired,
     store: object.isRequired
   };
 
   render() {
     const {
       assets,
-      history,
-      renderProps,
+      component,
       store,
     } = this.props;
-    const { pathname } = history.getCurrentLocation();
-    const { isProd, host } = config;
+    const { isProd } = config;
     const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`;
     const head = Helmet.rewind();
     const ie = '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
-    const content = renderToString(
-      <Provider store={store}>
-        <RouterContext {...renderProps} />
-      </Provider>
-    );
+    const content = component ? renderToString(component) : '';
     return (
       <html lang="en">
         <head>
@@ -78,7 +69,6 @@ export default class Html extends Component {
           <meta property="og:site_name" content="wearepush.co" />
           <meta property="og:locale" content="en_US" />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content={host + pathname} />
           <meta property="og:image" content="/logo.jpg" />
           {/*
           <meta property="og:title" content="" />

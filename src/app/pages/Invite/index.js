@@ -1,8 +1,4 @@
 export default {
-  path: 'invite',
-  getComponent(nextState, cb) {
-    require.ensure([], (require) => {
-      cb(null, require('./containers/Invite'));
-    });
-  },
+  path: '/invite',
+  component: require('./containers/Invite')
 };
