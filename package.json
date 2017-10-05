@@ -59,7 +59,7 @@
     "redux-immutablejs": "^0.0.8",
     "semantic-ui-react": "^0.74.2",
     "serve-favicon": "^2.4.5",
-    "superagent": "^3.6.3"
+    "superagent": "^3.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.4",
