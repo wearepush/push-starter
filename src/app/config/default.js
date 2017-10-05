@@ -5,7 +5,7 @@ const prefix = 'http' + (ssl ? 's' : '') + '://';
 const host = prefix + (process.env.HOST || 'localhost');
 
 const port = typeof process.env.PORT !== 'undefined' &&
-            process.env.PORT !== 'undefined' ? +(process.env.PORT) : null;
+            process.env.PORT !== 'undefined' ? +(process.env.PORT) : '';
 
 const apiSsl = typeof process.env.APISSL !== 'undefined' &&
                 process.env.APISSL !== 'undefined' && +(process.env.APISSL) === 1 ? 1 : 0;
@@ -13,10 +13,13 @@ const apiSsl = typeof process.env.APISSL !== 'undefined' &&
 const prefixHost = 'http' + (apiSsl ? 's' : '') + '://';
 
 const apiPort = typeof process.env.APIPORT !== 'undefined' &&
-                process.env.APIPORT !== 'undefined' ? +(process.env.APIPORT) : null;
+                process.env.APIPORT !== 'undefined' ? +(process.env.APIPORT) : '';
 
 const apiHost = prefixHost + (typeof process.env.APIHOST !== 'undefined' &&
                 process.env.APIHOST !== 'undefined' ? process.env.APIHOST : 'localhost') + apiPort;
+
+const ssr = typeof process.env.SSR !== 'undefined' &&
+            process.env.SSR !== 'undefined' && +(process.env.SSR) === 1;
 
 export default {
   ssl,
@@ -25,6 +28,7 @@ export default {
   apiSsl,
   apiPort,
   apiHost,
+  ssr,
 
   server: {
     ssl,

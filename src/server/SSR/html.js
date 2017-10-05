@@ -7,9 +7,13 @@ import Helmet from 'react-helmet';
 import config from 'config';
 
 export default class Html extends Component {
+  static defaultProps = {
+    component: null
+  };
+
   static propTypes = {
     assets: object.isRequired,
-    component: node.isRequired,
+    component: node,
     store: object.isRequired
   };
 

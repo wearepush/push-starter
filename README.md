@@ -52,7 +52,7 @@ To get this project to work on Heroku, you need to:
 
 1. Add heroku `heroku git:remote -a wearepush-redux-starter`
 2. `heroku config:set NODE_ENV=production`
-3. `heroku config:set NODE_PATH=./src`
+3. `heroku config:set SSR=1`
 4. `heroku config:set NPM_CONFIG_PRODUCTION=false`
 5. `heroku config:set NODE_MODULES_CACHE=false`
   * This is to enable webpack to run the build on deploy.
