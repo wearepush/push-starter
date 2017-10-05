@@ -7,10 +7,10 @@ import { AppContainer } from 'react-hot-loader';
 import Redbox from 'redbox-react';
 
 import Root from './root';
-import ApiClient from '../helpers/ApiClient';
-import getRoutes from '../app/routes';
-import config from '../app/config';
-import configureStore from '../app/redux/store';
+import ApiClient from './../helpers/ApiClient';
+import getRoutes from './../app/routes';
+import config from './../app/config';
+import configureStore from './../app/redux/store';
 
 const client = new ApiClient();
 const initialState = fromJS(window.__INITIAL_STATE__);

@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { object, node } from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
-
-import config from 'config';
+import config from './../../app/config';
 
 export default class Html extends Component {
   static defaultProps = {

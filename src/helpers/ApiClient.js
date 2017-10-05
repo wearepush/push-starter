@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import config from 'config';
+import config from './../app/config';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {

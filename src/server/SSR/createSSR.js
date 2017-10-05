@@ -4,11 +4,11 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 
-import getRoutes from 'routes';
+import getRoutes from './../../app/routes';
 import Html from './html';
-import ApiClient from '../../helpers/ApiClient';
-import configureStore from '../../app/redux/store';
-import config from '../../app/config';
+import ApiClient from './../../helpers/ApiClient';
+import configureStore from './../../app/redux/store';
+import config from './../../app/config';
 
 export default function createSSR(assets) {
   return (req, res) => {
@@ -27,7 +27,7 @@ export default function createSSR(assets) {
       );
     };
 
-    if (config.ssr) {
+    if (!config.ssr) {
       hydrateOnClient();
       return;
     }
@@ -64,9 +64,6 @@ export default function createSSR(assets) {
       res.status(200);
     }
 
-    for (const cookie of client.cookies) { // eslint-disable-line
-      res.set('Set-Cookie', cookie);
-    }
     res.send(`<!doctype html>\n${content}`);
   };
 }

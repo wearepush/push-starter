@@ -5,7 +5,7 @@ import { FieldArray, reduxForm, isValid, getFormValues } from 'redux-form/immuta
 import { func, bool, object } from 'prop-types';
 import { Form, Container, Message } from 'semantic-ui-react';
 
-import { Button, Input } from 'elements';
+import { Button, Input } from './../../elements';
 import validate from './validate';
 import s from './Invite.scss';
 

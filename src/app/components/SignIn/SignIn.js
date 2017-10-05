@@ -4,7 +4,7 @@ import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Container } from 'semantic-ui-react';
 
-import { Input, Button } from 'elements';
+import { Input, Button } from './../../elements';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
