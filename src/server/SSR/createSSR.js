@@ -15,6 +15,7 @@ export default function createSSR(assets) {
     const context = {};
     const client = new ApiClient(req);
     const store = configureStore(client);
+    const routes = getRoutes(store);
 
     const hydrateOnClient = () => {
       res.send(
@@ -32,16 +33,22 @@ export default function createSSR(assets) {
       return;
     }
 
+    if (context.status === 302) {
+      res.redirect(302, context.url);
+      return;
+    }
+
     const component = (
       <Provider store={store}>
         <StaticRouter
           location={req.url}
           context={context}
         >
-          {renderRoutes(getRoutes(store))}
+          {renderRoutes(routes)}
         </StaticRouter>
       </Provider>
     );
+
     const content = renderToString(
       <Html
         assets={assets}
@@ -49,14 +56,6 @@ export default function createSSR(assets) {
         store={store}
       />
     );
-
-    if (context.url) {
-      res.writeHead(302, {
-        Location: context.url
-      });
-      res.end();
-      return;
-    }
 
     if (context.status) {
       res.status(context.status);
