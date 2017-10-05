@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Helmet } from 'react-helmet';
-
-import { SignIn } from '../components';
+import { SignIn } from './../../components';
 
 export default class Home extends PureComponent {
   render() {

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Helmet } from 'react-helmet';
-
-import { Invites } from './../components';
+import { Invites } from './../../components';
 
 export default class Invite extends PureComponent {
   render() {
