@@ -1,8 +1,9 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import StaticRouter from 'react-router-dom/StaticRouter';
+import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
+import { createMemoryHistory } from 'history';
 
 import getRoutes from './../../app/routes';
 import Html from './html';
@@ -13,8 +14,9 @@ import config from './../../app/config';
 export default function createSSR(assets) {
   return (req, res) => {
     const context = {};
+    const memoryHistory = createMemoryHistory(req.url);
     const client = new ApiClient(req);
-    const store = configureStore(client);
+    const store = configureStore(client, {}, memoryHistory);
     const routes = getRoutes(store);
 
     const hydrateOnClient = () => {

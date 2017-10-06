@@ -5,6 +5,7 @@ import { fromJS } from 'immutable';
 import { hydrate } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Redbox from 'redbox-react';
+import createHistory from 'history/createBrowserHistory';
 
 import Root from './root';
 import ApiClient from './../helpers/ApiClient';
@@ -14,7 +15,8 @@ import configureStore from './../app/redux/store';
 
 const client = new ApiClient();
 const initialState = fromJS(window.__INITIAL_STATE__);
-const store = configureStore(client, initialState);
+const history = createHistory();
+const store = configureStore(client, initialState, history);
 const dest = document.getElementById('root');
 
 const hydrateApp = renderProps => hydrate(
@@ -30,7 +32,8 @@ const hydrateApp = renderProps => hydrate(
 
 hydrateApp({
   routes: getRoutes(store),
-  store
+  store,
+  history
 });
 
 if (process.env.NODE_ENV !== 'production') {

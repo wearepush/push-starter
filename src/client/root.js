@@ -3,19 +3,24 @@ import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { ConnectedRouter } from 'react-router-redux';
 
 const Root = ({
+  history,
   routes,
   store
 }) => (
   <Provider store={store}>
-    <BrowserRouter>
-      {renderRoutes(routes)}
-    </BrowserRouter>
+    <ConnectedRouter history={history}>
+      <BrowserRouter>
+        {renderRoutes(routes)}
+      </BrowserRouter>
+    </ConnectedRouter>
   </Provider>
 );
 
 Root.propTypes = {
+  history: object.isRequired,
   store: object.isRequired,
   routes: oneOfType([
     array,
