@@ -11,11 +11,6 @@ const Header = () => (
           Home
         </Menu.Item>
       </Link>
-      <Link to="/invite">
-        <Menu.Item>
-          Invite
-        </Menu.Item>
-      </Link>
     </Menu>
   </div>
 );
