@@ -32,7 +32,9 @@
     "webpack",
     "jest",
     "enzyme",
-    "css-modules"
+    "css-modules",
+    "react-router",
+    "react-router-dom"
   ],
   "dependencies": {
     "babel-polyfill": "^6.26.0",

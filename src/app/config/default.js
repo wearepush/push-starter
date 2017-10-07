@@ -1,13 +1,14 @@
-const isDefined = v => typeof v !== 'undefined' && v !== 'undefined';
-const ssl = isDefined(process.env.SSL) && +(process.env.SSL) === 1 ? 1 : 0;
+import { isUndefined } from 'lodash';
+
+const ssl = !isUndefined(process.env.SSL) && +(process.env.SSL) === 1 ? 1 : 0;
 const prefix = 'http' + (ssl ? 's' : '') + '://';
 const host = prefix + (process.env.HOST || 'localhost');
-const port = isDefined(process.env.PORT) ? +(process.env.PORT) : '';
-const apiSsl = isDefined(process.env.APISSL) && +(process.env.APISSL) === 1 ? 1 : 0;
+const port = !isUndefined(process.env.PORT) ? +(process.env.PORT) : '';
+const apiSsl = !isUndefined(process.env.APISSL) && +(process.env.APISSL) === 1 ? 1 : 0;
 const prefixHost = 'http' + (apiSsl ? 's' : '') + '://';
-const apiPort = isDefined(process.env.APIPORT) ? +(process.env.APIPORT) : '';
-const apiHost = prefixHost + (isDefined(process.env.APIHOST) ? process.env.APIHOST : 'localhost') + apiPort;
-const ssr = isDefined(process.env.SSR) && +(process.env.SSR) === 1;
+const apiPort = !isUndefined(process.env.APIPORT) ? +(process.env.APIPORT) : '';
+const apiHost = prefixHost + (!isUndefined(process.env.APIHOST) ? process.env.APIHOST : 'localhost') + apiPort;
+const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
 
 export default {
   ssl,

@@ -11,6 +11,7 @@ const baseConfig = getBaseConfig({
 
 const config = {
   devtool: 'cheap-module-eval-source-map',
+
   performance: { hints: false },
 
   entry: {
@@ -41,10 +42,11 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
-        SSL: `"${process.env.SSL}"`,
-        APISSL: `"${process.env.APISSL}"`,
-        APIHOST: `"${process.env.APIHOST}"`,
-        APIPORT: `"${process.env.APIPORT}"`
+        SSR: process.env.SSR,
+        SSL: process.env.SSL,
+        APISSL: process.env.APISSL,
+        APIHOST: process.env.APIHOST,
+        APIPORT: process.env.APIPORT
       },
       __CLIENT__: true,
       __SERVER__: false
