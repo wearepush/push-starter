@@ -14,9 +14,11 @@ import config from './../../app/config';
 export default function createSSR(assets) {
   return (req, res) => {
     const context = {};
-    const memoryHistory = createMemoryHistory(req.url);
+    const history = createMemoryHistory({
+      initialEntries: [req.url]
+    });
     const client = new ApiClient(req);
-    const store = configureStore(client, {}, memoryHistory);
+    const store = configureStore(history, client);
     const routes = getRoutes(store);
 
     const hydrateOnClient = () => {

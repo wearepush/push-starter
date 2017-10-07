@@ -16,7 +16,7 @@ import configureStore from './../app/redux/store';
 const client = new ApiClient();
 const initialState = fromJS(window.__INITIAL_STATE__);
 const history = createHistory();
-const store = configureStore(client, initialState, history);
+const store = configureStore(history, client, initialState);
 const dest = document.getElementById('root');
 
 const hydrateApp = renderProps => hydrate(
@@ -74,7 +74,8 @@ if (module.hot) {
     const nextRoutes = require('../app/routes');
     hydrateApp({
       routes: nextRoutes(store),
-      store
+      store,
+      history
     });
   });
 }
