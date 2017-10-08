@@ -5,6 +5,9 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {
   if (directUrl) return path;
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
+  if (path.indexOf('http') === 0) {
+    return path;
+  }
   return config.apiHost + (config.apiPort ? ':' + config.apiPort : '') + adjustedPath;
 }
 

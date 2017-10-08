@@ -18,9 +18,11 @@ export default function configureStore(history, client, initialState = {}) {
     applyMiddleware(...middlewares)
   );
 
+  const initialValues = fromJS(initialState).set('router', history);
+
   const store = createStore(
     reducer,
-    fromJS({ ...initialState, router: history }),
+    initialValues,
     enhancer
   );
 

@@ -26,7 +26,7 @@ export default class Html extends Component {
     const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`;
     const head = Helmet.rewind();
     const ie = '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
-    const content = component ? renderToString(component) : '';
+    const content = component ? renderToString(component) : null;
     return (
       <html lang="en">
         <head>
