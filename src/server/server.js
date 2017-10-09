@@ -4,19 +4,31 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import {} from './env';
 import createSSR from './SSR/createSSR';
-import appConfig from './../app/config';
+import config from './../app/config';
 
-const { host, port } = appConfig.server;
+const { host, port } = config.server;
 const app = express();
 
 export default function (parameters) {
-  if (appConfig.isProd) {
+  if (config.isProd) {
     app.use(compression());
   }
   app.disable('etag');
   app.disable('x-powered-by');
   app.use('/', express.static('static', { etag: false }));
   app.use(favicon(path.join(__dirname, '..', 'favicons', 'favicon.ico')));
+
+  app.use((req, res, next) => {
+    if (config.ssl) {
+      if (req.headers['x-forwarded-proto'] !== 'https') {
+        res.redirect(302, 'https://' + req.hostname + req.originalUrl);
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
+  });
 
   app.get('/api/users', (req, res) => {
     res.json({
