@@ -89,10 +89,17 @@ export default class Html extends Component {
           */}
           {/* styles */}
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" />
+          {isProd && <link rel="preload" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" as="style" />}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {isProd && assets.styles && Object.keys(assets.styles).map(
-            style => <link href={assets.styles[style]} key={style} rel="stylesheet" type="text/css" charSet="UTF-8" />
+            c => <link href={assets.styles[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
           )}
+          {/* styles will be preloaded */}
+          {isProd && assets.styles && Object.keys(assets.styles).map(
+            c => <link rel="preload" href={assets.styles[c]} key={c} as="style" />
+          )}
+          {isProd && <link rel="preload" href={assets.javascript.vendor} as="script" />}
+          {isProd && <link rel="preload" href={assets.javascript.main} as="script" />}
         </head>
         <body>
           <div dangerouslySetInnerHTML={{ __html: ie }} />

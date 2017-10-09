@@ -58,8 +58,9 @@ To get this project to work on Heroku, you need to:
 1. Add heroku `heroku git:remote -a heroku-app-name`
 2. `heroku config:set NODE_ENV=production`
 3. `heroku config:set SSR=1`
-4. `heroku config:set NPM_CONFIG_PRODUCTION=false`
-5. `heroku config:set NODE_MODULES_CACHE=false`
+4. `heroku config:set SSL=1`
+5. `heroku config:set NPM_CONFIG_PRODUCTION=false`
+6. `heroku config:set NODE_MODULES_CACHE=false`
   * This is to enable webpack to run the build on deploy.
 
 
