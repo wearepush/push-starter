@@ -18,7 +18,7 @@ export default function createSSR(assets) {
       initialEntries: [req.url]
     });
     const client = new ApiClient(req);
-    let store = configureStore(history, client);
+    const store = configureStore(history, client);
     const routes = getRoutes(store);
 
     const hydrateOnClient = () => {
@@ -45,14 +45,16 @@ export default function createSSR(assets) {
     const branch = matchRoutes(routes, req.url);
     const promises = branch.map(({ route: { component: { fetchData } } }) => {
       if (fetchData instanceof Function) {
-        return fetchData(store);
+        return fetchData(store)
+          .then(
+            () => {},
+            () => {}
+          );
       }
       return Promise.resolve();
     });
 
     Promise.all(promises).then(() => {
-      store = configureStore(history, client, store.getState().toJS());
-
       const component = (
         <Provider store={store}>
           <StaticRouter

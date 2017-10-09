@@ -7,7 +7,7 @@ const port = !isUndefined(process.env.PORT) ? +(process.env.PORT) : '';
 const apiSsl = !isUndefined(process.env.APISSL) && +(process.env.APISSL) === 1 ? 1 : 0;
 const prefixHost = 'http' + (apiSsl ? 's' : '') + '://';
 const apiPort = !isUndefined(process.env.APIPORT) ? +(process.env.APIPORT) : '';
-const apiHost = prefixHost + (!isUndefined(process.env.APIHOST) ? process.env.APIHOST : 'localhost') + apiPort;
+const apiHost = prefixHost + (!isUndefined(process.env.APIHOST) ? process.env.APIHOST : 'localhost') + (apiPort ? ':' + apiPort : '');
 const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
 
 export default {

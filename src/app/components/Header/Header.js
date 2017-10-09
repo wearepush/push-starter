@@ -11,9 +11,9 @@ const Header = () => (
           Home
         </Menu.Item>
       </Link>
-      <Link to="/about">
+      <Link to="/users">
         <Menu.Item>
-          About
+          Users
         </Menu.Item>
       </Link>
     </Menu>

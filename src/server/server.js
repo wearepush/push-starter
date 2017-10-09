@@ -17,6 +17,16 @@ export default function (parameters) {
   app.disable('x-powered-by');
   app.use('/', express.static('static', { etag: false }));
   app.use(favicon(path.join(__dirname, '..', 'favicons', 'favicon.ico')));
+
+  app.get('/api/users', (req, res) => {
+    res.json({
+      records: [
+        { id: 1, name: 'Justin Timberlake' },
+        { id: 2, name: 'Kenny West' }
+      ]
+    });
+  });
+
   app.get('*', createSSR(parameters.chunks()));
 
   app.listen(port, (err) => { // eslint-disable-line
