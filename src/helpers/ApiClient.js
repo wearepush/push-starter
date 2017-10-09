@@ -1,11 +1,14 @@
 import superagent from 'superagent';
-import config from 'config';
+import config from './../app/config';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {
   if (directUrl) return path;
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
-  return config.apiHost + (config.apiPort ? ':' + config.apiPort : '') + adjustedPath;
+  if (path.indexOf('http') === 0) {
+    return path;
+  }
+  return config.apiHost + adjustedPath;
 }
 
 class _ApiClient {
@@ -21,6 +24,7 @@ class _ApiClient {
         getBackRequest
       } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path, directUrl));
+
         if (params) {
           request.query(params);
         }

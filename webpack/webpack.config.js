@@ -98,16 +98,7 @@ const config = {
   resolve: {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
-    alias: {
-      app: path.resolve(rootFolder, 'src/app'),
-      pages: path.resolve(rootFolder, 'src/app/pages'),
-      components: path.resolve(rootFolder, 'src/app/components'),
-      elements: path.resolve(rootFolder, 'src/app/elements'),
-      utils: path.resolve(rootFolder, 'src/app/utils'),
-      config: path.resolve(rootFolder, 'src/app/config'),
-      modules: path.resolve(rootFolder, 'src/app/redux/modules'),
-      routes: path.resolve(rootFolder, 'src/app/routes')
-    }
+    alias: {}
   }
 };
 

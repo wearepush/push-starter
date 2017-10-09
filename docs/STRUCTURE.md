@@ -1,21 +1,19 @@
 # STRUCTURE
 
-Pages folder
+Routes folder
 ```
-└── pages
+└── routes
 | └── PageName
-| | | index.js
-| | └── components
-| | |  |
-| | |  ...
-| | └── containers
-| | |  |
-| |  ...
-|
+| | | PageName.js
+| | | PageName.scss
+| | | PageName.test.js
+|...└──...
+| index.js - index point for routes
 ...
 ```
 
 * index.js - [entry react router point](https://github.com/ReactTraining/react-router/blob/v3/docs/guides/DynamicRouting.md)
+* [router](https://github.com/ReactTraining/react-router/tree/master/packages/react-router)
 
 Components folder
 ```
@@ -71,7 +69,6 @@ Redux folder
 |  |  ...
 |  |
 │  │  reducer.js
-│  │  routing.js
 │  │  store.js
 |  ...
 ```
@@ -79,19 +76,8 @@ Redux folder
 * clientMiddleware.js - [redux middleware](http://redux.js.org/docs/advanced/Middleware.html)
 * reducer.js - [redux reducer](http://redux.js.org/docs/basics/Reducers.html) [redux immutable](https://github.com/indexiatech/redux-immutablejs)
 * moduleName.js - [example reducer](http://redux.js.org/docs/recipes/StructuringReducers.html)
-* routing.js - [redux router](https://github.com/reactjs/react-router-redux)
 * store.js - [redux store](http://redux.js.org/docs/api/Store.html)
 
-
-Routes
-```
-...
-| routes.js - index point for routes
-|  ...
-```
-
-* [router](https://github.com/ReactTraining/react-router/tree/v3/docs)
-* [dynamic routing](https://github.com/ReactTraining/react-router/blob/v3/docs/guides/DynamicRouting.md)
 
 Helpers
 ```

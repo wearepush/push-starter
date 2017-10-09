@@ -13,12 +13,13 @@ type State = {
   error: any,
   loading: boolean,
   loaded: boolean,
-  user: any
+  user: any,
 };
 
 const initialState: State = {
   loading: false,
   loaded: false,
+  user: null,
 };
 
 const initialImmutableState = fromJS(initialState);
@@ -59,6 +60,7 @@ export default function reducer(state = initialImmutableState, action = {}) {
     //     mutableState.set('user', null);
     //     mutableState.set('loginError', action.error);
     //   });
+
     default:
       return state;
   }

@@ -1,23 +1,15 @@
-import { fromJS } from 'immutable';
 import { reducer as form } from 'redux-form/immutable';
 import { combineReducers } from 'redux-immutablejs';
-import {
-  setToImmutableStateFunc,
-  setToMutableStateFunc,
-  immutableReducer as reduxAsyncConnect
-} from 'redux-connect';
+import { routerReducer as router } from 'react-router-redux';
 
-import routing from './routing';
 import auth from './modules/auth';
-
-setToImmutableStateFunc(mutableState => fromJS(mutableState));
-setToMutableStateFunc(immutableState => immutableState.toJS());
+import records, { createRecordsReducer } from './modules/records';
 
 export default function createReducer() {
   return combineReducers({
-    routing,
     form,
-    reduxAsyncConnect,
-    auth
+    router,
+    auth,
+    users: createRecordsReducer(records, 'users')
   });
 }

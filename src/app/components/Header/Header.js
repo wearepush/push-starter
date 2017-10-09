@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import styles from './Header.scss';
 
@@ -11,9 +11,9 @@ const Header = () => (
           Home
         </Menu.Item>
       </Link>
-      <Link to="/invite">
+      <Link to="/users">
         <Menu.Item>
-          Invite
+          Users
         </Menu.Item>
       </Link>
     </Menu>

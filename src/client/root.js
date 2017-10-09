@@ -1,22 +1,27 @@
 import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { ReduxAsyncConnect } from 'redux-connect';
+import { BrowserRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import { ConnectedRouter } from 'react-router-redux';
 
-const Root = props => (
-  <Provider store={props.store}>
-    <Router
-      key={module.hot && new Date()}
-      render={rstProps => <ReduxAsyncConnect {...rstProps} />}
-      {...props}
-    />
+const Root = ({
+  history,
+  routes,
+  store
+}) => (
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <BrowserRouter>
+        {renderRoutes(routes)}
+      </BrowserRouter>
+    </ConnectedRouter>
   </Provider>
 );
 
 Root.propTypes = {
-  store: object.isRequired,
   history: object.isRequired,
+  store: object.isRequired,
   routes: oneOfType([
     array,
     object,

@@ -1,12 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
+import { SignIn } from './../../components';
 
-import { SignIn } from '../components';
+const mapStateToProps = () => ({});
 
-export default class Home extends PureComponent {
+const mapDispatchToProps = {};
+
+class Home extends Component {
   render() {
     const title = 'Redux Starter. Home';
     const description = 'Redux Form. Sign In';
+
     return (
       <div>
         <Helmet>
@@ -22,3 +27,5 @@ export default class Home extends PureComponent {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

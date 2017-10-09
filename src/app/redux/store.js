@@ -6,9 +6,7 @@ import createMiddleware from './middleware/clientMiddleware';
 
 export default function configureStore(history, client, initialState = {}) {
   const reducer = createReducer();
-
-  const reduxRouterMiddleware = routerMiddleware(history);
-  const middlewares = [createMiddleware(client), reduxRouterMiddleware];
+  const middlewares = [createMiddleware(client), routerMiddleware(history)];
 
   const composeEnhancers =
     (global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
@@ -20,9 +18,11 @@ export default function configureStore(history, client, initialState = {}) {
     applyMiddleware(...middlewares)
   );
 
+  const initialValues = fromJS(initialState).set('router', history);
+
   const store = createStore(
     reducer,
-    fromJS(initialState),
+    initialValues,
     enhancer
   );
 
