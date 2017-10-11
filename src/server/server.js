@@ -34,7 +34,7 @@ export default function (parameters) {
     res.json({
       records: [
         { id: 1, name: 'Justin Timberlake' },
-        { id: 2, name: 'Kenny West' }
+        { id: 2, name: 'Kanye West' }
       ]
     });
   });

@@ -37,6 +37,7 @@
     "react-router-dom"
   ],
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "compression": "^1.7.1",
@@ -62,8 +63,7 @@
     "redux-form": "^7.0.4",
     "redux-immutablejs": "^0.0.8",
     "semantic-ui-react": "^0.74.2",
-    "serve-favicon": "^2.4.5",
-    "superagent": "^3.6.3"
+    "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.4",
