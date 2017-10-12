@@ -1,4 +1,4 @@
-import superagent from 'superagent';
+import axios from 'axios';
 import config from './../app/config';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -21,52 +21,52 @@ class _ApiClient {
         attachments,
         directUrl,
         handleProgress,
-        getBackRequest
-      } = {}) => new Promise((resolve, reject) => {
-        const request = superagent[method](formatUrl(path, directUrl));
+        // getBackRequest
+      } = {}) => {
+        const requestConfig = new Object(null); //eslint-disable-line
 
         if (params) {
-          request.query(params);
-        }
-
-        if (!attachments) {
-          request.set('Content-Type', 'application/json');
+          requestConfig.params = { ...params };
         }
 
         if (headers) {
-          for (const header in headers) { // eslint-disable-line
-            if (headers.hasOwnProperty(header)) { // eslint-disable-line
-              request.set(header, headers[header]);
-            }
-          }
+          requestConfig.headers = { ...headers };
         }
+
+        // if (!attachments) {
+        //   if (requestConfig.headers) {
+        //     requestConfig.headers['Content-Type'] = 'application/json';
+        //   } else {
+        //     requestConfig['headers'] = {'Content-Type': 'application/json'}
+        //   }
+        // }
 
         if (attachments) {
           if (attachments && typeof attachments === 'object') {
+            const _data = new FormData();
             Object.keys(attachments).forEach((c) => {
-              typeof attachments[c] !== 'object' ? request.field(c, attachments[c]) : request.attach(c, attachments[c]);
+              _data.append(c, attachments[c]);
             });
+            requestConfig.data = _data;
           }
         }
 
         if (data && !attachments) {
-          request.send(data);
+          requestConfig.data = { ...data };
         }
 
         if (handleProgress) {
-          request.on('progress', handleProgress);
+          requestConfig.onUploadProgress = handleProgress;
         }
 
-        if (getBackRequest) {
-          getBackRequest(request);
-        }
-        request.end((err, res = {}) => {
-          if (err) {
-            return reject(res.body, err, request.xhr);
-          }
-          return resolve(res.body, request.xhr);
+        // if (getBackRequest) {
+        //   getBackRequest(request);
+        // }
+
+        return axios[method](formatUrl(path, directUrl), {
+          ...requestConfig,
         });
-      });
+      };
     });
   }
 }
