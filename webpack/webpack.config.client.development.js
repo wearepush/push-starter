@@ -45,7 +45,7 @@ const config = {
         SSR: process.env.SSR,
         SSL: process.env.SSL,
         APISSL: process.env.APISSL,
-        APIHOST: process.env.APIHOST,
+        APIHOST: `"${process.env.APIHOST}"`,
         APIPORT: process.env.APIPORT
       },
       __CLIENT__: true,
