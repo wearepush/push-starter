@@ -21,9 +21,8 @@ class _ApiClient {
         attachments,
         directUrl,
         handleProgress,
-        // getBackRequest
       } = {}) => {
-        const requestConfig = new Object(null); //eslint-disable-line
+        const requestConfig = {};
 
         if (params) {
           requestConfig.params = { ...params };
@@ -32,14 +31,6 @@ class _ApiClient {
         if (headers) {
           requestConfig.headers = { ...headers };
         }
-
-        // if (!attachments) {
-        //   if (requestConfig.headers) {
-        //     requestConfig.headers['Content-Type'] = 'application/json';
-        //   } else {
-        //     requestConfig['headers'] = {'Content-Type': 'application/json'}
-        //   }
-        // }
 
         if (attachments) {
           if (attachments && typeof attachments === 'object') {
@@ -58,10 +49,6 @@ class _ApiClient {
         if (handleProgress) {
           requestConfig.onUploadProgress = handleProgress;
         }
-
-        // if (getBackRequest) {
-        //   getBackRequest(request);
-        // }
 
         return axios[method](formatUrl(path, directUrl), {
           ...requestConfig,
