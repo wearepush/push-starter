@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Header.scss';
 
 const Header = () => (
-  <div className={styles.header}>
+  <div className={styles.Header}>
     <div>
       <Link to="/">
         Home

@@ -10,9 +10,9 @@ const App = ({
     routes
   }
 }) => (
-  <div className={styles.app}>
+  <div className={styles.App}>
     <Header />
-    <div className={styles.app__container}>
+    <div className={styles.App__container}>
       {renderRoutes(routes)}
     </div>
     <Footer />
