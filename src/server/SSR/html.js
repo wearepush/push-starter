@@ -87,9 +87,6 @@ export default class Html extends Component {
           <meta property="twitter:title" content="" />
           <meta property="twitter:description" content="" />
           */}
-          {/* styles */}
-          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" />
-          {isProd && <link rel="preload" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" as="style" />}
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {isProd && assets.styles && Object.keys(assets.styles).map(
             c => <link href={assets.styles[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />

@@ -19,8 +19,7 @@ const vendor = [
   'react-router-dom',
   'react-hot-loader',
   'react-helmet',
-  'redux-form',
-  'semantic-ui-react'
+  'redux-form'
 ];
 
 const config = {

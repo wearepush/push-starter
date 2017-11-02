@@ -1,7 +1,6 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';
-import { Container } from 'semantic-ui-react';
 
 import { Header, Footer } from './../../components';
 import styles from './App.scss';
@@ -11,13 +10,13 @@ const App = ({
     routes
   }
 }) => (
-  <Container className={styles.app}>
+  <div className={styles.app}>
     <Header />
     <div className={styles.app__container}>
       {renderRoutes(routes)}
     </div>
     <Footer />
-  </Container>
+  </div>
 );
 
 App.propTypes = {

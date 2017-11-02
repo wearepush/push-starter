@@ -1,22 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
 import styles from './Header.scss';
 
 const Header = () => (
   <div className={styles.header}>
-    <Menu inverted>
+    <div>
       <Link to="/">
-        <Menu.Item>
-          Home
-        </Menu.Item>
+        Home
       </Link>
       <Link to="/users">
-        <Menu.Item>
-          Users
-        </Menu.Item>
+        Users
       </Link>
-    </Menu>
+    </div>
   </div>
 );
 

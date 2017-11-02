@@ -1,16 +1,21 @@
 import React from 'react';
 import { string, object } from 'prop-types';
 import { Field } from 'redux-form/immutable';
-import { Input as InputUI } from 'semantic-ui-react';
+import cx from 'classnames';
 
 const Input = ({
   input,
   meta: { touched, error },
   ...rest
 }) => (
-  <div>
-    <InputUI
-      error={touched && !!error}
+  <div
+    className={cx(
+      {
+        error: touched && !!error
+      }
+    )}
+  >
+    <input
       {...input}
       {...rest}
     />

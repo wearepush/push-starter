@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { Form, Container } from 'semantic-ui-react';
 
 import { Input, Button } from './../../elements';
 
@@ -49,34 +48,34 @@ class SignIn extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <Container text>
-        <Form
+      <div>
+        <form
           onSubmit={handleSubmit(this.onSubmit)}
         >
-          <Form.Field>
+          <div>
             <Input
               name="username"
               type="text"
               placeholder="Username"
             />
-          </Form.Field>
-          <Form.Field>
+          </div>
+          <div>
             <Input
               name="password"
               type="password"
               placeholder="Password"
             />
-          </Form.Field>
+          </div>
           {error && <div>{error}</div>}
-          <Form.Field>
+          <div>
             <Button
               type="submit"
             >
               Sign In!
             </Button>
-          </Form.Field>
-        </Form>
-      </Container>
+          </div>
+        </form>
+      </div>
     );
   }
 }
