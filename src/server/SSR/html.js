@@ -87,7 +87,7 @@ const Html = ({
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />
-        <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
+        <div id="root" dangerouslySetInnerHTML={{ __html: content }} style={{ height: '100%' }} />
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
         {isProd && <script defer src={assets.javascript.vendor} />}
         <script defer src={assets.javascript.main} />
