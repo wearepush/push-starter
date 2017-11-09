@@ -94,7 +94,7 @@ describe('records reducer', () => {
       const store = mockStore({});
       return store.dispatch(load(branch)).then(() => {
         let data = {};
-        store.getActions().map(action => data = reducer(undefined, action));
+        store.getActions().map(action => data = reducer(undefined, action)); // eslint-disable-line
         expect(data.get('records').size > 0).toEqual(true);
       });
     });
@@ -103,7 +103,7 @@ describe('records reducer', () => {
       const store = mockStore({});
       store.dispatch(clear(branch));
       let data = {};
-      store.getActions().map(action => data = reducer(undefined, action));
+      store.getActions().map(action => data = reducer(undefined, action));  // eslint-disable-line
       expect(data).toEqual(initialImmutableState);
     });
   });
