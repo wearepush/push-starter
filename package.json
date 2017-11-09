@@ -23,8 +23,8 @@
     "prod:server:start": "NODE_ENV=production node ./src/server/start.babel.js",
     "heroku-postbuild": "npm-run-all prod:client:build prod:server:build",
     "lint": "eslint -c .eslintrc src",
-    "test": "jest --config jestconfig.json",
-    "watch:test": "jest --watch --config jestconfig.json"
+    "test": "NODE_ENV=test jest --config jestconfig.json",
+    "watch:test": "NODE_ENV=test jest --watch --config jestconfig.json"
   },
   "keywords": [
     "react",
@@ -96,7 +96,6 @@
     "file-loader": "^1.1.5",
     "flow-bin": "^0.57.3",
     "flow-runtime": "^0.14.0",
-    "http-status": "^1.0.1",
     "jest": "^21.2.1",
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.1",

@@ -16,7 +16,8 @@ export default function (parameters) {
   app.disable('etag');
   app.disable('x-powered-by');
   app.use('/', express.static('static', { etag: false }));
-  app.use(favicon(path.join(__dirname, '..', 'favicons', 'favicon.ico')));
+
+  app.use(favicon(path.join('static', 'favicons', 'favicon.ico')));
 
   app.use((req, res, next) => {
     if (config.ssl) {
@@ -39,13 +40,18 @@ export default function (parameters) {
     });
   });
 
-  app.get('*', createSSR(parameters.chunks()));
+  app.get('*', createSSR(parameters && parameters.chunks()));
 
-  app.listen(port, (err) => { // eslint-disable-line
+  const server = app.listen(port, (err) => { // eslint-disable-line
     if (err) {
       return console.error(err);
     }
 
     console.info(`Listening at ${host}:${port}`);
   });
+
+  return {
+    server,
+    app
+  };
 }
