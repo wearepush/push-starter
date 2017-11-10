@@ -21,8 +21,11 @@ const middlewares = [createMiddleware(client)];
 const mockStore = configureMockStore(middlewares);
 
 const { app, server } = createServer();
+let mockServer = {};
 beforeAll(() => {
-  supertest.agent(app.listen());
+  mockServer = app.listen();
+  supertest.agent(mockServer);
+  mockServer.close();
 });
 
 afterAll((done) => {
@@ -98,7 +101,9 @@ describe('records reducer', () => {
         expect(data.get('records').size > 0).toEqual(true);
       });
     });
+  });
 
+  describe('CLEAR', () => {
     it('should return clear values', () => {
       const store = mockStore({});
       store.dispatch(clear(branch));

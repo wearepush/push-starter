@@ -46,7 +46,6 @@ export default function (parameters) {
     if (err) {
       return console.error(err);
     }
-
     console.info(`Listening at ${host}:${port}`);
   });
 
