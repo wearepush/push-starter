@@ -1,7 +1,9 @@
-// @import "../../stylesheets/variables";
-// @import "../../stylesheets/mixins";
+@import "../../styles/variables";
+@import "../../styles/mixins";
 
-.app {
+$App: 'App';
+
+.#{$App} {
   display: flex;
   flex-direction: column;
   height: 100%;

@@ -1,5 +1,6 @@
 import { isUndefined } from 'lodash';
 
+const env = process.env.NODE_ENV;
 const ssl = !isUndefined(process.env.SSL) && +(process.env.SSL) === 1 ? 1 : 0;
 const prefix = 'http' + (ssl ? 's' : '') + '://';
 const host = prefix + (process.env.HOST || 'localhost');
@@ -11,6 +12,7 @@ const apiHost = prefixHost + (!isUndefined(process.env.APIHOST) ? process.env.AP
 const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
 
 export default {
+  env,
   ssl,
   host: host + (port ? `:${port}` : ''),
   port,

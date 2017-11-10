@@ -3,7 +3,8 @@ import Home from './Home/Home';
 import Users from './Users/Users';
 import NotFound from './NotFound/NotFound';
 
-export default (store) => {  // eslint-disable-line
+export default (store) => { // eslint-disable-line
+  // we can get an access to store
   return [{
     component: App,
     routes: [

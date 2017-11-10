@@ -74,6 +74,6 @@ export function load(branch) {
       `${branch}/${LOAD_SUCCESS}`,
       `${branch}/${LOAD_FAIL}`,
     ],
-    promise: client => client.get('/api/users')
+    promise: client => client.get(`/api/${branch}`)
   };
 }
