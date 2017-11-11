@@ -10,7 +10,7 @@ const baseConfig = getBaseConfig({
 });
 
 const config = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval',
 
   performance: { hints: false },
 
@@ -46,7 +46,8 @@ const config = {
         SSL: process.env.SSL,
         APISSL: process.env.APISSL,
         APIHOST: `"${process.env.APIHOST}"`,
-        APIPORT: process.env.APIPORT
+        APIPORT: process.env.APIPORT,
+        GOOGLE_ANALITICS_ID: `"${process.env.GOOGLE_ANALITICS_ID}"`
       },
       __CLIENT__: true,
       __SERVER__: false

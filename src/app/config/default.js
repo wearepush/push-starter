@@ -10,6 +10,7 @@ const prefixHost = 'http' + (apiSsl ? 's' : '') + '://';
 const apiPort = !isUndefined(process.env.APIPORT) ? +(process.env.APIPORT) : '';
 const apiHost = prefixHost + (!isUndefined(process.env.APIHOST) ? process.env.APIHOST : 'localhost') + (apiPort ? ':' + apiPort : '');
 const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
+const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
 
 export default {
   env,
@@ -20,6 +21,7 @@ export default {
   apiPort,
   apiHost,
   ssr,
+  googleAnaliticsId,
 
   server: {
     ssl,

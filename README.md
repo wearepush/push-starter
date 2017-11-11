@@ -61,8 +61,7 @@ To get this project to work on Heroku, you need to:
 4. `heroku config:set SSL=1`
 5. `heroku config:set NPM_CONFIG_PRODUCTION=false`
 6. `heroku config:set NODE_MODULES_CACHE=false`
-  * This is to enable webpack to run the build on deploy.
-
+7. `heroku config:set GOOGLE_ANALITICS_ID=UA-xxxxxxxxx-x` (optional)
 
 ## Contributing
 
