@@ -2,6 +2,7 @@ import { App } from './../components';
 import Home from './Home/Home';
 import Users from './Users/Users';
 import NotFound from './NotFound/NotFound';
+import withTracker from './withTracker';
 
 export default (store) => { // eslint-disable-line
   // we can get an access to store
@@ -11,15 +12,15 @@ export default (store) => { // eslint-disable-line
       {
         path: '/',
         exact: true,
-        component: Home
+        component: withTracker(Home)
       },
       {
         path: '/users',
-        component: Users
+        component: withTracker(Users)
       },
       {
         path: '*',
-        component: NotFound
+        component: withTracker(NotFound)
       }
     ]
   }];
