@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { Input, Button } from './../../elements';
 import validate from './SignInValidation';
 
-import { executionEnvironment } from '../../utils/helpers'; // eslint-disable-line
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const mapStateToProps = state => ({}); // eslint-disable-line
