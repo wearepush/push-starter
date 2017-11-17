@@ -4,6 +4,7 @@ import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Input, Button } from './../../elements';
+import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -14,6 +15,7 @@ const mapToProps = {
 
 const mapToForm = {
   form: 'SignInForm',
+  validate
 };
 
 class SignIn extends PureComponent {
