@@ -17,9 +17,10 @@ const vendor = [
   'redux-immutablejs',
   'react-router-config',
   'react-router-dom',
-  'react-hot-loader',
   'react-helmet',
-  'redux-form'
+  'redux-form',
+  'lru-memoize',
+  'react-ga'
 ];
 
 const config = {
