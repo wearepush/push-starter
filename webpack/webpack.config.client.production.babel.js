@@ -10,6 +10,7 @@ import getBaseConfig from './webpack.config.client';
 const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
 const baseConfig = getBaseConfig({ development: false });
 const vendor = [
+  'axios',
   'react',
   'react-dom',
   'prop-types',
@@ -19,10 +20,12 @@ const vendor = [
   'redux-immutablejs',
   'react-router-config',
   'react-router-dom',
+  'react-router-redux',
   'react-helmet',
-  'redux-form',
+  'redux-form/immutable',
   'lru-memoize',
-  'react-ga'
+  'react-ga',
+  'flow-runtime'
 ];
 
 const config = {
@@ -71,6 +74,8 @@ const config = {
       __CLIENT__: true,
       __SERVER__: false
     }),
+
+    new webpack.IgnorePlugin(/redbox-react/),
 
     new BundleAnalyzerPlugin({
       // Can be `server`, `static` or `disabled`.
