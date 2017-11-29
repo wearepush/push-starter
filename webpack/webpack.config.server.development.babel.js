@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import baseConfig from './webpack.config.server';
 import appConfig from '../src/app/config';
 

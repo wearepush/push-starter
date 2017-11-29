@@ -3,8 +3,6 @@ import 'babel-polyfill';
 import React from 'react';
 import { fromJS } from 'immutable';
 import { hydrate } from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
-import Redbox from 'redbox-react';
 import createHistory from 'history/createBrowserHistory';
 
 import Root from './root';
@@ -19,16 +17,27 @@ const history = createHistory();
 const store = configureStore(history, client, initialState);
 const dest = document.getElementById('root');
 
-const hydrateApp = renderProps => hydrate(
-  <AppContainer
-    errorReporter={Redbox}
-  >
-    <Root
-      {...renderProps}
-    />
-  </AppContainer>,
+let hydrateApp = renderProps => hydrate(
+  <Root
+    {...renderProps}
+  />,
   dest
 );
+
+if (config.env === 'development') {
+  const RedBox = require('redbox-react').default;
+  const RHL = require('react-hot-loader');
+  hydrateApp = renderProps => hydrate(
+    <RHL.AppContainer
+      errorReporter={RedBox}
+    >
+      <Root
+        {...renderProps}
+      />
+    </RHL.AppContainer>,
+    dest
+  );
+}
 
 hydrateApp({
   routes: getRoutes(store),
