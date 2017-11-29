@@ -56,6 +56,15 @@ const config = {
       { root: baseConfig.context }
     ),
 
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      }
+    }),
+
     new ExtractTextPlugin({
       filename: '[name].[chunkhash].css',
       allChunks: true
@@ -75,7 +84,7 @@ const config = {
       __SERVER__: false
     }),
 
-    new webpack.IgnorePlugin(/redbox-react/),
+    new webpack.IgnorePlugin(/redbox-react|react-hot-loader/),
 
     new BundleAnalyzerPlugin({
       // Can be `server`, `static` or `disabled`.

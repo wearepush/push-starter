@@ -18,7 +18,7 @@
     "dev:client:build": "babel-node ./webpack/webpack-dev-server.js",
     "delay": "node ./node_modules/npm-delay 15000",
     "prod": "npm-run-all prod:client:build prod:server:build prod:server:start",
-    "prod:client:build": "NODE_ENV=production webpack -p --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details",
+    "prod:client:build": "NODE_ENV=production webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details",
     "prod:server:build": "NODE_ENV=production webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
     "prod:server:start": "NODE_ENV=production node ./src/server/start.babel.js",
     "heroku-postbuild": "npm-run-all prod:client:build prod:server:build",
