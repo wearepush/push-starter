@@ -24,8 +24,7 @@ const vendor = [
   'react-helmet',
   'redux-form/immutable',
   'lru-memoize',
-  'react-ga',
-  'flow-runtime'
+  'react-ga'
 ];
 
 const config = {
