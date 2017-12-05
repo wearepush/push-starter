@@ -17,6 +17,7 @@ type State = {
 };
 
 const initialState: State = {
+  error: null,
   loading: false,
   loaded: false,
   user: null,

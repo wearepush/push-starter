@@ -14,6 +14,7 @@ The starter boilerplate includes the following technologies:
 
 | Technology                                                                                                                                                                                                                  | Description                                                     |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| [Node 8.9.1 LTS](https://nodejs.org/en/)                                          | Node |
 | [Redux Dev Tools](https://github.com/zalmoxisus/redux-devtools-extension)         | Redux Dev Tools |
 | [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)                 | Tweak React components in real time |
 | [React](https://github.com/facebook/react)                                        | JavaScript library for building user interfaces  |

@@ -2,11 +2,11 @@
   "presets": [
     "env",
     "react",
-    "stage-0"
+    "stage-0",
+    "flow"
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "add-module-exports",
-    "flow-runtime"
+    "add-module-exports"
   ]
 }
