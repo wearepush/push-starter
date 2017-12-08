@@ -22,7 +22,10 @@ class _ApiClient {
         directUrl,
         handleProgress,
       } = {}) => {
-        const requestConfig = {};
+        const requestConfig = {
+          method,
+          url: formatUrl(path, directUrl)
+        };
 
         if (params) {
           requestConfig.params = { ...params };
@@ -50,7 +53,7 @@ class _ApiClient {
           requestConfig.onUploadProgress = handleProgress;
         }
 
-        return axios[method](formatUrl(path, directUrl), {
+        return axios({
           ...requestConfig,
         });
       };
