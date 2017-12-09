@@ -1,8 +1,8 @@
 FROM mhart/alpine-node:8
 
 # Switch to directory with sources
-WORKDIR /src
-ADD . /src/
+WORKDIR /usr/src/app
+ADD . /usr/src/app/
 
 # Copy package json and install dependencies
 COPY package.json yarn.lock ./
@@ -11,7 +11,7 @@ COPY package.json yarn.lock ./
 RUN yarn
 
 # Copy required stuff
-ADD . .
+COPY . .
 
 # Expose SERVER ports
 EXPOSE 8080

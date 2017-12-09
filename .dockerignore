@@ -1,2 +1,6 @@
 .env
-node_modules/
+.env.docker
+.env.example
+npm-debug.log
+package-lock.log
+node_modules
