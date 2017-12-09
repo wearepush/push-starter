@@ -64,6 +64,20 @@ To get this project to work on Heroku, you need to:
 6. `heroku config:set NODE_MODULES_CACHE=false`
 7. `heroku config:set GOOGLE_ANALITICS_ID=UA-xxxxxxxxx-x` (optional)
 
+## Docker
+
+Run container
+
+```bash
+docker-compose up -d
+```
+
+Build an image
+
+```bash
+docker build -t wearepush/redux-starter .
+```
+
 ## Contributing
 
 We are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
