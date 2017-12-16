@@ -3,7 +3,7 @@ import React from 'react';
 import { object, node } from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
-import { isProd } from './../../app/config';
+import config from './../../app/config';
 
 const Html = ({
   assets,
@@ -79,17 +79,17 @@ const Html = ({
           c => <link href={assets.styles[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
         )}
         {/* styles will be preloaded */}
-        {isProd && assets.styles && Object.keys(assets.styles).map(
+        {config.isProd && assets.styles && Object.keys(assets.styles).map(
           c => <link rel="preload" href={assets.styles[c]} key={c} as="style" />
         )}
-        {isProd && <link rel="preload" href={assets.javascript.vendor} as="script" />}
-        {isProd && <link rel="preload" href={assets.javascript.main} as="script" />}
+        {config.isProd && <link rel="preload" href={assets.javascript.vendor} as="script" />}
+        {config.isProd && <link rel="preload" href={assets.javascript.main} as="script" />}
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />
         <div id="root" dangerouslySetInnerHTML={{ __html: content }} style={{ height: '100%' }} />
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
-        {isProd && <script defer src={assets.javascript.vendor} />}
+        {config.isProd && <script defer src={assets.javascript.vendor} />}
         <script defer src={assets.javascript.main} />
       </body>
     </html>
