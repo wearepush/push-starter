@@ -2,7 +2,7 @@ import 'babel-polyfill';
 
 import React from 'react';
 import { fromJS } from 'immutable';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import Root from './root';
@@ -17,7 +17,7 @@ const history = createHistory();
 const store = configureStore(history, client, initialState);
 const dest = document.getElementById('root');
 
-let renderApp = renderProps => render(
+let renderApp = renderProps => hydrate(
   <Root
     {...renderProps}
   />,
@@ -27,9 +27,10 @@ let renderApp = renderProps => render(
 if (config.env === 'development') {
   const RedBox = require('redbox-react').default;
   const RHL = require('react-hot-loader');
-  renderApp = renderProps => render(
+  renderApp = renderProps => hydrate(
     <RHL.AppContainer
       errorReporter={RedBox}
+      warnings={false}
     >
       <Root
         {...renderProps}
@@ -81,6 +82,7 @@ if (module.hot) {
 
   module.hot.accept('../app/routes', () => {
     const nextRoutes = require('../app/routes').default;
+    console.log(nextRoutes);
     renderApp({
       routes: nextRoutes(store),
       store,

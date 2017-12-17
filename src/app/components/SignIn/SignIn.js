@@ -73,7 +73,7 @@ class SignIn extends PureComponent {
             <Button
               type="submit"
             >
-              Sign In!!
+              Sign In!
             </Button>
           </div>
         </form>
