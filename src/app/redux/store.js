@@ -28,9 +28,8 @@ export default function configureStore(history, client, initialState = {}) {
 
   if (module.hot) {
     module.hot.accept('./reducer', () => {
-      const createNextReducer = require('./reducer');
+      const createNextReducer = require('./reducer').default;
       const nextReducer = createNextReducer();
-
       store.replaceReducer(nextReducer);
     });
   }
