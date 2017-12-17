@@ -13,8 +13,9 @@ function formatUrl(path, directUrl = false) {
 
 class _ApiClient {
   constructor() { // we can get an access to req
+    const _this = this;
     methods.forEach((method) => {
-      this[method] = (path, {
+      _this[method] = (path, {
         params,
         data,
         headers,
@@ -53,9 +54,7 @@ class _ApiClient {
           requestConfig.onUploadProgress = handleProgress;
         }
 
-        return axios({
-          ...requestConfig,
-        });
+        return axios(requestConfig);
       };
     });
   }

@@ -80,7 +80,7 @@ if (module.hot) {
   };
 
   module.hot.accept('../app/routes', () => {
-    const nextRoutes = require('../app/routes');
+    const nextRoutes = require('../app/routes').default;
     renderApp({
       routes: nextRoutes(store),
       store,

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import GoogleAnalytics from 'react-ga';
@@ -44,6 +43,10 @@ export default function withTracker(WrappedComponent, options = {}) {
       return <WrappedComponent {...this.props} />;
     }
   };
+
+  if (typeof WrappedComponent.fetchData !== 'undefined') {
+    HOC.fetchData = WrappedComponent.fetchData;
+  }
 
   return HOC;
 }
