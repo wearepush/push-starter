@@ -17,11 +17,11 @@
     "dev:server:start": "nodemon ./src/server/start.js --exec babel-node --watch ./static",
     "dev:client:build": "babel-node ./webpack/webpack-dev-server.js",
     "delay": "node ./node_modules/npm-delay 15000",
-    "prod": "npm-run-all prod:client:build prod:server:build prod:server:start",
+    "prod": "run-s prod:client:build prod:server:build prod:server:start",
     "prod:client:build": "NODE_ENV=production webpack --config ./webpack/webpack.config.client.production.babel.js --colors --display-error-details",
     "prod:server:build": "NODE_ENV=production webpack --config ./webpack/webpack.config.server.production.babel.js --colors --display-error-details",
     "prod:server:start": "NODE_ENV=production babel-node ./src/server/start.js",
-    "heroku-postbuild": "npm-run-all prod:client:build prod:server:build",
+    "heroku-postbuild": "run-p prod:client:build prod:server:build",
     "lint": "eslint -c .eslintrc src",
     "test": "NODE_ENV=test jest --config jestconfig.json",
     "watch:test": "NODE_ENV=test jest --watch --config jestconfig.json"
@@ -71,7 +71,6 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
@@ -115,7 +114,6 @@
     "webpack-merge": "^4.1.1"
   },
   "engines": {
-    "node": "^8.9.1",
-    "yarn": "^1.1.0"
+    "node": "^8.9.1"
   }
 }

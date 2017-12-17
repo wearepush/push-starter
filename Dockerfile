@@ -5,10 +5,10 @@ WORKDIR /usr/src/app
 ADD . /usr/src/app/
 
 # Copy package json and install dependencies
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 # Install (local) NPM packages/dependencies
-RUN yarn
+RUN npm install
 
 # Copy required stuff
 COPY . .
