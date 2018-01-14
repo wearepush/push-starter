@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import getBaseConfig from './webpack.config.client';
-import appConfig from '../src/app/config';
+import appConfig from '../src/config';
 
 const { host, port } = appConfig.webpack.server;
 const baseConfig = getBaseConfig({

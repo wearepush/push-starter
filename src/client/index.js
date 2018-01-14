@@ -7,9 +7,9 @@ import createHistory from 'history/createBrowserHistory';
 
 import Root from './root';
 import ApiClient from './../helpers/ApiClient';
-import getRoutes from './../app/routes';
-import config from './../app/config';
-import configureStore from './../app/redux/store';
+import getRoutes from './../routes';
+import config from './../config';
+import configureStore from './../redux/store';
 
 const client = new ApiClient();
 const initialState = fromJS(window.__INITIAL_STATE__);
@@ -80,8 +80,8 @@ if (module.hot) {
     }
   };
 
-  module.hot.accept('../app/routes', () => {
-    const nextRoutes = require('../app/routes').default;
+  module.hot.accept('../routes', () => {
+    const nextRoutes = require('../routes').default;
     console.log(nextRoutes);
     renderApp({
       routes: nextRoutes(store),

@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import baseConfig from './webpack.config.server';
-import appConfig from '../src/app/config';
+import appConfig from '../src/config';
 
 const { host, port } = appConfig.webpack.server;
 const config = cloneDeep(baseConfig);

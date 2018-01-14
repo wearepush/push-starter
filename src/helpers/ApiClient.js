@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from './../app/config';
+import config from './../config';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {
