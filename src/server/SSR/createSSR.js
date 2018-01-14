@@ -5,11 +5,11 @@ import { matchRoutes, renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 
-import getRoutes from './../../app/routes';
+import getRoutes from './../../routes';
 import Html from './html';
 import ApiClient from './../../helpers/ApiClient';
-import configureStore from './../../app/redux/store';
-import config from './../../app/config';
+import configureStore from './../../redux/store';
+import config from './../../config';
 
 export default function createSSR(assets) {
   return (req, res) => {

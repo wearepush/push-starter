@@ -3,9 +3,9 @@ import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
 import { fromJS } from 'immutable';
 
-import createServer from '../../../../server/server';
+import createServer from '../../../server/server';
 import createMiddleware from '../../middleware/clientMiddleware';
-import ApiClient from '../../../../helpers/ApiClient';
+import ApiClient from '../../../helpers/ApiClient';
 
 import reducer, {
   initialImmutableState,

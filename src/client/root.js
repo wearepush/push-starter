@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import { ConnectedRouter } from 'react-router-redux';
 import {} from './normalize.scss';
-import {} from './../app/styles/layout/_base.scss';
+import {} from './../styles/layout/_base.scss';
 
 const Root = ({
   history,
