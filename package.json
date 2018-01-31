@@ -64,7 +64,9 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.1",
     "redux-immutablejs": "^0.0.8",
-    "serve-favicon": "^2.4.5"
+    "serve-favicon": "^2.4.5",
+    "transit-immutable-js": "^0.7.0",
+    "transit-js": "^0.8.846"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",

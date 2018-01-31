@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
-import * as recordsActions from './../../redux/modules/records';
-
-const branch = 'users';
+import { clear, load, STATE_KEY as USERS_STATE_KEY } from './../../redux/modules/users';
 
 const mapStateToProps = state => ({
-  records: state.getIn([branch, 'records'])
+  records: state.getIn([USERS_STATE_KEY, 'records'])
 });
 
 const mapDispatchToProps = {
-  clear: recordsActions.clear,
-  load: recordsActions.load
+  clear,
+  load
 };
 
 class Users extends Component {
@@ -23,15 +21,15 @@ class Users extends Component {
   }
 
   static fetchData({ dispatch }) {
-    return dispatch(recordsActions.load(branch));
+    return dispatch(load());
   }
 
   componentDidMount() {
-    this.props.load(branch);
+    this.props.load();
   }
 
   componentWillUnmount() {
-    this.props.clear(branch);
+    this.props.clear();
   }
 
   render() {
@@ -54,9 +52,9 @@ class Users extends Component {
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
         <div>
           {
-            records.map(item => (
-              <div key={item.get('id')}>
-                <span>{item.get('name')}</span>
+            records.map(c => (
+              <div key={c.id}>
+                <span>{c.name}</span>
               </div>
             ))
           }

@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 
 import React from 'react';
-import { fromJS } from 'immutable';
 import { hydrate } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 
@@ -12,7 +11,7 @@ import config from './../config';
 import configureStore from './../redux/store';
 
 const client = new ApiClient();
-const initialState = fromJS(window.__INITIAL_STATE__);
+const initialState = window.__INITIAL_STATE__;
 const history = createHistory();
 const store = configureStore(history, client, initialState);
 const dest = document.getElementById('root');
