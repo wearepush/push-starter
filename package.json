@@ -49,6 +49,7 @@
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "lru-memoize": "^1.0.2",
+    "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
