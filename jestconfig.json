@@ -8,12 +8,13 @@
     "^.*\\.(css|scss|sass)$": "identity-obj-proxy"
   },
   "moduleDirectories": ["node_modules"],
-  "testEnvironment": "node",
+  "testEnvironment": "jsdom",
   "coverageDirectory": "./coverage/",
   "collectCoverage": true,
   "setupFiles": [
     "./enzyme"
   ],
+  "notify": true,
   "transform": {
     "^.+\\.js$": "babel-jest"
   }

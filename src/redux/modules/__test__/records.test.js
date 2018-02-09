@@ -1,9 +1,6 @@
-import supertest from 'supertest';
 import configureMockStore from 'redux-mock-store';
-import expect from 'expect';
 import { fromJS } from 'immutable';
 
-import createServer from '../../../server/server';
 import createMiddleware from '../../middleware/clientMiddleware';
 import ApiClient from '../../../helpers/ApiClient';
 
@@ -17,21 +14,8 @@ import reducer, {
 } from '../records';
 
 const client = new ApiClient();
-const middlewares = [createMiddleware(client)];
+const middlewaresiddlewares = [createMiddleware(client)];
 const mockStore = configureMockStore(middlewares);
-
-const { app, server } = createServer();
-let mockServer = {};
-beforeAll(() => {
-  mockServer = app.listen();
-  supertest.agent(mockServer);
-  mockServer.close();
-});
-
-afterAll((done) => {
-  server.close();
-  done();
-});
 
 describe('records reducer', () => {
   describe('INIT', () => {

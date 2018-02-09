@@ -38,7 +38,6 @@ class Users extends Component {
     } = this.props;
     const title = 'Redux Starter. Users';
     const description = 'Redux Form. Sign In';
-
     return (
       <div>
         <Helmet>
@@ -52,9 +51,9 @@ class Users extends Component {
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
         <div>
           {
-            records.map(c => (
-              <div key={c.id}>
-                <span>{c.name}</span>
+            records.map((c) => (
+              <div key={c.get('id')}>
+                <span>{c.get('name')}</span>
               </div>
             ))
           }

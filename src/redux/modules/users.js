@@ -1,9 +1,4 @@
-import { fromJS, Record } from 'immutable';
-
-export const User = new Record({
-  id: undefined,
-  name: ''
-});
+import { fromJS } from 'immutable';
 
 export const STATE_KEY = 'users';
 
@@ -34,11 +29,10 @@ export default function reducer(state = initialImmutableState, action = {}) {
       });
     case LOAD_USERS_SUCCESS:
       return state.withMutations((mutableState) => {
-        const records = result.get('records').map(c => new User(c));
         mutableState
           .set('loading', false)
           .set('loaded', true)
-          .set('records', records);
+          .set('records', result.get('records'));
       });
     case LOAD_USERS_FAIL:
       return state.withMutations((mutableState) => {
@@ -62,6 +56,6 @@ export function clear() {
 export function load() {
   return {
     types: [LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAIL],
-    promise: client => client.get(`/api/${STATE_KEY}`)
+    promise: client => client.get(`/api/${STATE_KEY}`),
   };
 }
