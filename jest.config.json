@@ -5,16 +5,16 @@
     "json"
   ],
   "moduleNameMapper": {
-    "^.*\\.(css|scss|sass)$": "identity-obj-proxy"
+    "^.*\\.(css|scss)$": "identity-obj-proxy"
   },
   "moduleDirectories": ["node_modules"],
   "testEnvironment": "jsdom",
   "coverageDirectory": "./coverage/",
   "collectCoverage": true,
   "setupFiles": [
-    "./enzyme"
+    "<rootDir>/scripts/enzyme.config.js",
+    "<rootDir>/scripts/tests.config.js"
   ],
-  "notify": true,
   "transform": {
     "^.+\\.js$": "babel-jest"
   }

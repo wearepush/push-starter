@@ -1,5 +1,12 @@
 import axios from 'axios';
+
 import config from './../config';
+
+if (config.env === 'test') {
+  const httpAdapter = require('axios/lib/adapters/http');
+  axios.defaults.host = config.testHost;
+  axios.defaults.adapter = httpAdapter; // eslint-disable-line
+}
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path, directUrl = false) {

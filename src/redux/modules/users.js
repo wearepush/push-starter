@@ -2,11 +2,11 @@ import { fromJS } from 'immutable';
 
 export const STATE_KEY = 'users';
 
-export const CLEAR_USERS = `${STATE_KEY}/CLEAR`;
+export const CLEAR = `${STATE_KEY}/CLEAR`;
 
-export const LOAD_USERS = `${STATE_KEY}/LOAD`;
-export const LOAD_USERS_SUCCESS = `${STATE_KEY}/LOAD_SUCCESS`;
-export const LOAD_USERS_FAIL = `${STATE_KEY}/LOAD_FAIL`;
+export const LOAD = `${STATE_KEY}/LOAD`;
+export const LOAD_SUCCESS = `${STATE_KEY}/LOAD_SUCCESS`;
+export const LOAD_FAIL = `${STATE_KEY}/LOAD_FAIL`;
 
 export const initialState = {
   error: null,
@@ -20,28 +20,26 @@ export const initialImmutableState = fromJS(initialState);
 export default function reducer(state = initialImmutableState, action = {}) {
   const { error, result } = action;
   switch (action.type) {
-    case CLEAR_USERS:
+    case CLEAR:
       return initialImmutableState;
-
-    case LOAD_USERS:
+    case LOAD:
       return state.withMutations((mutableState) => {
         mutableState.set('loading', true);
       });
-    case LOAD_USERS_SUCCESS:
+    case LOAD_SUCCESS:
       return state.withMutations((mutableState) => {
         mutableState
           .set('loading', false)
           .set('loaded', true)
           .set('records', result.get('records'));
       });
-    case LOAD_USERS_FAIL:
+    case LOAD_FAIL:
       return state.withMutations((mutableState) => {
         mutableState
           .set('error', error)
           .set('loading', false)
           .set('loaded', false);
       });
-
     default:
       return state;
   }
@@ -49,13 +47,13 @@ export default function reducer(state = initialImmutableState, action = {}) {
 
 export function clear() {
   return {
-    type: CLEAR_USERS,
+    type: CLEAR,
   };
 }
 
 export function load() {
   return {
-    types: [LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAIL],
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: client => client.get(`/api/${STATE_KEY}`),
   };
 }

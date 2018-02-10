@@ -23,8 +23,8 @@
     "prod:server:start": "NODE_ENV=production node ./src/server/start.babel.js",
     "heroku-postbuild": "run-p prod:client:build prod:server:build",
     "lint": "eslint -c .eslintrc src",
-    "test": "NODE_ENV=test jest --config jestconfig.json",
-    "watch:test": "NODE_ENV=test jest --watch --config jestconfig.json"
+    "test": "NODE_ENV=test jest --config jest.config.json",
+    "test:watch": "NODE_ENV=test jest --watch --config jest.config.json"
   },
   "keywords": [
     "react",
@@ -49,6 +49,7 @@
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "lru-memoize": "^1.0.2",
+    "nock": "^9.1.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
