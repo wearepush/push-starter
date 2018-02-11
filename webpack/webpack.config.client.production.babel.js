@@ -17,6 +17,8 @@ const vendor = [
   'redux',
   'react-redux',
   'immutable',
+  'transit-immutable-js',
+  'transit-js',
   'redux-immutablejs',
   'react-router-config',
   'react-router-dom',

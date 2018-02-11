@@ -34,8 +34,8 @@ export default function (parameters) {
   app.get('/api/users', (req, res) => {
     res.json({
       records: [
-        { id: 1, name: 'Justin Timberlake' },
-        { id: 2, name: 'Kanye West' }
+        { id: 2, name: 'Justin Timberlake' },
+        { id: 1, name: 'Kanye West' }
       ]
     });
   });

@@ -4,7 +4,7 @@ import { routerMiddleware } from 'react-router-redux';
 import createReducer from './reducer';
 import createMiddleware from './middleware/clientMiddleware';
 
-export default function configureStore(history, client, initialState = {}) {
+export default function configureStore(history, client, initialState = fromJS({})) {
   const reducer = createReducer();
   const middlewares = [createMiddleware(client), routerMiddleware(history)];
 
@@ -18,11 +18,9 @@ export default function configureStore(history, client, initialState = {}) {
     applyMiddleware(...middlewares)
   );
 
-  const initialValues = fromJS(initialState).set('router', history);
-
   const store = createStore(
     reducer,
-    initialValues,
+    initialState,
     enhancer
   );
 

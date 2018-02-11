@@ -2,36 +2,34 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
-import * as recordsActions from './../../redux/modules/records';
-
-const branch = 'users';
+import { clearUsers, loadUsers, getUsersRecords } from './../../redux/modules/users';
 
 const mapStateToProps = state => ({
-  records: state.getIn([branch, 'records'])
+  records: getUsersRecords(state)
 });
 
 const mapDispatchToProps = {
-  clear: recordsActions.clear,
-  load: recordsActions.load
+  clearUsers,
+  loadUsers
 };
 
 class Users extends Component {
   static propTypes = {
-    clear: func.isRequired,
-    load: func.isRequired,
+    clearUsers: func.isRequired,
+    loadUsers: func.isRequired,
     records: object.isRequired
   }
 
   static fetchData({ dispatch }) {
-    return dispatch(recordsActions.load(branch));
+    return dispatch(loadUsers());
   }
 
   componentDidMount() {
-    this.props.load(branch);
+    this.props.loadUsers();
   }
 
   componentWillUnmount() {
-    this.props.clear(branch);
+    this.props.clearUsers();
   }
 
   render() {
@@ -40,7 +38,6 @@ class Users extends Component {
     } = this.props;
     const title = 'Redux Starter. Users';
     const description = 'Redux Form. Sign In';
-
     return (
       <div>
         <Helmet>
@@ -54,9 +51,9 @@ class Users extends Component {
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
         <div>
           {
-            records.map(item => (
-              <div key={item.get('id')}>
-                <span>{item.get('name')}</span>
+            records.map((c) => (
+              <div key={c.get('id')}>
+                <span>{c.get('name')}</span>
               </div>
             ))
           }
