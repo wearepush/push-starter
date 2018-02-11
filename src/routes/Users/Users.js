@@ -2,34 +2,34 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
-import { clear, load, STATE_KEY as USERS_STATE_KEY } from './../../redux/modules/users';
+import { clearUsers, loadUsers, getUsersRecords } from './../../redux/modules/users';
 
 const mapStateToProps = state => ({
-  records: state.getIn([USERS_STATE_KEY, 'records'])
+  records: getUsersRecords(state)
 });
 
 const mapDispatchToProps = {
-  clear,
-  load
+  clearUsers,
+  loadUsers
 };
 
 class Users extends Component {
   static propTypes = {
-    clear: func.isRequired,
-    load: func.isRequired,
+    clearUsers: func.isRequired,
+    loadUsers: func.isRequired,
     records: object.isRequired
   }
 
   static fetchData({ dispatch }) {
-    return dispatch(load());
+    return dispatch(loadUsers());
   }
 
   componentDidMount() {
-    this.props.load();
+    this.props.loadUsers();
   }
 
   componentWillUnmount() {
-    this.props.clear();
+    this.props.clearUsers();
   }
 
   render() {

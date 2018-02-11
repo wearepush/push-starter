@@ -1,9 +1,7 @@
 import nock from 'nock';
-import configureMockStore from 'redux-mock-store';
 import { fromJS } from 'immutable';
 
-import createMiddleware from '../../middleware/clientMiddleware';
-import ApiClient from '../../../helpers/ApiClient';
+import mockStore from '../../__mocks__/store';
 import config from '../../../config';
 
 import reducer, {
@@ -13,17 +11,23 @@ import reducer, {
   LOAD,
   LOAD_SUCCESS,
   LOAD_FAIL,
-  clear,
-  load,
+  clearUsers,
+  loadUsers,
+  getUsers,
+  getUsersRecords,
+  getUsersLoading,
+  getUsersLoaded,
+  getUsersError,
 } from '../users';
 
-const client = new ApiClient();
-const middlewares = [createMiddleware(client)];
-const mockStore = configureMockStore(middlewares);
 let store;
 
 beforeEach(() => {
-  store = mockStore({});
+  store = mockStore(
+    fromJS({
+      [STATE_KEY]: initialImmutableState
+    })
+  );
 });
 
 afterEach(() => {
@@ -93,9 +97,36 @@ describe(`${STATE_KEY} module`, () => {
     });
   });
 
+  describe(`${STATE_KEY} getters`, () => {
+    it(`should return ${STATE_KEY} state`, () => {
+      const state = store.getState();
+      expect(getUsers(state)).toBe(initialImmutableState);
+    });
+
+    it(`should return ${STATE_KEY} records state`, () => {
+      const state = store.getState();
+      expect(getUsersRecords(state)).toBe(initialImmutableState.get('records'));
+    });
+
+    it(`should return ${STATE_KEY} loading state`, () => {
+      const state = store.getState();
+      expect(getUsersLoading(state)).toBe(initialImmutableState.get('loading'));
+    });
+
+    it(`should return ${STATE_KEY} loaded state`, () => {
+      const state = store.getState();
+      expect(getUsersLoaded(state)).toBe(initialImmutableState.get('loaded'));
+    });
+
+    it(`should return ${STATE_KEY} error state`, () => {
+      const state = store.getState();
+      expect(getUsersError(state)).toBe(initialImmutableState.get('error'));
+    });
+  });
+
   describe(`${STATE_KEY} actions`, () => {
     it('should return clean initial state', () => {
-      store.dispatch(clear());
+      store.dispatch(clearUsers());
       const actions = store.getActions();
       let data = null;
       actions.map(action => {
@@ -116,7 +147,7 @@ describe(`${STATE_KEY} module`, () => {
         .get('/api/users')
         .reply(200, payload);
 
-      store.dispatch(load())
+      store.dispatch(loadUsers())
         .then(() => {
           const actions = store.getActions();
           let data = null;
@@ -146,7 +177,7 @@ describe(`${STATE_KEY} module`, () => {
         .get('/api/users')
         .reply(400, payload);
 
-      store.dispatch(load())
+      store.dispatch(loadUsers())
         .then(() => {
           const actions = store.getActions();
           let data = null;

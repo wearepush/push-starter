@@ -45,13 +45,27 @@ export default function reducer(state = initialImmutableState, action = {}) {
   }
 }
 
-export function clear() {
+/*
+* Getters
+*/
+
+export const getUsers = (state) => state.get(STATE_KEY);
+export const getUsersRecords = (state) => getUsers(state).get('records');
+export const getUsersLoading = (state) => getUsers(state).get('loading');
+export const getUsersLoaded = (state) => getUsers(state).get('loaded');
+export const getUsersError = (state) => getUsers(state).get('error');
+
+/*
+* Actions
+*/
+
+export function clearUsers() {
   return {
     type: CLEAR,
   };
 }
 
-export function load() {
+export function loadUsers() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: client => client.get(`/api/${STATE_KEY}`),
