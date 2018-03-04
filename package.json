@@ -67,7 +67,7 @@
     "serve-favicon": "^2.4.5",
     "transit-immutable-js": "^0.7.0",
     "transit-js": "^0.8.846",
-    "webpack-cli": "^2.0.9"
+    "webpack-cli": "^2.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^8.0.0",
