@@ -11,6 +11,7 @@ const baseConfig = getBaseConfig({
 
 const config = {
   devtool: 'eval',
+  mode: 'development',
 
   performance: { hints: false },
 

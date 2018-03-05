@@ -47,7 +47,7 @@ const config = {
       }
     }),
 
-    new webpack.optimize.CommonsChunkPlugin({
+    new webpack.optimize.SplitChunksPlugin({
       names: ['vendor'],
       minChunks: Infinity
     }),
@@ -56,15 +56,6 @@ const config = {
       [path.relative(baseConfig.context, baseConfig.output.path)],
       { root: baseConfig.context }
     ),
-
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      }
-    }),
 
     new ExtractTextPlugin({
       filename: '[name].[chunkhash].css',
