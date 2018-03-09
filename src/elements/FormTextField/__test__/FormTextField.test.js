@@ -17,8 +17,8 @@ describe('FormTextField', () => {
     onFocusSpy = noop,
     onChangeSpy = noop,
     onBlurSpy = noop,
-  }) => {
-    return class Form extends Component {
+  }) => (
+    class Form extends Component {
       render() {
         renderSpy(this.props);
         return (
@@ -31,10 +31,10 @@ describe('FormTextField', () => {
               onBlur={onBlurSpy}
             />
           </form>
-        )
+        );
       }
     }
-  };
+  );
 
   const renderForm = (Form, formState, config = {}) => {
     const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
@@ -46,7 +46,7 @@ describe('FormTextField', () => {
   };
 
   it('it should render with initial state', () => {
-    const renderSpy = jest.fn(() => {})
+    const renderSpy = jest.fn(() => {});
     const Form = makeForm({ renderSpy });
     const dom = renderForm(Form, {}, {});
 
@@ -61,11 +61,16 @@ describe('FormTextField', () => {
   });
 
   it('it should handle onFocus, onChange, onBlur', () => {
-    const renderSpy = jest.fn(() => {})
+    const renderSpy = jest.fn(() => {});
     const onFocusSpy = jest.fn();
     const onChangeSpy = jest.fn();
     const onBlurSpy = jest.fn();
-    const Form = makeForm({ renderSpy, onFocusSpy, onChangeSpy, onBlurSpy });
+    const Form = makeForm({
+      renderSpy,
+      onFocusSpy,
+      onChangeSpy,
+      onBlurSpy
+    });
     const dom = renderForm(Form, {}, {});
 
     let inputElement = dom.find('.FormTextField input');
@@ -96,5 +101,4 @@ describe('FormTextField', () => {
     inputElement = dom.find('.FormTextField input');
     expect(inputElement.hasClass('is-active')).toBe(false);
   });
-
 });

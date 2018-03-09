@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import FormFieldLabel from '../FormFieldLabel.js';
 
 describe('FormFieldLabel', () => {
-
   it('it should render with initial state', () => {
     const label = shallow(
       <FormFieldLabel
@@ -37,5 +36,4 @@ describe('FormFieldLabel', () => {
     );
     expect(label.find('.FormFieldLabel').hasClass('is-invalid')).toBe(true);
   });
-
 });

@@ -3,12 +3,10 @@ import { shallow } from 'enzyme';
 import FormField from '../FormField.js';
 
 describe('FormField', () => {
-
   it('it should render with initial state', () => {
     const children = (<div>Children</div>);
     const formField = shallow(
-      <FormField
-      >
+      <FormField>
         {children}
       </FormField>
     );
