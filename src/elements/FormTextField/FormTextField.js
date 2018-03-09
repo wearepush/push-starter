@@ -3,6 +3,7 @@ import { string, object } from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import cx from 'classnames';
 import { FormField } from '../index.js';
+import styles from './FormTextField.scss';
 
 const FormTextField = ({
   id,
@@ -11,24 +12,25 @@ const FormTextField = ({
   meta,
   ...rest
 }) => (
-  <FormField
-    meta={meta}
-    label={label}
-    name={id || input.name}
-  >
-    <input
-      id={id || input.name}
-      {...input}
-      {...rest}
-      className={
-        cx({
-          'is-active': meta.active,
-          'is-invalid': !meta.invalid,
-          'is-valid': meta.valid,
-        })
-      }
-    />
-  </FormField>
+  <div className={styles.FormTextField}>
+    <FormField
+      meta={meta}
+      label={label}
+      name={id || input.name}
+    >
+      <input
+        id={id || input.name}
+        {...rest}
+        {...input}
+        className={
+          cx(styles.FormTextField__input, {
+            'is-active': meta.active,
+            'is-invalid': meta.invalid,
+          })
+        }
+      />
+    </FormField>
+  </div>
 );
 
 FormTextField.propTypes = {
