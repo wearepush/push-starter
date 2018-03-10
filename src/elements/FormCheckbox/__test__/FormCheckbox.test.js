@@ -142,11 +142,10 @@ describe('FormCheckbox', () => {
   it('it should render with custom checked icon', () => {
     const iconChecked = (<div className="icon-custom-checked">checked</div>);
     const iconUnChecked = (<div className="icon-custom-unchecked">unchecked</div>);
-    const renderSpy = jest.fn(() => {});
     const Form = makeForm({ iconChecked, iconUnChecked });
     const dom = renderForm(Form, {}, {});
 
-    let inputElement = dom.find('.FormCheckbox__input');
+    const inputElement = dom.find('.FormCheckbox__input');
     let iconElement = dom.find('.FormCheckbox__icon');
     expect(iconElement.hasClass('is-custom-icon')).toBe(true);
     expect(iconElement.hasClass('is-unchecked')).toBe(true);
