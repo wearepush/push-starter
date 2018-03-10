@@ -3,7 +3,7 @@ import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, Button } from './../../elements';
+import { FormTextField, FormCheckbox, Button } from './../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -68,6 +68,12 @@ class SignIn extends PureComponent {
               name="password"
               type="password"
               placeholder="Password"
+            />
+          </div>
+          <div>
+            <FormCheckbox
+              name="remember"
+              placeholder="Remember me"
             />
           </div>
           {error && <div>{error}</div>}

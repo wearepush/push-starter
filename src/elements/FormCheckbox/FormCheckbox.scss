@@ -1,0 +1,63 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$FormCheckbox: 'FormCheckbox';
+
+.#{$FormCheckbox} {
+
+  &__icon {
+    display: inline-block;
+
+    &:global {
+      &.is-default-icon {
+        width: 18px;
+        height: 18px;
+        border: 1px solid black;
+        vertical-align: middle;
+
+        &.is-checked {
+          background-color: black;
+        }
+
+        &.is-unchecked {
+          background-color: white;
+        }
+
+        &.is-invalid {
+          border-color: red;
+        }
+
+        &.is-active {
+          border-color: blue;
+        }
+      }
+
+      &.is-custom-icon {
+        &.is-checked {
+          background-color: black;
+        }
+
+        &.is-unchecked {
+          background-color: white;
+        }
+
+        &.is-invalid {
+          border-color: red;
+        }
+
+        &.is-active {
+          border-color: blue;
+        }
+      }
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__placeholder {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
