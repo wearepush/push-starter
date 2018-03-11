@@ -3,7 +3,7 @@ import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, FormCheckbox, Button } from './../../elements';
+import { FormTextField, FormCheckbox, FormRadio, Button } from './../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -30,6 +30,7 @@ class SignIn extends PureComponent {
   };
 
   onSubmit = (values) => { // eslint-disable-line
+    console.log(values.toJS());
     return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
         throw new SubmissionError({
@@ -74,6 +75,18 @@ class SignIn extends PureComponent {
             <FormCheckbox
               name="remember"
               placeholder="Remember me"
+            />
+          </div>
+          <div>
+            <FormRadio
+              name="gender"
+              value="1"
+              placeholder="Women"
+            />
+            <FormRadio
+              name="gender"
+              value="2"
+              placeholder="Men"
             />
           </div>
           {error && <div>{error}</div>}

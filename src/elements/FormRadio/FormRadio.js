@@ -3,9 +3,9 @@ import { node, string, object } from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import cx from 'classnames';
 import { FormField } from '../index.js';
-import styles from './FormCheckbox.scss';
+import styles from './FormRadio.scss';
 
-const FormCheckbox = ({
+const FormRadio = ({
   iconChecked,
   iconUnChecked,
   id,
@@ -15,9 +15,9 @@ const FormCheckbox = ({
   placeholder,
   ...rest
 }) => {
-  const _id = id || input.name;
+  const _id = id || `${input.name}-${input.value}`;
   return (
-    <div className={styles.FormCheckbox}>
+    <div className={styles.FormRadio}>
       <FormField
         meta={meta}
         label={label}
@@ -27,7 +27,7 @@ const FormCheckbox = ({
           {iconChecked && iconUnChecked ?
             <div
               className={
-                cx(styles.FormCheckbox__icon, {
+                cx(styles.FormRadio__icon, {
                   'is-custom-icon': true,
                   'is-checked': input.checked,
                   'is-unchecked': !input.checked,
@@ -45,7 +45,7 @@ const FormCheckbox = ({
             :
             <div
               className={
-                cx(styles.FormCheckbox__icon, {
+                cx(styles.FormRadio__icon, {
                   'is-default-icon': true,
                   'is-checked': input.checked,
                   'is-unchecked': !input.checked,
@@ -59,10 +59,11 @@ const FormCheckbox = ({
             id={_id}
             {...rest}
             {...input}
-            className={styles.FormCheckbox__input}
-            type="checkbox"
+            data-checked={input.checked.toString()}
+            className={styles.FormRadio__input}
+            type="radio"
           />
-          <span className={styles.FormCheckbox__placeholder}>
+          <span className={styles.FormRadio__placeholder}>
             {placeholder}
           </span>
         </label>
@@ -71,7 +72,7 @@ const FormCheckbox = ({
   );
 };
 
-FormCheckbox.propTypes = {
+FormRadio.propTypes = {
   iconChecked: node,
   iconUnChecked: node,
   id: string,
@@ -81,11 +82,11 @@ FormCheckbox.propTypes = {
   placeholder: string.isRequired,
 };
 
-FormCheckbox.defaultProps = {
+FormRadio.defaultProps = {
   iconChecked: null,
   iconUnChecked: null,
   id: '',
   label: '',
 };
 
-export default props => <Field {...props} component={FormCheckbox} type="checkbox" />;
+export default props => <Field {...props} component={FormRadio} type="radio" />;

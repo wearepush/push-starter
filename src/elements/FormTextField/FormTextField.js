@@ -11,27 +11,30 @@ const FormTextField = ({
   label,
   meta,
   ...rest
-}) => (
-  <div className={styles.FormTextField}>
-    <FormField
-      meta={meta}
-      label={label}
-      name={id || input.name}
-    >
-      <input
-        id={id || input.name}
-        {...rest}
-        {...input}
-        className={
-          cx(styles.FormTextField__input, {
-            'is-active': meta.active,
-            'is-invalid': meta.invalid,
-          })
-        }
-      />
-    </FormField>
-  </div>
-);
+}) => {
+  const _id = id || input.name;
+  return (
+    <div className={styles.FormTextField}>
+      <FormField
+        meta={meta}
+        label={label}
+        name={_id}
+      >
+        <input
+          id={_id}
+          {...rest}
+          {...input}
+          className={
+            cx(styles.FormTextField__input, {
+              'is-active': meta.active,
+              'is-invalid': meta.invalid,
+            })
+          }
+        />
+      </FormField>
+    </div>
+  );
+};
 
 FormTextField.propTypes = {
   id: string,
