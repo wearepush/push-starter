@@ -45,7 +45,6 @@ const FormSelectComponent = ({
             }
           </select>
           :
-
           <div
             className={
               cx(styles.FormSelect__list, {
@@ -55,24 +54,31 @@ const FormSelectComponent = ({
             }
             role="listbox"
           >
-            {
-              !multiple && placeholder &&
+            {placeholder &&
               <div
                 className={
                   cx(styles.FormSelect__item, {
                     'is-placeholder': true,
-                    'is-selected': !input.value,
+                    'is-selected': multiple ? input.value.length === 0 : !input.value,
                   })
                 }
-                tabIndex={!input.value ? '-1' : '0'}
-                aria-selected={!input.value}
+                tabIndex={multiple ? input.value.length === 0 ? '-1' : '0' : !input.value ? '-1' : '0'}
+                aria-selected={multiple ? input.value.length === 0 : !input.value}
                 role="option"
                 onClick={() => {
-                  input.onChange(null);
+                  if (multiple) {
+                    input.onChange([]);
+                  } else {
+                    input.onChange(null);
+                  }
                 }}
                 onKeyDown={(e) => {
                   if (e.keyCode === 13) { // enter
-                    input.onChange(null);
+                    if (multiple) {
+                      input.onChange([]);
+                    } else {
+                      input.onChange(null);
+                    }
                   } else if (e.keyCode === 40) { // down
                     const next = e.currentTarget.nextSibling;
                     if (next) {
@@ -86,7 +92,12 @@ const FormSelectComponent = ({
             }
             {
               options.map((c, i) => {
-                const selected = input.value === c.value;
+                let selected = false;
+                if (multiple) {
+                  selected = input.value.find(f => f === c.value);
+                } else {
+                  selected = input.value === c.value;
+                }
                 return (
                   <div
                     className={
@@ -100,7 +111,15 @@ const FormSelectComponent = ({
                     aria-disabled={c.disabled}
                     onClick={() => {
                       if (!c.disabled) {
-                        input.onChange(c.value);
+                        if (multiple) {
+                          if (!input.value.find(f => f === c.value)) {
+                            input.onChange([...input.value, c.value]);
+                          } else {
+                            input.onChange(input.value.filter(f => f !== c.value));
+                          }
+                        } else {
+                          input.onChange(c.value);
+                        }
                       }
                     }}
                     tabIndex={selected ? '-1' : '0'}
@@ -114,7 +133,15 @@ const FormSelectComponent = ({
                     onKeyDown={(e) => {
                       if (e.keyCode === 13) { // enter
                         if (!c.disabled) {
-                          input.onChange(c.value);
+                          if (multiple) {
+                            if (!input.value.find(f => f === c.value)) {
+                              input.onChange([...input.value, c.value]);
+                            } else {
+                              input.onChange(input.value.filter(f => f !== c.value));
+                            }
+                          } else {
+                            input.onChange(c.value);
+                          }
                         }
                       } else if (e.keyCode === 40) { // down
                         const next = e.currentTarget.nextSibling;

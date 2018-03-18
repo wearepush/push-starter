@@ -91,45 +91,17 @@ class SignIn extends PureComponent {
           </div>
           <div>
             <FormSelect
-              label="Age"
-              name="age"
-              placeholder="Select Age"
-              options={[
-                { label: '< 18', value: '18' },
-                { label: '18-25', value: '18-25', disabled: true },
-                { label: '25+', value: '25' },
-              ]}
-            />
-          </div>
-
-          <div>
-            <FormSelect
-              custom
-              label="Age"
-              name="age"
-              placeholder="Select Age"
-              options={[
-                { label: '< 18', value: '18' },
-                { label: '18-25', value: '18-25', disabled: true },
-                { label: '25+', value: '25' },
-              ]}
-            />
-          </div>
-          {/*
-          <div>
-            <FormSelect
-              label="Stage"
-              name="stage"
               multiple
-              placeholder="Select Stage"
+              label="Age"
+              name="age"
+              placeholder="Select Age"
               options={[
-                { label: '1', value: '1' },
-                { label: '2', value: '2' },
-                { label: '3', value: '3' },
+                { label: '< 18', value: '18' },
+                { label: '18-25', value: '18-25', disabled: true },
+                { label: '25+', value: '25' },
               ]}
             />
           </div>
-          */}
           {error && <div>{error}</div>}
           <div>
             <Button
