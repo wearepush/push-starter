@@ -3,7 +3,7 @@ import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, FormCheckbox, FormRadio, Button } from './../../elements';
+import { FormTextField, FormCheckbox, FormRadio, FormSelect, Button } from './../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -89,6 +89,47 @@ class SignIn extends PureComponent {
               placeholder="Men"
             />
           </div>
+          <div>
+            <FormSelect
+              label="Age"
+              name="age"
+              placeholder="Select Age"
+              options={[
+                { label: '< 18', value: '18' },
+                { label: '18-25', value: '18-25', disabled: true },
+                { label: '25+', value: '25' },
+              ]}
+            />
+          </div>
+
+          <div>
+            <FormSelect
+              custom
+              label="Age"
+              name="age"
+              placeholder="Select Age"
+              options={[
+                { label: '< 18', value: '18' },
+                { label: '18-25', value: '18-25', disabled: true },
+                { label: '25+', value: '25' },
+              ]}
+            />
+          </div>
+          {/*
+          <div>
+            <FormSelect
+              label="Stage"
+              name="stage"
+              multiple
+              placeholder="Select Stage"
+              options={[
+                { label: '1', value: '1' },
+                { label: '2', value: '2' },
+                { label: '3', value: '3' },
+              ]}
+            />
+          </div>
+          */}
           {error && <div>{error}</div>}
           <div>
             <Button
