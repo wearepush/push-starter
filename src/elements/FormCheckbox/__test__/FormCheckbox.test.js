@@ -11,45 +11,45 @@ beforeEach(() => {
   store = formStore;
 });
 
-describe('FormCheckbox', () => {
-  const makeForm = ({
-    renderSpy = noop,
-    onFocusSpy = noop,
-    onChangeSpy = noop,
-    onBlurSpy = noop,
-    iconChecked = null,
-    iconUnChecked = null,
-  }) => (
-    class Form extends Component {
-      render() {
-        renderSpy(this.props);
-        return (
-          <form>
-            <FormCheckbox
-              iconChecked={iconChecked}
-              iconUnChecked={iconUnChecked}
-              label="Remember"
-              name="remember"
-              placeholder="Remember"
-              onFocus={onFocusSpy}
-              onChange={onChangeSpy}
-              onBlur={onBlurSpy}
-            />
-          </form>
-        );
-      }
+const makeForm = ({
+  renderSpy = noop,
+  onFocusSpy = noop,
+  onChangeSpy = noop,
+  onBlurSpy = noop,
+  iconChecked = null,
+  iconUnChecked = null,
+}) => (
+  class Form extends Component {
+    render() {
+      renderSpy(this.props);
+      return (
+        <form>
+          <FormCheckbox
+            iconChecked={iconChecked}
+            iconUnChecked={iconUnChecked}
+            label="Remember"
+            name="remember"
+            placeholder="Remember"
+            onFocus={onFocusSpy}
+            onChange={onChangeSpy}
+            onBlur={onBlurSpy}
+          />
+        </form>
+      );
     }
+  }
+);
+
+const renderForm = (Form, formState, config = {}) => {
+  const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
+  return mount(
+    <Provider store={store}>
+      <Decorated />
+    </Provider>
   );
+};
 
-  const renderForm = (Form, formState, config = {}) => {
-    const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
-    return mount(
-      <Provider store={store}>
-        <Decorated />
-      </Provider>
-    );
-  };
-
+describe('FormCheckbox', () => {
   it('it should render with initial state', () => {
     const renderSpy = jest.fn(() => {});
     const Form = makeForm({ renderSpy });
@@ -63,6 +63,8 @@ describe('FormCheckbox', () => {
     expect(inputElement.prop('id')).toBe('remember');
     expect(inputElement.prop('value')).toBe('');
     expect(inputElement.prop('type')).toBe('checkbox');
+
+    dom.unmount();
   });
 
   it('it should handle onFocus, onChange, onBlur', () => {
@@ -137,6 +139,8 @@ describe('FormCheckbox', () => {
     inputElement = dom.find('.FormCheckbox__input');
     iconElement = dom.find('.FormCheckbox__icon');
     expect(iconElement.hasClass('is-active')).toBe(false);
+
+    dom.unmount();
   });
 
   it('it should render with custom checked icon', () => {
@@ -188,5 +192,7 @@ describe('FormCheckbox', () => {
     inputElement.simulate('blur');
     iconElement = dom.find('.FormCheckbox__icon');
     expect(iconElement.hasClass('is-active')).toBe(false);
+
+    dom.unmount();
   });
 });

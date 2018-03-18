@@ -11,46 +11,46 @@ beforeEach(() => {
   store = formStore;
 });
 
-describe('FormRadio', () => {
-  const makeForm = ({
-    renderSpy = noop,
-    onFocusSpy = noop,
-    onChangeSpy = noop,
-    onBlurSpy = noop,
-    iconChecked = null,
-    iconUnChecked = null,
-  }) => (
-    class Form extends Component {
-      render() {
-        renderSpy(this.props);
-        return (
-          <form>
-            <FormRadio
-              iconChecked={iconChecked}
-              iconUnChecked={iconUnChecked}
-              label="Label"
-              name="name"
-              placeholder="Placeholder"
-              onFocus={onFocusSpy}
-              onChange={onChangeSpy}
-              onBlur={onBlurSpy}
-              value="value"
-            />
-          </form>
-        );
-      }
+const makeForm = ({
+  renderSpy = noop,
+  onFocusSpy = noop,
+  onChangeSpy = noop,
+  onBlurSpy = noop,
+  iconChecked = null,
+  iconUnChecked = null,
+}) => (
+  class Form extends Component {
+    render() {
+      renderSpy(this.props);
+      return (
+        <form>
+          <FormRadio
+            iconChecked={iconChecked}
+            iconUnChecked={iconUnChecked}
+            label="Label"
+            name="name"
+            placeholder="Placeholder"
+            onFocus={onFocusSpy}
+            onChange={onChangeSpy}
+            onBlur={onBlurSpy}
+            value="value"
+          />
+        </form>
+      );
     }
+  }
+);
+
+const renderForm = (Form, formState, config = {}) => {
+  const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
+  return mount(
+    <Provider store={store}>
+      <Decorated />
+    </Provider>
   );
+};
 
-  const renderForm = (Form, formState, config = {}) => {
-    const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
-    return mount(
-      <Provider store={store}>
-        <Decorated />
-      </Provider>
-    );
-  };
-
+describe('FormRadio', () => {
   it('it should render with initial state', () => {
     const renderSpy = jest.fn(() => {});
     const Form = makeForm({ renderSpy });
@@ -65,6 +65,8 @@ describe('FormRadio', () => {
     expect(inputElement.prop('id')).toBe('name-value');
     expect(inputElement.prop('value')).toBe('value');
     expect(inputElement.prop('type')).toBe('radio');
+
+    dom.unmount();
   });
 
   it('it should handle onFocus, onChange, onBlur', () => {
@@ -141,6 +143,8 @@ describe('FormRadio', () => {
     inputElement = dom.find('.FormRadio__input');
     iconElement = dom.find('.FormRadio__icon');
     expect(iconElement.hasClass('is-active')).toBe(false);
+
+    dom.unmount();
   });
 
   it('it should render with custom checked icon', () => {
@@ -192,5 +196,7 @@ describe('FormRadio', () => {
     inputElement.simulate('blur');
     iconElement = dom.find('.FormRadio__icon');
     expect(iconElement.hasClass('is-active')).toBe(false);
+
+    dom.unmount();
   });
 });

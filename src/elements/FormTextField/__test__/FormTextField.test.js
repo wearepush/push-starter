@@ -11,40 +11,40 @@ beforeEach(() => {
   store = formStore;
 });
 
-describe('FormTextField', () => {
-  const makeForm = ({
-    renderSpy = noop,
-    onFocusSpy = noop,
-    onChangeSpy = noop,
-    onBlurSpy = noop,
-  }) => (
-    class Form extends Component {
-      render() {
-        renderSpy(this.props);
-        return (
-          <form>
-            <FormTextField
-              label="Email"
-              name="email"
-              onFocus={onFocusSpy}
-              onChange={onChangeSpy}
-              onBlur={onBlurSpy}
-            />
-          </form>
-        );
-      }
+const makeForm = ({
+  renderSpy = noop,
+  onFocusSpy = noop,
+  onChangeSpy = noop,
+  onBlurSpy = noop,
+}) => (
+  class Form extends Component {
+    render() {
+      renderSpy(this.props);
+      return (
+        <form>
+          <FormTextField
+            label="Email"
+            name="email"
+            onFocus={onFocusSpy}
+            onChange={onChangeSpy}
+            onBlur={onBlurSpy}
+          />
+        </form>
+      );
     }
+  }
+);
+
+const renderForm = (Form, formState, config = {}) => {
+  const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
+  return mount(
+    <Provider store={store}>
+      <Decorated />
+    </Provider>
   );
+};
 
-  const renderForm = (Form, formState, config = {}) => {
-    const Decorated = reduxForm({ form: 'testForm', ...config })(Form);
-    return mount(
-      <Provider store={store}>
-        <Decorated />
-      </Provider>
-    );
-  };
-
+describe('FormTextField', () => {
   it('it should render with initial state', () => {
     const renderSpy = jest.fn(() => {});
     const Form = makeForm({ renderSpy });
@@ -58,6 +58,8 @@ describe('FormTextField', () => {
     expect(inputElement.prop('id')).toBe('email');
     expect(inputElement.prop('value')).toBe('');
     expect(inputElement.prop('type')).toBe('text');
+
+    dom.unmount();
   });
 
   it('it should handle onFocus, onChange, onBlur', () => {
@@ -100,5 +102,7 @@ describe('FormTextField', () => {
 
     inputElement = dom.find('.FormTextField input');
     expect(inputElement.hasClass('is-active')).toBe(false);
+
+    dom.unmount();
   });
 });

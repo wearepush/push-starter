@@ -91,7 +91,6 @@ class SignIn extends PureComponent {
           </div>
           <div>
             <FormSelect
-              multiple
               label="Age"
               name="age"
               placeholder="Select Age"

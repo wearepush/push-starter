@@ -23,7 +23,7 @@ const FormSelectComponent = ({
         label={label}
         name={_id}
       >
-        {custom ?
+        {!custom ?
           <select
             id={_id}
             {...rest}
