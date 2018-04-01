@@ -1,14 +1,17 @@
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import WebpackBundleAnalyzer from 'webpack-bundle-analyzer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import getBaseConfig from './webpack.config.client';
 
 const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
-const baseConfig = getBaseConfig({ development: false });
+const baseConfig = getBaseConfig({
+  development: false,
+  useMiniCssExtractPlugin: true
+});
 const vendor = [
   'axios',
   'react',
@@ -57,7 +60,7 @@ const config = {
       { root: baseConfig.context }
     ),
 
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css',
       allChunks: true
     }),
