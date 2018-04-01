@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React from 'react';
 import { shallow } from 'enzyme';
 import Checkbox from '../Checkbox.js';
@@ -93,6 +94,40 @@ describe('Checkbox', () => {
       );
       expect(checkbox.hasClass('Checkbox__test')).toBe(true);
     });
+
+    it('should render with input props', () => {
+      const checkbox = shallow(
+        <Checkbox
+          inputProps={{
+            'data-test': true
+          }}
+          name="name"
+          placeholder="placeholder"
+        />
+      );
+      expect(checkbox.find('.Checkbox__input').prop('data-test')).toBe(true);
+    });
+
+    it('should render with input ref prop', () => {
+      const checkbox = shallow(
+        <Checkbox
+          inputRef={() => {}}
+          name="name"
+          placeholder="placeholder"
+        />
+      );
+      expect(checkbox.instance().props.inputRef).not.toBe(undefined);
+    });
+
+    it('shouldn\'t render with input ref prop', () => {
+      const checkbox = shallow(
+        <Checkbox
+          name="name"
+          placeholder="placeholder"
+        />
+      );
+      expect(checkbox.instance().props.inputRef).toBe(undefined);
+    });
   });
 
   describe('default checkbox', () => {
@@ -132,7 +167,7 @@ describe('Checkbox', () => {
           />
         );
         const inputElement = checkbox.find('.Checkbox__input');
-        expect(inputElement.prop('tabIndex')).toBe("-10");
+        expect(inputElement.prop('tabIndex')).toBe('-10');
       });
 
       it('should render with value type array', () => {
@@ -152,7 +187,7 @@ describe('Checkbox', () => {
           <Checkbox
             name="name"
             placeholder="placeholder"
-            value={true}
+            value
           />
         );
         const inputElement = checkbox.find('.Checkbox__input');
@@ -372,7 +407,7 @@ describe('Checkbox', () => {
           />
         );
         const inputElement = checkbox.find('.Checkbox__input');
-        expect(inputElement.prop('tabIndex')).toBe("-10");
+        expect(inputElement.prop('tabIndex')).toBe('-10');
       });
 
       it('should render with value type array', () => {
@@ -394,7 +429,7 @@ describe('Checkbox', () => {
             custom
             name="name"
             placeholder="placeholder"
-            value={true}
+            value
           />
         );
         const inputElement = checkbox.find('.Checkbox__input');
@@ -526,7 +561,6 @@ describe('Checkbox', () => {
         inputElement.simulate('blur', { currentTarget: { getAttribute: () => 'true' } });
         expect(onBlurSpy).toHaveBeenCalledTimes(1);
         expect(checkbox.instance().state).toEqual({ checked: true, active: false });
-
       });
 
       it('should handle onFocus, onChange, onBlur', () => {

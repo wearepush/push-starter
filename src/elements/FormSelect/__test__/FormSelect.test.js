@@ -184,5 +184,4 @@ describe('FormSelect', () => {
       dom.unmount();
     });
   });
-
 });

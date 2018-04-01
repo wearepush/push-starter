@@ -34,6 +34,14 @@ export default class Checkbox extends PureComponent {
     */
     defaultChecked: bool,
     /**
+    * Properties applied to the `input` element.
+    */
+    inputProps: object,
+    /**
+    * Use that property to pass a ref callback to the native input component.
+    */
+    inputRef: func,
+    /**
     * If `true`, the component is invalid.
     */
     invalid: bool,
@@ -88,6 +96,8 @@ export default class Checkbox extends PureComponent {
     className: '',
     disabled: false,
     defaultChecked: false,
+    inputProps: null,
+    inputRef: undefined,
     invalid: false,
     id: '',
     onBlur: undefined,
@@ -196,6 +206,8 @@ export default class Checkbox extends PureComponent {
   renderDefault() {
     const {
       disabled,
+      inputProps,
+      inputRef,
       name,
       tabIndex,
       value,
@@ -209,6 +221,7 @@ export default class Checkbox extends PureComponent {
         htmlFor={this.id}
       >
         <input
+          {...inputProps}
           checked={checked}
           className={styles.Checkbox__input}
           disabled={disabled}
@@ -216,6 +229,7 @@ export default class Checkbox extends PureComponent {
           onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
+          ref={inputRef}
           name={name}
           tabIndex={active ? -1 : tabIndex || 0}
           type="checkbox"
@@ -230,6 +244,8 @@ export default class Checkbox extends PureComponent {
     const {
       checkedIcon,
       disabled,
+      inputProps,
+      inputRef,
       name,
       tabIndex,
       unCheckedIcon,
@@ -244,6 +260,7 @@ export default class Checkbox extends PureComponent {
         htmlFor={this.id}
       >
         <div
+          {...inputProps}
           aria-checked={checked}
           className={styles.Checkbox__input}
           disabled={disabled}
@@ -253,6 +270,7 @@ export default class Checkbox extends PureComponent {
           onClick={this.onChange}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          ref={inputRef}
           name={name}
           tabIndex={active ? -1 : tabIndex || 0}
           value={value}
