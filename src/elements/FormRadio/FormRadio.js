@@ -1,92 +1,65 @@
 import React from 'react';
-import { node, string, object } from 'prop-types';
+import { bool, object, node, string } from 'prop-types';
 import { Field } from 'redux-form/immutable';
-import cx from 'classnames';
-import { FormField } from '../index.js';
-import styles from './FormRadio.scss';
+import { FormField, Radio } from '../index.js';
 
 const FormRadio = ({
-  iconChecked,
-  iconUnChecked,
+  custom,
+  checkedIcon,
+  disabled,
   id,
   input,
   label,
   meta,
   placeholder,
-  ...rest
+  unCheckedIcon,
 }) => {
   const _id = id || `${input.name}-${input.value}`;
   return (
-    <div className={styles.FormRadio}>
-      <FormField
-        meta={meta}
-        label={label}
-        name={_id}
-      >
-        <label htmlFor={_id}>
-          {iconChecked && iconUnChecked ?
-            <div
-              className={
-                cx(styles.FormRadio__icon, {
-                  'is-custom-icon': true,
-                  'is-checked': input.checked,
-                  'is-unchecked': !input.checked,
-                  'is-active': meta.active,
-                  'is-invalid': meta.invalid,
-                })
-              }
-            >
-              {input.checked ?
-                iconChecked
-                :
-                iconUnChecked
-              }
-            </div>
-            :
-            <div
-              className={
-                cx(styles.FormRadio__icon, {
-                  'is-default-icon': true,
-                  'is-checked': input.checked,
-                  'is-unchecked': !input.checked,
-                  'is-active': meta.active,
-                  'is-invalid': meta.invalid,
-                })
-              }
-            />
-          }
-          <input
-            id={_id}
-            {...rest}
-            {...input}
-            data-checked={input.checked.toString()}
-            className={styles.FormRadio__input}
-            type="radio"
-          />
-          <span className={styles.FormRadio__placeholder}>
-            {placeholder}
-          </span>
-        </label>
-      </FormField>
-    </div>
+    <FormField
+      meta={meta}
+      label={label}
+      name={_id}
+    >
+      <Radio
+        active={meta.active}
+        checked={input.checked}
+        custom={custom}
+        checkedIcon={checkedIcon}
+        disabled={disabled}
+        id={id}
+        invalid={meta.invalid}
+        onBlur={(event) => input.onBlur(event)}
+        onChange={(event, value) => input.onChange(value)}
+        onFocus={(event, value) => input.onFocus(value)}
+        name={input.name}
+        placeholder={placeholder}
+        unCheckedIcon={unCheckedIcon}
+        value={input.value}
+      />
+    </FormField>
   );
 };
 
 FormRadio.propTypes = {
-  iconChecked: node,
-  iconUnChecked: node,
+  checkedIcon: node,
+  custom: bool,
+  disabled: bool,
   id: string,
   input: object.isRequired,
   label: string,
   meta: object.isRequired,
   placeholder: string.isRequired,
+  unCheckedIcon: node,
 };
 
 FormRadio.defaultProps = {
-  iconChecked: null,
-  iconUnChecked: null,
+  custom: false,
+  checkedIcon: null,
+  disabled: false,
   id: '',
   label: '',
+  unCheckedIcon: null,
 };
 
 export default props => <Field {...props} component={FormRadio} type="radio" />;

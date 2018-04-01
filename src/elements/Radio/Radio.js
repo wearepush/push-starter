@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { array, bool, func, number, object, oneOfType, node, string } from 'prop-types';
 import cx from 'classnames';
-import styles from './Checkbox.scss';
+import styles from './Radio.scss';
 
-export default class Checkbox extends PureComponent {
+export default class Radio extends PureComponent {
   static propTypes = {
     /**
     * If `true`, the component is active.
@@ -90,7 +90,7 @@ export default class Checkbox extends PureComponent {
       object,
       number,
       string,
-    ]),
+    ]).isRequired,
   };
 
   static defaultProps = {
@@ -110,7 +110,6 @@ export default class Checkbox extends PureComponent {
     onFocus: undefined,
     tabIndex: null,
     unCheckedIcon: null,
-    value: null,
   };
 
   constructor(props, context) {
@@ -124,7 +123,7 @@ export default class Checkbox extends PureComponent {
       this.state.active = props.active;
     }
 
-    this.id = this.props.id || this.props.name;
+    this.id = this.props.id || this.props.name + '-' + this.props.value;
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
@@ -142,11 +141,10 @@ export default class Checkbox extends PureComponent {
     if (this.props.disabled) {
       return false;
     }
-    const checked = this.isEventChecked(event);
     if (!this.isControlled) {
       this.setState({ active: false });
     }
-    this.props.onBlur && this.props.onBlur(event, checked);
+    this.props.onBlur && this.props.onBlur(event, this.props.value);
     return true;
   }
 
@@ -155,11 +153,10 @@ export default class Checkbox extends PureComponent {
       return false;
     }
     const checked = this.isEventChecked(event);
-
     if (!this.isControlled) {
       this.setState({ checked });
     }
-    this.props.onChange && this.props.onChange(event, checked);
+    this.props.onChange && this.props.onChange(event, this.props.value);
     return true;
   }
 
@@ -170,8 +167,7 @@ export default class Checkbox extends PureComponent {
     if (!this.isControlled) {
       this.setState({ active: true });
     }
-    const checked = this.isEventChecked(event);
-    this.props.onFocus && this.props.onFocus(event, checked);
+    this.props.onFocus && this.props.onFocus(event, this.props.value);
     return true;
   }
 
@@ -202,7 +198,7 @@ export default class Checkbox extends PureComponent {
 
   renderPlaceholder() {
     return (
-      <span className={styles.Checkbox__placeholder}>
+      <span className={styles.Radio__placeholder}>
         {this.props.placeholder}
       </span>
     );
@@ -228,7 +224,7 @@ export default class Checkbox extends PureComponent {
         <input
           {...inputProps}
           checked={checked}
-          className={styles.Checkbox__input}
+          className={styles.Radio__input}
           disabled={disabled}
           id={this.id}
           onBlur={this.onBlur}
@@ -237,7 +233,7 @@ export default class Checkbox extends PureComponent {
           ref={inputRef}
           name={name}
           tabIndex={active ? -1 : tabIndex || 0}
-          type="checkbox"
+          type="radio"
           value={value}
         />
         {this.renderPlaceholder()}
@@ -267,10 +263,10 @@ export default class Checkbox extends PureComponent {
         <div
           {...inputProps}
           aria-checked={checked}
-          className={styles.Checkbox__input}
+          className={styles.Radio__input}
           disabled={disabled}
           id={this.id}
-          role="checkbox"
+          role="radio"
           onBlur={this.onBlur}
           onClick={this.onChange}
           onFocus={this.onFocus}
@@ -283,7 +279,7 @@ export default class Checkbox extends PureComponent {
           {checkedIcon && unCheckedIcon ?
             <div
               className={
-                cx(styles.Checkbox__icon, {
+                cx(styles.Radio__icon, {
                   'is-custom-icon': true,
                   'is-checked': checked,
                   'is-unchecked': !checked,
@@ -299,7 +295,7 @@ export default class Checkbox extends PureComponent {
             :
             <div
               className={
-                cx(styles.Checkbox__icon, {
+                cx(styles.Radio__icon, {
                   'is-default-icon': true,
                   'is-checked': checked,
                   'is-unchecked': !checked,
@@ -324,7 +320,7 @@ export default class Checkbox extends PureComponent {
     const checked = this.isChecked();
     const active = this.isActive();
 
-    const className = cx(styles.Checkbox, {
+    const className = cx(styles.Radio, {
       [styles[classNameProp]]: !!classNameProp,
       'is-active': active,
       'is-checked': checked,

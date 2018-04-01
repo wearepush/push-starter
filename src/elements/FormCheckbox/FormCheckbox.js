@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, node, string, object } from 'prop-types';
+import { bool, object, node, string } from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import { FormField, Checkbox } from '../index.js';
 
@@ -29,7 +29,7 @@ const FormCheckbox = ({
         disabled={disabled}
         id={id}
         invalid={meta.invalid}
-        onBlur={(event, value) => input.onBlur(value)}
+        onBlur={(event) => input.onBlur(event)}
         onChange={(event, value) => input.onChange(value)}
         onFocus={(event, value) => input.onFocus(value)}
         name={input.name}
@@ -42,8 +42,8 @@ const FormCheckbox = ({
 };
 
 FormCheckbox.propTypes = {
-  custom: bool,
   checkedIcon: node,
+  custom: bool,
   disabled: bool,
   id: string,
   input: object.isRequired,

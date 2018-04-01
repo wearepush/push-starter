@@ -3,7 +3,7 @@ import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, FormCheckbox, FormRadio, FormSelect, Button } from './../../elements';
+import { FormTextField, FormCheckbox, FormRadio, FormSelect, Radio, Button, } from './../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -52,6 +52,16 @@ class SignIn extends PureComponent {
     const { handleSubmit, error } = this.props;
     return (
       <div>
+        <Radio
+          name="gender"
+          value="1"
+          placeholder="Women"
+        />
+        <Radio
+          name="gender"
+          value="12"
+          placeholder="Women"
+        />
         <form
           onSubmit={handleSubmit(this.onSubmit)}
         >
@@ -80,11 +90,13 @@ class SignIn extends PureComponent {
           </div>
           <div>
             <FormRadio
+              custom
               name="gender"
               value="1"
               placeholder="Women"
             />
             <FormRadio
+              custom
               name="gender"
               value="2"
               placeholder="Men"
