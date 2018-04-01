@@ -1,91 +1,65 @@
 import React from 'react';
-import { node, string, object } from 'prop-types';
+import { bool, node, string, object } from 'prop-types';
 import { Field } from 'redux-form/immutable';
-import cx from 'classnames';
-import { FormField } from '../index.js';
-import styles from './FormCheckbox.scss';
+import { FormField, Checkbox } from '../index.js';
 
 const FormCheckbox = ({
-  iconChecked,
-  iconUnChecked,
+  custom,
+  checkedIcon,
+  disabled,
   id,
   input,
   label,
   meta,
   placeholder,
-  ...rest
+  unCheckedIcon,
 }) => {
   const _id = id || input.name;
   return (
-    <div className={styles.FormCheckbox}>
-      <FormField
-        meta={meta}
-        label={label}
-        name={_id}
-      >
-        <label htmlFor={_id}>
-          {iconChecked && iconUnChecked ?
-            <div
-              className={
-                cx(styles.FormCheckbox__icon, {
-                  'is-custom-icon': true,
-                  'is-checked': input.checked,
-                  'is-unchecked': !input.checked,
-                  'is-active': meta.active,
-                  'is-invalid': meta.invalid,
-                })
-              }
-            >
-              {input.checked ?
-                iconChecked
-                :
-                iconUnChecked
-              }
-            </div>
-            :
-            <div
-              className={
-                cx(styles.FormCheckbox__icon, {
-                  'is-default-icon': true,
-                  'is-checked': input.checked,
-                  'is-unchecked': !input.checked,
-                  'is-active': meta.active,
-                  'is-invalid': meta.invalid,
-                })
-              }
-            />
-          }
-          <input
-            id={_id}
-            {...rest}
-            {...input}
-            className={styles.FormCheckbox__input}
-            type="checkbox"
-          />
-          <span className={styles.FormCheckbox__placeholder}>
-            {placeholder}
-          </span>
-        </label>
-      </FormField>
-    </div>
+    <FormField
+      meta={meta}
+      label={label}
+      name={_id}
+    >
+      <Checkbox
+        active={meta.active}
+        checked={input.checked}
+        custom={custom}
+        checkedIcon={checkedIcon}
+        disabled={disabled}
+        id={id}
+        invalid={meta.invalid}
+        onBlur={(event, value) => input.onBlur(value)}
+        onChange={(event, value) => input.onChange(value)}
+        onFocus={(event, value) => input.onFocus(value)}
+        name={input.name}
+        placeholder={placeholder}
+        unCheckedIcon={unCheckedIcon}
+        value={input.value}
+      />
+    </FormField>
   );
 };
 
 FormCheckbox.propTypes = {
-  iconChecked: node,
-  iconUnChecked: node,
+  custom: bool,
+  checkedIcon: node,
+  disabled: bool,
   id: string,
   input: object.isRequired,
   label: string,
   meta: object.isRequired,
   placeholder: string.isRequired,
+  unCheckedIcon: node,
 };
 
 FormCheckbox.defaultProps = {
-  iconChecked: null,
-  iconUnChecked: null,
+  custom: false,
+  checkedIcon: null,
+  disabled: false,
   id: '',
   label: '',
+  unCheckedIcon: null,
 };
 
 export default props => <Field {...props} component={FormCheckbox} type="checkbox" />;

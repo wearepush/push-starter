@@ -1,4 +1,8 @@
+/* ui */
 export Button from './Button/Button';
+export Checkbox from './Checkbox/Checkbox';
+
+/* redux-form */
 export FormTextField from './FormTextField/FormTextField';
 export FormCheckbox from './FormCheckbox/FormCheckbox';
 export FormRadio from './FormRadio/FormRadio';

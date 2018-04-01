@@ -73,6 +73,7 @@ class SignIn extends PureComponent {
           </div>
           <div>
             <FormCheckbox
+              custom
               name="remember"
               placeholder="Remember me"
             />

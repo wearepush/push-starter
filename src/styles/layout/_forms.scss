@@ -63,6 +63,14 @@ textarea {
   resize: vertical;
 }
 
+[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+
+[type="radio"] {
+  -webkit-appearance: radio;
+}
+
 [type="checkbox"],
 [type="radio"] {
   display: inline;

@@ -1,9 +1,29 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-$FormCheckbox: 'FormCheckbox';
+$Checkbox: 'Checkbox';
 
-.#{$FormCheckbox} {
+.#{$Checkbox} {
+
+  &:global {
+    &.is-active {
+    }
+
+    &.is-checked {
+    }
+
+    &.is-disabled {
+      opacity: 0.3;
+    }
+
+    &.is-invalid {
+      color: red;
+    }
+
+    &.is-unchecked {
+
+    }
+  }
 
   &__icon {
     display: inline-block;
@@ -22,14 +42,6 @@ $FormCheckbox: 'FormCheckbox';
         &.is-unchecked {
           background-color: white;
         }
-
-        &.is-invalid {
-          border-color: red;
-        }
-
-        &.is-active {
-          border-color: blue;
-        }
       }
 
       &.is-custom-icon {
@@ -39,14 +51,6 @@ $FormCheckbox: 'FormCheckbox';
 
         &.is-unchecked {
           background-color: white;
-        }
-
-        &.is-invalid {
-          border-color: red;
-        }
-
-        &.is-active {
-          border-color: blue;
         }
       }
     }
