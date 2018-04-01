@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, object, node, string } from 'prop-types';
+import { array, bool, object, node, number, oneOfType, string } from 'prop-types';
 import { Field } from 'redux-form/immutable';
 import { FormField, Checkbox } from '../index.js';
 
@@ -13,6 +13,7 @@ const FormCheckbox = ({
   meta,
   placeholder,
   unCheckedIcon,
+  valueProp,
 }) => {
   const _id = id || input.name;
   return (
@@ -35,7 +36,7 @@ const FormCheckbox = ({
         name={input.name}
         placeholder={placeholder}
         unCheckedIcon={unCheckedIcon}
-        value={input.value}
+        value={valueProp}
       />
     </FormField>
   );
@@ -51,6 +52,13 @@ FormCheckbox.propTypes = {
   meta: object.isRequired,
   placeholder: string.isRequired,
   unCheckedIcon: node,
+  valueProp: oneOfType([
+    array,
+    bool,
+    object,
+    number,
+    string,
+  ]),
 };
 
 FormCheckbox.defaultProps = {
@@ -60,6 +68,7 @@ FormCheckbox.defaultProps = {
   id: '',
   label: '',
   unCheckedIcon: null,
+  valueProp: null,
 };
 
-export default props => <Field {...props} component={FormCheckbox} type="checkbox" />;
+export default props => <Field {...props} component={FormCheckbox} valueProp={props.value} type="checkbox" />; // eslint-disable-line

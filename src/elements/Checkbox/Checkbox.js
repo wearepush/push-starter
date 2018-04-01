@@ -155,7 +155,6 @@ export default class Checkbox extends PureComponent {
       return false;
     }
     const checked = this.isEventChecked(event);
-
     if (!this.isControlled) {
       this.setState({ checked });
     }
