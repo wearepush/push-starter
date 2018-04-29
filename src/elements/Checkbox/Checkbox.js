@@ -110,7 +110,7 @@ export default class Checkbox extends PureComponent {
     onFocus: undefined,
     tabIndex: null,
     unCheckedIcon: null,
-    value: null,
+    value: undefined,
   };
 
   constructor(props, context) {

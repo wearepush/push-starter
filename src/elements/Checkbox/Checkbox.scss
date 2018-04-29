@@ -9,9 +9,6 @@ $Checkbox: 'Checkbox';
     &.is-active {
     }
 
-    &.is-checked {
-    }
-
     &.is-disabled {
       opacity: 0.3;
     }
@@ -21,8 +18,12 @@ $Checkbox: 'Checkbox';
     }
 
     &.is-unchecked {
-
     }
+
+    &.is-checked {
+    }
+
+
   }
 
   &__icon {
@@ -47,10 +48,12 @@ $Checkbox: 'Checkbox';
       &.is-custom-icon {
         &.is-checked {
           background-color: black;
+          color: white;
         }
 
         &.is-unchecked {
           background-color: white;
+          color: black;
         }
       }
     }

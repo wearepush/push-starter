@@ -68,7 +68,7 @@ FormCheckbox.defaultProps = {
   id: '',
   label: '',
   unCheckedIcon: null,
-  valueProp: null,
+  valueProp: undefined,
 };
 
 export default props => <Field {...props} component={FormCheckbox} valueProp={props.value} type="checkbox" />; // eslint-disable-line

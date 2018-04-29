@@ -142,7 +142,7 @@ describe('Checkbox', () => {
         const inputElement = checkbox.find('.Checkbox__input');
         expect(inputElement.prop('name')).toBe('name');
         expect(inputElement.prop('id')).toBe('name');
-        expect(inputElement.prop('value')).toBe(null);
+        expect(inputElement.prop('value')).toBe(undefined);
         expect(inputElement.prop('type')).toBe('checkbox');
       });
 
@@ -380,7 +380,7 @@ describe('Checkbox', () => {
         const inputElement = checkbox.find('.Checkbox__input');
         expect(inputElement.prop('name')).toBe('name');
         expect(inputElement.prop('id')).toBe('name');
-        expect(inputElement.prop('value')).toBe(null);
+        expect(inputElement.prop('value')).toBe(undefined);
         expect(inputElement.prop('role')).toBe('checkbox');
       });
 
