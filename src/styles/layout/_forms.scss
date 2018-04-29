@@ -15,12 +15,6 @@ legend {
   padding: 0;
 }
 
-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: $small-spacing / 2;
-}
-
 input,
 select,
 textarea {
@@ -69,10 +63,19 @@ textarea {
   resize: vertical;
 }
 
+[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+
+[type="radio"] {
+  -webkit-appearance: radio;
+}
+
 [type="checkbox"],
 [type="radio"] {
   display: inline;
   margin-right: $small-spacing / 2;
+  width: auto;
 }
 
 [type="file"] {

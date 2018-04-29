@@ -76,7 +76,7 @@ const Html = ({
         <meta property="twitter:description" content="" />
         */}
         {/* styles (will be present only in production with webpack extract text plugin) */}
-        {assets.styles && Object.keys(assets.styles).map(
+        {config.isProd && assets.styles && Object.keys(assets.styles).map(
           c => <link href={assets.styles[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
         )}
         {/* styles will be preloaded */}

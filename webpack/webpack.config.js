@@ -102,7 +102,9 @@ const config = {
   resolve: {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
-    alias: {}
+    alias: {
+      'react': path.resolve('node_modules/react')
+    }
   }
 };
 
