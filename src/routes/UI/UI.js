@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Checkbox } from '../../elements';
+import { Checkbox, Radio } from '../../elements';
 
 const UI = () => {
   const title = 'Redux Starter. UI';
@@ -36,7 +36,7 @@ const UI = () => {
           checkedIcon={<span>checked</span>}
           unCheckedIcon={<span>unchecked</span>}
         />
-        <h2>Checkbox's API</h2>
+        <h2>{'Checkbox\'s API'}</h2>
         <Checkbox
           name="checkbox-3"
           placeholder="Checkbox placeholder"
@@ -48,6 +48,27 @@ const UI = () => {
           }}
           onBlur={(e, checked) => {
             console.log('onBlur', checked);
+          }}
+        />
+        <h2>Radio</h2>
+        <Radio
+          name="radio-0"
+          placeholder="Radio placeholder"
+          value={{
+            test: true
+          }}
+          onChange={(e, value) => {
+            console.log(value);
+          }}
+        />
+        <Radio
+          name="radio-0"
+          placeholder="Radio placeholder"
+          value={{
+            test2: true
+          }}
+          onChange={(e, value) => {
+            console.log(value);
           }}
         />
       </div>

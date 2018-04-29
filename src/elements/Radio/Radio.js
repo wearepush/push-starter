@@ -223,7 +223,7 @@ export default class Radio extends PureComponent {
       >
         <input
           {...inputProps}
-          checked={checked.toString()}
+          checked={checked}
           className={styles.Radio__input}
           disabled={disabled}
           id={this.id}
