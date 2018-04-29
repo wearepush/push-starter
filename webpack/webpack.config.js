@@ -2,6 +2,7 @@ process.noDeprecation = true;
 
 import path from 'path';
 import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import Dotenv from 'dotenv-webpack';
 
 const rootFolder = path.resolve(__dirname, '..');
@@ -41,48 +42,54 @@ const config = {
       },
       {
         test: /\.(scss)$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader : 'css-loader',
-          options:
+        use: [
+          // MiniCssExtractPlugin.loader,
           {
-            sourceMap: true,
-            importLoaders: 2,
-            modules: true,
-            localIdentName: '[local]__[hash:base64:5]'
+            loader: 'style-loader'
+          },
+          {
+            loader : 'css-loader',
+            options:
+            {
+              sourceMap: true,
+              importLoaders: 2,
+              modules: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          },
+          {
+            loader : 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader : 'sass-loader',
+            options: {
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
           }
-        },
-        {
-          loader : 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader : 'sass-loader',
-          options: {
-            outputStyle: 'expanded',
-            sourceMap: true
-          }
-        }]
+        ]
       },
       {
         test: /\.(css)$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader : 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true
+        use: [
+          // MiniCssExtractPlugin.loader,
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader : 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
           }
-        },
-        {
-          loader: 'postcss-loader'
-        }]
+        ]
       }
     ]
   },
