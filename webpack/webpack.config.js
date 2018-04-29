@@ -2,7 +2,6 @@ process.noDeprecation = true;
 
 import path from 'path';
 import webpack from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import Dotenv from 'dotenv-webpack';
 
 const rootFolder = path.resolve(__dirname, '..');
@@ -43,7 +42,6 @@ const config = {
       {
         test: /\.(scss)$/,
         use: [
-          // MiniCssExtractPlugin.loader,
           {
             loader: 'style-loader'
           },
@@ -75,7 +73,6 @@ const config = {
       {
         test: /\.(css)$/,
         use: [
-          // MiniCssExtractPlugin.loader,
           {
             loader: 'style-loader'
           },

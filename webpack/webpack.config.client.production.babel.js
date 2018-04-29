@@ -58,8 +58,6 @@ const config = {
     ),
 
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
@@ -113,5 +111,27 @@ const config = {
     })
   ]
 };
+
+// remove this when mini-css-extract-plugin fix HMR
+const findScss = baseConfig.module.rules.findIndex((c) => {
+  if (c && c.test.toString().indexOf('.(scss)') > -1) {
+    return c;
+  }
+});
+
+if (findScss > -1) {
+  baseConfig.module.rules[findScss].use[0] = MiniCssExtractPlugin.loader;
+}
+
+const findCss = baseConfig.module.rules.findIndex((c) => {
+  if (c && c.test.toString().indexOf('.(css)') > -1) {
+    return c;
+  }
+});
+
+if (findCss > -1) {
+  baseConfig.module.rules[findCss].use[0] = MiniCssExtractPlugin.loader;
+}
+
 
 export default merge(baseConfig, config);
