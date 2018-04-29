@@ -6,7 +6,7 @@ import appConfig from '../src/config';
 const { host, port } = appConfig.webpack.server;
 const baseConfig = getBaseConfig({
   development: true,
-  css_bundle: true
+  useMiniCssExtractPlugin: true
 });
 
 const config = {

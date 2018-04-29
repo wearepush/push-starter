@@ -3,6 +3,7 @@ process.noDeprecation = true;
 import path from 'path';
 import webpack from 'webpack';
 import Dotenv from 'dotenv-webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
@@ -39,50 +40,57 @@ const config = {
         test: /\.(eot|ttf|wav|mp3)$/,
         use: 'file-loader'
       },
+
       {
         test: /\.(scss)$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader : 'css-loader',
-          options:
+        use: [
           {
-            sourceMap: true,
-            importLoaders: 2,
-            modules: true,
-            localIdentName: '[local]__[hash:base64:5]'
+            loader: 'style-loader'
+          },
+          MiniCssExtractPlugin.loader,
+          {
+            loader : 'css-loader',
+            options:
+            {
+              sourceMap: true,
+              importLoaders: 2,
+              modules: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          },
+          {
+            loader : 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader : 'sass-loader',
+            options: {
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
           }
-        },
-        {
-          loader : 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader : 'sass-loader',
-          options: {
-            outputStyle: 'expanded',
-            sourceMap: true
-          }
-        }]
+        ]
       },
       {
         test: /\.(css)$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader : 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          MiniCssExtractPlugin.loader,
+          {
+            loader : 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
           }
-        },
-        {
-          loader: 'postcss-loader'
-        }]
+        ]
       }
     ]
   },
