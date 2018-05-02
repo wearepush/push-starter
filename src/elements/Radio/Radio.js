@@ -123,7 +123,7 @@ export default class Radio extends PureComponent {
       this.state.active = props.active;
     }
 
-    this.id = this.props.id || this.props.name + '-' + this.props.value;
+    this.id = this.props.id || this.props.name + '-' + JSON.stringify(this.props.value); // replace to hash
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);

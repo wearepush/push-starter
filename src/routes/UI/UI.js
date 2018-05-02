@@ -53,23 +53,30 @@ const UI = () => {
         <h2>Radio</h2>
         <Radio
           name="radio-0"
-          placeholder="Radio placeholder"
+          placeholder="Radio placeholder 0"
           value={{
             test: true
-          }}
-          onChange={(e, value) => {
-            console.log(value);
           }}
         />
         <Radio
           name="radio-0"
-          placeholder="Radio placeholder"
+          placeholder="Radio placeholder 1"
           value={{
             test2: true
           }}
-          onChange={(e, value) => {
-            console.log(value);
-          }}
+        />
+        <h2>Radio with custom render</h2>
+        <Radio
+          name="radio-1"
+          placeholder="Radio placeholder 2"
+          custom
+          value="1"
+        />
+        <Radio
+          name="radio-1"
+          placeholder="Radio placeholder 3"
+          custom
+          value="2"
         />
       </div>
     </div>
