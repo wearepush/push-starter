@@ -168,8 +168,6 @@ describe('FormSelect', () => {
       selectElement.simulate('change', { target: { value: '18' } });
       expect(onChangeSpy).toHaveBeenCalled();
 
-      console.log(selectElement.instance().value);
-
       expect(selectElement.instance().value).toEqual('18');
 
       expect(renderSpy).toHaveBeenCalledTimes(2);

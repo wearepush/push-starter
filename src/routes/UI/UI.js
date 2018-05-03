@@ -50,6 +50,7 @@ const UI = () => {
             console.log('onBlur', checked);
           }}
         />
+        <hr />
         <h2>Radio</h2>
         <Radio
           name="radio-0"
@@ -76,6 +77,23 @@ const UI = () => {
           name="radio-1"
           placeholder="Radio placeholder 3"
           custom
+          value="2"
+        />
+        <h2>Radio with custom icons</h2>
+        <Radio
+          name="radio-2"
+          placeholder="Radio placeholder 2"
+          custom
+          checkedIcon={<span>checked</span>}
+          unCheckedIcon={<span>unchecked</span>}
+          value="1"
+        />
+        <Radio
+          name="radio-3"
+          placeholder="Radio placeholder 3"
+          custom
+          checkedIcon={<span>checked</span>}
+          unCheckedIcon={<span>unchecked</span>}
           value="2"
         />
       </div>
