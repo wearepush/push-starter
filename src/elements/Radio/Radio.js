@@ -57,8 +57,7 @@ export default class Radio extends PureComponent {
     * Callback fired when the state is changed.
     *
     * @param {object} event The event source of the callback.
-    * You can pull out the new value by accessing `event.currentTarget.checked` or `event.currentTarget.getAttribute('aria-checked')`.
-    * @param {boolean} checked The `checked` value of the switch
+    * @param {boolean|array|object|number|string} value The value of the switch
     */
     onChange: func,
     /**

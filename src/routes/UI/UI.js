@@ -89,13 +89,29 @@ const UI = () => {
           value="1"
         />
         <Radio
-          name="radio-3"
+          name="radio-2"
           placeholder="Radio placeholder 3"
           custom
           checkedIcon={<span>checked</span>}
           unCheckedIcon={<span>unchecked</span>}
           value="2"
         />
+        <h2>{'Radio\'s API'}</h2>
+        <Radio
+          name="radio-3"
+          placeholder="Radio placeholder"
+          onChange={(e, value) => {
+            console.log('onChange', value);
+          }}
+          onFocus={(e, value) => {
+            console.log('onFocus', value);
+          }}
+          onBlur={(e, value) => {
+            console.log('onBlur', value);
+          }}
+          value="1"
+        />
+        <hr />
       </div>
     </div>
   );
