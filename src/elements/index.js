@@ -2,6 +2,7 @@
 export Button from './Button/Button.js';
 export Checkbox from './Checkbox/Checkbox.js';
 export Radio from './Radio/Radio.js';
+export TextField from './TextField/TextField.js';
 
 /* redux form */
 export FormTextField from './FormTextField/FormTextField.js';

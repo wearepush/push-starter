@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Checkbox, Radio } from '../../elements';
+import { Checkbox, Radio, TextField } from '../../elements';
 
 const UI = () => {
   const title = 'Redux Starter. UI';
@@ -15,7 +15,17 @@ const UI = () => {
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
       </Helmet>
-      <div>This is example of ui library</div>
+      <h1>This is example of ui library</h1>
+      <hr />
+      <h2>TextField</h2>
+      <TextField
+        onChange={(e, value) => {
+          console.log('onChange', value);
+        }}
+        name="textfield-0"
+        placeholder="TextField placeholder 0"
+      />
+      <hr />
       <div>
         <h2>Checkbox</h2>
         <Checkbox
@@ -111,7 +121,6 @@ const UI = () => {
           }}
           value="1"
         />
-        <hr />
       </div>
     </div>
   );
