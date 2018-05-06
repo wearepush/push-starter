@@ -19,12 +19,10 @@ const UI = () => {
       <hr />
       <h2>TextField</h2>
       <TextField
-        defaultValue="312312"
-        onChange={(e, value) => {
-          console.log('onChange', value);
-        }}
+        defaultValue={0}
         name="textfield-0"
         placeholder="TextField placeholder 0"
+        type="number"
       />
       <hr />
       <div>

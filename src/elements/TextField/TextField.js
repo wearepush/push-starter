@@ -59,6 +59,10 @@ export default class TextField extends PureComponent {
     /**
     * @ignore
     */
+    onKeyPress: func,
+    /**
+    * @ignore
+    */
     onKeyDown: func,
     /**
     * The name of the `input` element.
@@ -104,6 +108,7 @@ export default class TextField extends PureComponent {
     onBlur: undefined,
     onChange: undefined,
     onFocus: undefined,
+    onKeyPress: undefined,
     onKeyDown: undefined,
     tabIndex: null,
     type: 'text',
@@ -125,6 +130,7 @@ export default class TextField extends PureComponent {
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
     this.renderPlaceholder = this.renderPlaceholder.bind(this);
@@ -151,6 +157,10 @@ export default class TextField extends PureComponent {
     }
     const value = this.isEventValue(event);
     if (!this.isControlled) {
+      if (this.props.type === 'number' && Number.isNaN(value)) {
+        event.preventDefault();
+        return false;
+      }
       this.setState({ value });
     }
     this.props.onChange && this.props.onChange(event, value);
@@ -169,11 +179,25 @@ export default class TextField extends PureComponent {
     return true;
   }
 
+  onKeyPress(event) {
+    if (this.props.disabled) {
+      return false;
+    }
+    const value = this.isEventValue(event);
+    this.props.onKeyPress && this.props.onKeyPress(event, value);
+    return true;
+  }
+
   onKeyDown(event) {
     if (this.props.disabled) {
       return false;
     }
     const value = this.isEventValue(event);
+    if (this.props.type === 'number' && event.keyCode >= 65 && event.keyCode <= 90) {
+      event.preventDefault();
+      this.setState({ value });
+      return false;
+    }
     this.props.onKeyDown && this.props.onKeyDown(event, value);
     return true;
   }
@@ -189,6 +213,9 @@ export default class TextField extends PureComponent {
   }
 
   isEventValue(event) { // eslint-disable-line
+    if (this.props.type === 'number') {
+      return parseInt(event.currentTarget.value, 10);
+    }
     return event.currentTarget.value;
   }
 
@@ -238,6 +265,7 @@ export default class TextField extends PureComponent {
           onBlur={this.onBlur}
           onChange={this.onChange}
           onFocus={this.onFocus}
+          onKeyPress={this.onKeyPress}
           onKeyDown={this.onKeyDown}
           ref={inputRef}
           name={name}
