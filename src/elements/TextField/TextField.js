@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { bool, func, number, object, oneOfType, string } from 'prop-types';
+import { bool, func, number, object, oneOfType, oneOf, string } from 'prop-types';
 import cx from 'classnames';
 import styles from './TextField.scss';
 
@@ -20,7 +20,10 @@ export default class TextField extends PureComponent {
     /**
     * @ignore
     */
-    defaultValue: bool,
+    defaultValue: oneOfType([
+      number,
+      string,
+    ]),
     /**
     * Properties applied to the `input` element.
     */
@@ -68,7 +71,18 @@ export default class TextField extends PureComponent {
     /**
     * @ignore
     */
-    tabIndex: oneOfType([number, string]),
+    tabIndex: oneOfType([
+      number,
+      string,
+    ]),
+    /**
+    * The type of the input.
+    */
+    type: oneOf([
+      'text',
+      'date',
+      'number',
+    ]),
     /**
     * The value of the component.
     */
@@ -92,6 +106,7 @@ export default class TextField extends PureComponent {
     onFocus: undefined,
     onKeyDown: undefined,
     tabIndex: null,
+    type: 'text',
     value: undefined,
   };
 
@@ -111,11 +126,9 @@ export default class TextField extends PureComponent {
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
-    // this.isChecked = this.isChecked.bind(this);
-    // this.isEventValue = this.isEventValue.bind(this);
+    this.isEmpty = this.isEmpty.bind(this);
     this.renderPlaceholder = this.renderPlaceholder.bind(this);
     this.renderDefault = this.renderDefault.bind(this);
-    // this.renderCustom = this.renderCustom.bind(this);
   }
 
   state = {};
@@ -167,21 +180,15 @@ export default class TextField extends PureComponent {
 
   isControlled = null;
 
-  // isChecked() {
-  //   return this.isControlled ? this.props.checked : this.state.checked;
-  // }
+  isEmpty() {
+    return this.isControlled ? !this.props.value : !this.state.value;
+  }
 
   isActive() {
     return this.isControlled ? this.props.active : this.state.active;
   }
 
   isEventValue(event) { // eslint-disable-line
-    // if (!this.props.custom) {
-    //   return event.currentTarget.checked;
-    // } else if (event.currentTarget.getAttribute('aria-checked') === 'false') {
-    //   return true;
-    // }
-    // return false;
     return event.currentTarget.value;
   }
 
@@ -195,15 +202,19 @@ export default class TextField extends PureComponent {
 
   renderDefault() {
     const {
+      defaultValue,
       disabled,
       inputProps,
       inputRef,
+      invalid,
       name,
       tabIndex,
+      type,
       value,
     } = this.props;
 
     const active = this.isActive();
+    const empty = this.isEmpty();
 
     return (
       <label
@@ -212,7 +223,16 @@ export default class TextField extends PureComponent {
         {this.renderPlaceholder()}
         <input
           {...inputProps}
-          className={styles.TextField__input}
+          className={
+            cx(styles.TextField__input, {
+              'is-active': active,
+              'is-disabled': disabled,
+              'is-empty': empty,
+              'is-invalid': invalid,
+              'is-not-empty': !empty,
+            })
+          }
+          defaultValue={defaultValue}
           disabled={disabled}
           id={this.id}
           onBlur={this.onBlur}
@@ -222,7 +242,7 @@ export default class TextField extends PureComponent {
           ref={inputRef}
           name={name}
           tabIndex={active ? -1 : tabIndex || 0}
-          type="text"
+          type={type}
           value={value}
         />
       </label>
@@ -236,16 +256,16 @@ export default class TextField extends PureComponent {
       invalid,
     } = this.props;
 
-    // const empty = this.isEmpty();
     const active = this.isActive();
+    const empty = this.isEmpty();
 
     const className = cx(styles.Checkbox, {
       [styles[classNameProp]]: !!classNameProp,
       'is-active': active,
-      // 'is-empty': empty,
+      'is-empty': empty,
       'is-disabled': disabled,
       'is-invalid': invalid,
-      // 'is-unchecked': !checked,
+      'is-not-empty': !empty,
     });
 
     return (

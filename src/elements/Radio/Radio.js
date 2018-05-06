@@ -32,7 +32,13 @@ export default class Radio extends PureComponent {
     /**
     * @ignore
     */
-    defaultChecked: bool,
+    defaultChecked: oneOfType([
+      array,
+      bool,
+      object,
+      number,
+      string,
+    ]),
     /**
     * Properties applied to the `input` element.
     */

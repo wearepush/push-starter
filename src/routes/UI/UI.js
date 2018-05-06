@@ -19,6 +19,7 @@ const UI = () => {
       <hr />
       <h2>TextField</h2>
       <TextField
+        defaultValue="312312"
         onChange={(e, value) => {
           console.log('onChange', value);
         }}
