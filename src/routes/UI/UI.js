@@ -19,10 +19,23 @@ const UI = () => {
       <hr />
       <h2>TextField</h2>
       <TextField
-        defaultValue={0}
         name="textfield-0"
         placeholder="TextField placeholder 0"
-        type="number"
+        type="text"
+      />
+      <h2>{'TextField\'s API'}</h2>
+      <TextField
+        name="textfield-1"
+        placeholder="TextField placeholder"
+        onChange={(e, value) => {
+          console.log('onChange', value);
+        }}
+        onFocus={(e, value) => {
+          console.log('onFocus', value);
+        }}
+        onBlur={(e, value) => {
+          console.log('onBlur', value);
+        }}
       />
       <hr />
       <div>

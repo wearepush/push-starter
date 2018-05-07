@@ -65,13 +65,17 @@ export default class TextField extends PureComponent {
     */
     onKeyDown: func,
     /**
+    * @ignore
+    */
+    onKeyUp: func,
+    /**
     * The name of the `input` element.
     */
     name: string.isRequired,
     /**
-    * The label of the component.
+    * The placeholder of the component.
     */
-    placeholder: string.isRequired,
+    placeholder: string,
     /**
     * @ignore
     */
@@ -83,9 +87,11 @@ export default class TextField extends PureComponent {
     * The type of the input.
     */
     type: oneOf([
-      'text',
       'date',
+      'email',
       'number',
+      'password',
+      'text',
     ]),
     /**
     * The value of the component.
@@ -110,6 +116,8 @@ export default class TextField extends PureComponent {
     onFocus: undefined,
     onKeyPress: undefined,
     onKeyDown: undefined,
+    onKeyUp: undefined,
+    placeholder: '',
     tabIndex: null,
     type: 'text',
     value: undefined,
@@ -132,8 +140,8 @@ export default class TextField extends PureComponent {
     this.onFocus = this.onFocus.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
-    this.renderPlaceholder = this.renderPlaceholder.bind(this);
     this.renderDefault = this.renderDefault.bind(this);
   }
 
@@ -158,7 +166,6 @@ export default class TextField extends PureComponent {
     const value = this.isEventValue(event);
     if (!this.isControlled) {
       if (this.props.type === 'number' && Number.isNaN(value)) {
-        event.preventDefault();
         return false;
       }
       this.setState({ value });
@@ -202,9 +209,24 @@ export default class TextField extends PureComponent {
     return true;
   }
 
+  onKeyUp(event) {
+    if (this.props.disabled) {
+      return false;
+    }
+    const value = this.isEventValue(event);
+    this.props.onKeyUp && this.props.onKeyUp(event, value);
+    return true;
+  }
+
   isControlled = null;
 
   isEmpty() {
+    if (this.props.type === 'number') {
+      return this.isControlled ?
+        this.props.value !== 0 && !this.props.value
+        :
+        this.state.value !== 0 && !this.state.value;
+    }
     return this.isControlled ? !this.props.value : !this.state.value;
   }
 
@@ -212,19 +234,11 @@ export default class TextField extends PureComponent {
     return this.isControlled ? this.props.active : this.state.active;
   }
 
-  isEventValue(event) { // eslint-disable-line
+  isEventValue(event) {
     if (this.props.type === 'number') {
       return parseInt(event.currentTarget.value, 10);
     }
     return event.currentTarget.value;
-  }
-
-  renderPlaceholder() {
-    return (
-      <span className={styles.TextField__placeholder}>
-        {this.props.placeholder}
-      </span>
-    );
   }
 
   renderDefault() {
@@ -235,6 +249,7 @@ export default class TextField extends PureComponent {
       inputRef,
       invalid,
       name,
+      placeholder,
       tabIndex,
       type,
       value,
@@ -244,36 +259,33 @@ export default class TextField extends PureComponent {
     const empty = this.isEmpty();
 
     return (
-      <label
-        htmlFor={this.id}
-      >
-        {this.renderPlaceholder()}
-        <input
-          {...inputProps}
-          className={
-            cx(styles.TextField__input, {
-              'is-active': active,
-              'is-disabled': disabled,
-              'is-empty': empty,
-              'is-invalid': invalid,
-              'is-not-empty': !empty,
-            })
-          }
-          defaultValue={defaultValue}
-          disabled={disabled}
-          id={this.id}
-          onBlur={this.onBlur}
-          onChange={this.onChange}
-          onFocus={this.onFocus}
-          onKeyPress={this.onKeyPress}
-          onKeyDown={this.onKeyDown}
-          ref={inputRef}
-          name={name}
-          tabIndex={active ? -1 : tabIndex || 0}
-          type={type}
-          value={value}
-        />
-      </label>
+      <input
+        {...inputProps}
+        className={
+          cx(styles.TextField__input, {
+            'is-active': active,
+            'is-disabled': disabled,
+            'is-empty': empty,
+            'is-invalid': invalid,
+            'is-not-empty': !empty,
+          })
+        }
+        defaultValue={defaultValue}
+        disabled={disabled}
+        id={this.id}
+        onBlur={this.onBlur}
+        onChange={this.onChange}
+        onFocus={this.onFocus}
+        onKeyPress={this.onKeyPress}
+        onKeyDown={this.onKeyDown}
+        onKeyUp={this.onKeyUp}
+        ref={inputRef}
+        name={name}
+        placeholder={placeholder}
+        tabIndex={active ? -1 : tabIndex || 0}
+        type={type}
+        value={value}
+      />
     );
   }
 

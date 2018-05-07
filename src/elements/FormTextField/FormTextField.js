@@ -1,16 +1,17 @@
 import React from 'react';
-import { string, object } from 'prop-types';
+import { bool, object, oneOf, string } from 'prop-types';
 import { Field } from 'redux-form/immutable';
-import cx from 'classnames';
-import { FormField } from '../index.js';
+import { FormField, TextField } from '../index.js';
 import styles from './FormTextField.scss';
 
 const FormTextField = ({
+  disabled,
   id,
   input,
   label,
   meta,
-  ...rest
+  placeholder,
+  type,
 }) => {
   const _id = id || input.name;
   return (
@@ -20,16 +21,18 @@ const FormTextField = ({
         label={label}
         name={_id}
       >
-        <input
-          id={_id}
-          {...rest}
-          {...input}
-          className={
-            cx(styles.FormTextField__input, {
-              'is-active': meta.active,
-              'is-invalid': meta.invalid,
-            })
-          }
+        <TextField
+          active={meta.active}
+          disabled={disabled}
+          id={id}
+          invalid={meta.invalid}
+          onBlur={(event) => input.onBlur(event)}
+          onChange={(event, value) => input.onChange(value)}
+          onFocus={(event, value) => input.onFocus(value)}
+          name={input.name}
+          placeholder={placeholder}
+          type={type}
+          value={input.value}
         />
       </FormField>
     </div>
@@ -37,16 +40,26 @@ const FormTextField = ({
 };
 
 FormTextField.propTypes = {
+  disabled: bool,
   id: string,
   input: object.isRequired,
   label: string,
   meta: object.isRequired,
-  type: string,
+  placeholder: string,
+  type: oneOf([
+    'date',
+    'email',
+    'number',
+    'password',
+    'text',
+  ]),
 };
 
 FormTextField.defaultProps = {
+  disabled: false,
   id: '',
   label: '',
+  placeholder: '',
   type: 'text',
 };
 
