@@ -48,8 +48,8 @@ export default class TextField extends PureComponent {
     * Callback fired when the state is changed.
     *
     * @param {object} event The event source of the callback.
-    * You can pull out the new value by accessing `event.currentTarget.checked` or `event.currentTarget.getAttribute('aria-checked')`.
-    * @param {boolean} checked The `checked` value of the switch
+    * You can pull out the new value by accessing `event.currentTarget.value`.
+    * @param {string} value The `value` of the input
     */
     onChange: func,
     /**
@@ -299,7 +299,7 @@ export default class TextField extends PureComponent {
     const active = this.isActive();
     const empty = this.isEmpty();
 
-    const className = cx(styles.Checkbox, {
+    const className = cx(styles.TextField, {
       [styles[classNameProp]]: !!classNameProp,
       'is-active': active,
       'is-empty': empty,
