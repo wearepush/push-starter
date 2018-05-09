@@ -1,14 +1,14 @@
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CleanPlugin from 'clean-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import WebpackBundleAnalyzer from 'webpack-bundle-analyzer';
 import getBaseConfig from './webpack.config.client';
 
 const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
-const baseConfig = getBaseConfig({ development: false });
+const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: true });
 const vendor = [
   'axios',
   'react',
@@ -57,9 +57,9 @@ const config = {
       { root: baseConfig.context }
     ),
 
-    new ExtractTextPlugin({
-      filename: '[name].[chunkhash].css',
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
 
     new webpack.DefinePlugin({
@@ -111,5 +111,27 @@ const config = {
     })
   ]
 };
+
+// remove this when mini-css-extract-plugin fix HMR
+const findScss = baseConfig.module.rules.findIndex((c) => {
+  if (c && c.test.toString().indexOf('.(scss)') > -1) {
+    return c;
+  }
+});
+
+if (findScss > -1) {
+  baseConfig.module.rules[findScss].use[0] = MiniCssExtractPlugin.loader;
+}
+
+const findCss = baseConfig.module.rules.findIndex((c) => {
+  if (c && c.test.toString().indexOf('.(css)') > -1) {
+    return c;
+  }
+});
+
+if (findCss > -1) {
+  baseConfig.module.rules[findCss].use[0] = MiniCssExtractPlugin.loader;
+}
+
 
 export default merge(baseConfig, config);

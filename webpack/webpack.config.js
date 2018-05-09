@@ -41,48 +41,52 @@ const config = {
       },
       {
         test: /\.(scss)$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader : 'css-loader',
-          options:
+        use: [
           {
-            sourceMap: true,
-            importLoaders: 2,
-            modules: true,
-            localIdentName: '[local]__[hash:base64:5]'
+            loader: 'style-loader'
+          },
+          {
+            loader : 'css-loader',
+            options:
+            {
+              sourceMap: true,
+              importLoaders: 2,
+              modules: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          },
+          {
+            loader : 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader : 'sass-loader',
+            options: {
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
           }
-        },
-        {
-          loader : 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader : 'sass-loader',
-          options: {
-            outputStyle: 'expanded',
-            sourceMap: true
-          }
-        }]
+        ]
       },
       {
         test: /\.(css)$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader : 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader : 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
           }
-        },
-        {
-          loader: 'postcss-loader'
-        }]
+        ]
       }
     ]
   },
@@ -98,7 +102,9 @@ const config = {
   resolve: {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
-    alias: {}
+    alias: {
+      'react': path.resolve('node_modules/react')
+    }
   }
 };
 

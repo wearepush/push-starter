@@ -6,11 +6,16 @@ import appConfig from '../src/config';
 const { host, port } = appConfig.webpack.server;
 const baseConfig = getBaseConfig({
   development: true,
-  css_bundle: true
 });
 
 const config = {
   devtool: 'eval',
+
+  watchOptions: {
+    aggregateTimeout: 500,
+    ignored: ["node_modules", "__mocks__", "__test__"]
+  },
+
   mode: 'development',
 
   performance: { hints: false },

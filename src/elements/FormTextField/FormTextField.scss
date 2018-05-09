@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$FormTextField: 'FormTextField';
+
+.#{$FormTextField} {
+
+  &__input {
+    border: 1px solid black;
+
+    &:global {
+      &.is-invalid {
+        border-color: red;
+      }
+
+      &.is-active {
+        border-color: blue;
+      }
+    }
+  }
+}

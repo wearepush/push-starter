@@ -1,0 +1,70 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$Checkbox: 'Checkbox';
+
+.#{$Checkbox} {
+
+  &:global {
+    &.is-active {
+    }
+
+    &.is-disabled {
+      opacity: 0.3;
+    }
+
+    &.is-invalid {
+      color: red;
+    }
+
+    &.is-unchecked {
+    }
+
+    &.is-checked {
+    }
+
+
+  }
+
+  &__icon {
+    display: inline-block;
+
+    &:global {
+      &.is-default-icon {
+        width: 18px;
+        height: 18px;
+        border: 1px solid black;
+        vertical-align: middle;
+
+        &.is-checked {
+          background-color: black;
+        }
+
+        &.is-unchecked {
+          background-color: white;
+        }
+      }
+
+      &.is-custom-icon {
+        &.is-checked {
+          background-color: black;
+          color: white;
+        }
+
+        &.is-unchecked {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+
+  &__input {
+    display: inline-block;
+  }
+
+  &__placeholder {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
