@@ -3,7 +3,7 @@ import { reduxForm, SubmissionError } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Input, Button } from './../../elements';
+import { FormTextField, FormCheckbox, FormRadio, FormSelect, Button, } from './../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -30,6 +30,7 @@ class SignIn extends PureComponent {
   };
 
   onSubmit = (values) => { // eslint-disable-line
+    console.log(values.toJS());
     return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
         throw new SubmissionError({
@@ -55,17 +56,52 @@ class SignIn extends PureComponent {
           onSubmit={handleSubmit(this.onSubmit)}
         >
           <div>
-            <Input
+            <FormTextField
+              label="Username"
               name="username"
               type="text"
               placeholder="Username"
             />
           </div>
           <div>
-            <Input
+            <FormTextField
+              label="Password"
               name="password"
               type="password"
               placeholder="Password"
+            />
+          </div>
+          <div>
+            <FormCheckbox
+              custom
+              name="remember"
+              placeholder="Remember me"
+            />
+          </div>
+          <div>
+            <FormRadio
+              custom
+              name="gender"
+              value="1"
+              placeholder="Women"
+            />
+            <FormRadio
+              custom
+              name="gender"
+              value="2"
+              placeholder="Men"
+            />
+          </div>
+          <div>
+            <FormSelect
+              label="Age"
+              name="age"
+              placeholder="Select Age"
+              options={[
+                { label: '< 18', value: '18' },
+                { label: '18-25', value: '18-25', disabled: true },
+                { label: '25+', value: '25' },
+              ]}
             />
           </div>
           {error && <div>{error}</div>}
