@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { bool, func, node, number, oneOfType, string } from 'prop-types';
+import { bool, func, node, number, oneOfType, oneOf, string } from 'prop-types';
 import cx from 'classnames';
 import styles from './Button.scss';
 
@@ -22,14 +22,15 @@ export default class Button extends PureComponent {
     * Either a string to use a DOM element or a component.
     * The default value is a `button`.
     */
-    component: oneOfType([
-      string,
-      func
-    ]),
+    component: string,
     /**
     * If `true`, the base button will be disabled.
     */
     disabled: bool,
+    /**
+    * If `true`, the button will take up the full width of its container.
+    */
+    fullWidth: bool,
     /**
     * @ignore
     */
@@ -86,6 +87,14 @@ export default class Button extends PureComponent {
       string
     ]),
     /**
+    * The size of the button.
+    */
+    size: oneOf([
+      'small',
+      'medium',
+      'large'
+    ]),
+    /**
     * @ignore
     */
     type: string,
@@ -96,6 +105,7 @@ export default class Button extends PureComponent {
     className: '',
     component: 'button',
     disabled: false,
+    fullWidth: false,
     onBlur: undefined,
     onClick: undefined,
     onFocus: undefined,
@@ -108,6 +118,7 @@ export default class Button extends PureComponent {
     onTouchMove: undefined,
     onTouchStart: undefined,
     role: 'button',
+    size: 'medium',
     tabIndex: 0,
     type: 'button',
   };
@@ -119,6 +130,7 @@ export default class Button extends PureComponent {
       className: classNameProp,
       component,
       disabled,
+      fullWidth,
       onClick,
       onBlur,
       onFocus,
@@ -131,6 +143,7 @@ export default class Button extends PureComponent {
       onTouchMove,
       onTouchStart,
       role,
+      size,
       tabIndex,
       type,
       ...other
@@ -151,13 +164,18 @@ export default class Button extends PureComponent {
     if (ComponentProp === 'button') {
       buttonProps.type = type || 'button';
       buttonProps.disabled = disabled;
+      buttonProps.role = undefined;
     } else {
       buttonProps.role = 'button';
     }
 
     const className = cx(styles.Button, {
-      [styles[classNameProp]]: !!classNameProp,
+      [classNameProp]: !!classNameProp,
+      [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
       'is-disabled': disabled,
+      'is-full-width': fullWidth,
+      [`is-size-${size}`]: !!size,
+      'is-link': !!other.href,
     });
 
     return (
@@ -176,7 +194,7 @@ export default class Button extends PureComponent {
         onTouchStart={onTouchStart}
         ref={buttonRef}
         role={role}
-        tabIndex={disabled ? '-1' : tabIndex}
+        tabIndex={disabled ? -1 : parseInt(tabIndex, 10)}
         {...buttonProps}
         {...other}
       >

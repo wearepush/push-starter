@@ -5,6 +5,7 @@ export Radio from './Radio/Radio.js';
 export TextField from './TextField/TextField.js';
 
 /* redux form */
+export FormButton from './FormButton/FormButton.js';
 export FormTextField from './FormTextField/FormTextField.js';
 export FormCheckbox from './FormCheckbox/FormCheckbox.js';
 export FormRadio from './FormRadio/FormRadio.js';

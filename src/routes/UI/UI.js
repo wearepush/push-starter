@@ -19,12 +19,38 @@ const UI = () => {
       <hr />
       <h2>Button</h2>
       <Button>
-        test
+        Button
       </Button>
       <Button
         disabled
+        onClick={() => { console.log('!!!!!!'); }}
       >
         Disabled Button
+      </Button>
+      <Button
+        fullWidth
+      >
+        Full Width Button
+      </Button>
+      <Button
+        size="small"
+      >
+        Small Button
+      </Button>
+      <Button
+        size="medium"
+      >
+        Medium Button
+      </Button>
+      <Button
+        size="large"
+      >
+        Large Button
+      </Button>
+      <Button
+        className="custom-class"
+      >
+        Custom Classname Button
       </Button>
       <Button component="a">
         test

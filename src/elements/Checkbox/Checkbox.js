@@ -324,7 +324,8 @@ export default class Checkbox extends PureComponent {
     const active = this.isActive();
 
     const className = cx(styles.Checkbox, {
-      [styles[classNameProp]]: !!classNameProp,
+      [classNameProp]: !!classNameProp,
+      [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
       'is-active': active,
       'is-checked': checked,
       'is-disabled': disabled,
