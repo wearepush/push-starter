@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { reduxForm, SubmissionError } from 'redux-form/immutable';
+import { reduxForm, SubmissionError, Form } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, FormCheckbox, FormRadio, FormSelect, Button, } from './../../elements';
+import { FormTextField, FormCheckbox, FormRadio, FormSelect, Button, FormButton } from './../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -52,7 +52,7 @@ class SignIn extends PureComponent {
     const { handleSubmit, error } = this.props;
     return (
       <div>
-        <form
+        <Form
           onSubmit={handleSubmit(this.onSubmit)}
         >
           <div>
@@ -112,7 +112,14 @@ class SignIn extends PureComponent {
               Sign In!
             </Button>
           </div>
-        </form>
+        </Form>
+        <br />
+        <FormButton
+          form="SignInForm"
+          className="test-2"
+        >
+          Sign In Remote Button!
+        </FormButton>
       </div>
     );
   }

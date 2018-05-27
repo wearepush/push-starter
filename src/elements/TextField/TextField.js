@@ -299,7 +299,8 @@ export default class TextField extends PureComponent {
     const active = this.isActive();
     const empty = this.isEmpty();
     const className = cx(styles.TextField, {
-      [styles[classNameProp]]: !!classNameProp,
+      [classNameProp]: !!classNameProp,
+      [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
       'is-active': active,
       'is-empty': empty,
       'is-disabled': disabled,

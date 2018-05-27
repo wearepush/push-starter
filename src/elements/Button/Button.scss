@@ -9,5 +9,21 @@ $Button: 'Button';
     &.is-disabled {
       opacity: 0.3;
     }
+
+    &.is-full-width {
+      width: 100%;
+    }
+
+    &.is-size-small {
+      font-size: 10px;
+    }
+
+    &.is-size-medium {
+      font-size: 14px;
+    }
+
+    &.is-size-large {
+      font-size: 16px;
+    }
   }
 }

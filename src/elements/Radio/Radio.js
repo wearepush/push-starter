@@ -326,7 +326,8 @@ export default class Radio extends PureComponent {
     const active = this.isActive();
 
     const className = cx(styles.Radio, {
-      [styles[classNameProp]]: !!classNameProp,
+      [classNameProp]: !!classNameProp,
+      [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
       'is-active': active,
       'is-checked': checked,
       'is-disabled': disabled,
