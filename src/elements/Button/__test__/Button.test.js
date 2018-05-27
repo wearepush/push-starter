@@ -5,7 +5,6 @@ import Button from '../Button.js';
 
 describe('Button', () => {
   describe('default props', () => {
-
     it('should render button', () => {
       const button = shallow(
         <Button>
@@ -30,20 +29,16 @@ describe('Button', () => {
 
     it('should render with tabIndex prop', () => {
       const button = shallow(
-        <Button
-          tabIndex={10}
-        >
+        <Button tabIndex={-2}>
           Button
         </Button>
       );
-      expect(button.prop('tabIndex')).toEqual(10);
+      expect(button.prop('tabIndex')).toEqual(-2);
     });
 
     it('should render with children prop', () => {
       const button = shallow(
-        <Button
-          tabIndex={10}
-        >
+        <Button>
           <div className="test">Button</div>
         </Button>
       );
@@ -124,8 +119,7 @@ describe('Button', () => {
 
     it('shouldn\'t render with input ref prop', () => {
       const button = shallow(
-        <Button
-        >
+        <Button>
           Button
         </Button>
       );
@@ -238,8 +232,6 @@ describe('Button', () => {
 
       button.simulate('touchstart');
       expect(onTouchStartSpy).toHaveBeenCalled();
-
     });
-
   });
 });
