@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Checkbox, Radio, TextField } from '../../elements';
+import { Checkbox, Button, Radio, TextField } from '../../elements';
 
 const UI = () => {
   const title = 'Redux Starter. UI';
@@ -16,6 +16,19 @@ const UI = () => {
         <meta property="twitter:description" content={description} />
       </Helmet>
       <h1>This is example of ui library</h1>
+      <hr />
+      <h2>Button</h2>
+      <Button>
+        test
+      </Button>
+      <Button
+        disabled
+      >
+        Disabled Button
+      </Button>
+      <Button component="a">
+        test
+      </Button>
       <hr />
       <h2>TextField</h2>
       <TextField

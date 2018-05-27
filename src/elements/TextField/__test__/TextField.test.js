@@ -141,6 +141,41 @@ describe('TextField', () => {
       expect(input.hasClass('is-empty')).toBe(true);
     });
 
+    it('should render with empty prop input number', () => {
+      const input = shallow(
+        <TextField
+          name="name"
+          placeholder="placeholder"
+          type="number"
+        />
+      );
+      expect(input.hasClass('is-empty')).toBe(true);
+    });
+
+    it('should render with defaultValue input number', () => {
+      const input = shallow(
+        <TextField
+          defaultValue={0}
+          name="name"
+          placeholder="placeholder"
+          type="number"
+        />
+      );
+      expect(input.hasClass('is-not-empty')).toBe(true);
+    });
+
+    it('should render with value input number', () => {
+      const input = shallow(
+        <TextField
+          name="name"
+          placeholder="placeholder"
+          type="number"
+          value={0}
+        />
+      );
+      expect(input.hasClass('is-not-empty')).toBe(true);
+    });
+
     it('should render with className prop', () => {
       const input = shallow(
         <TextField
@@ -252,6 +287,62 @@ describe('TextField', () => {
       });
     });
 
+    describe('events', () => {
+      it('should handle onKeyPress, onKeyDown, onKeyUp', () => {
+        const onKeyPressSpy = jest.fn();
+        const onKeyDownSpy = jest.fn();
+        const onKeyUpSpy = jest.fn();
+        const input = shallow(
+          <TextField
+            onKeyPress={onKeyPressSpy}
+            onKeyDown={onKeyDownSpy}
+            onKeyUp={onKeyUpSpy}
+            name="name"
+            placeholder="placeholder"
+          />
+        );
+        const inputElement = input.find('.TextField__input');
+
+        inputElement.simulate('keypress', { currentTarget: { value: 'test' } });
+        expect(onKeyPressSpy).toHaveBeenCalledTimes(1);
+        expect(onKeyPressSpy).toHaveBeenCalledWith({ currentTarget: { value: 'test' } }, 'test');
+
+        inputElement.simulate('keydown', { currentTarget: { value: 'test' } });
+        expect(onKeyDownSpy).toHaveBeenCalledTimes(1);
+        expect(onKeyDownSpy).toHaveBeenCalledWith({ currentTarget: { value: 'test' } }, 'test');
+
+        inputElement.simulate('keyup', { currentTarget: { value: 'test' } });
+        expect(onKeyUpSpy).toHaveBeenCalledTimes(1);
+        expect(onKeyUpSpy).toHaveBeenCalledWith({ currentTarget: { value: 'test' } }, 'test');
+      });
+
+      it('shouldn\'t handle onKeyPress, onKeyDown, onKeyUp when disabled', () => {
+        const onKeyPressSpy = jest.fn();
+        const onKeyDownSpy = jest.fn();
+        const onKeyUpSpy = jest.fn();
+        const input = shallow(
+          <TextField
+            disabled
+            onKeyPress={onKeyPressSpy}
+            onKeyDown={onKeyDownSpy}
+            onKeyUp={onKeyUpSpy}
+            name="name"
+            placeholder="placeholder"
+          />
+        );
+        const inputElement = input.find('.TextField__input');
+
+        inputElement.simulate('keypress', { currentTarget: { value: 'test' } });
+        expect(onKeyPressSpy).not.toHaveBeenCalled();
+
+        inputElement.simulate('keydown', { currentTarget: { value: 'test' } });
+        expect(onKeyDownSpy).not.toHaveBeenCalled();
+
+        inputElement.simulate('keyup', { currentTarget: { value: 'test' } });
+        expect(onKeyUpSpy).not.toHaveBeenCalled();
+      });
+    });
+
     describe('uncontrolled', () => {
       it('should render with initial state', () => {
         const input = shallow(
@@ -336,38 +427,112 @@ describe('TextField', () => {
         expect(state.active).toBe(undefined);
       });
 
-      // it('should handle onFocus, onChange, onBlur', () => {
-      //   const onBlurSpy = jest.fn();
-      //   const onChangeSpy = jest.fn();
-      //   const onFocusSpy = jest.fn();
-      //   const input = shallow(
-      //     <TextField
-      //       checked
-      //       onBlur={onBlurSpy}
-      //       onChange={onChangeSpy}
-      //       onFocus={onFocusSpy}
-      //       name="name"
-      //       placeholder="placeholder"
-      //     />
-      //   );
+      it('should handle onFocus, onChange, onBlur', () => {
+        const onBlurSpy = jest.fn();
+        const onChangeSpy = jest.fn();
+        const onFocusSpy = jest.fn();
+        const input = shallow(
+          <TextField
+            onBlur={onBlurSpy}
+            onChange={onChangeSpy}
+            onFocus={onFocusSpy}
+            name="name"
+            placeholder="placeholder"
+            value="test"
+          />
+        );
 
-      //   const inputElement = input.find('.TextField__input');
+        const inputElement = input.find('.TextField__input');
 
-      //   inputElement.simulate('focus', { currentTarget: { checked: false } });
-      //   expect(onFocusSpy).toHaveBeenCalledWith({ currentTarget: { checked: false } }, false);
-      //   expect(onFocusSpy).toHaveBeenCalledTimes(1);
-      //   expect(input.instance().state).toEqual({});
+        inputElement.simulate('focus', { currentTarget: { value: undefined } });
+        expect(onFocusSpy).toHaveBeenCalledWith({ currentTarget: { value: undefined } }, undefined);
+        expect(onFocusSpy).toHaveBeenCalledTimes(1);
+        expect(input.instance().state).toEqual({ });
 
-      //   inputElement.simulate('change', { currentTarget: { checked: false } });
-      //   expect(onChangeSpy).toHaveBeenCalledWith({ currentTarget: { checked: false } }, false);
-      //   expect(onChangeSpy).toHaveBeenCalledTimes(1);
-      //   expect(input.instance().state).toEqual({});
+        inputElement.simulate('change', { currentTarget: { value: 'test2' } });
+        expect(onChangeSpy).toHaveBeenCalledWith({ currentTarget: { value: 'test2' } }, 'test2');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(input.instance().state).toEqual({});
 
-      //   inputElement.simulate('blur', { currentTarget: { checked: false } });
-      //   expect(onBlurSpy).toHaveBeenCalledWith({ currentTarget: { checked: false } }, false);
-      //   expect(onBlurSpy).toHaveBeenCalledTimes(1);
-      //   expect(input.instance().state).toEqual({});
-      // });
+        inputElement.simulate('blur', { currentTarget: { value: 'test2' } });
+        expect(onBlurSpy).toHaveBeenCalledWith({ currentTarget: { value: 'test2' } }, 'test2');
+        expect(onBlurSpy).toHaveBeenCalledTimes(1);
+        expect(input.instance().state).toEqual({});
+      });
+    });
+  });
+
+  describe('input number', () => {
+    describe('uncontrolled', () => {
+      it('should handle onFocus, onChange, onBlur', () => {
+        const onBlurSpy = jest.fn();
+        const onChangeSpy = jest.fn();
+        const onFocusSpy = jest.fn();
+        const onKeyPressSpy = jest.fn();
+        const onKeyDownSpy = jest.fn();
+        const onKeyUpSpy = jest.fn();
+        const preventDefaultSpy = jest.fn();
+        const input = shallow(
+          <TextField
+            onBlur={onBlurSpy}
+            onChange={onChangeSpy}
+            onFocus={onFocusSpy}
+            onKeyPress={onKeyPressSpy}
+            onKeyDown={onKeyDownSpy}
+            onKeyUp={onKeyUpSpy}
+            name="name"
+            placeholder="placeholder"
+            type="number"
+          />
+        );
+
+        const inputElement = input.find('.TextField__input');
+
+        inputElement.simulate('focus', { currentTarget: { value: undefined } });
+        expect(onFocusSpy).toHaveBeenCalledWith({ currentTarget: { value: undefined } }, NaN);
+        expect(onFocusSpy).toHaveBeenCalledTimes(1);
+        expect(input.instance().state).toEqual({ value: undefined, active: true });
+
+        inputElement.simulate('change', { currentTarget: { value: 1 } });
+        expect(onChangeSpy).toHaveBeenCalledWith({ currentTarget: { value: 1 } }, 1);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(input.instance().state).toEqual({ value: 1, active: true });
+
+        inputElement.simulate('keypress', { currentTarget: { value: 1 } });
+        expect(onKeyPressSpy).toHaveBeenCalledTimes(1);
+        expect(onKeyPressSpy).toHaveBeenCalledWith({ currentTarget: { value: 1 } }, 1);
+
+        inputElement.simulate('keydown', { currentTarget: { value: 1 }, keyCode: 65, preventDefault: preventDefaultSpy });
+        expect(onKeyDownSpy).not.toHaveBeenCalled();
+        expect(preventDefaultSpy).toHaveBeenCalled();
+        expect(input.instance().state).toEqual({ value: 1, active: true });
+
+        inputElement.simulate('keyup', { currentTarget: { value: 1 } });
+        expect(onKeyUpSpy).toHaveBeenCalledTimes(1);
+        expect(onKeyUpSpy).toHaveBeenCalledWith({ currentTarget: { value: 1 } }, 1);
+
+        inputElement.simulate('blur', { currentTarget: { value: 1 } });
+        expect(onBlurSpy).toHaveBeenCalledWith({ currentTarget: { value: 1 } }, 1);
+        expect(onBlurSpy).toHaveBeenCalledTimes(1);
+        expect(input.instance().state).toEqual({ value: 1, active: false });
+      });
+
+      it('shouldn\'t handle onChange with NaN', () => {
+        const onChangeSpy = jest.fn();
+        const input = shallow(
+          <TextField
+            onChange={onChangeSpy}
+            name="name"
+            placeholder="placeholder"
+            type="number"
+          />
+        );
+
+        const inputElement = input.find('.TextField__input');
+
+        inputElement.simulate('change', { currentTarget: { value: NaN } });
+        expect(onChangeSpy).not.toHaveBeenCalled();
+      });
     });
   });
 });
