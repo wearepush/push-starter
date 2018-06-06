@@ -14,14 +14,14 @@ const mapDispatchToProps = {
 };
 
 class Users extends Component {
+  static fetchData({ dispatch }) {
+    return dispatch(loadUsers());
+  }
+
   static propTypes = {
     clearUsers: func.isRequired,
     loadUsers: func.isRequired,
     records: object.isRequired
-  }
-
-  static fetchData({ dispatch }) {
-    return dispatch(loadUsers());
   }
 
   componentDidMount() {
