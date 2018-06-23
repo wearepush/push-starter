@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$DropDown: 'dropdown';
+.#{$DropDown} {
+  display: inline-block;
+  position: relative;
+  min-width: 150px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #ccc;
+  &__trigger_wrap {
+    padding: 0 10px;
+    display: inline-block;
+  }
+  &__menu {
+    width: 100%;
+    background: #fff;
+    list-style: none;
+    z-index: 1;
+    max-height: 300px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    &-item {
+      cursor: pointer;
+    }
+  }
+}
