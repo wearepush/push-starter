@@ -1,37 +1,7 @@
-/*eslint-disable */
 import React, { Component } from 'react';
-import Trigger from 'rc-trigger';
 import { array, bool, node } from 'prop-types';
+import cx from 'classnames';
 import styles from './Dropdown.scss';
-import 'rc-trigger/assets/index.css';
-
-
-const builtinPlacements = {
-  left: {
-    points: ['cr', 'cl'],
-  },
-  right: {
-    points: ['cl', 'cr'],
-  },
-  top: {
-    points: ['bc', 'tc'],
-  },
-  bottom: {
-    points: ['tc', 'bc'],
-  },
-  topLeft: {
-    points: ['bl', 'tl'],
-  },
-  topRight: {
-    points: ['br', 'tr'],
-  },
-  bottomRight: {
-    points: ['tr', 'br'],
-  },
-  bottomLeft: {
-    points: ['tl', 'bl'],
-  },
-};
 
 function saveRef(name, component) {
   this[name] = component;
@@ -40,13 +10,14 @@ function saveRef(name, component) {
 export default class Dropdown extends Component {
   static propTypes = {
     children: array.isRequired,
+    trigger: node.isRequired,
     isOpen: bool,
-    trigger: node
   }
 
   static defaultProps = {
     isOpen: undefined,
     trigger: undefined,
+    children: []
   }
 
   constructor(props) {
@@ -58,6 +29,11 @@ export default class Dropdown extends Component {
     this.saveContainerRef = saveRef.bind(this, 'containerInstance');
   }
 
+  componentDidMount() {
+    if (this.isControled) return;
+    window.addEventListener('click', this.changeMenuHandler);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.isControled) return;
     this.setState({
@@ -65,41 +41,53 @@ export default class Dropdown extends Component {
     });
   }
 
+  componentWillUnmount() {
+    if (this.isControled) return;
+    window.removeEventListener('click', this.changeMenuHandler);
+  }
+
+  changeMenuHandler = (e) => {
+    const $target = e.target;
+    if ($target !== this.containerInstance && !this.containerInstance.contains($target) && this.state.isOpen) {
+      this.setState({ isOpen: false });
+    }
+  }
+
+  clickTriggerHandler = () => {
+    if (this.isControled) return;
+    this.setState(state => ({ isOpen: !state.isOpen }));
+  }
+
   render() {
     const { isOpen } = this.state;
     const { children, trigger } = this.props;
-    const isVisible = this.isControled ? isOpen : undefined;
     return (
       <div
         ref={this.saveContainerRef}
-        className={`${styles.dropdown} ${isOpen ? ' is-open' : ''}`}
+        className={cx(styles.dropdown, {
+          [styles['dropdown--is-open']]: isOpen
+        })}
       >
-        <Trigger
-          getPopupContainer={() => this.containerInstance}
-          action={['click']}
-          popupPlacement="bottom"
-          builtinPlacements={builtinPlacements}
-          popupClassName={styles.dropdown__menu}
-          //popupVisible={isVisible}
-          popup={
-            <ul>
-              {
-                children.map((child, index) => <li key={index}>{child}</li>)
-              }
-            </ul>
-          }
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={this.clickTriggerHandler}
+          onKeyDown={() => { }}
+          className={styles.drppdown__trigger}
         >
-          <div
-            role="button"
-            tabIndex={0}
-            onKeyDown={() => {}}
-            className={styles.drppdown__trigger_wrap}
-          >
-            {
-              trigger
-            }
-          </div>
-        </Trigger>
+          {
+            trigger
+          }
+        </div>
+        <ul
+          className={cx(styles.dropdown__menu, {
+            [styles['dropdown__menu--is-open']]: isOpen
+          })}
+        >
+          {
+            children.map((child, index) => <li className={styles['dropdown__menu-item']} key={index}>{child}</li>)
+          }
+        </ul>
       </div>
     );
   }

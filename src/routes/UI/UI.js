@@ -175,6 +175,8 @@ const UI = () => {
       </div>
       <h2>Dropdown uncontroled</h2>
       <Dropdown
+        triggerClassName="my-trigger"
+        dropMenuClassName="my-drop"
         trigger={<span>Uncontroled</span>}
       >
         <span>1</span>

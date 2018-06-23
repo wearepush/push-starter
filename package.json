@@ -50,7 +50,6 @@
     "lodash": "^4.17.10",
     "lru-memoize": "^1.0.2",
     "prop-types": "^15.6.1",
-    "rc-trigger": "^2.5.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-ga": "^2.5.3",
