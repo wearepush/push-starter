@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { array, bool, node } from 'prop-types';
 import cx from 'classnames';
 import styles from './Dropdown.scss';
 
-function saveRef(name, component) {
-  this[name] = component;
-}
-
 export default class Dropdown extends Component {
   static propTypes = {
-    children: array.isRequired,
+    children: array,
     trigger: node.isRequired,
     isOpen: bool,
   }
@@ -25,8 +22,8 @@ export default class Dropdown extends Component {
     this.state = {
       isOpen: props.isOpen !== undefined ? props.isOpen : false
     };
+    this.containerInstance = React.createRef();
     this.isControled = props.isOpen !== undefined;
-    this.saveContainerRef = saveRef.bind(this, 'containerInstance');
   }
 
   componentDidMount() {
@@ -48,7 +45,8 @@ export default class Dropdown extends Component {
 
   changeMenuHandler = (e) => {
     const $target = e.target;
-    if ($target !== this.containerInstance && !this.containerInstance.contains($target) && this.state.isOpen) {
+    const container = this.containerInstance.current;
+    if ($target !== container && !container.contains($target) && this.state.isOpen) {
       this.setState({ isOpen: false });
     }
   }
@@ -58,12 +56,32 @@ export default class Dropdown extends Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
+  renderDrop = () => {
+    const { isOpen } = this.state;
+    const { children } = this.props;
+    if (!this.containerInstance.current || !isOpen) return null;
+    return ReactDOM.createPortal(
+      <ul
+        className={cx(styles.dropdown__menu, {
+          [styles['dropdown__menu--is-open']]: isOpen
+        })}
+      >
+        {
+          children.length > 0 ?
+            children.map((child, index) => <li className={styles['dropdown__menu-item']} key={index}>{child}</li>) :
+            <li>No data</li>
+        }
+      </ul>,
+      this.containerInstance.current
+    );
+  }
+
   render() {
     const { isOpen } = this.state;
-    const { children, trigger } = this.props;
+    const { trigger } = this.props;
     return (
       <div
-        ref={this.saveContainerRef}
+        ref={this.containerInstance}
         className={cx(styles.dropdown, {
           [styles['dropdown--is-open']]: isOpen
         })}
@@ -75,19 +93,9 @@ export default class Dropdown extends Component {
           onKeyDown={() => { }}
           className={styles.drppdown__trigger}
         >
-          {
-            trigger
-          }
+          {trigger}
+          {this.renderDrop()}
         </div>
-        <ul
-          className={cx(styles.dropdown__menu, {
-            [styles['dropdown__menu--is-open']]: isOpen
-          })}
-        >
-          {
-            children.map((child, index) => <li className={styles['dropdown__menu-item']} key={index}>{child}</li>)
-          }
-        </ul>
       </div>
     );
   }

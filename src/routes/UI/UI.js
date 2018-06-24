@@ -187,11 +187,7 @@ const UI = () => {
       <Dropdown
         isOpen={true} // eslint-disable-line
         trigger={<span>Controled</span>}
-      >
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-      </Dropdown>
+      />
     </div>
   );
 };
