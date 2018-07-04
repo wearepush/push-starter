@@ -1,10 +1,8 @@
-/* eslint-disable */
-
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';
 
-import { Header, Footer } from './../../components';
+import { Header, Footer } from '../index';
 import styles from './App.scss';
 
 const App = ({

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import { bool, func, node, number, oneOfType, oneOf, string } from 'prop-types';
 import cx from 'classnames';

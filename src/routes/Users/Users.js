@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
-import { clearUsers, loadUsers, getUsersRecords } from './../../redux/modules/users';
+import { clearUsers, loadUsers, getUsersRecords } from '../../redux/modules/users';
 
 const mapStateToProps = state => ({
   records: getUsersRecords(state)

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 /* ui */
 export Button from './Button/Button.js';
 export Checkbox from './Checkbox/Checkbox.js';

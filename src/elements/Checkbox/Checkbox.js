@@ -1,11 +1,11 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import { array, bool, func, number, object, oneOfType, node, string } from 'prop-types';
 import cx from 'classnames';
 import styles from './Checkbox.scss';
 
 export default class Checkbox extends PureComponent {
+  isControlled = null;
+
   static propTypes = {
     /**
     * If `true`, the component is active.
@@ -182,8 +182,6 @@ export default class Checkbox extends PureComponent {
     }
   }
 
-  isControlled = null;
-
   isChecked() {
     return this.isControlled ? this.props.checked : this.state.checked;
   }
@@ -282,31 +280,35 @@ export default class Checkbox extends PureComponent {
           value={value}
         >
           {checkedIcon && unCheckedIcon ?
-            <div
-              className={
-                cx(styles.Checkbox__icon, {
-                  'is-custom-icon': true,
-                  'is-checked': checked,
-                  'is-unchecked': !checked,
-                })
-              }
-            >
-              {checked ?
-                checkedIcon
-                :
-                unCheckedIcon
-              }
-            </div>
+            (
+              <div
+                className={
+                  cx(styles.Checkbox__icon, {
+                    'is-custom-icon': true,
+                    'is-checked': checked,
+                    'is-unchecked': !checked,
+                  })
+                }
+              >
+                {checked ?
+                  checkedIcon
+                  :
+                  unCheckedIcon
+                }
+              </div>
+            )
             :
-            <div
-              className={
-                cx(styles.Checkbox__icon, {
-                  'is-default-icon': true,
-                  'is-checked': checked,
-                  'is-unchecked': !checked,
-                })
-              }
-            />
+            (
+              <div
+                className={
+                  cx(styles.Checkbox__icon, {
+                    'is-default-icon': true,
+                    'is-checked': checked,
+                    'is-unchecked': !checked,
+                  })
+                }
+              />
+            )
           }
           {this.renderPlaceholder()}
         </div>

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import { array, bool, object, node, number, oneOfType, string } from 'prop-types';
 import { Field } from 'redux-form/immutable';

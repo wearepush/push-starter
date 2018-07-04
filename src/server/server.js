@@ -1,11 +1,10 @@
-/* eslint-disable */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
 import favicon from 'serve-favicon';
 import {} from './env';
 import createSSR from './SSR/createSSR';
-import config from './../config';
+import config from '../config';
 
 const { host, port } = config.server;
 const app = express();

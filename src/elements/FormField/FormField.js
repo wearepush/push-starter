@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import { bool, node, shape, string } from 'prop-types';
 import { FormFieldLabel, FormFieldError } from '../index.js';
@@ -14,7 +12,7 @@ const FormField = ({
   <div
     className={styles.FormField}
   >
-    {label &&
+    {label && (
       <div className={styles.FormField__label}>
         <FormFieldLabel
           active={meta.active}
@@ -23,17 +21,17 @@ const FormField = ({
           label={label}
         />
       </div>
-    }
+    )}
     <div className={styles.FormField__children}>
       {children}
     </div>
-    {meta.touched && (meta.error || meta.warning) &&
+    {meta.touched && (meta.error || meta.warning) && (
       <div className={styles.FormField__error}>
         <FormFieldError
           error={meta.error || meta.warning}
         />
       </div>
-    }
+    )}
   </div>
 );
 

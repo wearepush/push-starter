@@ -1,4 +1,3 @@
-/* eslint-disable */
 import 'babel-polyfill';
 
 import React from 'react';
@@ -51,11 +50,12 @@ if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
   if (
-    !config.ssr &&
-    (
-      !dest || !dest.firstChild ||
-      !dest.firstChild.attributes ||
-      !dest.firstChild.attributes['data-react-checksum']
+    !config.ssr
+    && (
+      !dest
+      || !dest.firstChild
+      || !dest.firstChild.attributes
+      || !dest.firstChild.attributes['data-react-checksum']
     )
   ) {
     console.error('Server-side React render was discarded.');

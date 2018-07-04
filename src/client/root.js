@@ -1,11 +1,10 @@
-/* eslint-disable */
 import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import { ConnectedRouter } from 'react-router-redux';
 import {} from './normalize.scss';
-import {} from './../styles/layout/_base.scss';
+import {} from './../styles/layout/_base.scss'; // eslint-disable-line
 
 const Root = ({
   history,
