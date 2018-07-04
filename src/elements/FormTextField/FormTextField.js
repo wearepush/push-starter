@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import { bool, object, oneOf, string } from 'prop-types';
 import { Field } from 'redux-form/immutable';

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { func, object } from 'prop-types';

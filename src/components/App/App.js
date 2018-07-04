@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';

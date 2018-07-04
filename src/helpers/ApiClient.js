@@ -1,5 +1,7 @@
+/* eslint-disable */
+
 import axios from 'axios';
-import config from './../config';
+import config from '../config';
 
 if (config.env === 'test') {
   const httpAdapter = require('axios/lib/adapters/http');

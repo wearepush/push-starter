@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';

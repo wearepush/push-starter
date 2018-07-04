@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint-disable react/no-danger */
 import React from 'react';
 import { object, node } from 'prop-types';

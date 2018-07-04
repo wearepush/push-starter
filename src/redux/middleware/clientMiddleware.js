@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { fromJS } from 'immutable';
 
 export default function clientMiddleware(client) {

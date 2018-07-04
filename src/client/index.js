@@ -1,3 +1,4 @@
+/* eslint-disable */
 import 'babel-polyfill';
 
 import React from 'react';
@@ -6,10 +7,10 @@ import createHistory from 'history/createBrowserHistory';
 import transit from 'transit-immutable-js';
 
 import Root from './root';
-import ApiClient from './../helpers/ApiClient';
-import getRoutes from './../routes';
-import config from './../config';
-import configureStore from './../redux/store';
+import ApiClient from '../helpers/ApiClient';
+import getRoutes from '../routes';
+import config from '../config';
+import configureStore from '../redux/store';
 
 const client = new ApiClient();
 const initialState = transit.fromJSON(window.__INITIAL_STATE__);
@@ -50,12 +51,10 @@ if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
   if (
-    !config.ssr
-    &&
-    (!dest || !dest.firstChild
-      ||
-      !dest.firstChild.attributes
-      ||
+    !config.ssr &&
+    (
+      !dest || !dest.firstChild ||
+      !dest.firstChild.attributes ||
       !dest.firstChild.attributes['data-react-checksum']
     )
   ) {

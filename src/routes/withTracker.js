@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import GoogleAnalytics from 'react-ga';

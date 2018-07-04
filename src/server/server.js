@@ -1,3 +1,4 @@
+/* eslint-disable */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import { bool, node, shape, string } from 'prop-types';
 import { FormFieldLabel, FormFieldError } from '../index.js';

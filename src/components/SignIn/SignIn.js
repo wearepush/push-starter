@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import { reduxForm, SubmissionError, Form } from 'redux-form/immutable';
 import { func, string } from 'prop-types';
