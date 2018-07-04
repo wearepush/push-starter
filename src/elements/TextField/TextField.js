@@ -4,6 +4,8 @@ import cx from 'classnames';
 import styles from './TextField.scss';
 
 export default class TextField extends PureComponent {
+  isControlled = null;
+
   static propTypes = {
     /**
     * If `true`, the component is active.
@@ -217,8 +219,6 @@ export default class TextField extends PureComponent {
     this.props.onKeyUp && this.props.onKeyUp(event, value);
     return true;
   }
-
-  isControlled = null;
 
   isEmpty() {
     if (this.props.type === 'number') {

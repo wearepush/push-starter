@@ -1,4 +1,4 @@
-import { App } from './../components';
+import { App } from '../components';
 import { Home, UI, Users, NotFound } from './routes';
 import withTracker from './withTracker';
 

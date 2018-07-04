@@ -6,10 +6,10 @@ import createHistory from 'history/createBrowserHistory';
 import transit from 'transit-immutable-js';
 
 import Root from './root';
-import ApiClient from './../helpers/ApiClient';
-import getRoutes from './../routes';
-import config from './../config';
-import configureStore from './../redux/store';
+import ApiClient from '../helpers/ApiClient';
+import getRoutes from '../routes';
+import config from '../config';
+import configureStore from '../redux/store';
 
 const client = new ApiClient();
 const initialState = transit.fromJSON(window.__INITIAL_STATE__);
@@ -51,12 +51,11 @@ if (process.env.NODE_ENV !== 'production') {
 
   if (
     !config.ssr
-    &&
-    (!dest || !dest.firstChild
-      ||
-      !dest.firstChild.attributes
-      ||
-      !dest.firstChild.attributes['data-react-checksum']
+    && (
+      !dest
+      || !dest.firstChild
+      || !dest.firstChild.attributes
+      || !dest.firstChild.attributes['data-react-checksum']
     )
   ) {
     console.error('Server-side React render was discarded.');
