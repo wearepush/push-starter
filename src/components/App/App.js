@@ -3,9 +3,10 @@ import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';
 
 import { Header, Footer } from '../index';
+import withDevice from './withDevice';
 import styles from './App.scss';
 
-const App = ({
+export const App = ({
   route: {
     routes
   }
@@ -27,4 +28,6 @@ App.defaultProps = {
   route: object,
 };
 
-export default App;
+export default withDevice(
+  App
+);
