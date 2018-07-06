@@ -26,11 +26,14 @@ const vendor = [
   'react-helmet',
   'redux-form/immutable',
   'lru-memoize',
-  'react-ga'
+  'react-ga',
+  'current-device',
+  'detect-browser'
 ];
 
 const config = {
   devtool: false,
+
   entry: { vendor },
 
   output: {
