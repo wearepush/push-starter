@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { reduxForm, SubmissionError, Form } from 'redux-form/immutable';
+import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -30,7 +30,7 @@ class SignIn extends PureComponent {
   };
 
   onSubmit = (values) => { // eslint-disable-line
-    console.log(values.toJS());
+    console.log(values);
     return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
         throw new SubmissionError({

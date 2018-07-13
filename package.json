@@ -1,7 +1,7 @@
 {
   "name": "redux-starter",
   "description": "React 16, React Router 4, Redux, Webpack 4, Express, Server side rendering",
-  "version": "1.0.0-beta.21",
+  "version": "1.0.0-beta.22",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -48,7 +48,6 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "history": "^4.7.2",
-    "immutable": "^3.8.2",
     "lodash": "^4.17.10",
     "lru-memoize": "^1.0.2",
     "prop-types": "^15.6.2",
@@ -64,10 +63,7 @@
     "redbox-react": "^1.6.0",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
-    "redux-immutablejs": "^0.0.8",
-    "serve-favicon": "^2.5.0",
-    "transit-immutable-js": "^0.7.0",
-    "transit-js": "^0.8.861"
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.5",

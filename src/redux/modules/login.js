@@ -1,5 +1,3 @@
-import { fromJS } from 'immutable';
-
 export const STATE_KEY = 'login';
 
 export const CLEAR = `${STATE_KEY}/CLEAR`;
@@ -8,37 +6,35 @@ export const LOAD = `${STATE_KEY}/LOAD`;
 export const LOAD_SUCCESS = `${STATE_KEY}/LOAD_SUCCESS`;
 export const LOAD_FAIL = `${STATE_KEY}/LOAD_FAIL`;
 
-const initialState = {
+export const initialState = {
   error: null,
   loading: false,
   loaded: false,
 };
 
-const initialImmutableState = fromJS(initialState);
-
-export default function reducer(state = initialImmutableState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   const { error } = action;
   switch (action.type) {
     case CLEAR:
-      return initialImmutableState;
+      return initialState;
     case LOAD:
-      return state.withMutations((mutableState) => {
-        mutableState.set('loading', true);
-      });
+      return {
+        ...state,
+        loading: true,
+      };
     case LOAD_SUCCESS:
-      return state.withMutations((mutableState) => {
-        mutableState
-          .set('loading', false)
-          .set('loaded', true)
-          .set('error', null);
-      });
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+      };
     case LOAD_FAIL:
-      return state.withMutations((mutableState) => {
-        mutableState
-          .set('loading', false)
-          .set('loaded', false)
-          .set('error', error);
-      });
+      return {
+        ...state,
+        error,
+        loading: false,
+        loaded: false,
+      };
     default:
       return state;
   }

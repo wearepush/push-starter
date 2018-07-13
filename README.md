@@ -23,7 +23,6 @@ The starter boilerplate includes the following technologies:
 | [Webpack 4](http://webpack.github.io)                                             | Module bundler                       |
 | [Universal Webpack](https://www.npmjs.com/package/universal-webpack)              | Helps setting up universal Webpack build: the one that's working both on client and server                                                |
 | [Redux](http://redux.js.org/)                                                     | Redux is a predictable state container for JavaScript apps                           |
-| [Redux Immutable](https://github.com/gajus/redux-immutablejs)                     | Redux & Immutable integration                                                          |
 | [React Router Redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)               | Simple bindings to keep react-router and redux in sync                                        |
 | [ESLint](http://eslint.org)                                                       | The pluggable linting utility for JavaScript and JSX                                            |
 

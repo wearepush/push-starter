@@ -1,5 +1,5 @@
-import { reducer as form } from 'redux-form/immutable';
-import { combineReducers } from 'redux-immutablejs';
+import { combineReducers } from 'redux';
+import { reducer as form } from 'redux-form';
 import { routerReducer as router } from 'react-router-redux';
 
 import login, { STATE_KEY as LOGIN_STATE_KEY } from './modules/login';

@@ -1,11 +1,9 @@
 import nock from 'nock';
-import { fromJS } from 'immutable';
-
 import mockStore from '../../__mocks__/store';
 import config from '../../../config';
 
 import reducer, {
-  initialImmutableState,
+  initialState,
   STATE_KEY,
   CLEAR,
   LOAD,
@@ -24,9 +22,9 @@ let store;
 
 beforeEach(() => {
   store = mockStore(
-    fromJS({
-      [STATE_KEY]: initialImmutableState
-    })
+    {
+      [STATE_KEY]: initialState
+    }
   );
 });
 
@@ -38,21 +36,21 @@ afterEach(() => {
 describe(`${STATE_KEY} module`, () => {
   describe(`${STATE_KEY} reducer`, () => {
     it('should return initial state', () => {
-      expect(reducer(undefined, {})).toEqual(initialImmutableState);
+      expect(reducer(undefined, {})).toEqual(initialState);
     });
 
     it('should return clean initial state', () => {
       const action = {
         type: CLEAR
       };
-      expect(reducer(undefined, action)).toEqual(initialImmutableState);
+      expect(reducer(undefined, action)).toEqual(initialState);
     });
 
     it('should return loading status', () => {
       const action = {
         type: LOAD
       };
-      expect(reducer(undefined, action).toJS())
+      expect(reducer(undefined, action))
         .toEqual(
           expect.objectContaining({
             loading: true,
@@ -63,11 +61,11 @@ describe(`${STATE_KEY} module`, () => {
     it('should return success loaded status', () => {
       const action = {
         type: LOAD_SUCCESS,
-        result: fromJS({
+        result: {
           records: []
-        })
+        }
       };
-      expect(reducer(undefined, action).toJS())
+      expect(reducer(undefined, action))
         .toEqual(
           expect.objectContaining({
             records: [],
@@ -80,11 +78,11 @@ describe(`${STATE_KEY} module`, () => {
     it('should return failed loaded status', () => {
       const action = {
         type: LOAD_FAIL,
-        error: fromJS({
+        error: {
           message: 'failed'
-        })
+        }
       };
-      expect(reducer(undefined, action).toJS())
+      expect(reducer(undefined, action))
         .toEqual(
           expect.objectContaining({
             error: {
@@ -100,27 +98,27 @@ describe(`${STATE_KEY} module`, () => {
   describe(`${STATE_KEY} getters`, () => {
     it(`should return ${STATE_KEY} state`, () => {
       const state = store.getState();
-      expect(getUsers(state)).toBe(initialImmutableState);
+      expect(getUsers(state)).toBe(initialState);
     });
 
     it(`should return ${STATE_KEY} records state`, () => {
       const state = store.getState();
-      expect(getUsersRecords(state)).toBe(initialImmutableState.get('records'));
+      expect(getUsersRecords(state)).toBe(initialState.records);
     });
 
     it(`should return ${STATE_KEY} loading state`, () => {
       const state = store.getState();
-      expect(getUsersLoading(state)).toBe(initialImmutableState.get('loading'));
+      expect(getUsersLoading(state)).toBe(initialState.loading);
     });
 
     it(`should return ${STATE_KEY} loaded state`, () => {
       const state = store.getState();
-      expect(getUsersLoaded(state)).toBe(initialImmutableState.get('loaded'));
+      expect(getUsersLoaded(state)).toBe(initialState.loaded);
     });
 
     it(`should return ${STATE_KEY} error state`, () => {
       const state = store.getState();
-      expect(getUsersError(state)).toBe(initialImmutableState.get('error'));
+      expect(getUsersError(state)).toBe(initialState.error);
     });
   });
 
@@ -133,7 +131,7 @@ describe(`${STATE_KEY} module`, () => {
         data = reducer(undefined, action);
         return true;
       });
-      expect(data).toEqual(initialImmutableState);
+      expect(data).toEqual(initialState);
     });
 
     it('should return success loaded', () => {
@@ -155,7 +153,7 @@ describe(`${STATE_KEY} module`, () => {
             data = reducer(undefined, action);
             return true;
           });
-          expect(data.toJS()).toEqual(
+          expect(data).toEqual(
             expect.objectContaining({
               ...payload,
               error: null,
@@ -185,7 +183,7 @@ describe(`${STATE_KEY} module`, () => {
             data = reducer(undefined, action);
             return true;
           });
-          expect(data.toJS()).toEqual(
+          expect(data).toEqual(
             expect.objectContaining({
               ...payload,
               loading: false,

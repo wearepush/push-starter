@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submit } from 'redux-form/immutable';
+import { submit } from 'redux-form';
 import { func, string } from 'prop-types';
 import { Button } from '../index.js';
 

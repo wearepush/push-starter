@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { reduxForm } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form';
 import { noop } from 'lodash';
 import formStore from '../../../redux/__mocks__/formStore.js';
 import { TextField, FormField, FormTextField } from '../../index.js';

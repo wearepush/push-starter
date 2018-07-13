@@ -62,7 +62,6 @@ export function phone(value) { // eslint-disable-line
 
 export function createValidator(rules, section, activate) {
   return (data = {}) => {
-    data = data.toJS ? data.toJS() : data; // eslint-disable-line
     data = section && data.section ? data[section] : data; // eslint-disable-line
     if (activate && typeof data[activate] !== 'undefined') {
       if (!data[activate]) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { array, bool, object, node, number, oneOfType, string } from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import { Field } from 'redux-form';
 import { FormField, Checkbox } from '../index.js';
 
 const FormCheckbox = ({
