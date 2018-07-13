@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { func, object } from 'prop-types';
+import { array, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { clearUsers, loadUsers, getUsersRecords } from '../../redux/modules/users';
 
@@ -21,7 +21,7 @@ class Users extends Component {
   static propTypes = {
     clearUsers: func.isRequired,
     loadUsers: func.isRequired,
-    records: object.isRequired
+    records: array.isRequired
   }
 
   componentDidMount() {
@@ -52,8 +52,8 @@ class Users extends Component {
         <div>
           {
             records.map((c) => (
-              <div key={c.get('id')}>
-                <span>{c.get('name')}</span>
+              <div key={c.id}>
+                <span>{c.name}</span>
               </div>
             ))
           }

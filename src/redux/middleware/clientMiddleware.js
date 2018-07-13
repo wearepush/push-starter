@@ -1,5 +1,4 @@
-import { fromJS } from 'immutable';
-
+// TODO: implement the logger
 export default function clientMiddleware(client) {
   return ({ dispatch, getState }) => next => (action) => {
     if (typeof action === 'function') {
@@ -15,11 +14,11 @@ export default function clientMiddleware(client) {
 
     const actionPromise = promise(client);
     actionPromise.then(
-      result => next({ ...rest, result: fromJS(result.data), type: SUCCESS }),
-      ({ response = {} }) => next({ ...rest, error: fromJS(response.data), type: FAILURE })
+      result => next({ ...rest, result: result.data, type: SUCCESS }),
+      ({ response = {} }) => next({ ...rest, error: response.data, type: FAILURE })
     ).catch(({ response = {} }) => {
       console.error('MIDDLEWARE ERROR:', response);
-      next({ ...rest, error: fromJS(response.data), type: FAILURE });
+      next({ ...rest, error: response.data, type: FAILURE });
     });
     return actionPromise;
   };

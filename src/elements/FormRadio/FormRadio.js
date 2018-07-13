@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, object, node, string } from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import { Field } from 'redux-form';
 import { FormField, Radio } from '../index.js';
 
 const FormRadio = ({
