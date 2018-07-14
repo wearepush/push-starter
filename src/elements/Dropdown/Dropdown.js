@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { array, bool, node } from 'prop-types';
 import cx from 'classnames';
 import styles from './Dropdown.scss';
@@ -60,7 +59,7 @@ export default class Dropdown extends Component {
     const { isOpen } = this.state;
     const { children } = this.props;
     if (!this.containerInstance.current || !isOpen) return null;
-    return ReactDOM.createPortal(
+    return (
       <ul
         className={cx(styles.dropdown__menu, {
           [styles['dropdown__menu--is-open']]: isOpen
@@ -71,9 +70,7 @@ export default class Dropdown extends Component {
             children.map((child, index) => <li className={styles['dropdown__menu-item']} key={index}>{child}</li>) :
             <li>No data</li>
         }
-      </ul>,
-      this.containerInstance.current
-    );
+      </ul>);
   }
 
   render() {
@@ -94,8 +91,8 @@ export default class Dropdown extends Component {
           className={styles.drppdown__trigger}
         >
           {trigger}
-          {this.renderDrop()}
         </div>
+        {this.renderDrop()}
       </div>
     );
   }

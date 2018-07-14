@@ -68,3 +68,8 @@ export function loadImages(arr) {
 
   return Promise.all(arr.map(c => createImg(c)));
 }
+
+
+export function canUseDOM() {
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+}
