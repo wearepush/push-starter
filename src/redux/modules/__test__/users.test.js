@@ -5,17 +5,10 @@ import config from '../../../config';
 import reducer, {
   initialState,
   STATE_KEY,
-  CLEAR,
-  LOAD,
-  LOAD_SUCCESS,
-  LOAD_FAIL,
-  clearUsers,
-  loadUsers,
-  getUsers,
-  getUsersRecords,
-  getUsersLoading,
-  getUsersLoaded,
-  getUsersError,
+  ACTIONS_TYPES,
+  ACTIONS,
+  GETTERS,
+  SELECTORS,
 } from '../users';
 
 let store;
@@ -41,14 +34,14 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return clean initial state', () => {
       const action = {
-        type: CLEAR
+        type: ACTIONS_TYPES.CLEAR
       };
       expect(reducer(undefined, action)).toEqual(initialState);
     });
 
     it('should return loading status', () => {
       const action = {
-        type: LOAD
+        type: ACTIONS_TYPES.LOAD
       };
       expect(reducer(undefined, action))
         .toEqual(
@@ -60,7 +53,7 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return success loaded status', () => {
       const action = {
-        type: LOAD_SUCCESS,
+        type: ACTIONS_TYPES.LOAD_SUCCESS,
         result: {
           records: []
         }
@@ -77,7 +70,7 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return failed loaded status', () => {
       const action = {
-        type: LOAD_FAIL,
+        type: ACTIONS_TYPES.LOAD_FAIL,
         error: {
           message: 'failed'
         }
@@ -98,33 +91,55 @@ describe(`${STATE_KEY} module`, () => {
   describe(`${STATE_KEY} getters`, () => {
     it(`should return ${STATE_KEY} state`, () => {
       const state = store.getState();
-      expect(getUsers(state)).toBe(initialState);
+      expect(GETTERS.getUsers(state)).toBe(initialState);
     });
 
     it(`should return ${STATE_KEY} records state`, () => {
       const state = store.getState();
-      expect(getUsersRecords(state)).toBe(initialState.records);
+      expect(GETTERS.getUsersRecords(state)).toBe(initialState.records);
     });
 
     it(`should return ${STATE_KEY} loading state`, () => {
       const state = store.getState();
-      expect(getUsersLoading(state)).toBe(initialState.loading);
+      expect(GETTERS.getUsersLoading(state)).toBe(initialState.loading);
     });
 
     it(`should return ${STATE_KEY} loaded state`, () => {
       const state = store.getState();
-      expect(getUsersLoaded(state)).toBe(initialState.loaded);
+      expect(GETTERS.getUsersLoaded(state)).toBe(initialState.loaded);
     });
 
     it(`should return ${STATE_KEY} error state`, () => {
       const state = store.getState();
-      expect(getUsersError(state)).toBe(initialState.error);
+      expect(GETTERS.getUsersError(state)).toBe(initialState.error);
+    });
+  });
+
+  describe(`${STATE_KEY} selectors`, () => {
+    it(`should return ${STATE_KEY} list`, () => {
+      const state = store.getState();
+      expect(SELECTORS.usersRecords(state)).toEqual([]);
+    });
+
+    it(`should return ${STATE_KEY} loading state`, () => {
+      const state = store.getState();
+      expect(SELECTORS.usersLoading(state)).toBe(false);
+    });
+
+    it(`should return ${STATE_KEY} loaded state`, () => {
+      const state = store.getState();
+      expect(SELECTORS.usersLoaded(state)).toBe(false);
+    });
+
+    it(`should return ${STATE_KEY} error state`, () => {
+      const state = store.getState();
+      expect(SELECTORS.usersError(state)).toBe(null);
     });
   });
 
   describe(`${STATE_KEY} actions`, () => {
     it('should return clean initial state', () => {
-      store.dispatch(clearUsers());
+      store.dispatch(ACTIONS.clear());
       const actions = store.getActions();
       let data = null;
       actions.map(action => {
@@ -145,7 +160,7 @@ describe(`${STATE_KEY} module`, () => {
         .get('/api/users')
         .reply(200, payload);
 
-      store.dispatch(loadUsers())
+      store.dispatch(ACTIONS.load())
         .then(() => {
           const actions = store.getActions();
           let data = null;
@@ -175,7 +190,7 @@ describe(`${STATE_KEY} module`, () => {
         .get('/api/users')
         .reply(400, payload);
 
-      store.dispatch(loadUsers())
+      store.dispatch(ACTIONS.load())
         .then(() => {
           const actions = store.getActions();
           let data = null;
