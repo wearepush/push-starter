@@ -31,6 +31,7 @@ const FormTextField = ({
         placeholder={placeholder}
         type={type}
         value={input.value}
+        valid={meta.valid}
       />
     </FormField>
   );

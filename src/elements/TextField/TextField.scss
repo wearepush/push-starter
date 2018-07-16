@@ -22,6 +22,10 @@ $TextField: 'TextField';
 
     &.is-not-empty {
     }
+
+    &.is-valid {
+      border-color: #0BB07B;
+    }
   }
 
   &__input {

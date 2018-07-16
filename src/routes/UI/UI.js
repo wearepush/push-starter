@@ -62,6 +62,14 @@ const UI = () => {
         placeholder="TextField placeholder 0"
         type="text"
       />
+      <h2>Valid TextField</h2>
+      <TextField
+        defaultValue="Placeholder"
+        name="textfield-0"
+        placeholder="TextField placeholder 0"
+        type="text"
+        valid
+      />
       <h2>{'TextField\'s API'}</h2>
       <TextField
         name="textfield-1"

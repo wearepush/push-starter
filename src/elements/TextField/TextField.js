@@ -102,6 +102,10 @@ export default class TextField extends PureComponent {
       number,
       string,
     ]),
+    /**
+    * If `true`, the component is invalid.
+    */
+    valid: bool,
   };
 
   static defaultProps = {
@@ -123,6 +127,7 @@ export default class TextField extends PureComponent {
     tabIndex: null,
     type: 'text',
     value: undefined,
+    valid: false,
   };
 
   constructor(props, context) {
@@ -253,6 +258,7 @@ export default class TextField extends PureComponent {
       tabIndex,
       type,
       value,
+      valid,
     } = this.props;
 
     const active = this.isActive();
@@ -268,6 +274,7 @@ export default class TextField extends PureComponent {
             'is-empty': empty,
             'is-invalid': invalid,
             'is-not-empty': !empty,
+            'is-valid': valid,
           })
         }
         defaultValue={defaultValue}
@@ -294,6 +301,7 @@ export default class TextField extends PureComponent {
       className: classNameProp,
       disabled,
       invalid,
+      valid,
     } = this.props;
 
     const active = this.isActive();
@@ -306,6 +314,7 @@ export default class TextField extends PureComponent {
       'is-disabled': disabled,
       'is-invalid': invalid,
       'is-not-empty': !empty,
+      'is-valid': valid,
     });
 
     return (

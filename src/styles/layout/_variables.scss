@@ -7,7 +7,7 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
+$base-border-radius: 4px;
 $base-spacing: 1.5em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
@@ -17,14 +17,22 @@ $blue: #1565c0;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$white: #fff;
+$color-grey: #F1F2F4;
+$color-athens-grey: #E1E4E8;
+$color-down-river: #0A1F44;
+$color-cadet-blue: #A6AEBC;
+$color-azure: #007FFF;
+$color-niagara: #0BB07B;
 
 // Font Colors
-$base-font-color: $dark-gray;
-$action-color: $blue;
+$base-font-color: $color-down-river;
+$action-color: $color-azure;
 
 // Border
-$base-border-color: $light-gray;
+$base-border-color: $color-athens-grey;
 $base-border: 1px solid $base-border-color;
+$base-border-focus: 2px;
 
 // Background Colors
 $viewport-background-color: #fff;
