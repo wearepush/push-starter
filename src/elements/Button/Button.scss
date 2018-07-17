@@ -1,13 +1,17 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
+
 $Button: 'Button';
 
 .#{$Button} {
 
   &:global {
+
     &.is-disabled {
-      opacity: 0.3;
+      background-color: $color-grey;
+      // color: $color-cadet-blue;
+      cursor: not-allowed;
     }
 
     &.is-full-width {
