@@ -14,6 +14,7 @@ describe('Button', () => {
       expect(button.name()).toEqual('button');
       expect(button.prop('tabIndex')).toEqual(0);
       expect(button.prop('role')).toEqual(undefined);
+      expect(button.prop('state')).toEqual('');
     });
 
     it('should render with type prop', () => {
@@ -169,6 +170,19 @@ describe('Button', () => {
       );
       expect(button.props()['data-test']).toEqual('test');
     });
+
+     it('should render state', () => {
+      const button = shallow(
+        <Button
+          state='danger'
+        >
+          Button
+        </Button>
+      );
+      expect(button.hasClass('danger')).toBe(true);
+      expect(button.props()['state']).toEqual('danger');
+    });
+
 
     it('should handle events', () => {
       const onClickSpy = jest.fn();

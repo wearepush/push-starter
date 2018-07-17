@@ -10,8 +10,11 @@ $Button: 'Button';
 
     &.is-disabled {
       background-color: $color-grey;
-      // color: $color-cadet-blue;
       cursor: not-allowed;
+
+      &:hover {
+        background-color: $color-grey;
+      }
     }
 
     &.is-full-width {
@@ -28,6 +31,33 @@ $Button: 'Button';
 
     &.is-size-large {
       font-size: 16px;
+    }
+
+    &.danger {
+      background-color: $color-pamegranate;
+
+      &:hover,
+      &:focus {
+        background-color: $color-bittersweet;
+      }
+    }
+
+    &.primary {
+      background-color: $color-blue-ribbon;
+
+      &:hover,
+      &:focus {
+        background-color: $color-azure;
+      }
+    }
+
+    &.success {
+      background-color: $color-niagara;
+
+      &:hover,
+      &:focus {
+        background-color: $color-mountain;
+      }
     }
   }
 }

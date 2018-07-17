@@ -18,7 +18,9 @@ const UI = () => {
       <h1>This is example of ui library</h1>
       <hr />
       <h2>Button</h2>
-      <Button>
+      <Button
+        state="primary"
+      >
         Button
       </Button>
       <Button
@@ -29,11 +31,13 @@ const UI = () => {
       </Button>
       <Button
         fullWidth
+        state="danger"
       >
         Full Width Button
       </Button>
       <Button
         size="small"
+        state="success"
       >
         Small Button
       </Button>
