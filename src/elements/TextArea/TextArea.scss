@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$TextArea: 'TextArea';
+
+.#{$TextArea} {
+
+  &:global {
+    &.is-active {
+    }
+
+    &.is-disabled {
+      opacity: 0.3;
+    }
+
+    &.is-invalid {
+      color: red;
+    }
+
+    &.is-empty {
+    }
+
+    &.is-not-empty {
+    }
+  }
+
+  &__input {
+  }
+}
