@@ -171,16 +171,16 @@ describe('Button', () => {
       expect(button.props()['data-test']).toEqual('test');
     });
 
-     it('should render state', () => {
+    it('should render state', () => {
       const button = shallow(
         <Button
-          state='danger'
+          state="danger"
         >
           Button
         </Button>
       );
       expect(button.hasClass('danger')).toBe(true);
-      expect(button.props()['state']).toEqual('danger');
+      expect(button.props().state).toEqual('danger');
     });
 
 
