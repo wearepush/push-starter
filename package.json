@@ -1,7 +1,7 @@
 {
   "name": "redux-starter",
   "description": "React 16, React Router 4, Redux, Webpack 4, Express, Server side rendering",
-  "version": "1.0.0-beta.22",
+  "version": "1.0.0-beta.23",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -67,7 +67,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "autoprefixer": "^8.6.5",
+    "autoprefixer": "^9.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",

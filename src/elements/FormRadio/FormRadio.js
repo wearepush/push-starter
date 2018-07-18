@@ -17,7 +17,6 @@ const FormRadio = ({
   const _id = id || `${input.name}-${JSON.stringify(input.value)}`; // replace to hash
   return (
     <FormField
-      meta={meta}
       label={label}
       name={_id}
     >

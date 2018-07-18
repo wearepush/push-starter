@@ -18,7 +18,6 @@ const FormCheckbox = ({
   const _id = id || input.name;
   return (
     <FormField
-      meta={meta}
       label={label}
       name={_id}
     >
