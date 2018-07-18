@@ -30,6 +30,17 @@ describe('TextArea', () => {
       expect(input.hasClass('is-invalid')).toBe(true);
     });
 
+    it('should render with valid prop', () => {
+      const input = shallow(
+        <TextArea
+          valid
+          name="name"
+          placeholder="placeholder"
+        />
+      );
+      expect(input.hasClass('is-valid')).toBe(true);
+    });
+
     it('should render with disabled prop', () => {
       const onBlurSpy = jest.fn();
       const onChangeSpy = jest.fn();
@@ -77,17 +88,6 @@ describe('TextArea', () => {
         <TextArea
           name="name"
           placeholder="placeholder"
-        />
-      );
-      expect(input.hasClass('is-empty')).toBe(true);
-    });
-
-    it('should render with empty prop input number', () => {
-      const input = shallow(
-        <TextArea
-          name="name"
-          placeholder="placeholder"
-          type="number"
         />
       );
       expect(input.hasClass('is-empty')).toBe(true);

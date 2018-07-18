@@ -24,7 +24,11 @@ $Checkbox: 'Checkbox';
     }
 
     &.is-invalid {
-
+      & :local {
+        .#{$Checkbox}__placeholder {
+          color: $color-pamegranate;
+        }
+      }
     }
 
     &.is-unchecked {
@@ -41,7 +45,7 @@ $Checkbox: 'Checkbox';
     line-height: 18px;
 
     &:hover {
-      .Checkbox__icon {
+      .#{$Checkbox}__icon {
         border-color: $color-blue-ribbon;
       }
     }

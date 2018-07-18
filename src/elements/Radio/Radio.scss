@@ -24,7 +24,11 @@ $Radio: 'Radio';
     }
 
     &.is-invalid {
-      color: red;
+      & :local {
+        .#{$Radio}__placeholder {
+          color: $color-pamegranate;
+        }
+      }
     }
 
     &.is-unchecked {

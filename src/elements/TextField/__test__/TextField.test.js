@@ -89,6 +89,17 @@ describe('TextField', () => {
       expect(input.hasClass('is-invalid')).toBe(true);
     });
 
+    it('should render with valid prop', () => {
+      const input = shallow(
+        <TextField
+          valid
+          name="name"
+          placeholder="placeholder"
+        />
+      );
+      expect(input.hasClass('is-valid')).toBe(true);
+    });
+
     it('should render with disabled prop', () => {
       const onBlurSpy = jest.fn();
       const onChangeSpy = jest.fn();
