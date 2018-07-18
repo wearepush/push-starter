@@ -1,23 +1,34 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { oneOf, string } from 'prop-types';
+import cx from 'classnames';
 import styles from './FormFieldError.scss';
 
 const FormFieldError = ({
-  error,
+  text,
+  type,
 }) => (
   <div
-    className={styles.FormFieldError}
+    className={
+      cx(styles.FormFieldError, {
+        [`is-${type}`]: !!type,
+      })
+    }
   >
-    {error}
+    {text}
   </div>
 );
 
 FormFieldError.propTypes = {
-  error: string,
+  text: string,
+  type: oneOf([
+    'error',
+    'warning',
+  ]),
 };
 
 FormFieldError.defaultProps = {
-  error: '',
+  text: '',
+  type: 'error',
 };
 
 export default FormFieldError;

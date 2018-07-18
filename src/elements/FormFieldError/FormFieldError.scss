@@ -4,6 +4,13 @@
 $FormFieldError: 'FormFieldError';
 
 .#{$FormFieldError} {
+  &:global {
+    &.is-error {
+      color: $color-pamegranate;
+    }
 
-  color: $color-pamegranate;
+    &.is-warning {
+      color: orange;
+    }
+  }
 }
