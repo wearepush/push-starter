@@ -20,7 +20,7 @@ select,
 textarea {
   display: block;
   font-family: $base-font-family;
-  font-size: 16px;
+  font-size: 14px;
 
   &:-webkit-autofill,
   &:-webkit-autofill,
@@ -39,9 +39,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   border: $base-border;
   border-radius: $base-border-radius;
   box-sizing: border-box;
-  margin-bottom: $small-spacing;
-  padding: 16px 16px 12px;
-  transition: border-color $base-duration $base-timing;
+  padding: 15px 16px;
+  transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
   width: 100%;
 
   &:hover {
@@ -58,8 +57,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: $color-grey;
     cursor: not-allowed;
 
-    &:hover {
+    &:focus {
       border: $base-border;
+    }
+
+    &::placeholder {
+      color: $color-cadet-blue;
     }
   }
 
@@ -74,7 +77,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   &.is-invalid {
     border-color: $color-pamegranate;
 
-
     &:focus {
       box-shadow: 0px 0px 0px 1px $color-pamegranate;
     }
@@ -86,7 +88,25 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 textarea {
-  resize: vertical;
+  border: 1px solid $color-athens-grey;
+  border-radius: $base-border-radius;
+  color: $color-down-river;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 13px 16px;
+  resize: none;
+  transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
+  width: 100%;
+
+  &::placeholder {
+    color: $color-cadet-blue;
+  }
+
+  &:focus {
+    border-color: $color-azure;
+    box-shadow: 0px 0px 0px 1px $color-azure;
+    outline: none;
+  }
 }
 
 [type="checkbox"] {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Checkbox, Button, Radio, TextField } from '../../elements';
+import { Checkbox, Button, Radio, TextField, TextArea } from '../../elements';
 
 const UI = () => {
   const title = 'Redux Starter. UI';
@@ -66,6 +66,13 @@ const UI = () => {
         placeholder="TextField placeholder 0"
         type="text"
       />
+      <h2>Disabled TextField</h2>
+      <TextField
+        disabled
+        name="textfield-0"
+        placeholder="Input disabled"
+        type="text"
+      />
       <h2>Valid TextField</h2>
       <TextField
         defaultValue="Placeholder"
@@ -89,6 +96,18 @@ const UI = () => {
         }}
       />
       <hr />
+      <h2>TextArea</h2>
+      <TextArea
+        name="textarea-0"
+        placeholder="Textarea placeholder 0"
+      />
+      <h2>Disabled TextArea</h2>
+      <TextArea
+        disabled
+        name="textarea-1"
+        placeholder="Textarea disabled"
+      />
+      <hr />
       <div>
         <h2>Checkbox</h2>
         <Checkbox
@@ -98,6 +117,13 @@ const UI = () => {
         <h2>Checkbox with custom render</h2>
         <Checkbox
           name="checkbox-1"
+          placeholder="Checkbox placeholder"
+          custom
+        />
+        <h2>Checkbox with disabled custom render</h2>
+        <Checkbox
+          disabled
+          name="checkbox-3"
           placeholder="Checkbox placeholder"
           custom
         />
@@ -151,6 +177,13 @@ const UI = () => {
           placeholder="Radio placeholder 3"
           custom
           value="2"
+        />
+        <Radio
+          name="radio-1"
+          placeholder="Radio placeholder 3"
+          custom
+          disabled
+          value="3"
         />
         <h2>Radio with custom icons</h2>
         <Radio

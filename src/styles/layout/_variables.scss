@@ -1,5 +1,5 @@
 // Typography
-$base-font-family: $font-stack-system;
+$base-font-family: 'Lato', sans-serif;
 $heading-font-family: $base-font-family;
 
 // Line height
@@ -29,9 +29,11 @@ $color-pamegranate: #F03D3D;
 $color-bittersweet: #FF5D5D;
 $color-blue-ribbon: #0C66FF;
 $color-mountain: #22C993;
+$color-yellow: #FFAD0D;
+$color-ghost: #C9CED6;
+$color-denim: #0D55CF;
 
-//Font
-$base-font: 'Lato', sans-serif;
+
 
 // Font Colors
 $base-font-color: $color-down-river;
@@ -56,4 +58,4 @@ $base-timing: ease;
 
 
 //Label
-$bas-label-color: $color-bayoux;
+$base-label-color: $color-bayoux;

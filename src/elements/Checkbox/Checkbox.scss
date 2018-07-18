@@ -4,17 +4,27 @@
 $Checkbox: 'Checkbox';
 
 .#{$Checkbox} {
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
 
   &:global {
     &.is-active {
+      box-shadow: none;
+      outline: 0;
     }
 
     &.is-disabled {
-      opacity: 0.3;
+      label {
+        cursor: not-allowed;
+      }
     }
 
     &.is-invalid {
-      color: red;
+
     }
 
     &.is-unchecked {
@@ -23,25 +33,89 @@ $Checkbox: 'Checkbox';
     &.is-checked {
     }
 
+  }
 
+  label {
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 18px;
+
+    &:hover {
+      .Checkbox__icon {
+        border-color: $color-blue-ribbon;
+      }
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
   }
 
   &__icon {
     display: inline-block;
+    vertical-align: middle;
 
     &:global {
       &.is-default-icon {
         width: 18px;
         height: 18px;
-        border: 1px solid black;
-        vertical-align: middle;
+        border: 2px solid $color-blue-ribbon;
+        border-radius: 3px;
+        position: relative;
+        transition: border-color $base-duration $base-timing, background-color $base-duration $base-timing;
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 4px;
+          left: 3px;
+          width: 9px;
+          height: 5px;
+          border: 2px solid transparent;
+          border-top-style: none;
+          border-right-style: none;
+          transform: rotate(-45deg);
+        }
+
+        &:hover {
+          background-color: $white;
+          border-color: $color-blue-ribbon;
+        }
 
         &.is-checked {
-          background-color: black;
+          background-color: $color-blue-ribbon;
+
+          &:after {
+            border-color: $white;
+          }
         }
 
         &.is-unchecked {
-          background-color: white;
+          background-color: $white;
+          border-color: $color-ghost;
+        }
+
+        &.is-disabled {
+          background-color: $white;
+          border-color: $color-athens-grey !important;
+          cursor: not-allowed;
+
+          &:after {
+            background-color: $color-athens-grey;
+            border: 0;
+            height: 2px;
+            width: 8px;
+            transform: rotate(0) translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+          }
+
+          &:hover {
+            background-color: $white;
+            border-color: $color-athens-grey;
+          }
         }
       }
 
@@ -52,19 +126,30 @@ $Checkbox: 'Checkbox';
         }
 
         &.is-unchecked {
-          background-color: white;
-          color: black;
+          background-color: $white;
+          border-color: $color-ghost;
         }
+
+
       }
     }
   }
 
   &__input {
     display: inline-block;
+
+    &:focus {
+      box-shadow: none;
+      outline: 0;
+    }
   }
 
   &__placeholder {
+    color: $color-bayoux;
     display: inline-block;
     vertical-align: middle;
+    font-size: 14px;
+    line-height: 18px;
+    padding-left: 13px;
   }
 }

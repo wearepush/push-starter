@@ -6,10 +6,9 @@ $FormFieldLabel: 'FormFieldLabel';
 .#{$FormFieldLabel} {
 
   &:global {
-    color: $bas-label-color;
-    font-size: 14px;
+    color: $base-label-color;
+    font-size: 12px;
     line-height: 16px;
-    font-family: $base-font;
     text-transform: capitalize;
     margin-bottom: 6px;
 

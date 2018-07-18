@@ -4,5 +4,16 @@
 $Footer: 'Footer';
 
 .#{$Footer} {
+  border-top: 1px solid $color-grey;
   display: flex;
+
+  &__container {
+    color: $color-bayoux;
+    font-size: 15px;
+    line-height: 17px;
+    padding: 0 15px;
+    margin: 48px auto;
+    max-width: 1140px;
+    width: 100%;
+  }
 }

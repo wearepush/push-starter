@@ -1,8 +1,11 @@
 import memoize from 'lru-memoize';
-import { createValidator, required } from '../../utils/validation';
+import { createValidator, required, email } from '../../utils/validation';
 
 const SignInFormValidation = createValidator({
-  username: [required],
-  password: [required]
+  username: [required, email],
+  password: [required],
+  description: [required],
+  gender: [required],
+  remember: [required],
 });
 export default memoize(10)(SignInFormValidation);

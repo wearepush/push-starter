@@ -14,7 +14,7 @@ $TextField: 'TextField';
     }
 
     &.is-invalid {
-      border-color: red;
+      border-color: $color-pamegranate;
     }
 
     &.is-empty {

@@ -86,6 +86,10 @@ export default class TextArea extends PureComponent {
       string,
     ]),
     /**
+    * If `true`, the component is invalid.
+    */
+    valid: bool,
+    /**
     * The value of the component.
     */
     value: oneOfType([
@@ -111,6 +115,7 @@ export default class TextArea extends PureComponent {
     onKeyUp: undefined,
     placeholder: '',
     tabIndex: null,
+    valid: false,
     value: undefined,
   };
 
@@ -223,6 +228,7 @@ export default class TextArea extends PureComponent {
       name,
       placeholder,
       tabIndex,
+      valid,
       value,
     } = this.props;
 
@@ -239,6 +245,7 @@ export default class TextArea extends PureComponent {
             'is-empty': empty,
             'is-invalid': invalid,
             'is-not-empty': !empty,
+            'is-valid': valid,
           })
         }
         defaultValue={defaultValue}
@@ -264,6 +271,7 @@ export default class TextArea extends PureComponent {
       className: classNameProp,
       disabled,
       invalid,
+      valid,
     } = this.props;
 
     const active = this.isActive();
@@ -276,6 +284,7 @@ export default class TextArea extends PureComponent {
       'is-disabled': disabled,
       'is-invalid': invalid,
       'is-not-empty': !empty,
+      'is-valid': valid,
     });
 
     return (
