@@ -2,6 +2,7 @@ import React from 'react';
 import { bool, object, string } from 'prop-types';
 import { Field } from 'redux-form';
 import { FormField, TextArea } from '../index.js';
+// import styles from './TextArea.scss';
 
 const FormTextArea = ({
   disabled,
@@ -28,6 +29,7 @@ const FormTextArea = ({
         onFocus={(event, value) => input.onFocus(value)}
         name={input.name}
         placeholder={placeholder}
+        valid={meta.valid}
         value={input.value}
       />
     </FormField>

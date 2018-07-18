@@ -5,6 +5,11 @@ $Radio: 'Radio';
 
 .#{$Radio} {
 
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+
   &:global {
     &.is-active {
     }
@@ -13,7 +18,9 @@ $Radio: 'Radio';
     }
 
     &.is-disabled {
-      opacity: 0.3;
+      label {
+        cursor: not-allowed;
+      }
     }
 
     &.is-invalid {
@@ -25,6 +32,21 @@ $Radio: 'Radio';
     }
   }
 
+  label {
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:hover {
+      .Radio__icon {
+        border-color: $color-blue-ribbon;
+      }
+    }
+  }
+
   &__icon {
     display: inline-block;
 
@@ -33,15 +55,53 @@ $Radio: 'Radio';
         border-radius: 50%;
         width: 18px;
         height: 18px;
-        border: 1px solid black;
+        border: 2px solid black;
         vertical-align: middle;
+        position: relative;
+        transition: border-color $base-duration $base-timing, background-color $base-duration $base-timing;
+
+        &:after {
+          content: '';
+          position: absolute;
+          height: 8px;
+          width: 8px;
+          background-color: transparent;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        &:hover {
+          border-color: $color-athens-grey;
+        }
 
         &.is-checked {
-          background-color: black;
+          background-color: $white;
+          border-color: $color-blue-ribbon;
+
+          &:after {
+            background-color: $color-blue-ribbon;
+          }
         }
 
         &.is-unchecked {
-          background-color: white;
+          background-color: $white;
+          border-color: $color-ghost;
+        }
+
+        &.is-disabled {
+          background-color: $white;
+          border-color: $color-athens-grey !important;
+          cursor: not-allowed;
+
+          &:after {
+            background-color: $color-athens-grey;
+          }
+
+          &:hover {
+            border-color: $color-athens-grey;
+          }
         }
       }
 
@@ -59,10 +119,19 @@ $Radio: 'Radio';
 
   &__input {
     display: inline-block;
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
   }
 
   &__placeholder {
+    color: $color-bayoux;
     display: inline-block;
     vertical-align: middle;
+    font-size: 14px;
+    line-height: 18px;
+    padding-left: 13px;
   }
 }

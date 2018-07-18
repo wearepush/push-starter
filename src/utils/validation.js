@@ -1,4 +1,4 @@
-const isEmpty = value => value === undefined || value === null || value === ''; // eslint-disable-line
+const isEmpty = value => value === undefined || value === null || value === '' || !value; // eslint-disable-line
 const join = (rules) => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0]; // eslint-disable-line
 
 export function email(value) { // eslint-disable-line

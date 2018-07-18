@@ -289,6 +289,7 @@ export default class Radio extends PureComponent {
                     'is-custom-icon': true,
                     'is-checked': checked,
                     'is-unchecked': !checked,
+                    'is-disabled': disabled,
                   })
                 }
               >
@@ -307,6 +308,7 @@ export default class Radio extends PureComponent {
                     'is-default-icon': true,
                     'is-checked': checked,
                     'is-unchecked': !checked,
+                    'is-disabled': disabled,
                   })
                 }
               />

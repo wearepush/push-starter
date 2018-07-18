@@ -10,11 +10,48 @@ $TextArea: 'TextArea';
     }
 
     &.is-disabled {
-      opacity: 0.3;
+      textarea {
+        background-color: $color-grey;
+        cursor: not-allowed;
+
+        &:focus {
+          border: $base-border;
+        }
+
+        &::placeholder {
+          color: $color-cadet-blue;
+        }
+      }
     }
 
     &.is-invalid {
-      color: red;
+      border-color: $color-pamegranate;
+
+      textarea {
+        border-color: $color-pamegranate;
+
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-pamegranate;
+        }
+      }
+    }
+
+    &.is-valid {
+      textarea {
+        border-color: $color-niagara;
+
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-niagara;
+        }
+      }
+    }
+
+    &.is-alert {
+      border-color: $color-yellow;
+
+      &:focus {
+        box-shadow: 0px 0px 0px 1px $color-yellow;
+      }
     }
 
     &.is-empty {

@@ -1,13 +1,20 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
+
 $Button: 'Button';
 
 .#{$Button} {
 
   &:global {
+
     &.is-disabled {
-      opacity: 0.3;
+      background-color: $color-grey;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: $color-grey;
+      }
     }
 
     &.is-full-width {
@@ -24,6 +31,33 @@ $Button: 'Button';
 
     &.is-size-large {
       font-size: 16px;
+    }
+
+    &.danger {
+      background-color: $color-pamegranate;
+
+      &:hover,
+      &:focus {
+        background-color: $color-bittersweet;
+      }
+    }
+
+    &.primary {
+      background-color: $color-blue-ribbon;
+
+      &:hover,
+      &:focus {
+        background-color: $color-azure;
+      }
+    }
+
+    &.success {
+      background-color: $color-niagara;
+
+      &:hover,
+      &:focus {
+        background-color: $color-mountain;
+      }
     }
   }
 }

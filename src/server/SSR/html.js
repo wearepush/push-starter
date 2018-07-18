@@ -84,6 +84,7 @@ const Html = ({
         )}
         {config.isProd && <link rel="preload" href={assets.javascript.vendor} as="script" />}
         {config.isProd && <link rel="preload" href={assets.javascript.main} as="script" />}
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />

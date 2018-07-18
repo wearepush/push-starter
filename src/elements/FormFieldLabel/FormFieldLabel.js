@@ -6,6 +6,7 @@ import styles from './FormFieldLabel.scss';
 const FormFieldLabel = ({
   active,
   invalid,
+  disabled,
   htmlFor,
   label,
 }) => (
@@ -14,6 +15,7 @@ const FormFieldLabel = ({
       cx(styles.FormFieldLabel, {
         'is-active': active,
         'is-invalid': invalid,
+        'is-disabled': disabled,
       })
     }
     htmlFor={htmlFor}
@@ -25,6 +27,7 @@ const FormFieldLabel = ({
 FormFieldLabel.propTypes = {
   active: bool,
   invalid: bool,
+  disabled: bool,
   htmlFor: string.isRequired,
   label: string.isRequired,
 };
@@ -32,6 +35,7 @@ FormFieldLabel.propTypes = {
 FormFieldLabel.defaultProps = {
   active: false,
   invalid: false,
+  disabled: false,
 };
 
 export default FormFieldLabel;
