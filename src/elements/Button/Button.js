@@ -142,7 +142,7 @@ export default class Button extends PureComponent {
     size: 'medium',
     tabIndex: 0,
     type: 'button',
-    variant: 'container'
+    variant: 'contained'
   };
 
   render() {
@@ -207,6 +207,7 @@ export default class Button extends PureComponent {
     return (
       <ComponentProp
         className={className}
+        color={color}
         onClick={onClick}
         onBlur={onBlur}
         onFocus={onFocus}
@@ -221,6 +222,7 @@ export default class Button extends PureComponent {
         ref={buttonRef}
         role={role}
         tabIndex={disabled ? -1 : parseInt(tabIndex, 10)}
+        variant={variant}
         {...buttonProps}
         {...other}
       >
