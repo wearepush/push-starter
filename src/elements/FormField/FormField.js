@@ -16,7 +16,7 @@ const FormField = ({
       <div className={styles.FormField__label}>
         <FormFieldLabel
           active={meta.active}
-          invalid={meta.invalid}
+          invalid={meta.touched && meta.invalid}
           htmlFor={name}
           label={label}
         />
