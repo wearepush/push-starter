@@ -25,12 +25,14 @@ $DropDown: 'dropdown';
     max-height: 300px;
     overflow: auto;
     border: 1px solid #ccc;
-    display: none;
     position: absolute;
     left: 0;
     right: 0;
-    &--is-open {
-      display: block;
+
+    &:global {
+      &.is-open {
+        background: red;
+      }
     }
     &-item {
       cursor: pointer;

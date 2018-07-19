@@ -225,12 +225,10 @@ const UI = () => {
         trigger={<span>Uncontroled</span>}
       >
         <span>1</span>
-        <span>2</span>
-        <span>3</span>
       </Dropdown>
       <h2>Dropdown controled</h2>
       <Dropdown
-        isOpen={true} // eslint-disable-line
+        isOpen
         trigger={<span>Controled</span>}
       />
     </div>
