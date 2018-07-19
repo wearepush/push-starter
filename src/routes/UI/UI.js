@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Checkbox, Button, Radio, TextField, TextArea } from '../../elements';
+import { Checkbox, Button, Radio, TextField, TextArea, Dropdown } from '../../elements';
 
 const UI = () => {
   const title = 'Redux Starter. UI';
@@ -218,6 +218,19 @@ const UI = () => {
           value="1"
         />
       </div>
+      <h2>Dropdown uncontroled</h2>
+      <Dropdown
+        triggerClassName="my-trigger"
+        dropMenuClassName="my-drop"
+        trigger={<span>Uncontroled</span>}
+      >
+        <span>1</span>
+      </Dropdown>
+      <h2>Dropdown controled</h2>
+      <Dropdown
+        isOpen
+        trigger={<span>Controled</span>}
+      />
     </div>
   );
 };

@@ -4,6 +4,7 @@ export Checkbox from './Checkbox/Checkbox.js';
 export Radio from './Radio/Radio.js';
 export TextField from './TextField/TextField.js';
 export TextArea from './TextArea/TextArea.js';
+export Dropdown from './Dropdown/Dropdown';
 
 /* redux form */
 export FormButton from './FormButton/FormButton.js';
