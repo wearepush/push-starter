@@ -5,20 +5,40 @@ import styles from './Dropdown.scss';
 
 export default class Dropdown extends Component {
   static propTypes = {
-    trigger: node.isRequired,
-    isOpen: bool,
+    /**
+    * The childrens or a child for the dropdown list.
+    */
     children: oneOfType([
       arrayOf(node),
       node
     ]),
-    triggerClassName: string,
-    dropMenuClassName: string,
+    /**
+    * The additional class names setup list position.
+    */
     dropPosition: oneOf([
       'bl',
       'br',
       'tl',
       'tr'
     ]),
+    /**
+     * The additional class name for dropdown list.
+     */
+    dropMenuClassName: string,
+    /**
+     * The flag for the controlled dropdown.
+     * If isOpen is true the dropdown list will be open and
+     * component will be controlled
+     */
+    isOpen: bool,
+    /**
+    * The node for control list's visibility.
+    */
+    trigger: node.isRequired,
+    /**
+    * The additional class name for trigger.
+    */
+    triggerClassName: string,
   };
 
   static defaultProps = {
