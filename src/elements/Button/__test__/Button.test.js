@@ -187,13 +187,24 @@ describe('Button', () => {
     it('should render variant button', () => {
       const button = shallow(
         <Button
-          variant="fab"
+          variant="outlined"
         >
           Button
         </Button>
       );
-      expect(button.hasClass('is-fab')).toBe(true);
-      expect(button.props().variant).toEqual('fab');
+      expect(button.hasClass('is-outlined')).toBe(true);
+      expect(button.props().variant).toEqual('outlined');
+    });
+
+    it('should render float button', () => {
+      const button = shallow(
+        <Button
+          float
+        >
+          Button
+        </Button>
+      );
+      expect(button.hasClass('is-float')).toBe(true);
     });
 
     it('should handle events', () => {

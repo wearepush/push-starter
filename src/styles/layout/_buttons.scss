@@ -4,7 +4,8 @@ $_button-background-color-hover: shade($action-color, 20%);
 #{$all-buttons} {
   appearance: none;
   background-color: $_button-background-color;
-  border: 0;
+  border-width: 1px;
+  border-style: solid;
   border-radius: $base-border-radius;
   color: $white;
   cursor: pointer;
@@ -17,7 +18,7 @@ $_button-background-color-hover: shade($action-color, 20%);
   padding: $small-spacing $base-spacing;
   text-align: center;
   text-decoration: none;
-  transition: background-color $base-duration $base-timing;
+  transition: background-color $base-duration $base-timing, border-color $base-duration $base-timing, color $base-duration $base-timing, box-shadow $base-duration $base-timing;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
@@ -30,6 +31,7 @@ $_button-background-color-hover: shade($action-color, 20%);
   &:focus {
     outline: $focus-outline;
     outline-offset: $focus-outline-offset;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 
   &:disabled {

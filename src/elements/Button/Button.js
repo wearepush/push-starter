@@ -37,6 +37,10 @@ export default class Button extends PureComponent {
     */
     disabled: bool,
     /**
+    * If `true`, the base button will be disabled.
+    */
+    float: bool,
+    /**
     * If `true`, the button will take up the full width of its container.
     */
     fullWidth: bool,
@@ -111,11 +115,9 @@ export default class Button extends PureComponent {
     * The variant of the button style:
     * outlined: the button with outline;
     * contained: the button distinguished by the elevation and fill;
-    * fab: the button as a circular shape.
     */
     variant: oneOf([
       'contained',
-      'fab',
       'outlined'
     ])
   };
@@ -126,6 +128,7 @@ export default class Button extends PureComponent {
     color: 'primary',
     component: 'button',
     disabled: false,
+    float: false,
     fullWidth: false,
     onBlur: undefined,
     onClick: undefined,
@@ -153,6 +156,7 @@ export default class Button extends PureComponent {
       color,
       component,
       disabled,
+      float,
       fullWidth,
       onClick,
       onBlur,
@@ -201,7 +205,8 @@ export default class Button extends PureComponent {
       [`is-size-${size}`]: !!size,
       'is-link': !!other.href,
       [`is-${color}`]: !!color,
-      [`is-${variant}`]: !!variant
+      [`is-${variant}`]: !!variant,
+      'is-float': !!float,
     });
 
     return (

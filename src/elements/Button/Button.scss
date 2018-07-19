@@ -1,12 +1,10 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-
 $Button: 'Button';
 
 .#{$Button} {
-
-  &:global {
+  &:global  {
 
     &.is-disabled {
       background-color: $color-grey;
@@ -15,8 +13,13 @@ $Button: 'Button';
       &:hover {
         background-color: $color-grey;
       }
+
+      &:focus {
+        box-shadow: none;
+      }
     }
 
+    //Size
     &.is-full-width {
       width: 100%;
     }
@@ -33,31 +36,125 @@ $Button: 'Button';
       font-size: 16px;
     }
 
-    &.danger {
-      background-color: $color-pamegranate;
+    //Contained
+    &.is-contained {
 
-      &:hover,
-      &:focus {
-        background-color: $color-bittersweet;
+      //Color
+      &.is-danger {
+        border-color: $color-pamegranate;
+        background-color: $color-pamegranate;
+
+        &:hover,
+        &:focus {
+          background-color: $color-bittersweet;
+          border-color: $color-bittersweet;
+        }
+      }
+
+      &.is-primary {
+        background-color: $color-blue-ribbon;
+        border-color: $color-blue-ribbon;
+
+        &:hover,
+        &:focus {
+          background-color: $color-azure;
+          border-color: $color-azure;
+        }
+      }
+
+      &.is-success {
+        background-color: $color-niagara;
+        border-color: $color-niagara;
+
+        &:hover,
+        &:focus {
+          background-color: $color-mountain;
+          border-color: $color-mountain;
+        }
+      }
+
+      &.is-alert {
+        background-color: $color-yellow;
+        border-color: $color-yellow;
+
+        &:hover,
+        &:focus {
+          background-color: $color-camboge;
+          border-color: $color-camboge;
+        }
+      }
+
+      &.is-grey {
+        background-color: $color-slate-grey;
+        border-color: $color-slate-grey;
+
+        &:hover,
+        &:focus {
+          background-color: $color-slate-grey-1;
+          border-color: $color-slate-grey-1;
+        }
       }
     }
 
-    &.primary {
-      background-color: $color-blue-ribbon;
+    // outlined
+    &.is-outlined {
+      background-color: $white;
 
-      &:hover,
-      &:focus {
-        background-color: $color-azure;
+      //Color
+      &.is-danger {
+        border-color: $color-pamegranate;
+        color: $color-alizarin;
+
+        &:hover,
+        &:focus {
+          background-color: $color-rose-white;
+        }
+      }
+
+      &.is-primary {
+        border-color: $color-blue-ribbon;
+        color: $color-blue-ribbon;
+
+        &:hover,
+        &:focus {
+          background-color: $color-alice-blue;
+        }
+      }
+
+      &.is-success {
+        border-color: $color-niagara;
+        color: $color-niagara;
+
+        &:hover,
+        &:focus {
+          background-color: $color-white-ice;
+        }
+      }
+
+      &.is-alert {
+        border-color: $color-yellow;
+        color: $color-yellow;
+
+        &:hover,
+        &:focus {
+          background-color: $color-pearl;
+        }
+      }
+
+      &.is-grey {
+        border-color: $color-athens-grey;
+        color: $color-down-river;
+
+        &:hover,
+        &:focus {
+          background-color: rgba(10, 31, 68, .04);
+        }
       }
     }
 
-    &.success {
-      background-color: $color-niagara;
-
-      &:hover,
-      &:focus {
-        background-color: $color-mountain;
-      }
+    //Floating
+    &.is-float {
+      border-radius: 100px;
     }
   }
 }

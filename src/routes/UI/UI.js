@@ -42,9 +42,25 @@ const UI = () => {
         Small Button
       </Button>
       <Button
+        size="small"
+        color="alert"
+      >
+        Small Button
+      </Button>
+      <Button
         size="medium"
       >
         Medium Button
+      </Button>
+      <Button
+        variant="outlined"
+      >
+        Outlined Button
+      </Button>
+      <Button
+        float
+      >
+        Floating Button
       </Button>
       <Button
         size="large"
