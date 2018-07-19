@@ -14,9 +14,18 @@ export default class Button extends PureComponent {
     */
     children: node.isRequired,
     /**
-     * @ignore
-     */
+    * @ignore
+    */
     className: string,
+    /**
+    * The button text color.
+    */
+    color: oneOf([
+      'alert',
+      'danger',
+      'primary',
+      'success'
+    ]),
     /**
     * The component used for the root node.
     * Either a string to use a DOM element or a component.
@@ -82,10 +91,6 @@ export default class Button extends PureComponent {
     /**
     * @ignore
     */
-    state: string,
-    /**
-    * @ignore
-    */
     tabIndex: oneOfType([
       number,
       string
@@ -102,11 +107,23 @@ export default class Button extends PureComponent {
     * @ignore
     */
     type: string,
+    /**
+    * The variant of the button style:
+    * outlined: the button with outline;
+    * contained: the button distinguished by the elevation and fill;
+    * fab: the button as a circular shape.
+    */
+    variant: oneOf([
+      'contained',
+      'fab',
+      'outlined'
+    ])
   };
 
   static defaultProps = {
     buttonRef: undefined,
     className: '',
+    color: 'primary',
     component: 'button',
     disabled: false,
     fullWidth: false,
@@ -123,9 +140,9 @@ export default class Button extends PureComponent {
     onTouchStart: undefined,
     role: 'button',
     size: 'medium',
-    state: '',
     tabIndex: 0,
     type: 'button',
+    variant: 'container'
   };
 
   render() {
@@ -133,6 +150,7 @@ export default class Button extends PureComponent {
       buttonRef,
       children,
       className: classNameProp,
+      color,
       component,
       disabled,
       fullWidth,
@@ -149,9 +167,9 @@ export default class Button extends PureComponent {
       onTouchStart,
       role,
       size,
-      state,
       tabIndex,
       type,
+      variant,
       ...other
     } = this.props;
 
@@ -182,7 +200,8 @@ export default class Button extends PureComponent {
       'is-full-width': fullWidth,
       [`is-size-${size}`]: !!size,
       'is-link': !!other.href,
-      [state]: !!state
+      [`is-${color}`]: !!color,
+      [`is-${variant}`]: !!variant
     });
 
     return (
@@ -201,7 +220,6 @@ export default class Button extends PureComponent {
         onTouchStart={onTouchStart}
         ref={buttonRef}
         role={role}
-        state={state}
         tabIndex={disabled ? -1 : parseInt(tabIndex, 10)}
         {...buttonProps}
         {...other}
