@@ -14,7 +14,8 @@ describe('Button', () => {
       expect(button.name()).toEqual('button');
       expect(button.prop('tabIndex')).toEqual(0);
       expect(button.prop('role')).toEqual(undefined);
-      expect(button.prop('state')).toEqual('');
+      expect(button.prop('color')).toEqual('primary');
+      expect(button.prop('variant')).toEqual('contained');
     });
 
     it('should render with type prop', () => {
@@ -110,7 +111,7 @@ describe('Button', () => {
     it('should render with input ref prop', () => {
       const button = shallow(
         <Button
-          buttonRef={() => {}}
+          buttonRef={() => { }}
         >
           Button
         </Button>
@@ -171,18 +172,29 @@ describe('Button', () => {
       expect(button.props()['data-test']).toEqual('test');
     });
 
-    it('should render state', () => {
+    it('should render color', () => {
       const button = shallow(
         <Button
-          state="danger"
+          color="danger"
         >
           Button
         </Button>
       );
-      expect(button.hasClass('danger')).toBe(true);
-      expect(button.props().state).toEqual('danger');
+      expect(button.hasClass('is-danger')).toBe(true);
+      expect(button.props().color).toEqual('danger');
     });
 
+    it('should render variant button', () => {
+      const button = shallow(
+        <Button
+          variant="fab"
+        >
+          Button
+        </Button>
+      );
+      expect(button.hasClass('is-fab')).toBe(true);
+      expect(button.props().variant).toEqual('fab');
+    });
 
     it('should handle events', () => {
       const onClickSpy = jest.fn();

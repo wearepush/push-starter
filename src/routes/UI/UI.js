@@ -19,7 +19,7 @@ const UI = () => {
       <hr />
       <h2>Button</h2>
       <Button
-        state="primary"
+        color="primary"
       >
         Button
       </Button>
@@ -31,13 +31,13 @@ const UI = () => {
       </Button>
       <Button
         fullWidth
-        state="danger"
+        color="danger"
       >
         Full Width Button
       </Button>
       <Button
         size="small"
-        state="success"
+        color="success"
       >
         Small Button
       </Button>
