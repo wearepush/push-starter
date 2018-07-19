@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, object, oneOf, string } from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import { Field } from 'redux-form';
 import { FormField, TextField } from '../index.js';
 
 const FormTextField = ({
@@ -31,6 +31,7 @@ const FormTextField = ({
         placeholder={placeholder}
         type={type}
         value={input.value}
+        valid={meta.valid}
       />
     </FormField>
   );

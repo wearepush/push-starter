@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { func, object } from 'prop-types';
+import { array, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
-import { clearUsers, loadUsers, getUsersRecords } from './../../redux/modules/users';
+import { ACTIONS as usersActions, SELECTORS as usersSelectors } from '../../redux/modules/users';
 
 const mapStateToProps = state => ({
-  records: getUsersRecords(state)
+  loaded: usersSelectors.usersLoaded(state),
+  loading: usersSelectors.usersLoading(state),
+  users: usersSelectors.usersRecords(state),
 });
 
 const mapDispatchToProps = {
-  clearUsers,
-  loadUsers
+  clearUsers: usersActions.clear,
+  loadUsers: usersActions.load,
 };
 
 class Users extends Component {
   static fetchData({ dispatch }) {
-    return dispatch(loadUsers());
+    return dispatch(usersActions.load());
   }
 
   static propTypes = {
     clearUsers: func.isRequired,
+    loaded: bool.isRequired,
+    loading: bool.isRequired,
     loadUsers: func.isRequired,
-    records: object.isRequired
+    users: array.isRequired
   }
 
   componentDidMount() {
@@ -34,7 +38,9 @@ class Users extends Component {
 
   render() {
     const {
-      records
+      loaded,
+      loading,
+      users,
     } = this.props;
     const title = 'Redux Starter. Users';
     const description = 'Redux Form. Sign In';
@@ -49,15 +55,20 @@ class Users extends Component {
           <meta property="twitter:description" content={description} />
         </Helmet>
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
-        <div>
-          {
-            records.map((c) => (
-              <div key={c.get('id')}>
-                <span>{c.get('name')}</span>
-              </div>
-            ))
-          }
-        </div>
+        {loading &&
+          <div>Loading...</div>
+        }
+        {loaded && (
+          <div>
+            {
+              users.map((c) => (
+                <div key={c.id}>
+                  <span>{c.name}</span>
+                </div>
+              ))
+            }
+          </div>
+        )}
       </div>
     );
   }

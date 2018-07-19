@@ -16,14 +16,13 @@ The starter boilerplate includes the following technologies:
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 | [Node 8.9.1 LTS](https://nodejs.org/en/)                                          | Node |
 | [Redux Dev Tools](https://github.com/zalmoxisus/redux-devtools-extension)         | Redux Dev Tools |
-| [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)                 | Tweak React components in real time |
-| [React](https://github.com/facebook/react)                                        | JavaScript library for building user interfaces  |
-| [React Router](https://github.com/ReactTraining/react-router)                     | React Router is a complete routing library for React    |
+| [React Hot Loader 4](https://github.com/gaearon/react-hot-loader)                 | Tweak React components in real time |
+| [React 16](https://github.com/facebook/react)                                     | JavaScript library for building user interfaces  |
+| [React Router 4](https://github.com/ReactTraining/react-router)                   | React Router is a complete routing library for React    |
 | [Babel](http://babeljs.io)                                                        | Babel is a JavaScript compiler              |
-| [Webpack](http://webpack.github.io)                                               | Module bundler                       |
+| [Webpack 4](http://webpack.github.io)                                             | Module bundler                       |
 | [Universal Webpack](https://www.npmjs.com/package/universal-webpack)              | Helps setting up universal Webpack build: the one that's working both on client and server                                                |
 | [Redux](http://redux.js.org/)                                                     | Redux is a predictable state container for JavaScript apps                           |
-| [Redux Immutable](https://github.com/gajus/redux-immutablejs)                     | Redux & Immutable integration                                                          |
 | [React Router Redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)               | Simple bindings to keep react-router and redux in sync                                        |
 | [ESLint](http://eslint.org)                                                       | The pluggable linting utility for JavaScript and JSX                                            |
 

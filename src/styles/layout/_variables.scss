@@ -1,5 +1,5 @@
 // Typography
-$base-font-family: $font-stack-system;
+$base-font-family: 'Lato', sans-serif;
 $heading-font-family: $base-font-family;
 
 // Line height
@@ -7,7 +7,7 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
+$base-border-radius: 4px;
 $base-spacing: 1.5em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
@@ -17,13 +17,30 @@ $blue: #1565c0;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$white: #fff;
+$color-grey: #F1F2F4;
+$color-athens-grey: #E1E4E8;
+$color-down-river: #0A1F44;
+$color-cadet-blue: #A6AEBC;
+$color-azure: #007FFF;
+$color-niagara: #0BB07B;
+$color-bayoux: #53627C;
+$color-pamegranate: #F03D3D;
+$color-bittersweet: #FF5D5D;
+$color-blue-ribbon: #0C66FF;
+$color-mountain: #22C993;
+$color-yellow: #FFAD0D;
+$color-ghost: #C9CED6;
+$color-denim: #0D55CF;
+
+
 
 // Font Colors
-$base-font-color: $dark-gray;
-$action-color: $blue;
+$base-font-color: $color-down-river;
+$action-color: $color-azure;
 
 // Border
-$base-border-color: $light-gray;
+$base-border-color: $color-athens-grey;
 $base-border: 1px solid $base-border-color;
 
 // Background Colors
@@ -38,3 +55,7 @@ $focus-outline-offset: 0px;
 // Animations
 $base-duration: 150ms;
 $base-timing: ease;
+
+
+//Label
+$base-label-color: $color-bayoux;

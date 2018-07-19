@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 import React from 'react';
 import { array, arrayOf, bool, shape, string, object, oneOfType, number } from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import { Field } from 'redux-form';
 import cx from 'classnames';
 import { FormField } from '../index.js';
 import styles from './FormSelect.scss';

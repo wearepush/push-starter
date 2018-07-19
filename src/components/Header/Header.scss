@@ -4,5 +4,37 @@
 $Header: 'Header';
 
 .#{$Header} {
-  padding: 40px 0;
+  background-color: $white;
+  padding: 16px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+
+  &__container {
+    padding: 0 15px;
+    margin: 0 auto;
+    max-width: 1140px;
+    width: 100%;
+  }
+
+  &__link {
+    color: $color-bayoux;
+    font-size: 13px;
+    line-height: 15px;
+    padding: 8px 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color $base-duration $base-timing;
+
+    &:hover {
+      color: $color-denim;
+    }
+
+    &:focus {
+      outline: 0;
+      outline-offset: 0;
+    }
+  }
 }

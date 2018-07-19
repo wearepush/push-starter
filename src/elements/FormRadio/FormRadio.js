@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, object, node, string } from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import { Field } from 'redux-form';
 import { FormField, Radio } from '../index.js';
 
 const FormRadio = ({
@@ -17,7 +17,6 @@ const FormRadio = ({
   const _id = id || `${input.name}-${JSON.stringify(input.value)}`; // replace to hash
   return (
     <FormField
-      meta={meta}
       label={label}
       name={_id}
     >

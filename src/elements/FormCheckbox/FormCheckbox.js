@@ -1,6 +1,6 @@
 import React from 'react';
 import { array, bool, object, node, number, oneOfType, string } from 'prop-types';
-import { Field } from 'redux-form/immutable';
+import { Field } from 'redux-form';
 import { FormField, Checkbox } from '../index.js';
 
 const FormCheckbox = ({
@@ -18,7 +18,6 @@ const FormCheckbox = ({
   const _id = id || input.name;
   return (
     <FormField
-      meta={meta}
       label={label}
       name={_id}
     >

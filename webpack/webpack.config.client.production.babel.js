@@ -16,21 +16,20 @@ const vendor = [
   'prop-types',
   'redux',
   'react-redux',
-  'immutable',
-  'transit-immutable-js',
-  'transit-js',
-  'redux-immutablejs',
   'react-router-config',
   'react-router-dom',
   'react-router-redux',
   'react-helmet',
-  'redux-form/immutable',
+  'redux-form',
   'lru-memoize',
-  'react-ga'
+  'react-ga',
+  'current-device',
+  'detect-browser'
 ];
 
 const config = {
   devtool: false,
+
   entry: { vendor },
 
   output: {

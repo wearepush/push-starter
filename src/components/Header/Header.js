@@ -4,14 +4,14 @@ import styles from './Header.scss';
 
 const Header = () => (
   <div className={styles.Header}>
-    <div>
-      <Link to="/">
+    <div className={styles.Header__container}>
+      <Link className={styles.Header__link} to="/">
         Home
       </Link>
-      <Link to="/ui">
+      <Link className={styles.Header__link} to="/ui">
         UI
       </Link>
-      <Link to="/users">
+      <Link className={styles.Header__link} to="/users">
         Users
       </Link>
     </div>

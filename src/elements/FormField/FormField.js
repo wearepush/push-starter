@@ -4,15 +4,15 @@ import { FormFieldLabel, FormFieldError } from '../index.js';
 import styles from './FormField.scss';
 
 const FormField = ({
-  meta,
   children,
   label,
+  meta,
   name,
 }) => (
   <div
     className={styles.FormField}
   >
-    {label &&
+    {label && (
       <div className={styles.FormField__label}>
         <FormFieldLabel
           active={meta.active}
@@ -21,21 +21,24 @@ const FormField = ({
           label={label}
         />
       </div>
-    }
+    )}
     <div className={styles.FormField__children}>
       {children}
     </div>
-    {meta.touched && (meta.error || meta.warning) &&
+    {meta.touched && (meta.error || meta.warning) && (
       <div className={styles.FormField__error}>
         <FormFieldError
-          error={meta.error || meta.warning}
+          text={meta.error || meta.warning}
+          type={(meta.error ? 'error' : '') || (meta.warning ? 'warning' : '')}
         />
       </div>
-    }
+    )}
   </div>
 );
 
 FormField.propTypes = {
+  children: node.isRequired,
+  label: string,
   meta: shape({
     active: bool,
     error: string,
@@ -43,12 +46,11 @@ FormField.propTypes = {
     touched: bool,
     warning: string,
   }),
-  children: node.isRequired,
-  label: string,
   name: string,
 };
 
 FormField.defaultProps = {
+  label: '',
   meta: {
     active: false,
     error: '',
@@ -56,7 +58,6 @@ FormField.defaultProps = {
     touched: false,
     warning: '',
   },
-  label: '',
   name: '',
 };
 

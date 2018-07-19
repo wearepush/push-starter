@@ -6,8 +6,18 @@ $FormFieldLabel: 'FormFieldLabel';
 .#{$FormFieldLabel} {
 
   &:global {
+    color: $base-label-color;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: capitalize;
+    margin-bottom: 6px;
+
     &.is-invalid {
-      color: red;
+      color: $color-pamegranate;
+    }
+
+    &.is-disabled {
+      color: $color-cadet-blue;
     }
   }
 }

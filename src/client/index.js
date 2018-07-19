@@ -3,16 +3,15 @@ import 'babel-polyfill';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
-import transit from 'transit-immutable-js';
 
 import Root from './root';
-import ApiClient from './../helpers/ApiClient';
-import getRoutes from './../routes';
-import config from './../config';
-import configureStore from './../redux/store';
+import ApiClient from '../helpers/ApiClient';
+import getRoutes from '../routes/routes';
+import config from '../config';
+import configureStore from '../redux/store';
 
 const client = new ApiClient();
-const initialState = transit.fromJSON(window.__INITIAL_STATE__);
+const initialState = window.__INITIAL_STATE__;
 const history = createHistory();
 const store = configureStore(history, client, initialState);
 const dest = document.getElementById('root');
@@ -51,12 +50,11 @@ if (process.env.NODE_ENV !== 'production') {
 
   if (
     !config.ssr
-    &&
-    (!dest || !dest.firstChild
-      ||
-      !dest.firstChild.attributes
-      ||
-      !dest.firstChild.attributes['data-react-checksum']
+    && (
+      !dest
+      || !dest.firstChild
+      || !dest.firstChild.attributes
+      || !dest.firstChild.attributes['data-react-checksum']
     )
   ) {
     console.error('Server-side React render was discarded.');
@@ -80,8 +78,8 @@ if (module.hot) {
     }
   };
 
-  module.hot.accept('../routes', () => {
-    const nextRoutes = require('../routes').default;
+  module.hot.accept('../routes/routes', () => {
+    const nextRoutes = require('../routes/routes').default;
     renderApp({
       routes: nextRoutes(store),
       store,

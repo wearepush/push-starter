@@ -82,6 +82,10 @@ export default class Button extends PureComponent {
     /**
     * @ignore
     */
+    state: string,
+    /**
+    * @ignore
+    */
     tabIndex: oneOfType([
       number,
       string
@@ -119,6 +123,7 @@ export default class Button extends PureComponent {
     onTouchStart: undefined,
     role: 'button',
     size: 'medium',
+    state: '',
     tabIndex: 0,
     type: 'button',
   };
@@ -144,6 +149,7 @@ export default class Button extends PureComponent {
       onTouchStart,
       role,
       size,
+      state,
       tabIndex,
       type,
       ...other
@@ -176,6 +182,7 @@ export default class Button extends PureComponent {
       'is-full-width': fullWidth,
       [`is-size-${size}`]: !!size,
       'is-link': !!other.href,
+      [state]: !!state
     });
 
     return (
@@ -194,6 +201,7 @@ export default class Button extends PureComponent {
         onTouchStart={onTouchStart}
         ref={buttonRef}
         role={role}
+        state={state}
         tabIndex={disabled ? -1 : parseInt(tabIndex, 10)}
         {...buttonProps}
         {...other}

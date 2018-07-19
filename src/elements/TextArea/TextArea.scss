@@ -1,0 +1,66 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$TextArea: 'TextArea';
+
+.#{$TextArea} {
+
+  &:global {
+    &.is-active {
+    }
+
+    &.is-disabled {
+      textarea {
+        background-color: $color-grey;
+        cursor: not-allowed;
+
+        &:focus {
+          border: $base-border;
+        }
+
+        &::placeholder {
+          color: $color-cadet-blue;
+        }
+      }
+    }
+
+    &.is-invalid {
+      border-color: $color-pamegranate;
+
+      textarea {
+        border-color: $color-pamegranate;
+
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-pamegranate;
+        }
+      }
+    }
+
+    &.is-valid {
+      textarea {
+        border-color: $color-niagara;
+
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-niagara;
+        }
+      }
+    }
+
+    &.is-alert {
+      border-color: $color-yellow;
+
+      &:focus {
+        box-shadow: 0px 0px 0px 1px $color-yellow;
+      }
+    }
+
+    &.is-empty {
+    }
+
+    &.is-not-empty {
+    }
+  }
+
+  &__input {
+  }
+}

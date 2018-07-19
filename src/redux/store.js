@@ -1,10 +1,9 @@
-import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createReducer from './reducer';
 import createMiddleware from './middleware/clientMiddleware';
 
-export default function configureStore(history, client, initialState = fromJS({})) {
+export default function configureStore(history, client, initialState = {}) {
   const reducer = createReducer();
   const middlewares = [createMiddleware(client), routerMiddleware(history)];
 

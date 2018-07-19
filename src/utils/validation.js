@@ -1,4 +1,4 @@
-const isEmpty = value => value === undefined || value === null || value === ''; // eslint-disable-line
+const isEmpty = value => value === undefined || value === null || value === '' || !value; // eslint-disable-line
 const join = (rules) => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0]; // eslint-disable-line
 
 export function email(value) { // eslint-disable-line
@@ -62,7 +62,6 @@ export function phone(value) { // eslint-disable-line
 
 export function createValidator(rules, section, activate) {
   return (data = {}) => {
-    data = data.toJS ? data.toJS() : data; // eslint-disable-line
     data = section && data.section ? data[section] : data; // eslint-disable-line
     if (activate && typeof data[activate] !== 'undefined') {
       if (!data[activate]) {

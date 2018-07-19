@@ -38,7 +38,12 @@
     "arrow-parens": 0,
     "linebreak-style": 0,
     "jsx-a11y/label-has-for": 0,
-    "react/no-array-index-key": 0
+    "object-curly-newline": 0,
+    "react/destructuring-assignment": 0,
+    "operator-linebreak": 0,
+    "no-else-return": 0,
+    "import/no-cycle": 0,
+    "react/jsx-one-expression-per-line": 0
   },
   "plugins": [
     "react",

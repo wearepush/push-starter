@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export function fireEvent(node, eventName) {
   let doc = {};
   if (node.ownerDocument) {

@@ -1,5 +1,5 @@
-$_form-background-color: #fff;
-$_form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$_form-background-color: $white;
+$_form-box-shadow: 0px 0px 0px 1px rgba(0, 127, 255, 1);
 $_form-box-shadow-focus: $_form-box-shadow, 0 0 5px rgba($action-color, 0.7);
 
 fieldset {
@@ -20,7 +20,17 @@ select,
 textarea {
   display: block;
   font-family: $base-font-family;
-  font-size: 16px;
+  font-size: 14px;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill,
+  &:-webkit-autofill {
+    background-color: $white !important;
+  }
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  background-color: $white !important;
 }
 
 #{$all-text-inputs} {
@@ -28,11 +38,9 @@ textarea {
   background-color: $_form-background-color;
   border: $base-border;
   border-radius: $base-border-radius;
-  box-shadow: $_form-box-shadow;
   box-sizing: border-box;
-  margin-bottom: $small-spacing;
-  padding: $base-spacing / 3;
-  transition: border-color $base-duration $base-timing;
+  padding: 15px 16px;
+  transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
   width: 100%;
 
   &:hover {
@@ -41,26 +49,64 @@ textarea {
 
   &:focus {
     border-color: $action-color;
-    box-shadow: $_form-box-shadow-focus;
+    box-shadow: $_form-box-shadow;
     outline: none;
   }
 
   &:disabled {
-    background-color: shade($_form-background-color, 5%);
+    background-color: $color-grey;
     cursor: not-allowed;
 
-    &:hover {
+    &:focus {
       border: $base-border;
+    }
+
+    &::placeholder {
+      color: $color-cadet-blue;
+    }
+  }
+
+  &.is-valid {
+    border-color: $color-niagara;
+
+    &:focus {
+      box-shadow: 0px 0px 0px 1px $color-niagara;
+    }
+  }
+
+  &.is-invalid {
+    border-color: $color-pamegranate;
+
+    &:focus {
+      box-shadow: 0px 0px 0px 1px $color-pamegranate;
     }
   }
 
   &::placeholder {
-    color: tint($base-font-color, 40%);
+    color: $color-cadet-blue;
   }
 }
 
 textarea {
-  resize: vertical;
+  border: 1px solid $color-athens-grey;
+  border-radius: $base-border-radius;
+  color: $color-down-river;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 13px 16px;
+  resize: none;
+  transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
+  width: 100%;
+
+  &::placeholder {
+    color: $color-cadet-blue;
+  }
+
+  &:focus {
+    border-color: $color-azure;
+    box-shadow: 0px 0px 0px 1px $color-azure;
+    outline: none;
+  }
 }
 
 [type="checkbox"] {

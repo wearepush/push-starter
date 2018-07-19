@@ -3,15 +3,14 @@ import React from 'react';
 import { object, node } from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
-import transit from 'transit-immutable-js';
-import config from './../../config';
+import config from '../../config';
 
 const Html = ({
   assets,
   component,
   store,
 }) => {
-  const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(transit.toJSON(store.getState()))}`;
+  const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`;
   const head = Helmet.rewind();
   const ie = '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
   const content = component ? renderToString(component) : null;
@@ -85,6 +84,7 @@ const Html = ({
         )}
         {config.isProd && <link rel="preload" href={assets.javascript.vendor} as="script" />}
         {config.isProd && <link rel="preload" href={assets.javascript.main} as="script" />}
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />

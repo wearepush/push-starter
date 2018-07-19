@@ -10,17 +10,39 @@ $TextField: 'TextField';
     }
 
     &.is-disabled {
-      opacity: 0.3;
+      // opacity: 0.3;
     }
 
     &.is-invalid {
-      color: red;
+      border-color: $color-pamegranate;
     }
 
     &.is-empty {
     }
 
     &.is-not-empty {
+    }
+
+    &.is-valid {
+
+
+      input {
+        border-color: $color-niagara;
+
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-niagara;
+        }
+      }
+    }
+
+    &.is-invalid {
+      input {
+        border-color: $color-pamegranate;
+
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-pamegranate;
+        }
+      }
     }
   }
 

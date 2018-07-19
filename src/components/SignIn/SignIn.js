@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { reduxForm, SubmissionError, Form } from 'redux-form/immutable';
+import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, FormCheckbox, FormRadio, FormSelect, Button, FormButton } from './../../elements';
+import { FormTextField, FormTextArea, FormCheckbox, FormRadio, FormSelect, Button, FormButton } from '../../elements';
 import validate from './SignInValidation';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -30,7 +30,7 @@ class SignIn extends PureComponent {
   };
 
   onSubmit = (values) => { // eslint-disable-line
-    console.log(values.toJS());
+    console.log(values);
     return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
         throw new SubmissionError({
@@ -72,6 +72,13 @@ class SignIn extends PureComponent {
             />
           </div>
           <div>
+            <FormTextArea
+              label="Description"
+              name="description"
+              placeholder="Description"
+            />
+          </div>
+          <div>
             <FormCheckbox
               custom
               name="remember"
@@ -104,7 +111,11 @@ class SignIn extends PureComponent {
               ]}
             />
           </div>
-          {error && <div>{error}</div>}
+          {error && (
+            <div>
+              {error}
+            </div>
+          )}
           <div>
             <Button
               type="submit"
