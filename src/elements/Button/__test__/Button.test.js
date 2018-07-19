@@ -111,7 +111,7 @@ describe('Button', () => {
     it('should render with input ref prop', () => {
       const button = shallow(
         <Button
-          buttonRef={() => {}}
+          buttonRef={() => { }}
         >
           Button
         </Button>
@@ -195,8 +195,6 @@ describe('Button', () => {
       expect(button.hasClass('is-fab')).toBe(true);
       expect(button.props().variant).toEqual('fab');
     });
-
-
 
     it('should handle events', () => {
       const onClickSpy = jest.fn();
