@@ -7,6 +7,7 @@ const FormTextField = ({
   disabled,
   id,
   input,
+  inputProps,
   label,
   meta,
   placeholder,
@@ -23,7 +24,8 @@ const FormTextField = ({
         active={meta.active}
         disabled={disabled}
         id={id}
-        invalid={meta.invalid}
+        invalid={meta.touched && meta.invalid}
+        inputProps={inputProps}
         onBlur={(event) => input.onBlur(event)}
         onChange={(event, value) => input.onChange(value)}
         onFocus={(event, value) => input.onFocus(value)}
@@ -41,6 +43,7 @@ FormTextField.propTypes = {
   disabled: bool,
   id: string,
   input: object.isRequired,
+  inputProps: object,
   label: string,
   meta: object.isRequired,
   placeholder: string,
@@ -56,6 +59,7 @@ FormTextField.propTypes = {
 FormTextField.defaultProps = {
   disabled: false,
   id: '',
+  inputProps: null,
   label: '',
   placeholder: '',
   type: 'text',

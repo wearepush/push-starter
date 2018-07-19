@@ -9,6 +9,7 @@ const FormCheckbox = ({
   disabled,
   id,
   input,
+  inputProps,
   label,
   meta,
   placeholder,
@@ -28,7 +29,8 @@ const FormCheckbox = ({
         checkedIcon={checkedIcon}
         disabled={disabled}
         id={id}
-        invalid={meta.invalid}
+        inputProps={inputProps}
+        invalid={meta.touched && meta.invalid}
         onBlur={(event) => input.onBlur(event)}
         onChange={(event, value) => input.onChange(value)}
         onFocus={(event, value) => input.onFocus(value)}
@@ -47,6 +49,7 @@ FormCheckbox.propTypes = {
   disabled: bool,
   id: string,
   input: object.isRequired,
+  inputProps: object,
   label: string,
   meta: object.isRequired,
   placeholder: string.isRequired,
@@ -65,6 +68,7 @@ FormCheckbox.defaultProps = {
   checkedIcon: null,
   disabled: false,
   id: '',
+  inputProps: null,
   label: '',
   unCheckedIcon: null,
   valueProp: undefined,

@@ -9,6 +9,7 @@ const FormRadio = ({
   disabled,
   id,
   input,
+  inputProps,
   label,
   meta,
   placeholder,
@@ -27,7 +28,8 @@ const FormRadio = ({
         checkedIcon={checkedIcon}
         disabled={disabled}
         id={id}
-        invalid={meta.invalid}
+        inputProps={inputProps}
+        invalid={meta.touched && meta.invalid}
         onBlur={(event) => input.onBlur(event)}
         onChange={(event, value) => input.onChange(value)}
         onFocus={(event, value) => input.onFocus(value)}
@@ -46,6 +48,7 @@ FormRadio.propTypes = {
   disabled: bool,
   id: string,
   input: object.isRequired,
+  inputProps: object,
   label: string,
   meta: object.isRequired,
   placeholder: string.isRequired,
@@ -57,6 +60,7 @@ FormRadio.defaultProps = {
   checkedIcon: null,
   disabled: false,
   id: '',
+  inputProps: null,
   label: '',
   unCheckedIcon: null,
 };
