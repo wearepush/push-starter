@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, bool, node } from 'prop-types';
+import { array, bool, node, string } from 'prop-types';
 import cx from 'classnames';
 import styles from './Dropdown.scss';
 
@@ -8,12 +8,14 @@ export default class Dropdown extends Component {
     children: array,
     trigger: node.isRequired,
     isOpen: bool,
+    dropPosition: string
   }
 
   static defaultProps = {
     isOpen: undefined,
     trigger: undefined,
-    children: []
+    children: [],
+    dropPosition: 'bl' // can be -> bl, br, tl, tr
   }
 
   constructor(props) {
@@ -44,7 +46,7 @@ export default class Dropdown extends Component {
 
   changeMenuHandler = (e) => {
     const $target = e.target;
-    const container = this.containerInstance.current;
+    const container = this.containerInstance;
     if ($target !== container && !container.contains($target) && this.state.isOpen) {
       this.setState({ isOpen: false });
     }
@@ -57,12 +59,13 @@ export default class Dropdown extends Component {
 
   renderDrop = () => {
     const { isOpen } = this.state;
-    const { children } = this.props;
-    if (!this.containerInstance.current || !isOpen) return null;
+    const { children, dropPosition } = this.props;
+    if (!this.containerInstance || !isOpen) return null;
     return (
       <ul
         className={cx(styles.dropdown__menu, {
-          [styles['dropdown__menu--is-open']]: isOpen
+          'is-open': isOpen,
+          [`is-${dropPosition}`]: !!dropPosition
         })}
       >
         {
