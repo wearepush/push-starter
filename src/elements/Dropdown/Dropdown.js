@@ -1,7 +1,10 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { bool, node, string, oneOf, oneOfType, arrayOf } from 'prop-types';
 import cx from 'classnames';
 import styles from './Dropdown.scss';
+
+const Trigger = ({ text }) => (<span>{text}</span>);
 
 export default class Dropdown extends Component {
   static propTypes = {
@@ -26,6 +29,10 @@ export default class Dropdown extends Component {
      */
     dropMenuClassName: string,
     /**
+     * The flag for self close after clicked on menu item
+     */
+    isSelfClosed: bool,
+    /**
      * The flag for the controlled dropdown.
      * If isOpen is true the dropdown list will be open and
      * component will be controlled
@@ -34,7 +41,10 @@ export default class Dropdown extends Component {
     /**
     * The node for control list's visibility.
     */
-    trigger: node.isRequired,
+    trigger: oneOfType([
+      node,
+      string
+    ]).isRequired,
     /**
     * The additional class name for trigger.
     */
@@ -43,6 +53,7 @@ export default class Dropdown extends Component {
 
   static defaultProps = {
     isOpen: undefined,
+    isSelfClosed: undefined,
     children: undefined,
     triggerClassName: '',
     dropMenuClassName: '',
@@ -76,9 +87,10 @@ export default class Dropdown extends Component {
   }
 
   changeMenuHandler = (e) => {
+    const { isOpen } = this.state;
     const $target = e.target;
     const container = this.containerInstance;
-    if ($target !== container && !container.current.contains($target) && this.state.isOpen) {
+    if ($target !== container && !container.current.contains($target) && isOpen) {
       this.setState({ isOpen: false });
     }
   }
@@ -88,12 +100,21 @@ export default class Dropdown extends Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
+  selfClosedHandler = () => {
+    if (this.props.isSelfClosed && this.state.isOpen) {
+      this.setState({
+        isOpen: false
+      });
+    }
+  }
+
   renderDrop = () => {
     const { isOpen } = this.state;
     const { children, dropPosition, dropMenuClassName } = this.props;
     if (!this.containerInstance || !isOpen || !children) return null;
     return (
       <div
+        onClick={this.selfClosedHandler}
         className={
           cx(styles.dropdown__menu, {
             'is-open': isOpen,
@@ -110,7 +131,7 @@ export default class Dropdown extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { trigger, triggerClassName } = this.props;
+    const { trigger: TriggerProp, triggerClassName } = this.props;
     return (
       <div
         ref={this.containerInstance}
@@ -131,7 +152,14 @@ export default class Dropdown extends Component {
             })
           }
         >
-          {trigger}
+          {typeof TriggerProp === 'object' ?
+            TriggerProp
+            :
+            typeof TriggerProp === 'string' ?
+              <Trigger text={TriggerProp} />
+              :
+              null
+          }
         </div>
         {this.renderDrop()}
       </div>
