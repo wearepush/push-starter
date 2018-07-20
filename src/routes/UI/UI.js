@@ -58,6 +58,12 @@ const UI = () => {
         Outlined Button
       </Button>
       <Button
+        variant="outlined"
+        color="alert"
+      >
+        Outlined Button
+      </Button>
+      <Button
         float
       >
         Floating Button

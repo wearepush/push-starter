@@ -14,7 +14,7 @@ $TextField: 'TextField';
     }
 
     &.is-invalid {
-      border-color: $color-pamegranate;
+      border-color: $color-danger;
     }
 
     &.is-empty {
@@ -27,20 +27,20 @@ $TextField: 'TextField';
 
 
       input {
-        border-color: $color-niagara;
+        border-color: $color-success;
 
         &:focus {
-          box-shadow: 0px 0px 0px 1px $color-niagara;
+          box-shadow: 0px 0px 0px 1px $color-success;
         }
       }
     }
 
     &.is-invalid {
       input {
-        border-color: $color-pamegranate;
+        border-color: $color-danger;
 
         &:focus {
-          box-shadow: 0px 0px 0px 1px $color-pamegranate;
+          box-shadow: 0px 0px 0px 1px $color-danger;
         }
       }
     }
