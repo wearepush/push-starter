@@ -60,7 +60,7 @@ export default class Dropdown extends Component {
 
   componentDidMount() {
     if (this.isControled) return;
-    document.addEventListener('click', this.changeMenuHandler);
+    document.body.addEventListener('click', this.changeMenuHandler);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,7 +78,7 @@ export default class Dropdown extends Component {
   changeMenuHandler = (e) => {
     const $target = e.target;
     const container = this.containerInstance;
-    if ($target !== container && !container.current.contains($target) && this.state.isOpen) {
+    if ($target !== container && container && container.current && !container.current.contains($target) && this.state.isOpen) {
       this.setState({ isOpen: false });
     }
   }

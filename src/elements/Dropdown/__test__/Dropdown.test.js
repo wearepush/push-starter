@@ -22,6 +22,7 @@ describe('Dropdown', () => {
       expect(dropdown.prop('triggerClassName')).toEqual(undefined);
     });
   });
+
   describe('render dropdown menu', () => {
     it('should render dropdown menu after click', () => {
       const dropdown = mount(
@@ -35,8 +36,10 @@ describe('Dropdown', () => {
       );
       dropdown.find(Trigger).simulate('click');
       expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      dropdown.unmount();
     });
   });
+
   describe('render dropdown menu with unique classNames', () => {
     it('should set up unique classes', () => {
       const dropdown = mount(
@@ -53,8 +56,10 @@ describe('Dropdown', () => {
       dropdown.find(Trigger).simulate('click');
       expect(dropdown.find(Trigger).hasClass('my-trigger-classname'));
       expect(dropdown.find('.dropdown__menu').hasClass('my-menu-classname'));
+      dropdown.unmount();
     });
   });
+
   describe('dropdown menu is open', () => {
     it('should render dropdown menu when component have isOpen prop', () => {
       const dropdown = mount(
@@ -68,34 +73,36 @@ describe('Dropdown', () => {
         </Dropdown>
       );
       expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      dropdown.unmount();
     });
+
   });
+
   describe('close dropdown menu', () => {
     it('should close dropdown menu when clicking outside component', () => {
-      const map = {}
-      document.addEventListener = jest.fn((event, cb) => {
-        map[event] = cb
-      });
-      const layout = mount(
-        <div>
-          <button id="outside">Outside button</button>
-          <Dropdown
-            trigger={<Trigger />}
-          >
-            {
-              menuList.map((el, i) => <span key={i.toString()}>{el}</span>)
-            }
-          </Dropdown>
-        </div>
+
+      const dropdown = mount(
+        <Dropdown
+          trigger={<Trigger />}
+        >
+          {
+            menuList.map((el, i) => <span key={i.toString()}>{el}</span>)
+          }
+        </Dropdown>
       );
-      let outsideButton = layout.find('#outside');
-      layout.find(Trigger).simulate('click');
-      expect(layout.find('.dropdown__menu').length).toEqual(1);
-      outsideButton.simulate('click');
-      map.click({
-        target: ReactDOM.findDOMNode(outsideButton.instance())
-      });
-      expect(layout.find('.dropdown__menu').length).toEqual(0);
+
+      dropdown.find(Trigger).simulate('click');
+      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+
+      document.body.addEventListener('click', () => { });
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent("click", false, true);
+      document.body.dispatchEvent(evt)
+
+      dropdown.update();
+      expect(dropdown.find('.dropdown__menu').length).toEqual(0);
+      dropdown.unmount();
     });
   });
+
 });
