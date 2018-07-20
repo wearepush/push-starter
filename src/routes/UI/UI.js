@@ -247,7 +247,7 @@ const UI = () => {
       <Dropdown
         triggerClassName="my-trigger"
         dropMenuClassName="my-drop"
-        trigger={<span>Uncontroled</span>}
+        dropPosition="bl"
       >
         <span>1</span>
       </Dropdown>
