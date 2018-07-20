@@ -58,6 +58,12 @@ const UI = () => {
         Outlined Button
       </Button>
       <Button
+        variant="outlined"
+        color="alert"
+      >
+        Outlined Button
+      </Button>
+      <Button
         float
       >
         Floating Button
@@ -72,8 +78,11 @@ const UI = () => {
       >
         Custom Classname Button
       </Button>
-      <Button component="a">
-        test
+      <Button
+        component="a"
+        variant="outlined"
+      >
+        Link
       </Button>
       <hr />
       <h2>TextField</h2>
@@ -239,7 +248,7 @@ const UI = () => {
         isSelfClosed
         triggerClassName="my-trigger"
         dropMenuClassName="my-drop"
-        trigger={<span>Uncontroled</span>}
+        dropPosition="bl"
       >
         <span>1</span>
       </Dropdown>

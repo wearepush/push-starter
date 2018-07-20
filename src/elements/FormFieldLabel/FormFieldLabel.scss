@@ -13,7 +13,7 @@ $FormFieldLabel: 'FormFieldLabel';
     margin-bottom: 6px;
 
     &.is-invalid {
-      color: $color-pamegranate;
+      color: $color-danger;
     }
 
     &.is-disabled {

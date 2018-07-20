@@ -26,7 +26,7 @@ $Radio: 'Radio';
     &.is-invalid {
       & :local {
         .#{$Radio}__placeholder {
-          color: $color-pamegranate;
+          color: $color-danger;
         }
       }
     }
@@ -46,7 +46,7 @@ $Radio: 'Radio';
 
     &:hover {
       .Radio__icon {
-        border-color: $color-blue-ribbon;
+        border-color: $color-primary;
       }
     }
   }
@@ -77,15 +77,15 @@ $Radio: 'Radio';
         }
 
         &:hover {
-          border-color: $color-athens-grey;
+          border-color: $color-default;
         }
 
         &.is-checked {
           background-color: $white;
-          border-color: $color-blue-ribbon;
+          border-color: $color-primary;
 
           &:after {
-            background-color: $color-blue-ribbon;
+            background-color: $color-primary;
           }
         }
 
@@ -96,15 +96,15 @@ $Radio: 'Radio';
 
         &.is-disabled {
           background-color: $white;
-          border-color: $color-athens-grey !important;
+          border-color: $color-default !important;
           cursor: not-allowed;
 
           &:after {
-            background-color: $color-athens-grey;
+            background-color: $color-default;
           }
 
           &:hover {
-            border-color: $color-athens-grey;
+            border-color: $color-default;
           }
         }
       }
@@ -123,11 +123,13 @@ $Radio: 'Radio';
 
   &__input {
     display: inline-block;
+    vertical-align: middle;
 
     &:focus {
       outline: 0;
       box-shadow: none;
     }
+
   }
 
   &__placeholder {
