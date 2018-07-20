@@ -236,6 +236,7 @@ const UI = () => {
       </div>
       <h2>Dropdown uncontroled</h2>
       <Dropdown
+        isSelfClosed
         triggerClassName="my-trigger"
         dropMenuClassName="my-drop"
         trigger={<span>Uncontroled</span>}
@@ -245,7 +246,7 @@ const UI = () => {
       <h2>Dropdown controled</h2>
       <Dropdown
         isOpen
-        trigger={<span>Controled</span>}
+        trigger="My Settings"
       />
     </div>
   );
