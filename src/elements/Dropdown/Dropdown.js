@@ -42,11 +42,11 @@ export default class Dropdown extends Component {
   };
 
   static defaultProps = {
-    isOpen: undefined,
     children: undefined,
-    triggerClassName: '',
     dropMenuClassName: '',
-    dropPosition: 'bl'
+    dropPosition: 'bl',
+    isOpen: undefined,
+    triggerClassName: ''
   };
 
   constructor(props) {
@@ -60,7 +60,7 @@ export default class Dropdown extends Component {
 
   componentDidMount() {
     if (this.isControled) return;
-    window.addEventListener('click', this.changeMenuHandler);
+    document.addEventListener('click', this.changeMenuHandler);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,7 +72,7 @@ export default class Dropdown extends Component {
 
   componentWillUnmount() {
     if (this.isControled) return;
-    window.removeEventListener('click', this.changeMenuHandler);
+    document.removeEventListener('click', this.changeMenuHandler);
   }
 
   changeMenuHandler = (e) => {
@@ -126,7 +126,7 @@ export default class Dropdown extends Component {
           onClick={this.clickTriggerHandler}
           onKeyDown={() => { }}
           className={
-            cx(styles.drppdown__trigger, {
+            cx(styles.dropdown__trigger, {
               [triggerClassName]: !!triggerClassName,
             })
           }
