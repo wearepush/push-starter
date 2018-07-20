@@ -78,8 +78,11 @@ const UI = () => {
       >
         Custom Classname Button
       </Button>
-      <Button component="a">
-        test
+      <Button
+        component="a"
+        variant="outlined"
+      >
+        Link
       </Button>
       <hr />
       <h2>TextField</h2>

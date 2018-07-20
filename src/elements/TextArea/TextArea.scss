@@ -6,6 +6,35 @@ $TextArea: 'TextArea';
 .#{$TextArea} {
 
   &:global {
+
+    & > textarea {
+      border: 1px solid $color-default;
+      border-radius: $base-border-radius;
+      color: $color-down-river;
+      display: block;
+      font-family: $base-font-family;
+      font-size: 14px;
+      line-height: 16px;
+      padding: 13px 16px;
+      resize: none;
+      transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
+      width: 100%;
+
+      &::placeholder {
+        color: $color-cadet-blue;
+      }
+
+      textarea:-webkit-autofill {
+        background-color: $white !important;
+      }
+
+      &:focus {
+        border-color: $color-azure;
+        box-shadow: 0px 0px 0px 1px $color-azure;
+        outline: none;
+      }
+    }
+
     &.is-active {
     }
 

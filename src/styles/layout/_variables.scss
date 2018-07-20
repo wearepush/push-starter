@@ -52,3 +52,13 @@ $base-timing: ease;
 
 //Label
 $base-label-color: $color-bayoux;
+
+//Form
+$_form-background-color: $white;
+$_form-box-shadow: 0px 0px 0px 1px rgba(0, 127, 255, 1);
+$_form-box-shadow-focus: $_form-box-shadow, 0 0 5px rgba($action-color, 0.7);
+
+//Button
+$_button-background-color: $action-color;
+$_button-background-color-hover: shade($action-color, 20%);
+
