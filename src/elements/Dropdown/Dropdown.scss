@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-$DropDown: 'dropdown';
+$DropDown: 'Dropdown';
 .#{$DropDown} {
   // background-color: $white;
   // border: 1px solid $color-default;
@@ -13,7 +13,64 @@ $DropDown: 'dropdown';
   // min-width: 236px;
   // min-height: 48px;
   // padding: 10px 16px;
-  // position: relative;
+
+  position: relative;
+
+  div[role="button"] {
+    background-color: $white;
+    border: 1px solid $color-default;
+    border-radius: 4px;
+    color: $color-down-river;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 14px 30px 14px 14px;
+    position: relative;
+    min-width: 256px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      margin: auto;
+      top: 20px;
+      right: 17px;
+      width: 9px;
+      height: 9px;
+      transform: rotate(45deg);
+      border-right: 2px solid $color-nile-blue;
+      border-bottom: 2px solid $color-nile-blue;
+    }
+
+    &.is-open {
+      border-color: $color-azure;
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  div[role="list"] {
+    width: 100%;
+    background-color: $white;
+    box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
+    border-radius: $base-border-radius;
+    list-style: none;
+    z-index: 10;
+    max-height: 300px;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 20px;
+    border: 1px solid $color-default;
+    padding: 8px;
+    position: absolute;
+    text-align: left;
+    min-width: 256px;
+    max-width: 256px;
+    z-index: 100;
+  }
+
 
   &--is-open {
     position: relative;
@@ -47,8 +104,25 @@ $DropDown: 'dropdown';
 
     &:global {
       &.is-open {
-        // position: relative;
-        // min-width: 236px;
+        width: 100%;
+        background-color: $white;
+        box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
+        border-radius: $base-border-radius;
+        list-style: none;
+        z-index: 10;
+        max-height: 300px;
+        overflow: auto;
+        font-size: 14px;
+        line-height: 20px;
+        border: 1px solid $color-default;
+        padding: 8px;
+        position: absolute;
+        // top: 100%;
+        // left: 0;
+        text-align: left;
+        min-width: 236px;
+        max-width: 236px;
+        z-index: 100;
       }
 
       &.is-bl {
@@ -88,5 +162,27 @@ $DropDown: 'dropdown';
         border-bottom-color: $color-grey;
       }
     }
+  }
+
+  .my-drop {
+    width: 100%;
+    background-color: $white;
+    box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
+    border-radius: $base-border-radius;
+    list-style: none;
+    z-index: 10;
+    max-height: 300px;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 20px;
+    border: 1px solid $color-default;
+    padding: 8px;
+    position: absolute;
+    // top: 100%;
+    // left: 0;
+    text-align: left;
+    min-width: 236px;
+    max-width: 236px;
+    z-index: 100;
   }
 }

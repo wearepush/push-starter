@@ -1,7 +1,39 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */
 import React, { Component } from 'react';
-import { bool, node, string, oneOf, oneOfType, arrayOf } from 'prop-types';
+import { bool, node, number, string, oneOf, oneOfType, arrayOf } from 'prop-types';
 import cx from 'classnames';
 import styles from './Dropdown.scss';
+
+export const DropdownTrigger = ({
+  className: classNameProp,
+  isOpen,
+  text,
+}) => {
+  const className = cx(styles.Drppdown__default_button, {
+    [classNameProp]: !!classNameProp,
+    [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
+    'is-open': isOpen,
+  });
+
+  return (
+    <div
+      className={className}
+    >
+      {text}
+    </div>
+  );
+};
+
+DropdownTrigger.propTypes = {
+  className: string,
+  isOpen: bool,
+  text: string.isRequired,
+};
+
+DropdownTrigger.defaultProps = {
+  className: '',
+  isOpen: false,
+};
 
 export default class Dropdown extends Component {
   static propTypes = {
@@ -12,6 +44,18 @@ export default class Dropdown extends Component {
       arrayOf(node),
       node
     ]),
+    /**
+    * @ignore
+    */
+    className: string,
+    /**
+    * The additional class name for trigger.
+    */
+    classNameTrigger: string,
+    /**
+    * The additional class name for default button.
+    */
+    classNameDefaultButton: string,
     /**
     * The additional class names setup list position.
     */
@@ -26,27 +70,38 @@ export default class Dropdown extends Component {
      */
     dropMenuClassName: string,
     /**
+     * The flag for self close after clicked on menu item
+     */
+    isSelfClosed: bool,
+    /**
      * The flag for the controlled dropdown.
      * If isOpen is true the dropdown list will be open and
      * component will be controlled
      */
     isOpen: bool,
     /**
+    * @ignore
+    */
+    tabIndex: oneOfType([number, string]),
+    /**
     * The node for control list's visibility.
     */
-    trigger: node.isRequired,
-    /**
-    * The additional class name for trigger.
-    */
-    triggerClassName: string,
+    trigger: oneOfType([
+      node,
+      string
+    ]).isRequired,
   };
 
   static defaultProps = {
-    isOpen: undefined,
     children: undefined,
-    triggerClassName: '',
+    className: '',
+    classNameTrigger: '',
     dropMenuClassName: '',
-    dropPosition: 'bl'
+    classNameDefaultButton: '',
+    dropPosition: 'bl',
+    isOpen: undefined,
+    isSelfClosed: false,
+    tabIndex: null,
   };
 
   constructor(props) {
@@ -54,7 +109,7 @@ export default class Dropdown extends Component {
     this.state = {
       isOpen: props.isOpen !== undefined ? props.isOpen : false
     };
-    this.containerInstance = React.createRef();
+    this.containerRef = React.createRef();
     this.isControled = props.isOpen !== undefined;
   }
 
@@ -76,9 +131,10 @@ export default class Dropdown extends Component {
   }
 
   changeMenuHandler = (e) => {
+    const { isOpen } = this.state;
     const $target = e.target;
-    const container = this.containerInstance;
-    if ($target !== container && !container.current.contains($target) && this.state.isOpen) {
+    const container = this.containerRef;
+    if ($target !== container && !container.current.contains($target) && isOpen) {
       this.setState({ isOpen: false });
     }
   }
@@ -88,10 +144,18 @@ export default class Dropdown extends Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
+  selfClosedHandler = () => {
+    if (this.props.isSelfClosed && this.state.isOpen) {
+      this.setState({
+        isOpen: false
+      });
+    }
+  }
+
   renderDrop = () => {
     const { isOpen } = this.state;
     const { children, dropPosition, dropMenuClassName } = this.props;
-    if (!this.containerInstance || !isOpen || !children) return null;
+    if (!this.containerRef || !isOpen || !children) return null;
     return (
       <div
         className={
@@ -101,37 +165,73 @@ export default class Dropdown extends Component {
             [dropMenuClassName]: !!dropMenuClassName,
           })
         }
+        role="list"
+        onClick={this.selfClosedHandler}
       >
         {
-          React.Children.map(children, (child, i) => <div className={styles['dropdown__menu-item']} key={i.toString()}>{child}</div>)
+          React.Children.map(children, (child, i) => (
+            <div
+              className={styles['dropdown__menu-item']}
+              key={i.toString()}
+              role="listitem"
+            >
+              {child}
+            </div>
+          ))
         }
       </div>);
   }
 
+  renderTrigger = () => {
+    const { trigger } = this.props;
+    switch (typeof trigger) {
+      case 'object':
+        return trigger;
+      case 'string':
+        return (
+          <DropdownTrigger
+            className={this.props.classNameDefaultButton}
+            isOpen={this.isControled ? this.props.isOpen : this.state.isOpen}
+            text={trigger}
+          />
+        );
+      default:
+        return null;
+    }
+  }
+
   render() {
     const { isOpen } = this.state;
-    const { trigger, triggerClassName } = this.props;
+    const {
+      className: classNameProp,
+      tabIndex,
+      classNameTrigger: classNameTriggerProp,
+    } = this.props;
+
+    const className = cx(styles.Dropdown, {
+      [classNameProp]: !!classNameProp,
+      [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
+      'is-open': isOpen,
+    });
+
+    const classNameTrigger = cx(styles.Drppdown__trigger, {
+      [classNameTriggerProp]: !!classNameTriggerProp,
+      [styles[classNameTriggerProp]]: !!styles[classNameTriggerProp] && !!classNameTriggerProp,
+      'is-open': isOpen,
+    });
+
     return (
       <div
-        ref={this.containerInstance}
-        className={
-          cx(styles.dropdown, {
-            'is-open': isOpen
-          })
-        }
+        ref={this.containerRef}
+        className={className}
       >
         <div
           role="button"
-          tabIndex={0}
+          tabIndex={isOpen ? -1 : tabIndex || 0}
           onClick={this.clickTriggerHandler}
-          onKeyDown={() => { }}
-          className={
-            cx(styles.drppdown__trigger, {
-              [triggerClassName]: !!triggerClassName,
-            })
-          }
+          className={classNameTrigger}
         >
-          {trigger}
+          {this.renderTrigger()}
         </div>
         {this.renderDrop()}
       </div>
