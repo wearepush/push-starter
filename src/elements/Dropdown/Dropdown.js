@@ -84,6 +84,13 @@ export default class Dropdown extends Component {
     */
     tabIndex: oneOfType([number, string]),
     /**
+    * type of relay to open drop
+    */
+    trigger: oneOf([
+      'hover',
+      'click'
+    ]),
+    /**
     * The node for control list's visibility.
     */
     button: oneOfType([
@@ -102,6 +109,7 @@ export default class Dropdown extends Component {
     isOpen: undefined,
     isSelfClosed: false,
     tabIndex: null,
+    trigger: 'click'
   };
 
   constructor(props) {
@@ -111,23 +119,24 @@ export default class Dropdown extends Component {
     };
     this.containerRef = React.createRef();
     this.isControled = props.isOpen !== undefined;
+    this.isHoverTrigger = props.trigger === 'hover';
   }
 
   componentDidMount() {
-    if (this.isControled) return;
+    if (this.isControled || this.isHoverTrigger) return;
     document.body.addEventListener('click', this.changeMenuHandler);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.isControled) return;
+    if (this.isControled || this.isHoverTrigger) return;
     this.setState({
       isOpen: nextProps.isOpen
     });
   }
 
   componentWillUnmount() {
-    if (this.isControled) return;
-    document.removeEventListener('click', this.changeMenuHandler);
+    if (this.isControled || this.isHoverTrigger) return;
+    document.body.removeEventListener('click', this.changeMenuHandler);
   }
 
   changeMenuHandler = (e) => {
@@ -140,8 +149,22 @@ export default class Dropdown extends Component {
   }
 
   clickButtonHandler = () => {
-    if (this.isControled) return;
+    if (this.isControled || this.isHoverTrigger) return;
     this.setState(state => ({ isOpen: !state.isOpen }));
+  }
+
+  hoverButtonEnterHandler = () => {
+    if (this.isControled || !this.isHoverTrigger || this.state.isOpen) return;
+    this.setState({
+      isOpen: true
+    });
+  }
+
+  hoverButtonLeaveHandler = () => {
+    if (this.isControled || !this.isHoverTrigger || !this.state.isOpen) return;
+    this.setState({
+      isOpen: false
+    });
   }
 
   selfClosedHandler = () => {
@@ -221,11 +244,13 @@ export default class Dropdown extends Component {
       <div
         ref={this.containerRef}
         className={className}
+        onMouseLeave={this.hoverButtonLeaveHandler}
       >
         <div
           role="button"
           tabIndex={isOpen ? -1 : tabIndex || 0}
           onClick={this.clickButtonHandler}
+          onMouseEnter={this.hoverButtonEnterHandler}
           className={classNameButton}
         >
           {this.renderButton()}

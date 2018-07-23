@@ -245,6 +245,7 @@ const UI = () => {
       </div>
       <h2>Dropdown controled</h2>
       <Dropdown
+        trigger="hover"
         classNameDefaultButton="test"
         button="My Settings"
       >
