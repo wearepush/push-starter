@@ -9,7 +9,7 @@ export const DropdownTrigger = ({
   isOpen,
   text,
 }) => {
-  const className = cx(styles.Drppdown__default_button, {
+  const className = cx(styles.Dropdown__default_button, {
     [classNameProp]: !!classNameProp,
     [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
     'is-open': isOpen,
@@ -134,7 +134,7 @@ export default class Dropdown extends Component {
     const { isOpen } = this.state;
     const $target = e.target;
     const container = this.containerRef;
-    if ($target !== container && !container.current.contains($target) && isOpen) {
+    if ($target !== container && container.current && !container.current.contains($target) && isOpen) {
       this.setState({ isOpen: false });
     }
   }
@@ -214,7 +214,7 @@ export default class Dropdown extends Component {
       'is-open': isOpen,
     });
 
-    const classNameTrigger = cx(styles.Drppdown__trigger, {
+    const classNameTrigger = cx(styles.Dropdown__trigger, {
       [classNameTriggerProp]: !!classNameTriggerProp,
       [styles[classNameTriggerProp]]: !!styles[classNameTriggerProp] && !!classNameTriggerProp,
       'is-open': isOpen,

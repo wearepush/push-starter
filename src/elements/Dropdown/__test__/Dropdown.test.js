@@ -15,7 +15,8 @@ describe('Dropdown', () => {
           trigger={<Trigger />}
         />
       );
-      expect(dropdown.find('.dropdown__trigger').length).toEqual(1);
+      console.log(dropdown.debug());
+      expect(dropdown.find('.Dropdown__trigger').length).toEqual(1);
       expect(dropdown.find(Trigger).length).toEqual(1);
       expect(dropdown.prop('dropPosition')).toEqual(undefined);
       expect(dropdown.prop('isOpen')).toEqual(undefined);
