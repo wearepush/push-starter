@@ -4,12 +4,12 @@ import { bool, node, number, string, oneOf, oneOfType, arrayOf } from 'prop-type
 import cx from 'classnames';
 import styles from './Dropdown.scss';
 
-export const DropdownTrigger = ({
+export const DropdownButton = ({
   className: classNameProp,
   isOpen,
   text,
 }) => {
-  const className = cx(styles.Drppdown__default_button, {
+  const className = cx(styles.Dropdown__default_button, {
     [classNameProp]: !!classNameProp,
     [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
     'is-open': isOpen,
@@ -24,13 +24,13 @@ export const DropdownTrigger = ({
   );
 };
 
-DropdownTrigger.propTypes = {
+DropdownButton.propTypes = {
   className: string,
   isOpen: bool,
   text: string.isRequired,
 };
 
-DropdownTrigger.defaultProps = {
+DropdownButton.defaultProps = {
   className: '',
   isOpen: false,
 };
@@ -49,9 +49,9 @@ export default class Dropdown extends Component {
     */
     className: string,
     /**
-    * The additional class name for trigger.
+    * The additional class name for button.
     */
-    classNameTrigger: string,
+    classNameButton: string,
     /**
     * The additional class name for default button.
     */
@@ -84,9 +84,16 @@ export default class Dropdown extends Component {
     */
     tabIndex: oneOfType([number, string]),
     /**
+    * type of relay to open drop
+    */
+    trigger: oneOf([
+      'hover',
+      'click'
+    ]),
+    /**
     * The node for control list's visibility.
     */
-    trigger: oneOfType([
+    button: oneOfType([
       node,
       string
     ]).isRequired,
@@ -95,13 +102,14 @@ export default class Dropdown extends Component {
   static defaultProps = {
     children: undefined,
     className: '',
-    classNameTrigger: '',
+    classNameButton: '',
     dropMenuClassName: '',
     classNameDefaultButton: '',
     dropPosition: 'bl',
     isOpen: undefined,
     isSelfClosed: false,
     tabIndex: null,
+    trigger: 'click'
   };
 
   constructor(props) {
@@ -111,37 +119,52 @@ export default class Dropdown extends Component {
     };
     this.containerRef = React.createRef();
     this.isControled = props.isOpen !== undefined;
+    this.isHoverTrigger = props.trigger === 'hover';
   }
 
   componentDidMount() {
-    if (this.isControled) return;
-    window.addEventListener('click', this.changeMenuHandler);
+    if (this.isControled || this.isHoverTrigger) return;
+    document.body.addEventListener('click', this.changeMenuHandler);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.isControled) return;
+    if (this.isControled || this.isHoverTrigger) return;
     this.setState({
       isOpen: nextProps.isOpen
     });
   }
 
   componentWillUnmount() {
-    if (this.isControled) return;
-    window.removeEventListener('click', this.changeMenuHandler);
+    if (this.isControled || this.isHoverTrigger) return;
+    document.body.removeEventListener('click', this.changeMenuHandler);
   }
 
   changeMenuHandler = (e) => {
     const { isOpen } = this.state;
     const $target = e.target;
     const container = this.containerRef;
-    if ($target !== container && !container.current.contains($target) && isOpen) {
+    if ($target !== container && container && container.current && !container.current.contains($target) && isOpen) {
       this.setState({ isOpen: false });
     }
   }
 
-  clickTriggerHandler = () => {
-    if (this.isControled) return;
+  clickButtonHandler = () => {
+    if (this.isControled || this.isHoverTrigger) return;
     this.setState(state => ({ isOpen: !state.isOpen }));
+  }
+
+  hoverButtonEnterHandler = () => {
+    if (this.isControled || !this.isHoverTrigger || this.state.isOpen) return;
+    this.setState({
+      isOpen: true
+    });
+  }
+
+  hoverButtonLeaveHandler = () => {
+    if (this.isControled || !this.isHoverTrigger || !this.state.isOpen) return;
+    this.setState({
+      isOpen: false
+    });
   }
 
   selfClosedHandler = () => {
@@ -182,21 +205,18 @@ export default class Dropdown extends Component {
       </div>);
   }
 
-  renderTrigger = () => {
-    const { trigger } = this.props;
-    switch (typeof trigger) {
-      case 'object':
-        return trigger;
-      case 'string':
-        return (
-          <DropdownTrigger
-            className={this.props.classNameDefaultButton}
-            isOpen={this.isControled ? this.props.isOpen : this.state.isOpen}
-            text={trigger}
-          />
-        );
-      default:
-        return null;
+  renderButton = () => {
+    const { button } = this.props;
+    if (typeof button === 'object') {
+      return button;
+    } else {
+      return (
+        <DropdownButton
+          className={this.props.classNameDefaultButton}
+          isOpen={this.isControled ? this.props.isOpen : this.state.isOpen}
+          text={button}
+        />
+      );
     }
   }
 
@@ -205,7 +225,7 @@ export default class Dropdown extends Component {
     const {
       className: classNameProp,
       tabIndex,
-      classNameTrigger: classNameTriggerProp,
+      classNameButton: classNameButtonProp,
     } = this.props;
 
     const className = cx(styles.Dropdown, {
@@ -214,9 +234,9 @@ export default class Dropdown extends Component {
       'is-open': isOpen,
     });
 
-    const classNameTrigger = cx(styles.Drppdown__trigger, {
-      [classNameTriggerProp]: !!classNameTriggerProp,
-      [styles[classNameTriggerProp]]: !!styles[classNameTriggerProp] && !!classNameTriggerProp,
+    const classNameButton = cx(styles.Dropdown__button, {
+      [classNameButtonProp]: !!classNameButtonProp,
+      [styles[classNameButtonProp]]: !!styles[classNameButtonProp] && !!classNameButtonProp,
       'is-open': isOpen,
     });
 
@@ -224,14 +244,16 @@ export default class Dropdown extends Component {
       <div
         ref={this.containerRef}
         className={className}
+        onMouseLeave={this.hoverButtonLeaveHandler}
       >
         <div
           role="button"
           tabIndex={isOpen ? -1 : tabIndex || 0}
-          onClick={this.clickTriggerHandler}
-          className={classNameTrigger}
+          onClick={this.clickButtonHandler}
+          onMouseEnter={this.hoverButtonEnterHandler}
+          className={classNameButton}
         >
-          {this.renderTrigger()}
+          {this.renderButton()}
         </div>
         {this.renderDrop()}
       </div>
