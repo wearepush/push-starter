@@ -1,17 +1,23 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-$DropDown: 'dropdown';
+$DropDown: 'Dropdown';
 .#{$DropDown} {
-  display: inline-block;
+  // background-color: $white;
+  // border: 1px solid $color-default;
+  // border-radius: $base-border-radius;
+  // display: inline-block;
+  // color: $color-down-river;
+  // font-size: 14px;
+  // line-height: 20px;
+  // min-width: 236px;
+  // min-height: 48px;
+  // padding: 10px 16px;
   position: relative;
-  min-width: 150px;
-  height: 30px;
-  line-height: 28px;
-  text-align: center;
-  border: 1px solid #ccc;
+
   &--is-open {
-    border-color: firebrick;
+    position: relative;
+    min-width: 236px;
   }
   &__trigger {
     padding: 0 10px;
@@ -19,23 +25,68 @@ $DropDown: 'dropdown';
   }
   &__menu {
     width: 100%;
-    background: #fff;
+    background: $white;
+    box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
+    border-radius: $base-border-radius;
     list-style: none;
     z-index: 10;
     max-height: 300px;
     overflow: auto;
-    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 20px;
+    border: 1px solid $color-default;
+    padding: 8px;
     position: absolute;
-    left: 0;
-    right: 0;
+    // top: 100%;
+    // left: 0;
+    text-align: left;
+    min-width: 236px;
+    max-width: 236px;
+    z-index: 100;
+
 
     &:global {
       &.is-open {
-        background: red;
+        // position: relative;
+        // min-width: 236px;
+      }
+
+      &.is-bl {
+        top: 100%;
+        left: 0;
+      }
+
+      &.is-br {
+        top: 100%;
+        right: 0;
+      }
+
+      &.is-tl {
+        bottom: 100%;
+        left: 0;
+        right: auto;
+      }
+
+      &.is-tr {
+        bottom: 100%;
+        right: 0;
       }
     }
     &-item {
+      background-color: $white;
+      border-bottom: 1px solid $white;
+      color: $color-bayoux;
+      font-size: 14px;
+      line-height: 20px;
       cursor: pointer;
+      padding: 10px 16px 9px;
+      transition: background-color $base-duration $base-timing, border-bottom-color $base-duration $base-timing;
+
+      &:hover,
+      &:focus {
+        background-color: $color-athens-grey;
+        border-bottom-color: $color-grey;
+      }
     }
   }
 }

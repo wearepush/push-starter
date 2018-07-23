@@ -26,7 +26,7 @@ $Checkbox: 'Checkbox';
     &.is-invalid {
       & :local {
         .#{$Checkbox}__placeholder {
-          color: $color-pamegranate;
+          color: $color-danger;
         }
       }
     }
@@ -46,7 +46,7 @@ $Checkbox: 'Checkbox';
 
     &:hover {
       .#{$Checkbox}__icon {
-        border-color: $color-blue-ribbon;
+        border-color: $color-primary;
       }
     }
 
@@ -64,7 +64,7 @@ $Checkbox: 'Checkbox';
       &.is-default-icon {
         width: 18px;
         height: 18px;
-        border: 2px solid $color-blue-ribbon;
+        border: 2px solid $color-primary;
         border-radius: 3px;
         position: relative;
         transition: border-color $base-duration $base-timing, background-color $base-duration $base-timing;
@@ -85,11 +85,11 @@ $Checkbox: 'Checkbox';
 
         &:hover {
           background-color: $white;
-          border-color: $color-blue-ribbon;
+          border-color: $color-primary;
         }
 
         &.is-checked {
-          background-color: $color-blue-ribbon;
+          background-color: $color-primary;
 
           &:after {
             border-color: $white;
@@ -103,11 +103,11 @@ $Checkbox: 'Checkbox';
 
         &.is-disabled {
           background-color: $white;
-          border-color: $color-athens-grey !important;
+          border-color: $color-default !important;
           cursor: not-allowed;
 
           &:after {
-            background-color: $color-athens-grey;
+            background-color: $color-default;
             border: 0;
             height: 2px;
             width: 8px;
@@ -118,7 +118,7 @@ $Checkbox: 'Checkbox';
 
           &:hover {
             background-color: $white;
-            border-color: $color-athens-grey;
+            border-color: $color-default;
           }
         }
       }
@@ -141,6 +141,8 @@ $Checkbox: 'Checkbox';
 
   &__input {
     display: inline-block;
+    vertical-align: middle;
+
 
     &:focus {
       box-shadow: none;

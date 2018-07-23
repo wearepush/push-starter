@@ -58,6 +58,12 @@ const UI = () => {
         Outlined Button
       </Button>
       <Button
+        variant="outlined"
+        color="alert"
+      >
+        Outlined Button
+      </Button>
+      <Button
         float
       >
         Floating Button
@@ -72,8 +78,11 @@ const UI = () => {
       >
         Custom Classname Button
       </Button>
-      <Button component="a">
-        test
+      <Button
+        component="a"
+        variant="outlined"
+      >
+        Link
       </Button>
       <hr />
       <h2>TextField</h2>
@@ -153,7 +162,7 @@ const UI = () => {
         />
         <h2>{'Checkbox\'s API'}</h2>
         <Checkbox
-          name="checkbox-3"
+          name="checkbox-5"
           placeholder="Checkbox placeholder"
           onChange={(e, checked) => {
             console.log('onChange', checked);
@@ -234,19 +243,13 @@ const UI = () => {
           value="1"
         />
       </div>
-      <h2>Dropdown uncontroled</h2>
+      <h2>Dropdown controled</h2>
       <Dropdown
-        triggerClassName="my-trigger"
-        dropMenuClassName="my-drop"
-        trigger={<span>Uncontroled</span>}
+        classNameDefaultButton="test"
+        trigger="My Settings"
       >
         <span>1</span>
       </Dropdown>
-      <h2>Dropdown controled</h2>
-      <Dropdown
-        isOpen
-        trigger={<span>Controled</span>}
-      />
     </div>
   );
 };
