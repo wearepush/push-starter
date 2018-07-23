@@ -42,6 +42,10 @@ $DropDown: 'Dropdown';
       border-bottom: 2px solid $color-nile-blue;
     }
 
+    &:hover {
+      border-color: shade($base-border-color, 20%);
+    }
+
     &.is-open {
       border-color: $color-azure;
 

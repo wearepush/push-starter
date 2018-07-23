@@ -33,6 +33,10 @@ $TextArea: 'TextArea';
         box-shadow: 0px 0px 0px 1px $color-azure;
         outline: none;
       }
+
+      &:hover {
+        border-color: shade($base-border-color, 20%);
+      }
     }
 
     &.is-active {
