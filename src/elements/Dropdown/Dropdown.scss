@@ -1,22 +1,12 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-$DropDown: 'Dropdown';
-.#{$DropDown} {
-  // background-color: $white;
-  // border: 1px solid $color-default;
-  // border-radius: $base-border-radius;
-  // display: inline-block;
-  // color: $color-down-river;
-  // font-size: 14px;
-  // line-height: 20px;
-  // min-width: 236px;
-  // min-height: 48px;
-  // padding: 10px 16px;
-
+$Dropdown: 'Dropdown';
+.#{$Dropdown} {
+  display: inline-block;
   position: relative;
 
-  div[role="button"] {
+  &__default_button {
     background-color: $white;
     border: 1px solid $color-default;
     border-radius: 4px;
@@ -25,15 +15,14 @@ $DropDown: 'Dropdown';
     display: inline-block;
     font-size: 14px;
     line-height: 18px;
-    padding: 14px 30px 14px 14px;
+    padding: 14px 40px 14px 14px;
     position: relative;
-    min-width: 256px;
 
     &:after {
       content: '';
       position: absolute;
       margin: auto;
-      top: 20px;
+      top: 17px;
       right: 17px;
       width: 9px;
       height: 9px;
@@ -55,36 +44,7 @@ $DropDown: 'Dropdown';
     }
   }
 
-  div[role="list"] {
-    width: 100%;
-    background-color: $white;
-    box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
-    border-radius: $base-border-radius;
-    list-style: none;
-    z-index: 10;
-    max-height: 300px;
-    overflow: auto;
-    font-size: 14px;
-    line-height: 20px;
-    border: 1px solid $color-default;
-    padding: 8px;
-    position: absolute;
-    text-align: left;
-    min-width: 256px;
-    max-width: 256px;
-    z-index: 100;
-  }
-
-
-  &--is-open {
-    position: relative;
-    min-width: 236px;
-  }
-  &__trigger {
-    padding: 0 10px;
-    display: inline-block;
-  }
-  &__menu {
+  &__list {
     width: 100%;
     background: $white;
     box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
@@ -98,36 +58,11 @@ $DropDown: 'Dropdown';
     border: 1px solid $color-default;
     padding: 8px;
     position: absolute;
-    // top: 100%;
-    // left: 0;
     text-align: left;
-    min-width: 236px;
-    max-width: 236px;
     z-index: 100;
 
 
     &:global {
-      &.is-open {
-        width: 100%;
-        background-color: $white;
-        box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
-        border-radius: $base-border-radius;
-        list-style: none;
-        z-index: 10;
-        max-height: 300px;
-        overflow: auto;
-        font-size: 14px;
-        line-height: 20px;
-        border: 1px solid $color-default;
-        padding: 8px;
-        position: absolute;
-        // top: 100%;
-        // left: 0;
-        text-align: left;
-        min-width: 236px;
-        max-width: 236px;
-        z-index: 100;
-      }
 
       &.is-bl {
         top: 100%;
@@ -150,43 +85,23 @@ $DropDown: 'Dropdown';
         right: 0;
       }
     }
-    &-item {
-      background-color: $white;
-      border-bottom: 1px solid $white;
-      color: $color-bayoux;
-      font-size: 14px;
-      line-height: 20px;
-      cursor: pointer;
-      padding: 10px 16px 9px;
-      transition: background-color $base-duration $base-timing, border-bottom-color $base-duration $base-timing;
+  }
 
-      &:hover,
-      &:focus {
-        background-color: $color-athens-grey;
-        border-bottom-color: $color-grey;
-      }
+  &__item {
+    background-color: $white;
+    border-bottom: 1px solid $white;
+    color: $color-bayoux;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    padding: 10px 16px 9px;
+    transition: background-color $base-duration $base-timing, border-bottom-color $base-duration $base-timing;
+
+    &:hover,
+    &:focus {
+      background-color: $color-athens-grey;
+      border-bottom-color: $color-grey;
     }
   }
 
-  .my-drop {
-    width: 100%;
-    background-color: $white;
-    box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
-    border-radius: $base-border-radius;
-    list-style: none;
-    z-index: 10;
-    max-height: 300px;
-    overflow: auto;
-    font-size: 14px;
-    line-height: 20px;
-    border: 1px solid $color-default;
-    padding: 8px;
-    position: absolute;
-    // top: 100%;
-    // left: 0;
-    text-align: left;
-    min-width: 236px;
-    max-width: 236px;
-    z-index: 100;
-  }
 }
