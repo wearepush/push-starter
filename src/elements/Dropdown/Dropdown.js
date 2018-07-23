@@ -4,7 +4,7 @@ import { bool, node, number, string, oneOf, oneOfType, arrayOf } from 'prop-type
 import cx from 'classnames';
 import styles from './Dropdown.scss';
 
-export const DropdownTrigger = ({
+export const DropdownButton = ({
   className: classNameProp,
   isOpen,
   text,
@@ -24,13 +24,13 @@ export const DropdownTrigger = ({
   );
 };
 
-DropdownTrigger.propTypes = {
+DropdownButton.propTypes = {
   className: string,
   isOpen: bool,
   text: string.isRequired,
 };
 
-DropdownTrigger.defaultProps = {
+DropdownButton.defaultProps = {
   className: '',
   isOpen: false,
 };
@@ -49,9 +49,9 @@ export default class Dropdown extends Component {
     */
     className: string,
     /**
-    * The additional class name for trigger.
+    * The additional class name for button.
     */
-    classNameTrigger: string,
+    classNameButton: string,
     /**
     * The additional class name for default button.
     */
@@ -86,7 +86,7 @@ export default class Dropdown extends Component {
     /**
     * The node for control list's visibility.
     */
-    trigger: oneOfType([
+    button: oneOfType([
       node,
       string
     ]).isRequired,
@@ -95,7 +95,7 @@ export default class Dropdown extends Component {
   static defaultProps = {
     children: undefined,
     className: '',
-    classNameTrigger: '',
+    classNameButton: '',
     dropMenuClassName: '',
     classNameDefaultButton: '',
     dropPosition: 'bl',
@@ -134,12 +134,12 @@ export default class Dropdown extends Component {
     const { isOpen } = this.state;
     const $target = e.target;
     const container = this.containerRef;
-    if ($target !== container && container.current && !container.current.contains($target) && isOpen) {
+    if ($target !== container && container && container.current && !container.current.contains($target) && isOpen) {
       this.setState({ isOpen: false });
     }
   }
 
-  clickTriggerHandler = () => {
+  clickButtonHandler = () => {
     if (this.isControled) return;
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
@@ -182,21 +182,18 @@ export default class Dropdown extends Component {
       </div>);
   }
 
-  renderTrigger = () => {
-    const { trigger } = this.props;
-    switch (typeof trigger) {
-      case 'object':
-        return trigger;
-      case 'string':
-        return (
-          <DropdownTrigger
-            className={this.props.classNameDefaultButton}
-            isOpen={this.isControled ? this.props.isOpen : this.state.isOpen}
-            text={trigger}
-          />
-        );
-      default:
-        return null;
+  renderButton = () => {
+    const { button } = this.props;
+    if (typeof button === 'object') {
+      return button;
+    } else {
+      return (
+        <DropdownButton
+          className={this.props.classNameDefaultButton}
+          isOpen={this.isControled ? this.props.isOpen : this.state.isOpen}
+          text={button}
+        />
+      );
     }
   }
 
@@ -205,7 +202,7 @@ export default class Dropdown extends Component {
     const {
       className: classNameProp,
       tabIndex,
-      classNameTrigger: classNameTriggerProp,
+      classNameButton: classNameButtonProp,
     } = this.props;
 
     const className = cx(styles.Dropdown, {
@@ -214,9 +211,9 @@ export default class Dropdown extends Component {
       'is-open': isOpen,
     });
 
-    const classNameTrigger = cx(styles.Dropdown__trigger, {
-      [classNameTriggerProp]: !!classNameTriggerProp,
-      [styles[classNameTriggerProp]]: !!styles[classNameTriggerProp] && !!classNameTriggerProp,
+    const classNameButton = cx(styles.Dropdown__button, {
+      [classNameButtonProp]: !!classNameButtonProp,
+      [styles[classNameButtonProp]]: !!styles[classNameButtonProp] && !!classNameButtonProp,
       'is-open': isOpen,
     });
 
@@ -228,10 +225,10 @@ export default class Dropdown extends Component {
         <div
           role="button"
           tabIndex={isOpen ? -1 : tabIndex || 0}
-          onClick={this.clickTriggerHandler}
-          className={classNameTrigger}
+          onClick={this.clickButtonHandler}
+          className={classNameButton}
         >
-          {this.renderTrigger()}
+          {this.renderButton()}
         </div>
         {this.renderDrop()}
       </div>

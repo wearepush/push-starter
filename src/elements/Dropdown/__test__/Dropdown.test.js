@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Dropdown from '../Dropdown.js';
 
-const Trigger = () => (<span>trigger</span>);
+const Button = () => (<span>button</span>);
 const menuList = [1, 2, 3];
 
 describe('Dropdown', () => {
@@ -12,15 +12,14 @@ describe('Dropdown', () => {
     it('should render dropdown', () => {
       const dropdown = shallow(
         <Dropdown
-          trigger={<Trigger />}
+          button={<Button />}
         />
       );
-      console.log(dropdown.debug());
-      expect(dropdown.find('.Dropdown__trigger').length).toEqual(1);
-      expect(dropdown.find(Trigger).length).toEqual(1);
+      expect(dropdown.find('.Dropdown__button').length).toEqual(1);
+      expect(dropdown.find(Button).length).toEqual(1);
       expect(dropdown.prop('dropPosition')).toEqual(undefined);
       expect(dropdown.prop('isOpen')).toEqual(undefined);
-      expect(dropdown.prop('triggerClassName')).toEqual(undefined);
+      expect(dropdown.prop('buttonClassName')).toEqual(undefined);
     });
   });
 
@@ -28,14 +27,14 @@ describe('Dropdown', () => {
     it('should render dropdown menu after click', () => {
       const dropdown = mount(
         <Dropdown
-          trigger={<Trigger />}
+          button={<Button />}
         >
           {
             menuList.map((el, i) => <span key={i.toString()}>{el}</span>)
           }
         </Dropdown>
       );
-      dropdown.find(Trigger).simulate('click');
+      dropdown.find(Button).simulate('click');
       expect(dropdown.find('.dropdown__menu').length).toEqual(1);
       dropdown.unmount();
     });
@@ -45,18 +44,20 @@ describe('Dropdown', () => {
     it('should set up unique classes', () => {
       const dropdown = mount(
         <Dropdown
+          className='drop'
           dropMenuClassName='my-menu-classname'
-          triggerClassName='my-trigger-classname'
-          trigger={<Trigger />}
+          buttonClassName='my-button-classname'
+          button={<Button />}
         >
           {
             menuList.map((el, i) => <span key={i.toString()}>{el}</span>)
           }
         </Dropdown>
       );
-      dropdown.find(Trigger).simulate('click');
-      expect(dropdown.find(Trigger).hasClass('my-trigger-classname'));
+      dropdown.find(Button).simulate('click');
+      expect(dropdown.find(Button).hasClass('my-button-classname'));
       expect(dropdown.find('.dropdown__menu').hasClass('my-menu-classname'));
+      expect(dropdown.hasClass('drop'));
       dropdown.unmount();
     });
   });
@@ -66,7 +67,7 @@ describe('Dropdown', () => {
       const dropdown = mount(
         <Dropdown
           isOpen
-          trigger={<Trigger />}
+          button={<Button />}
         >
           {
             menuList.map((el, i) => <span key={i.toString()}>{el}</span>)
@@ -84,7 +85,7 @@ describe('Dropdown', () => {
 
       const dropdown = mount(
         <Dropdown
-          trigger={<Trigger />}
+          button={<Button />}
         >
           {
             menuList.map((el, i) => <span key={i.toString()}>{el}</span>)
@@ -92,7 +93,7 @@ describe('Dropdown', () => {
         </Dropdown>
       );
 
-      dropdown.find(Trigger).simulate('click');
+      dropdown.find(Button).simulate('click');
       expect(dropdown.find('.dropdown__menu').length).toEqual(1);
 
       document.body.addEventListener('click', () => { });
@@ -102,6 +103,65 @@ describe('Dropdown', () => {
 
       dropdown.update();
       expect(dropdown.find('.dropdown__menu').length).toEqual(0);
+      dropdown.unmount();
+    });
+  });
+
+  describe('close dropdown menu selfclosed component', () => {
+    it('should close dropdown menu when clicking on list element', () => {
+      const dropdown = mount(
+        <Dropdown
+          isSelfClosed
+          button={<Button />}
+        >
+          {
+            menuList.map((el, i) => <span className='menu-item' key={i.toString()}>{el}</span>)
+          }
+        </Dropdown>
+      );
+      dropdown.find(Button).simulate('click');
+      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      const listElem = dropdown.find('.menu-item').last();
+      listElem.simulate('click');
+      dropdown.update();
+      expect(dropdown.find('.dropdown__menu').length).toEqual(0);
+      dropdown.unmount();
+    });
+  });
+
+  describe('render default button', () => {
+    it('should render default button when setup "string" in button prop', () => {
+      const dropdown = mount(
+        <Dropdown
+          button='btn'
+        >
+          {
+            menuList.map((el, i) => <span className='menu-item' key={i.toString()}>{el}</span>)
+          }
+        </Dropdown>
+      );
+      expect(dropdown.find('div.Dropdown__default_button').length).toEqual(1);
+      dropdown.unmount();
+    });
+  });
+
+
+  describe('should be controlled component', () => {
+    it('should be controlled component if parent do setState', () => {
+      const dropdown = shallow(
+        <Dropdown
+          button='btn'
+          button={<Button />}
+        >
+          {
+            menuList.map((el, i) => <span className='menu-item' key={i.toString()}>{el}</span>)
+          }
+        </Dropdown>
+      );
+      
+      dropdown.setProps({test: true});
+      dropdown.update();
+      expect(dropdown.state().isOpen).toBe(undefined);
       dropdown.unmount();
     });
   });
