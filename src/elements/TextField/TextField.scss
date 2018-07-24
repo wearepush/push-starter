@@ -38,6 +38,10 @@ $TextField: 'TextField';
           border: $base-border;
         }
 
+        &:hover {
+          border-color: $color-default;
+        }
+
         &::placeholder {
           color: $color-cadet-blue;
         }
