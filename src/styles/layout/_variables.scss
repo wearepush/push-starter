@@ -8,26 +8,32 @@ $heading-line-height: 1.2;
 
 // Other Sizes
 $base-border-radius: 4px;
-$base-spacing: 1.5em;
+$base-spacing: 32px;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
 $white: #fff;
-$color-grey: #F1F2F4;
-$color-default: #E1E4E8;
+
+$color-disabled: #F1F2F4;
+
 $color-down-river: #0A1F44;
 $color-cadet-blue: #A6AEBC;
 $color-azure: #007FFF;
-$color-success: #0BB07B;
-$color-bayoux: #53627C;
-$color-danger: #F03D3D;
-$color-primary: #0C66FF;
-$color-alert: #FFAD0D;
-$color-ghost: #C9CED6;
+$color-link: #53627C;
 $color-denim: #0D55CF;
 $color-athens-grey: #F8F9FB;
 $color-nile-blue: #182C4F;
+
+$color-unchecked: #C9CED6;
+
+
+$color-danger: #F03D3D;
+$color-primary: #0C66FF;
+$color-alert: #FFAD0D;
+$color-success: #0BB07B;
+$color-default: #E1E4E8;
+$color-default-1: #758196;
 
 // Font Colors
 $base-font-color: $color-down-river;
@@ -52,7 +58,7 @@ $base-timing: ease;
 
 
 //Label
-$base-label-color: $color-bayoux;
+$base-label-color: #53627C;
 
 //Form
 $_form-background-color: $white;

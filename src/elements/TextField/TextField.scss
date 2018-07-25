@@ -31,7 +31,7 @@ $TextField: 'TextField';
       }
 
       &:disabled {
-        background-color: $color-grey;
+        background-color: $color-disabled;
         cursor: not-allowed;
 
         &:focus {
@@ -45,10 +45,6 @@ $TextField: 'TextField';
         &::placeholder {
           color: $color-cadet-blue;
         }
-      }
-
-      &:-webkit-autofill {
-        background-color: $white !important;
       }
     }
 

@@ -30,7 +30,7 @@ $FormSelect: 'FormSelect';
   }
 
   &:disabled {
-    background-color: $color-grey;
+    background-color: $color-disabled;
     cursor: not-allowed;
 
     &:focus {
@@ -57,7 +57,7 @@ $FormSelect: 'FormSelect';
     }
 
     &:-webkit-autofill {
-      background-color: $white !important;
+      background-color: $white;
     }
   }
 

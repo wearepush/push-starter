@@ -250,6 +250,19 @@ const UI = () => {
       >
         <span>1</span>
       </Dropdown>
+      <Dropdown
+        dropPosition="bl"
+        button={(
+          <Button
+            variant="contained"
+            color="default"
+          >
+            Outlined Button
+          </Button>
+        )}
+      >
+        <span>1</span>
+      </Dropdown>
     </div>
   );
 };

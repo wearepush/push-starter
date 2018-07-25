@@ -5,95 +5,75 @@ $TextArea: 'TextArea';
 
 .#{$TextArea} {
 
-  &:global {
+  &__input {
+    border: 1px solid $color-default;
+    border-radius: $base-border-radius;
+    color: $color-down-river;
+    display: block;
+    font-family: $base-font-family;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 13px 16px;
+    resize: none;
+    transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
+    width: 100%;
 
-    & > textarea {
-      border: 1px solid $color-default;
-      border-radius: $base-border-radius;
-      color: $color-down-river;
-      display: block;
-      font-family: $base-font-family;
-      font-size: 14px;
-      line-height: 16px;
-      padding: 13px 16px;
-      resize: none;
-      transition: border-color $base-duration $base-timing, box-shadow $base-duration $base-timing;
-      width: 100%;
-
-      &::placeholder {
-        color: $color-cadet-blue;
-      }
-
-      textarea:-webkit-autofill {
-        background-color: $white !important;
-      }
-
-      &:focus {
-        border-color: $color-azure;
-        box-shadow: 0px 0px 0px 1px $color-azure;
-        outline: none;
-      }
-
-      &:hover {
-        border-color: shade($base-border-color, 20%);
-      }
+    &::placeholder {
+      color: $color-cadet-blue;
     }
 
-    &.is-active {
+    &:focus {
+      border-color: $color-azure;
+      box-shadow: 0px 0px 0px 1px $color-azure;
+      outline: none;
     }
 
-    &.is-disabled {
-      textarea {
-        background-color: $color-grey;
+    &:hover {
+      border-color: shade($base-border-color, 20%);
+    }
+
+    &:global {
+      &.is-disabled {
+        background-color: $color-disabled;
         cursor: not-allowed;
 
         &:focus {
-          border: $base-border;
+          border-color: $color-default;
+          box-shadow: 0px 0px 0px 1px $color-disabled;
+        }
+
+        &:hover {
+          border-color: $color-default;
         }
 
         &::placeholder {
           color: $color-cadet-blue;
         }
       }
-    }
 
-    &.is-invalid {
-      border-color: $color-danger;
-
-      textarea {
+      &.is-invalid {
         border-color: $color-danger;
 
         &:focus {
           box-shadow: 0px 0px 0px 1px $color-danger;
         }
       }
-    }
 
-    &.is-valid {
-      textarea {
+      &.is-valid {
         border-color: $color-success;
 
         &:focus {
           box-shadow: 0px 0px 0px 1px $color-success;
         }
       }
-    }
 
-    &.is-alert {
-      border-color: $color-alert;
+      &.is-alert {
+        border-color: $color-alert;
 
-      &:focus {
-        box-shadow: 0px 0px 0px 1px $color-alert;
+        &:focus {
+          box-shadow: 0px 0px 0px 1px $color-alert;
+        }
       }
     }
-
-    &.is-empty {
-    }
-
-    &.is-not-empty {
-    }
-  }
-
-  &__input {
   }
 }

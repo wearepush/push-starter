@@ -4,6 +4,7 @@
 $Dropdown: 'Dropdown';
 .#{$Dropdown} {
   display: inline-block;
+  vertical-align: middle;
   position: relative;
 
   &__default_button {
@@ -90,7 +91,7 @@ $Dropdown: 'Dropdown';
   &__item {
     background-color: $white;
     border-bottom: 1px solid $white;
-    color: $color-bayoux;
+    color: $color-link;
     font-size: 14px;
     line-height: 20px;
     cursor: pointer;
@@ -100,7 +101,7 @@ $Dropdown: 'Dropdown';
     &:hover,
     &:focus {
       background-color: $color-athens-grey;
-      border-bottom-color: $color-grey;
+      border-bottom-color: $color-disabled;
     }
   }
 
