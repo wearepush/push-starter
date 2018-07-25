@@ -245,9 +245,21 @@ const UI = () => {
       </div>
       <h2>Dropdown controled</h2>
       <Dropdown
-        trigger="hover"
-        classNameDefaultButton="test"
+        dropPosition="bl"
         button="My Settings"
+      >
+        <span>1</span>
+      </Dropdown>
+      <Dropdown
+        dropPosition="bl"
+        button={(
+          <Button
+            variant="contained"
+            color="default"
+          >
+            Outlined Button
+          </Button>
+        )}
       >
         <span>1</span>
       </Dropdown>

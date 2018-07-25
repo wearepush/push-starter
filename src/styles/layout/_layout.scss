@@ -1,6 +1,7 @@
 html {
   background-color: $viewport-background-color;
   box-sizing: border-box;
+  height: 100%;
 }
 
 *,
@@ -11,7 +12,7 @@ html {
 
 html,
 body {
-  height: 100%;
+  font-size: 14px;
 }
 
 body {
@@ -20,5 +21,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-backface-visibility: hidden;
   -webkit-tap-highlight-color: transparent;
+  padding-bottom: $footer-padding;
+  min-height: 100%;
+  position: relative;
 }
 

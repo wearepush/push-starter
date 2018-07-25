@@ -1,29 +1,84 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-$DropDown: 'Dropdown';
-.#{$DropDown} {
-  // background-color: $white;
-  // border: 1px solid $color-default;
-  // border-radius: $base-border-radius;
-  // display: inline-block;
-  // color: $color-down-river;
-  // font-size: 14px;
-  // line-height: 20px;
-  // min-width: 236px;
-  // min-height: 48px;
-  // padding: 10px 16px;
+$Dropdown: 'Dropdown';
+.#{$Dropdown} {
+  display: inline-block;
+  vertical-align: middle;
   position: relative;
 
-  &--is-open {
-    position: relative;
-    min-width: 236px;
+  &:focus {
+    outline: 0;
+    outline-offset: 0;
   }
-  &__button {
-    padding: 0 10px;
+  &__default_button {
+    background-color: $white;
+    border: 1px solid $color-default;
+    border-radius: 4px;
+    color: $color-down-river;
+    cursor: pointer;
     display: inline-block;
+    font-size: 14px;
+    line-height: 1;
+    padding: $small-spacing $base-spacing;
+    padding-right: 2.86em;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      margin: auto;
+      right: 17px;
+      width: 9px;
+      height: 9px;
+      transform: rotate(225deg) translateY(-50%);
+      border-top: 2px solid $color-nile-blue;
+      border-left: 2px solid $color-nile-blue;
+    }
+
+    &:hover {
+      border-color: shade($base-border-color, 20%);
+    }
+
+    &:global {
+      &.is-open {
+        border-color: $color-azure;
+        outline: $focus-outline;
+        outline-offset: $focus-outline-offset;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+
+        &:after {
+          transform: rotate(45deg) translateY(-50%);
+        }
+      }
+
+      //Size
+      &.is-full-width {
+        width: 100%;
+      }
+
+      &.is-size-small {
+        font-size: 10px;
+      }
+
+      &.is-size-medium {
+        font-size: 14px;
+      }
+
+      &.is-size-large {
+        font-size: 16px;
+      }
+    }
   }
-  &__menu {
+
+  &__button {
+    &:focus {
+      outline: $focus-outline;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
+  &__list {
     width: 100%;
     background: $white;
     box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 3px 4px 0 rgba(10,31,68,0.10);
@@ -33,23 +88,14 @@ $DropDown: 'Dropdown';
     max-height: 300px;
     overflow: auto;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1;
     border: 1px solid $color-default;
-    padding: 8px;
     position: absolute;
-    // top: 100%;
-    // left: 0;
     text-align: left;
-    min-width: 236px;
-    max-width: 236px;
     z-index: 100;
 
 
     &:global {
-      &.is-open {
-        // position: relative;
-        // min-width: 236px;
-      }
 
       &.is-bl {
         top: 100%;
@@ -72,21 +118,23 @@ $DropDown: 'Dropdown';
         right: 0;
       }
     }
-    &-item {
-      background-color: $white;
-      border-bottom: 1px solid $white;
-      color: $color-bayoux;
-      font-size: 14px;
-      line-height: 20px;
-      cursor: pointer;
-      padding: 10px 16px 9px;
-      transition: background-color $base-duration $base-timing, border-bottom-color $base-duration $base-timing;
+  }
 
-      &:hover,
-      &:focus {
-        background-color: $color-athens-grey;
-        border-bottom-color: $color-grey;
-      }
+  &__item {
+    background-color: $white;
+    border-bottom: 1px solid $white;
+    color: $color-link;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    padding: $small-spacing $base-spacing;
+    transition: background-color $base-duration $base-timing, border-bottom-color $base-duration $base-timing;
+
+    &:hover,
+    &:focus {
+      background-color: $color-athens-grey;
+      border-bottom-color: $color-disabled;
     }
   }
+
 }

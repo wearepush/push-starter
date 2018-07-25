@@ -31,12 +31,6 @@ $Checkbox: 'Checkbox';
       }
     }
 
-    &.is-unchecked {
-    }
-
-    &.is-checked {
-    }
-
   }
 
   label {
@@ -44,15 +38,16 @@ $Checkbox: 'Checkbox';
     font-size: 14px;
     line-height: 18px;
 
-    &:hover {
-      .#{$Checkbox}__icon {
-        border-color: $color-primary;
-      }
-    }
-
     &:focus {
       outline: 0;
       box-shadow: none;
+    }
+  }
+
+  &:hover {
+    .#{$Checkbox}__icon {
+      background-color: $white;
+      border-color: $color-primary;
     }
   }
 
@@ -64,7 +59,7 @@ $Checkbox: 'Checkbox';
       &.is-default-icon {
         width: 18px;
         height: 18px;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-unchecked;
         border-radius: 3px;
         position: relative;
         transition: border-color $base-duration $base-timing, background-color $base-duration $base-timing;
@@ -83,27 +78,9 @@ $Checkbox: 'Checkbox';
           transform: rotate(-45deg);
         }
 
-        &:hover {
-          background-color: $white;
-          border-color: $color-primary;
-        }
-
-        &.is-checked {
-          background-color: $color-primary;
-
-          &:after {
-            border-color: $white;
-          }
-        }
-
-        &.is-unchecked {
-          background-color: $white;
-          border-color: $color-ghost;
-        }
-
         &.is-disabled {
           background-color: $white;
-          border-color: $color-default !important;
+          border-color: $color-default;
           cursor: not-allowed;
 
           &:after {
@@ -117,24 +94,23 @@ $Checkbox: 'Checkbox';
           }
 
           &:hover {
-            background-color: $white;
             border-color: $color-default;
           }
         }
-      }
 
-      &.is-custom-icon {
-        &.is-checked {
-          background-color: black;
-          color: white;
-        }
-
-        &.is-unchecked {
+        &:hover {
           background-color: $white;
-          border-color: $color-ghost;
+          border-color: $color-primary;
         }
 
+        &.is-checked {
+          background-color: $color-primary;
+          border-color: $color-primary;
 
+          &:after {
+            border-color: $white;
+          }
+        }
       }
     }
   }
@@ -151,7 +127,7 @@ $Checkbox: 'Checkbox';
   }
 
   &__placeholder {
-    color: $color-bayoux;
+    color: $color-link;
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;

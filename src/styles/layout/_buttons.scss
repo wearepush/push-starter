@@ -35,7 +35,7 @@ $_button-background-color-hover: shade($action-color, 20%);
   }
 
   &:disabled {
-    background-color: $color-grey;
+    background-color: $color-disabled;
     color: $color-cadet-blue;
     cursor: not-allowed;
 

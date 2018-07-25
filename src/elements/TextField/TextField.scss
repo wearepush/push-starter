@@ -31,20 +31,20 @@ $TextField: 'TextField';
       }
 
       &:disabled {
-        background-color: $color-grey;
+        background-color: $color-disabled;
         cursor: not-allowed;
 
         &:focus {
           border: $base-border;
         }
 
+        &:hover {
+          border-color: $color-default;
+        }
+
         &::placeholder {
           color: $color-cadet-blue;
         }
-      }
-
-      &:-webkit-autofill {
-        background-color: $white !important;
       }
     }
 
