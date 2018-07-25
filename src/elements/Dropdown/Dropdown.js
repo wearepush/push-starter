@@ -76,7 +76,7 @@ export default class Dropdown extends Component {
     /**
      * The additional class name for dropdown list.
      */
-    dropMenuClassName: string,
+    dropListClassName: string,
     /**
      * The flag for self close after clicked on menu item
      */
@@ -119,7 +119,7 @@ export default class Dropdown extends Component {
     children: undefined,
     className: '',
     classNameButton: '',
-    dropMenuClassName: '',
+    dropListClassName: '',
     classNameDefaultButton: '',
     dropPosition: 'bl',
     isOpen: undefined,
@@ -194,7 +194,7 @@ export default class Dropdown extends Component {
 
   renderDrop = () => {
     const { isOpen } = this.state;
-    const { children, dropPosition, dropMenuClassName } = this.props;
+    const { children, dropPosition, dropListClassName } = this.props;
     if (!this.containerRef || !isOpen || !children) return null;
     return (
       <div
@@ -202,7 +202,7 @@ export default class Dropdown extends Component {
           cx(styles.Dropdown__list, {
             'is-open': isOpen,
             [`is-${dropPosition}`]: !!dropPosition,
-            [dropMenuClassName]: !!dropMenuClassName,
+            [dropListClassName]: !!dropListClassName,
           })
         }
         role="list"

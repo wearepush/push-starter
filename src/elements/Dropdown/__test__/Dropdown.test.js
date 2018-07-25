@@ -39,7 +39,7 @@ describe('Dropdown', () => {
         </Dropdown>
       );
       dropdown.find(Button).simulate('click');
-      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(1);
       dropdown.unmount();
     });
 
@@ -47,7 +47,7 @@ describe('Dropdown', () => {
       const dropdown = mount(
         <Dropdown
           className="drop"
-          dropMenuClassName="my-menu-classname"
+          dropListClassName="my-menu-classname"
           buttonClassName="my-button-classname"
           button={<Button />}
         >
@@ -58,7 +58,7 @@ describe('Dropdown', () => {
       );
       dropdown.find(Button).simulate('click');
       expect(dropdown.find(Button).hasClass('my-button-classname'));
-      expect(dropdown.find('.dropdown__menu').hasClass('my-menu-classname'));
+      expect(dropdown.find('.Dropdown__list').hasClass('my-menu-classname'));
       expect(dropdown.hasClass('drop'));
       dropdown.unmount();
     });
@@ -75,13 +75,13 @@ describe('Dropdown', () => {
       );
 
       dropdown.find(Button).simulate('click');
-      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(1);
       document.body.addEventListener('click', () => { });
       const evt = document.createEvent('HTMLEvents');
       evt.initEvent('click', false, true);
       document.body.dispatchEvent(evt);
       dropdown.update();
-      expect(dropdown.find('.dropdown__menu').length).toEqual(0);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(0);
       dropdown.unmount();
     });
 
@@ -97,11 +97,11 @@ describe('Dropdown', () => {
         </Dropdown>
       );
       dropdown.find(Button).simulate('click');
-      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(1);
       const listElem = dropdown.find('.menu-item').last();
       listElem.simulate('click');
       dropdown.update();
-      expect(dropdown.find('.dropdown__menu').length).toEqual(0);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(0);
       dropdown.unmount();
     });
     it('should render default button when setup "string" in button prop', () => {
@@ -134,10 +134,10 @@ describe('Dropdown', () => {
       const btn = dropdown.find('.Dropdown__button');
       btn.simulate('mouseenter');
       dropdown.update();
-      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(1);
       dropdown.simulate('mouseleave');
       dropdown.update();
-      expect(dropdown.find('.dropdown__menu').length).toEqual(0);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(0);
       dropdown.unmount();
     });
   });
@@ -171,7 +171,7 @@ describe('Dropdown', () => {
           }
         </Dropdown>
       );
-      expect(dropdown.find('.dropdown__menu').length).toEqual(1);
+      expect(dropdown.find('.Dropdown__list').length).toEqual(1);
       dropdown.unmount();
     });
   });
