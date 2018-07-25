@@ -5,8 +5,10 @@ $Footer: 'Footer';
 
 .#{$Footer} {
   border-top: 1px solid $color-disabled;
-  display: flex;
-  margin-top: 48px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   &__container {
     color: $color-link;

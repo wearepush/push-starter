@@ -8,10 +8,12 @@ export const DropdownButton = ({
   className: classNameProp,
   isOpen,
   text,
+  size,
 }) => {
   const className = cx(styles.Dropdown__default_button, {
     [classNameProp]: !!classNameProp,
     [styles[classNameProp]]: !!styles[classNameProp] && !!classNameProp,
+    [`is-size-${size}`]: !!size,
     'is-open': isOpen,
   });
 
@@ -28,11 +30,17 @@ DropdownButton.propTypes = {
   className: string,
   isOpen: bool,
   text: string.isRequired,
+  size: oneOf([
+    'small',
+    'medium',
+    'large'
+  ]),
 };
 
 DropdownButton.defaultProps = {
   className: '',
   isOpen: false,
+  size: 'medium',
 };
 
 export default class Dropdown extends Component {
@@ -84,6 +92,14 @@ export default class Dropdown extends Component {
     */
     tabIndex: oneOfType([number, string]),
     /**
+    * The size of the button.
+    */
+    size: oneOf([
+      'small',
+      'medium',
+      'large'
+    ]),
+    /**
     * type of relay to open drop
     */
     trigger: oneOf([
@@ -109,7 +125,8 @@ export default class Dropdown extends Component {
     isOpen: undefined,
     isSelfClosed: false,
     tabIndex: null,
-    trigger: 'click'
+    trigger: 'click',
+    size: 'medium',
   };
 
   constructor(props) {
@@ -206,7 +223,7 @@ export default class Dropdown extends Component {
   }
 
   renderButton = () => {
-    const { button } = this.props;
+    const { button, size } = this.props;
     if (typeof button === 'object') {
       return button;
     } else {
@@ -214,6 +231,7 @@ export default class Dropdown extends Component {
         <DropdownButton
           className={this.props.classNameDefaultButton}
           isOpen={this.isControled ? this.props.isOpen : this.state.isOpen}
+          size={size}
           text={button}
         />
       );
@@ -224,8 +242,8 @@ export default class Dropdown extends Component {
     const { isOpen } = this.state;
     const {
       className: classNameProp,
-      tabIndex,
       classNameButton: classNameButtonProp,
+      tabIndex,
     } = this.props;
 
     const className = cx(styles.Dropdown, {

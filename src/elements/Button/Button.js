@@ -24,7 +24,8 @@ export default class Button extends PureComponent {
       'alert',
       'danger',
       'primary',
-      'success'
+      'success',
+      'default',
     ]),
     /**
     * The component used for the root node.

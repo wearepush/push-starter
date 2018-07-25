@@ -7,6 +7,10 @@ $Dropdown: 'Dropdown';
   vertical-align: middle;
   position: relative;
 
+  &:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
   &__default_button {
     background-color: $white;
     border: 1px solid $color-default;
@@ -15,33 +19,62 @@ $Dropdown: 'Dropdown';
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
-    line-height: 18px;
-    padding: 14px 40px 14px 14px;
+    line-height: 1;
+    padding: $small-spacing $base-spacing;
+    padding-right: 2.86em;
     position: relative;
 
     &:after {
       content: '';
       position: absolute;
       margin: auto;
-      top: 17px;
       right: 17px;
       width: 9px;
       height: 9px;
-      transform: rotate(45deg);
-      border-right: 2px solid $color-nile-blue;
-      border-bottom: 2px solid $color-nile-blue;
+      transform: rotate(225deg) translateY(-50%);
+      border-top: 2px solid $color-nile-blue;
+      border-left: 2px solid $color-nile-blue;
     }
 
     &:hover {
       border-color: shade($base-border-color, 20%);
     }
 
-    &.is-open {
-      border-color: $color-azure;
+    &:global {
+      &.is-open {
+        border-color: $color-azure;
+        outline: $focus-outline;
+        outline-offset: $focus-outline-offset;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 
-      &:after {
-        transform: rotate(-45deg);
+        &:after {
+          transform: rotate(45deg) translateY(-50%);
+        }
       }
+
+      //Size
+      &.is-full-width {
+        width: 100%;
+      }
+
+      &.is-size-small {
+        font-size: 10px;
+      }
+
+      &.is-size-medium {
+        font-size: 14px;
+      }
+
+      &.is-size-large {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__button {
+    &:focus {
+      outline: $focus-outline;
+      outline-offset: $focus-outline-offset;
     }
   }
 
@@ -55,9 +88,8 @@ $Dropdown: 'Dropdown';
     max-height: 300px;
     overflow: auto;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1;
     border: 1px solid $color-default;
-    padding: 8px;
     position: absolute;
     text-align: left;
     z-index: 100;
@@ -93,9 +125,9 @@ $Dropdown: 'Dropdown';
     border-bottom: 1px solid $white;
     color: $color-link;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1;
     cursor: pointer;
-    padding: 10px 16px 9px;
+    padding: $small-spacing $base-spacing;
     transition: background-color $base-duration $base-timing, border-bottom-color $base-duration $base-timing;
 
     &:hover,
