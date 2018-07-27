@@ -26,6 +26,10 @@ $Radio: 'Radio';
         .#{$Radio}__placeholder {
           color: $color-danger;
         }
+
+        .#{$Radio}__icon {
+          border-color: $color-danger;
+        }
       }
     }
   }

@@ -28,6 +28,10 @@ $Checkbox: 'Checkbox';
         .#{$Checkbox}__placeholder {
           color: $color-danger;
         }
+
+        .#{$Checkbox}__icon {
+          border-color: $color-danger;
+        }
       }
     }
 
