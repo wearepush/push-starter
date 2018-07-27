@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { FormTextField, FormTextArea, FormCheckbox, FormRadio, FormSelect, Button, FormButton } from '../../elements';
+import { FormTextField, Button } from '../../elements';
 import validate from './SignInValidation';
+import styles from './SignIn.scss';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -51,86 +53,59 @@ class SignIn extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <div>
-        <Form
-          onSubmit={handleSubmit(this.onSubmit)}
-        >
-          <div>
-            <FormTextField
-              label="Username"
-              name="username"
-              type="text"
-              placeholder="Username"
-            />
-          </div>
-          <div>
-            <FormTextField
-              label="Password"
-              name="password"
-              type="password"
-              placeholder="Password"
-            />
-          </div>
-          <div>
-            <FormTextArea
-              label="Description"
-              name="description"
-              placeholder="Description"
-            />
-          </div>
-          <div>
-            <FormCheckbox
-              custom
-              name="remember"
-              placeholder="Remember me"
-            />
-          </div>
-          <div>
-            <FormRadio
-              custom
-              name="gender"
-              value="1"
-              placeholder="Women"
-            />
-            <FormRadio
-              custom
-              name="gender"
-              value="2"
-              placeholder="Men"
-            />
-          </div>
-          <div>
-            <FormSelect
-              label="Age"
-              name="age"
-              placeholder="Select Age"
-              options={[
-                { label: '< 18', value: '18' },
-                { label: '18-25', value: '18-25', disabled: true },
-                { label: '25+', value: '25' },
-              ]}
-            />
-          </div>
-          {error && (
-            <div>
-              {error}
-            </div>
-          )}
-          <div>
-            <Button
-              type="submit"
+      <div className={styles.SignIn}>
+        <div className={styles.SignIn__container}>
+          <div className={styles.SignIn__header}>
+            <h1 className={styles.SignIn__ttl}>Login into your account</h1>
+            <span className={styles.SignIn__account_text}>Don’t have an account?</span>
+            <Link
+              to="/signup"
+              className={styles.SignIn__link}
             >
-              Sign In!
-            </Button>
+              Create new
+            </Link>
           </div>
-        </Form>
-        <br />
-        <FormButton
-          form="SignInForm"
-          className="test-2"
-        >
-          Sign In Remote Button!
-        </FormButton>
+          <Form
+            onSubmit={handleSubmit(this.onSubmit)}
+            className={styles.SignIn__form}
+          >
+            <div className={styles.SignIn__form_item}>
+              <FormTextField
+                name="email"
+                type="email"
+                placeholder="Your Email"
+              />
+            </div>
+            <div className={styles.SignIn__form_item}>
+              <FormTextField
+                name="password"
+                type="password"
+                placeholder="Type your password"
+              />
+            </div>
+            {error && (
+              <div>
+                {error}
+              </div>
+            )}
+            <div className={styles.SignIn__footer}>
+              <Link
+                to="/signup"
+                className={styles.SignIn__link}
+              >
+                Forget Password?
+              </Link>
+              <div className={styles.SignIn__btn_login}>
+                <Button
+                  type="submit"
+                  float
+                >
+                  Login
+                </Button>
+              </div>
+            </div>
+          </Form>
+        </div>
       </div>
     );
   }

@@ -17,6 +17,7 @@ $footer-padding: 114px;
 $white: #fff;
 
 $color-disabled: #F1F2F4;
+$color-regent-grey: #8A94A6;
 
 $color-down-river: #0A1F44;
 $color-cadet-blue: #A6AEBC;
@@ -38,7 +39,7 @@ $color-default-1: #758196;
 
 // Font Colors
 $base-font-color: $color-down-river;
-$action-color: $color-azure;
+$action-color: $color-primary;
 
 // Border
 $base-border-color: $color-default;
@@ -70,3 +71,6 @@ $_form-box-shadow-focus: $_form-box-shadow, 0 0 5px rgba($action-color, 0.7);
 $_button-background-color: $action-color;
 $_button-background-color-hover: shade($action-color, 20%);
 
+$bourbon: (
+  "modular-scale-ratio": 1.25,
+);
