@@ -1,3 +1,5 @@
+@import "../mixins";
+
 html {
   color: $base-font-color;
   font-family: $base-font-family;
@@ -12,7 +14,6 @@ h4,
 h5,
 h6 {
   font-family: $heading-font-family;
-  font-size: modular-scale(1);
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
 }
@@ -23,7 +24,7 @@ p {
 
 a {
   color: $action-color;
-  text-decoration-skip: ink;
+  text-decoration: none;
   transition: color $base-duration $base-timing;
 
   &:hover {

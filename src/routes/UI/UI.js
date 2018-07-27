@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Checkbox, Button, Radio, TextField, TextArea, Dropdown } from '../../elements';
 
+
 const UI = () => {
   const title = 'Redux Starter. UI';
   const description = 'React. UI';
@@ -247,6 +248,7 @@ const UI = () => {
       <Dropdown
         dropPosition="bl"
         button="My Settings"
+        size="medium"
       >
         <span>1</span>
       </Dropdown>

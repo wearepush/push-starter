@@ -23,17 +23,23 @@ $Dropdown: 'Dropdown';
     padding: $small-spacing $base-spacing;
     padding-right: 2.86em;
     position: relative;
+    transition: border-color $base-duration $base-timing;
 
     &:after {
       content: '';
       position: absolute;
       margin: auto;
+      top: 50%;
       right: 17px;
       width: 9px;
       height: 9px;
-      transform: rotate(225deg) translateY(-50%);
-      border-top: 2px solid $color-nile-blue;
-      border-left: 2px solid $color-nile-blue;
+      transform: rotate(45deg);
+      transition: transform $base-duration $base-timing;
+      border: solid $color-nile-blue;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 3px;
+      margin-top: -6px;
     }
 
     &:hover {
@@ -48,7 +54,8 @@ $Dropdown: 'Dropdown';
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 
         &:after {
-          transform: rotate(45deg) translateY(-50%);
+          transform: rotate(225deg);
+          margin-top: 0;
         }
       }
 
@@ -59,10 +66,24 @@ $Dropdown: 'Dropdown';
 
       &.is-size-small {
         font-size: 10px;
+
+        &:after {
+          height: 6px;
+          width: 6px;
+          border-width: 0 1px 1px 0;
+          padding: 1px;
+          margin-top: -3px;
+        }
       }
 
       &.is-size-medium {
         font-size: 14px;
+
+        &.is-open {
+          &:after {
+            margin-top: -1px;
+          }
+        }
       }
 
       &.is-size-large {
