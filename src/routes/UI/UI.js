@@ -247,6 +247,7 @@ const UI = () => {
       <Dropdown
         dropPosition="bl"
         button="My Settings"
+        size="medium"
       >
         <span>1</span>
       </Dropdown>
