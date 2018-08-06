@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { SignIn } from '../../components';
+import { SignIn, SignUp } from '../../components';
 
 const mapStateToProps = () => ({});
 
@@ -23,6 +23,7 @@ class Home extends Component {
           <meta property="twitter:description" content={description} />
         </Helmet>
         <SignIn />
+        <SignUp />
       </div>
     );
   }

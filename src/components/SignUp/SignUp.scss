@@ -1,0 +1,68 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$SignUp: 'SignUp';
+
+.#{$SignUp} {
+  // position: relative;
+
+  &__container {
+    background-color: $white;
+    box-shadow: 0 0 1px 0 rgba(10,31,68,0.10), 0 18px 18px 0 rgba(10,31,68,0.12);
+    border-radius: $base-border-radius;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    padding: 56px 80px 80px;
+    margin: 20px auto;
+    max-width: 464px;
+    width: 100%
+  }
+
+  &__ttl {
+    color: $color-down-river;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: .5px;
+    margin: 0 0 .4em;
+  }
+
+  &__account_text {
+    color: $color-regent-grey;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0 15px 0 0;
+  }
+
+  &__link {
+    text-transform: capitalize;
+  }
+
+  &__form {
+
+    &_item {
+      margin-bottom: 1.7em;
+    }
+  }
+
+  &__btn_login {
+    display: inline-block;
+    vertical-align: middle;
+
+    & > button {
+      padding: 1.16em 3.9em;
+    }
+  }
+
+  &__btn_submit {
+    margin: 0 auto;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3em 0 0;
+  }
+}
