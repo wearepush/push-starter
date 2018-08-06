@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { FormTextField, Button } from 'redux-starter-ui';
+import { FormTextField, Button, Checkbox } from 'redux-starter-ui';
 
-import validate from './SignInValidation';
-import styles from './SignIn.scss';
+// import validate from './ResetPasswordValidation';
+import styles from './ResetPassword.scss';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -16,11 +16,11 @@ const mapToProps = {
 };
 
 const mapToForm = {
-  form: 'SignInForm',
-  validate
+  form: 'ResetPasswordForm',
+  // validate
 };
 
-class SignIn extends PureComponent {
+class ResetPassword extends PureComponent {
   static propTypes = {
     handleSubmit: func,
     error: string
@@ -53,34 +53,33 @@ class SignIn extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <div className={styles.SignIn}>
-        <div className={styles.SignIn__container}>
-          <div className={styles.SignIn__header}>
-            <h1 className={styles.SignIn__ttl}>Login into your account</h1>
-            <span className={styles.SignIn__account_text}>Don’t have an account?</span>
-            <Link
-              to="/signup"
-              className={styles.SignIn__link}
-            >
-              Create new
-            </Link>
-          </div>
+      <div className={styles.ResetPassword}>
+        <div className={styles.ResetPassword__container}>
           <Form
             onSubmit={handleSubmit(this.onSubmit)}
-            className={styles.SignIn__form}
+            className={styles.ResetPassword__form}
           >
-            <div className={styles.SignIn__form_item}>
-              <FormTextField
-                name="email"
-                type="email"
-                placeholder="Your Email"
-              />
-            </div>
-            <div className={styles.SignIn__form_item}>
+            <div className={styles.ResetPassword__form_item}>
               <FormTextField
                 name="password"
                 type="password"
                 placeholder="Type your password"
+                label="Password"
+              />
+            </div>
+            <div className={styles.ResetPassword__form_item}>
+              <FormTextField
+                name="password"
+                type="password"
+                placeholder="Confirm password"
+                label="Confirm Your password"
+              />
+            </div>
+            <div className={styles.ResetPassword__form_item}>
+              <Checkbox
+                name="checkbox-2"
+                placeholder="Please accept the terms and conditions to proceed with your request."
+                custom
               />
             </div>
             {error && (
@@ -88,19 +87,14 @@ class SignIn extends PureComponent {
                 {error}
               </div>
             )}
-            <div className={styles.SignIn__footer}>
-              <Link
-                to="/signup"
-                className={styles.SignIn__link}
-              >
-                Forget Password?
-              </Link>
-              <div className={styles.SignIn__btn_login}>
+            <div className={styles.ResetPassword__footer}>
+              <div className={styles.ResetPassword__btn_submit}>
                 <Button
+                  color="success"
                   type="submit"
                   float
                 >
-                  Login
+                  Submit
                 </Button>
               </div>
             </div>
@@ -112,5 +106,5 @@ class SignIn extends PureComponent {
 }
 
 export default connect(mapStateToProps, mapToProps)(
-  reduxForm(mapToForm)(SignIn)
+  reduxForm(mapToForm)(ResetPassword)
 );
