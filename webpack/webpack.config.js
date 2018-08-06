@@ -12,6 +12,8 @@ const config = {
     main: './src/client'
   },
 
+  mode: process.env.NODE_ENV || 'development',
+
   output: {
     path: path.resolve(rootFolder, 'static/assets'),
     publicPath: '/assets/',

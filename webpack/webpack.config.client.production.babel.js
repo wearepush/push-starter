@@ -19,12 +19,15 @@ const vendor = [
   'react-router-config',
   'react-router-dom',
   'react-router-redux',
+  'history',
   'react-helmet',
   'redux-form',
+  'reselect',
   'lru-memoize',
   'react-ga',
   'current-device',
-  'detect-browser'
+  'detect-browser',
+  'classnames'
 ];
 
 const config = {
@@ -35,6 +38,18 @@ const config = {
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js'
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    }
   },
 
   plugins: [
@@ -110,27 +125,5 @@ const config = {
     })
   ]
 };
-
-// remove this when mini-css-extract-plugin fix HMR
-const findScss = baseConfig.module.rules.findIndex((c) => {
-  if (c && c.test.toString().indexOf('.(scss)') > -1) {
-    return c;
-  }
-});
-
-if (findScss > -1) {
-  baseConfig.module.rules[findScss].use[0] = MiniCssExtractPlugin.loader;
-}
-
-const findCss = baseConfig.module.rules.findIndex((c) => {
-  if (c && c.test.toString().indexOf('.(css)') > -1) {
-    return c;
-  }
-});
-
-if (findCss > -1) {
-  baseConfig.module.rules[findCss].use[0] = MiniCssExtractPlugin.loader;
-}
-
 
 export default merge(baseConfig, config);

@@ -16,8 +16,6 @@ const config = {
     ignored: ["node_modules", "__mocks__", "__test__"]
   },
 
-  mode: 'development',
-
   performance: { hints: false },
 
   entry: {
