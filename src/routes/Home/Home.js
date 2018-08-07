@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { SignIn, SignUp } from '../../components';
+import { SignIn, SignUp, ResetPassword } from '../../components';
 
 const mapStateToProps = () => ({});
 
@@ -24,6 +24,7 @@ class Home extends Component {
         </Helmet>
         <SignIn />
         <SignUp />
+        <ResetPassword />
       </div>
     );
   }
