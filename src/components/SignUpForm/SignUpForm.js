@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { FormTextField, Button } from 'redux-starter-ui';
+import { FormTextField, Button, Checkbox } from 'redux-starter-ui';
 
-import validate from './SignInValidation';
-import styles from './SignIn.scss';
+// import validate from './SignUpFormValidation';
+import styles from './SignUpForm.scss';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -16,11 +16,11 @@ const mapToProps = {
 };
 
 const mapToForm = {
-  form: 'SignInForm',
-  validate
+  form: 'SignUpFormForm',
+  // validate
 };
 
-class SignIn extends PureComponent {
+class SignUpForm extends PureComponent {
   static propTypes = {
     handleSubmit: func,
     error: string
@@ -53,34 +53,57 @@ class SignIn extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <div className={styles.SignIn}>
-        <div className={styles.SignIn__container}>
-          <div className={styles.SignIn__header}>
-            <h1 className={styles.SignIn__ttl}>Login into your account</h1>
-            <span className={styles.SignIn__account_text}>Don’t have an account?</span>
-            <Link
-              to="/signup"
-              className={styles.SignIn__link}
-            >
-              Create new
-            </Link>
-          </div>
+      <div className={styles.SignUpForm}>
+        <div className={styles.SignUpForm__container}>
           <Form
             onSubmit={handleSubmit(this.onSubmit)}
-            className={styles.SignIn__form}
+            className={styles.SignUpForm__form}
           >
-            <div className={styles.SignIn__form_item}>
+            <div className={styles.SignUpForm__form_item}>
+              <FormTextField
+                name="text"
+                type="text"
+                placeholder="Full Name"
+                label="Full Name"
+              />
+            </div>
+            <div className={styles.SignUpForm__form_item}>
+              <FormTextField
+                name="text"
+                type="text"
+                placeholder="Address"
+                label="Enter Full Address"
+              />
+            </div>
+            <div className={styles.SignUpForm__form_item}>
               <FormTextField
                 name="email"
                 type="email"
                 placeholder="Your Email"
+                label="Enter Your Email"
               />
             </div>
-            <div className={styles.SignIn__form_item}>
+            <div className={styles.SignUpForm__form_item}>
               <FormTextField
-                name="password"
+                name="password_1"
                 type="password"
                 placeholder="Type your password"
+                label="Password"
+              />
+            </div>
+            <div className={styles.SignUpForm__form_item}>
+              <FormTextField
+                name="password_2"
+                type="password"
+                placeholder="Confirm password"
+                label="Confirm Your password"
+              />
+            </div>
+            <div className={styles.SignUpForm__form_item}>
+              <Checkbox
+                name="checkbox-1"
+                placeholder="Please accept the terms and conditions to proceed with your request."
+                custom
               />
             </div>
             {error && (
@@ -88,19 +111,14 @@ class SignIn extends PureComponent {
                 {error}
               </div>
             )}
-            <div className={styles.SignIn__footer}>
-              <Link
-                to="/signup"
-                className={styles.SignIn__link}
-              >
-                Forget Password?
-              </Link>
-              <div className={styles.SignIn__btn_login}>
+            <div className={styles.SignUpForm__footer}>
+              <div className={styles.SignUpForm__btn_submit}>
                 <Button
+                  color="success"
                   type="submit"
                   float
                 >
-                  Login
+                  Submit
                 </Button>
               </div>
             </div>
@@ -112,5 +130,5 @@ class SignIn extends PureComponent {
 }
 
 export default connect(mapStateToProps, mapToProps)(
-  reduxForm(mapToForm)(SignIn)
+  reduxForm(mapToForm)(SignUpForm)
 );

@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { FormTextField, Button, Checkbox } from 'redux-starter-ui';
+import { FormTextField, Button } from 'redux-starter-ui';
 
-// import validate from './ResetPasswordValidation';
-import styles from './ResetPassword.scss';
+import validate from './SignInFormValidation';
+import styles from './SignInForm.scss';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -16,11 +16,11 @@ const mapToProps = {
 };
 
 const mapToForm = {
-  form: 'ResetPasswordForm',
-  // validate
+  form: 'SignInForm',
+  validate
 };
 
-class ResetPassword extends PureComponent {
+class SignInForm extends PureComponent {
   static propTypes = {
     handleSubmit: func,
     error: string
@@ -53,33 +53,34 @@ class ResetPassword extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <div className={styles.ResetPassword}>
-        <div className={styles.ResetPassword__container}>
+      <div className={styles.SignInForm}>
+        <div className={styles.SignInForm__container}>
+          <div className={styles.SignInForm__header}>
+            <h1 className={styles.SignInForm__ttl}>Login into your account</h1>
+            <span className={styles.SignInForm__account_text}>Don’t have an account?</span>
+            <Link
+              to="/signup"
+              className={styles.SignInForm__link}
+            >
+              Create new
+            </Link>
+          </div>
           <Form
             onSubmit={handleSubmit(this.onSubmit)}
-            className={styles.ResetPassword__form}
+            className={styles.SignInForm__form}
           >
-            <div className={styles.ResetPassword__form_item}>
+            <div className={styles.SignInForm__form_item}>
+              <FormTextField
+                name="email"
+                type="email"
+                placeholder="Your Email"
+              />
+            </div>
+            <div className={styles.SignInForm__form_item}>
               <FormTextField
                 name="password"
                 type="password"
                 placeholder="Type your password"
-                label="Password"
-              />
-            </div>
-            <div className={styles.ResetPassword__form_item}>
-              <FormTextField
-                name="password"
-                type="password"
-                placeholder="Confirm password"
-                label="Confirm Your password"
-              />
-            </div>
-            <div className={styles.ResetPassword__form_item}>
-              <Checkbox
-                name="checkbox-2"
-                placeholder="Please accept the terms and conditions to proceed with your request."
-                custom
               />
             </div>
             {error && (
@@ -87,14 +88,19 @@ class ResetPassword extends PureComponent {
                 {error}
               </div>
             )}
-            <div className={styles.ResetPassword__footer}>
-              <div className={styles.ResetPassword__btn_submit}>
+            <div className={styles.SignInForm__footer}>
+              <Link
+                to="/signup"
+                className={styles.SignInForm__link}
+              >
+                Forget Password?
+              </Link>
+              <div className={styles.SignInForm__btn_login}>
                 <Button
-                  color="success"
                   type="submit"
                   float
                 >
-                  Submit
+                  Login
                 </Button>
               </div>
             </div>
@@ -106,5 +112,5 @@ class ResetPassword extends PureComponent {
 }
 
 export default connect(mapStateToProps, mapToProps)(
-  reduxForm(mapToForm)(ResetPassword)
+  reduxForm(mapToForm)(SignInForm)
 );
