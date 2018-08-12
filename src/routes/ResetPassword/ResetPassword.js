@@ -1,10 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { ResetPasswordForm } from '../../components';
+import { ResetPasswordForm } from 'components';
 
 const ResetPassword = () => {
   const title = 'Redux Starter. ResetPassword';
-  const description = 'Redux Form. Sign Up';
+  const description = 'Redux Form';
   return (
     <div>
       <Helmet>

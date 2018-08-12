@@ -105,7 +105,9 @@ const config = {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
     alias: {
-      'react': path.resolve('node_modules/react')
+      'react': path.resolve('node_modules/react'),
+      'components': path.resolve('src/components'),
+      'modules': path.resolve('src/redux/modules'),
     }
   }
 };

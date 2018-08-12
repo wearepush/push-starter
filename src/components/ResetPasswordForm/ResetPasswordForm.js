@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react';
-// import { Link } from 'react-router-dom';
-import { reduxForm, SubmissionError, Form } from 'redux-form';
+import { reduxForm, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { FormTextField, Button, Checkbox } from 'redux-starter-ui';
+import { FormTextField, Button } from 'redux-starter-ui';
 
-// import validate from './ResetPasswordFormValidation';
+import validate from './validate';
 import styles from './ResetPasswordForm.scss';
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
@@ -17,7 +14,7 @@ const mapToProps = {
 
 const mapToForm = {
   form: 'ResetPasswordForm',
-  // validate
+  validate
 };
 
 class ResetPasswordForm extends PureComponent {
@@ -33,21 +30,6 @@ class ResetPasswordForm extends PureComponent {
 
   onSubmit = (values) => { // eslint-disable-line
     console.log(values);
-    return sleep(100).then(() => {
-      if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
-        throw new SubmissionError({
-          username: 'User does not exist',
-          _error: 'Login failed!'
-        });
-      } else if (values.password !== 'qwerty') {
-        throw new SubmissionError({
-          password: 'Wrong password',
-          _error: 'Login failed!'
-        });
-      } else {
-        console.log(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-      }
-    });
   }
 
   render() {
@@ -69,17 +51,10 @@ class ResetPasswordForm extends PureComponent {
             </div>
             <div className={styles.ResetPasswordForm__form_item}>
               <FormTextField
-                name="password"
+                name="repeat_password"
                 type="password"
                 placeholder="Confirm password"
-                label="Confirm Your password"
-              />
-            </div>
-            <div className={styles.ResetPasswordForm__form_item}>
-              <Checkbox
-                name="checkbox-2"
-                placeholder="Please accept the terms and conditions to proceed with your request."
-                custom
+                label="Confirm your password"
               />
             </div>
             {error && (
@@ -94,7 +69,7 @@ class ResetPasswordForm extends PureComponent {
                   type="submit"
                   float
                 >
-                  Submit
+                  {'Reset password'}
                 </Button>
               </div>
             </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { SignUpForm } from '../../components';
+import { SignUpForm } from 'components';
 
 const SignUp = () => {
   const title = 'Redux Starter. SignUp';
-  const description = 'Redux Form. Sign Up';
+  const description = 'Redux Form';
   return (
     <div>
       <Helmet>

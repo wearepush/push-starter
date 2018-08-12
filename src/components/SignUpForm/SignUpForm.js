@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react';
-// import { Link } from 'react-router-dom';
-import { reduxForm, SubmissionError, Form } from 'redux-form';
+import { reduxForm, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { FormTextField, Button, Checkbox } from 'redux-starter-ui';
+import { FormTextField, Button, FormCheckbox } from 'redux-starter-ui';
 
-// import validate from './SignUpFormValidation';
+import validate from './validate';
 import styles from './SignUpForm.scss';
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
@@ -17,7 +14,7 @@ const mapToProps = {
 
 const mapToForm = {
   form: 'SignUpFormForm',
-  // validate
+  validate
 };
 
 class SignUpForm extends PureComponent {
@@ -33,21 +30,6 @@ class SignUpForm extends PureComponent {
 
   onSubmit = (values) => { // eslint-disable-line
     console.log(values);
-    return sleep(100).then(() => {
-      if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
-        throw new SubmissionError({
-          username: 'User does not exist',
-          _error: 'Login failed!'
-        });
-      } else if (values.password !== 'qwerty') {
-        throw new SubmissionError({
-          password: 'Wrong password',
-          _error: 'Login failed!'
-        });
-      } else {
-        console.log(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-      }
-    });
   }
 
   render() {
@@ -61,31 +43,23 @@ class SignUpForm extends PureComponent {
           >
             <div className={styles.SignUpForm__form_item}>
               <FormTextField
-                name="text"
+                name="name"
                 type="text"
-                placeholder="Full Name"
+                placeholder="Full name"
                 label="Full Name"
-              />
-            </div>
-            <div className={styles.SignUpForm__form_item}>
-              <FormTextField
-                name="text"
-                type="text"
-                placeholder="Address"
-                label="Enter Full Address"
               />
             </div>
             <div className={styles.SignUpForm__form_item}>
               <FormTextField
                 name="email"
                 type="email"
-                placeholder="Your Email"
-                label="Enter Your Email"
+                placeholder="Your email"
+                label="Enter your Email"
               />
             </div>
             <div className={styles.SignUpForm__form_item}>
               <FormTextField
-                name="password_1"
+                name="password"
                 type="password"
                 placeholder="Type your password"
                 label="Password"
@@ -93,15 +67,15 @@ class SignUpForm extends PureComponent {
             </div>
             <div className={styles.SignUpForm__form_item}>
               <FormTextField
-                name="password_2"
+                name="repeat_password"
                 type="password"
                 placeholder="Confirm password"
-                label="Confirm Your password"
+                label="Confirm your password"
               />
             </div>
             <div className={styles.SignUpForm__form_item}>
-              <Checkbox
-                name="checkbox-1"
+              <FormCheckbox
+                name="agree"
                 placeholder="Please accept the terms and conditions to proceed with your request."
                 custom
               />
@@ -118,7 +92,7 @@ class SignUpForm extends PureComponent {
                   type="submit"
                   float
                 >
-                  Submit
+                  {'Sign Up'}
                 </Button>
               </div>
             </div>

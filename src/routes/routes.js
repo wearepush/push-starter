@@ -29,7 +29,7 @@ export default (store) => { // eslint-disable-line
         component: withTracker(SignIn)
       },
       {
-        path: '/resetpassword',
+        path: '/reset',
         component: withTracker(ResetPassword)
       },
       {
