@@ -5,8 +5,8 @@ import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { FormTextField, Button, Checkbox } from 'redux-starter-ui';
 
-// import validate from './SignUpValidation';
-import styles from './SignUp.scss';
+// import validate from './ResetPasswordFormValidation';
+import styles from './ResetPasswordForm.scss';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -16,11 +16,11 @@ const mapToProps = {
 };
 
 const mapToForm = {
-  form: 'SignUpForm',
+  form: 'ResetPasswordForm',
   // validate
 };
 
-class SignUp extends PureComponent {
+class ResetPasswordForm extends PureComponent {
   static propTypes = {
     handleSubmit: func,
     error: string
@@ -53,37 +53,13 @@ class SignUp extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <div className={styles.SignUp}>
-        <div className={styles.SignUp__container}>
+      <div className={styles.ResetPasswordForm}>
+        <div className={styles.ResetPasswordForm__container}>
           <Form
             onSubmit={handleSubmit(this.onSubmit)}
-            className={styles.SignUp__form}
+            className={styles.ResetPasswordForm__form}
           >
-            <div className={styles.SignUp__form_item}>
-              <FormTextField
-                name="text"
-                type="text"
-                placeholder="Full Name"
-                label="Full Name"
-              />
-            </div>
-            <div className={styles.SignUp__form_item}>
-              <FormTextField
-                name="text"
-                type="text"
-                placeholder="Address"
-                label="Enter Full Address"
-              />
-            </div>
-            <div className={styles.SignUp__form_item}>
-              <FormTextField
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                label="Enter Your Email"
-              />
-            </div>
-            <div className={styles.SignUp__form_item}>
+            <div className={styles.ResetPasswordForm__form_item}>
               <FormTextField
                 name="password"
                 type="password"
@@ -91,7 +67,7 @@ class SignUp extends PureComponent {
                 label="Password"
               />
             </div>
-            <div className={styles.SignUp__form_item}>
+            <div className={styles.ResetPasswordForm__form_item}>
               <FormTextField
                 name="password"
                 type="password"
@@ -99,9 +75,9 @@ class SignUp extends PureComponent {
                 label="Confirm Your password"
               />
             </div>
-            <div className={styles.SignUp__form_item}>
+            <div className={styles.ResetPasswordForm__form_item}>
               <Checkbox
-                name="checkbox-1"
+                name="checkbox-2"
                 placeholder="Please accept the terms and conditions to proceed with your request."
                 custom
               />
@@ -111,8 +87,8 @@ class SignUp extends PureComponent {
                 {error}
               </div>
             )}
-            <div className={styles.SignUp__footer}>
-              <div className={styles.SignUp__btn_submit}>
+            <div className={styles.ResetPasswordForm__footer}>
+              <div className={styles.ResetPasswordForm__btn_submit}>
                 <Button
                   color="success"
                   type="submit"
@@ -130,5 +106,5 @@ class SignUp extends PureComponent {
 }
 
 export default connect(mapStateToProps, mapToProps)(
-  reduxForm(mapToForm)(SignUp)
+  reduxForm(mapToForm)(ResetPasswordForm)
 );
