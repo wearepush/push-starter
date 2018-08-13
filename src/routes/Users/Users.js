@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { array, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
-import { ACTIONS as usersActions, SELECTORS as usersSelectors } from '../../redux/modules/users';
+import { ACTIONS as usersActions, SELECTORS as usersSelectors } from 'modules';
 
 const mapStateToProps = state => ({
   loaded: usersSelectors.usersLoaded(state),

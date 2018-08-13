@@ -5,7 +5,7 @@ import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { FormTextField, Button } from 'redux-starter-ui';
 
-import validate from './SignInFormValidation';
+import validate from './validate';
 import styles from './SignInForm.scss';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -90,7 +90,7 @@ class SignInForm extends PureComponent {
             )}
             <div className={styles.SignInForm__footer}>
               <Link
-                to="/signup"
+                to="/reset"
                 className={styles.SignInForm__link}
               >
                 Forget Password?
