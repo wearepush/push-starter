@@ -32,7 +32,7 @@ const UI = () => {
       </Button>
       <Button
         fullWidth
-        color="danger"
+        color="warning"
       >
         Full Width Button
       </Button>
