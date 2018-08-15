@@ -20,6 +20,11 @@ export default function (parameters) {
   app.use(favicon(path.join('static', 'favicons', 'favicon.ico')));
 
   app.use((req, res, next) => {
+    res.set('X-Frame-Options', 'DENY');
+    next();
+  });
+
+  app.use((req, res, next) => {
     if (config.ssl) {
       if (req.headers['x-forwarded-proto'] !== 'https') {
         res.redirect(302, 'https://' + req.hostname + req.originalUrl);
