@@ -28,6 +28,7 @@ class _ApiClient {
         attachments,
         directUrl,
         handleProgress,
+        cancelToken
       } = {}) => {
         const requestConfig = {
           method,
@@ -58,6 +59,10 @@ class _ApiClient {
 
         if (handleProgress) {
           requestConfig.onUploadProgress = handleProgress;
+        }
+
+        if (cancelToken) {
+          requestConfig.cancelToken = cancelToken;
         }
 
         return axios(requestConfig);
