@@ -11,8 +11,8 @@ const apiPort = !isUndefined(process.env.APIPORT) && process.env.APIPORT !== 'un
 const isApiHostDefined = !isUndefined(process.env.APIHOST) && process.env.APIHOST !== 'undefined';
 const apiHost = (isApiHostDefined ? prefixHost : '') + (isApiHostDefined ? process.env.APIHOST : '') + (apiPort ? ':' + apiPort : '');
 const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
-const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
-const testHost = 'http' + process.env.TESTHOST;
+export const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
+export const testHost = 'http' + process.env.TESTHOST;
 
 
 export default {
