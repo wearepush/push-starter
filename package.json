@@ -40,7 +40,6 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/register": "^7.0.0",
     "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
     "bourbon": "^5.1.0",
     "bourbon-neat": "^3.0.0",
     "classnames": "^2.2.6",
