@@ -1,6 +1,7 @@
 import isUndefined from 'lodash/isUndefined';
 
 const env = process.env.NODE_ENV;
+const logLevel = process.env.LOG_LEVEL;
 const ssl = !isUndefined(process.env.SSL) && +(process.env.SSL) === 1 ? 1 : 0;
 const prefix = 'http' + (ssl ? 's' : '') + '://';
 const host = prefix + (process.env.HOST || 'localhost');
@@ -14,9 +15,9 @@ const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
 export const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
 export const testHost = 'http' + process.env.TESTHOST;
 
-
 export default {
   env,
+  logLevel,
   ssl,
   host: host + (port ? `:${port}` : ''),
   port,

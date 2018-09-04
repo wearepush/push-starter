@@ -8,7 +8,7 @@ import {} from './env';
 import createSSR from './SSR/createSSR';
 import config from '../config';
 
-const { host, port } = config.server;
+const { host, port, logLevel } = config.server;
 const app = express();
 
 export default function (parameters) {
@@ -48,10 +48,9 @@ export default function (parameters) {
     });
   });
 
-  app.get('*', createSSR(parameters && parameters.chunks()));
-
-  if (config.logs) {
+  if (logLevel) {
     const loggerOptions = {
+      level: logLevel,
       transports: [
         new winston.transports.Console({
           json: true,
@@ -59,9 +58,10 @@ export default function (parameters) {
         })
       ]
     };
-
-    app.use(expressWinston.errorLogger(loggerOptions));
+    app.use(expressWinston.logger(loggerOptions));
   }
+
+  app.get('*', createSSR(parameters && parameters.chunks()));
 
   const server = app.listen(port, (err) => { // eslint-disable-line
     if (err) {
