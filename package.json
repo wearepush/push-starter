@@ -1,7 +1,7 @@
 {
   "name": "redux-starter",
   "description": "React 16, React Router 4, Redux, Webpack 4, Express, Server side rendering",
-  "version": "1.0.0-beta.23",
+  "version": "1.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",

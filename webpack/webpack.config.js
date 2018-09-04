@@ -1,5 +1,3 @@
-process.noDeprecation = true;
-
 import path from 'path';
 import webpack from 'webpack';
 import Dotenv from 'dotenv-webpack';
@@ -43,6 +41,7 @@ const config = {
       },
       {
         test: /\.(scss)$/,
+        sideEffects: true,
         use: [
           {
             loader: 'style-loader'
@@ -74,6 +73,7 @@ const config = {
       },
       {
         test: /\.(css)$/,
+        sideEffects: true,
         use: [
           {
             loader: 'style-loader'

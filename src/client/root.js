@@ -5,7 +5,7 @@ import { renderRoutes } from 'react-router-config';
 import { ConnectedRouter } from 'react-router-redux';
 import {} from './normalize.scss';
 import {} from '../styles/layout/_base.scss';
-require('redux-starter-ui/dist/index.css');
+import {} from 'redux-starter-ui/dist/index.css';
 
 const Root = ({
   history,
