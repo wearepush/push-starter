@@ -18,8 +18,8 @@ yarn.lock
 .env
 
 # Dist
+build/
 static/assets
-static/server
 
 # Webpack
 webpack-assets.json
