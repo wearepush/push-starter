@@ -2,6 +2,8 @@ import path from 'path';
 import compression from 'compression';
 import express from 'express';
 import favicon from 'serve-favicon';
+import winston from 'winston';
+import expressWinston from 'express-winston';
 import {} from './env';
 import createSSR from './SSR/createSSR';
 import config from '../config';
@@ -15,6 +17,7 @@ export default function (parameters) {
   }
   app.disable('etag');
   app.disable('x-powered-by');
+
   app.use('/', express.static('static', { etag: false }));
 
   app.use(favicon(path.join('static', 'favicons', 'favicon.ico')));
@@ -46,6 +49,19 @@ export default function (parameters) {
   });
 
   app.get('*', createSSR(parameters && parameters.chunks()));
+
+  if (config.logs) {
+    const loggerOptions = {
+      transports: [
+        new winston.transports.Console({
+          json: true,
+          colorize: true
+        })
+      ]
+    };
+
+    app.use(expressWinston.errorLogger(loggerOptions));
+  }
 
   const server = app.listen(port, (err) => { // eslint-disable-line
     if (err) {
