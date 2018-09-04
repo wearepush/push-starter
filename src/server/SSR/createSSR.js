@@ -47,14 +47,15 @@ export default function createSSR(assets) {
       if (fetchData instanceof Function) {
         return fetchData(store)
           .then(
-            () => {},
-            () => {}
+            (response) => Promise.resolve(response)
+          ).catch(
+            (error) => Promise.reject(error)
           );
       }
       return Promise.resolve();
     });
 
-    Promise.all(promises).then(() => {
+    const onEnd = (_res) => {
       const component = (
         <Provider store={store}>
           <StaticRouter
@@ -74,13 +75,15 @@ export default function createSSR(assets) {
         />
       );
 
-      if (context.status) {
-        res.status(context.status);
+      if (_res && _res.response && _res.response.status) {
+        res.status(_res.response.status);
       } else {
         res.status(200);
       }
 
       return res.send(`<!doctype html>\n${content}`);
-    });
+    };
+
+    Promise.all(promises).then(onEnd).catch(onEnd);
   };
 }

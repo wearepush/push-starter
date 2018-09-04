@@ -2,11 +2,13 @@ import path from 'path';
 import compression from 'compression';
 import express from 'express';
 import favicon from 'serve-favicon';
+import winston from 'winston';
+import expressWinston from 'express-winston';
 import {} from './env';
 import createSSR from './SSR/createSSR';
 import config from '../config';
 
-const { host, port } = config.server;
+const { host, port, logLevel } = config.server;
 const app = express();
 
 export default function (parameters) {
@@ -15,6 +17,7 @@ export default function (parameters) {
   }
   app.disable('etag');
   app.disable('x-powered-by');
+
   app.use('/', express.static('static', { etag: false }));
 
   app.use(favicon(path.join('static', 'favicons', 'favicon.ico')));
@@ -44,6 +47,19 @@ export default function (parameters) {
       ]
     });
   });
+
+  if (logLevel) {
+    const loggerOptions = {
+      level: logLevel,
+      transports: [
+        new winston.transports.Console({
+          json: true,
+          colorize: true
+        })
+      ]
+    };
+    app.use(expressWinston.logger(loggerOptions));
+  }
 
   app.get('*', createSSR(parameters && parameters.chunks()));
 

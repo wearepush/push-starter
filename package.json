@@ -49,6 +49,7 @@
     "detect-browser": "^3.0.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-winston": "^3.0.0",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
     "lru-memoize": "^1.0.2",
@@ -68,7 +69,8 @@
     "redux-starter-ui": "^1.2.17",
     "reselect": "^3.0.1",
     "serialize-javascript": "^1.5.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

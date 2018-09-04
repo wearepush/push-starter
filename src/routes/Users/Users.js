@@ -17,7 +17,13 @@ const mapDispatchToProps = {
 
 class Users extends Component {
   static fetchData({ dispatch }) {
-    return dispatch(usersActions.load());
+    const test = usersActions.load();
+    // test.then(() => {
+    //   console.log('1');
+    // }, () => {
+    //   console.log(2);
+    // });
+    return dispatch(test);
   }
 
   static propTypes = {
