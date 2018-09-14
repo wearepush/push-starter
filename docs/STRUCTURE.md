@@ -87,7 +87,7 @@ Helpers
 |  ...
 ```
 
-* ApiClient.js - [superagent](https://github.com/visionmedia/superagent)
+* ApiClient.js - [axios](https://github.com/axios/axios)
 
 Client
 ```
