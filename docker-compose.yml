@@ -5,6 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - .env.docker
+      - .env.production
     ports:
       - 8080:8080
