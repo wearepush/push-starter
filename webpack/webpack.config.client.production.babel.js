@@ -1,3 +1,10 @@
+import dotenv from 'dotenv';
+import Dotenv from 'dotenv-webpack';
+
+dotenv.config({
+  path: '.env.production'
+});
+
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
@@ -76,16 +83,12 @@ const config = {
       chunkFilename: "[id].css"
     }),
 
+    new Dotenv({
+      systemvars: true,
+      path: '.env.production'
+    }),
+
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-        SSR: process.env.SSR,
-        SSL: process.env.SSL,
-        APISSL: process.env.APISSL,
-        APIHOST: `"${process.env.APIHOST}"`,
-        APIPORT: process.env.APIPORT,
-        GOOGLE_ANALITICS_ID: `"${process.env.GOOGLE_ANALITICS_ID}"`
-      },
       __CLIENT__: true,
       __SERVER__: false
     }),

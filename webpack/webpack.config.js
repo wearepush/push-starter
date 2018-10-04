@@ -2,6 +2,15 @@ import path from 'path';
 import webpack from 'webpack';
 import Dotenv from 'dotenv-webpack';
 
+const env = process.env.NODE_ENV;
+
+if (env === 'production') {
+  const dotenv = require('dotenv');
+  dotenv.config({
+    path: '.env.production'
+  });
+}
+
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
   context: rootFolder,
@@ -10,7 +19,7 @@ const config = {
     main: './src/client'
   },
 
-  mode: process.env.NODE_ENV || 'development',
+  mode: env || 'development',
 
   output: {
     path: path.resolve(rootFolder, 'static/assets'),

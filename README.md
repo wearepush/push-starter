@@ -7,6 +7,10 @@ React boilerplate, used best practices and focus on performance
 [![Demo on Heroku](https://img.shields.io/badge/demo-heroku-brightgreen.svg?style=flat-square)](https://wearepush-redux-starter.herokuapp.com/)
 ---
 
+---
+
+## [Live Demo](https://wearepush-redux-starter.herokuapp.com) :eyes:
+
 ## About
 
 The starter boilerplate includes the following technologies:

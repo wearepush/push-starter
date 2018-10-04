@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
+import Dotenv from 'dotenv-webpack';
 import getBaseConfig from './webpack.config.client';
 import appConfig from '../src/config';
 
@@ -43,16 +44,12 @@ const config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new Dotenv({
+      systemvars: true,
+      safe: true,
+      silent: true
+    }),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-        SSR: process.env.SSR,
-        SSL: process.env.SSL,
-        APISSL: process.env.APISSL,
-        APIHOST: `"${process.env.APIHOST}"`,
-        APIPORT: process.env.APIPORT,
-        GOOGLE_ANALITICS_ID: `"${process.env.GOOGLE_ANALITICS_ID}"`
-      },
       __CLIENT__: true,
       __SERVER__: false
     })
