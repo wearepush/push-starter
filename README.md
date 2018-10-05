@@ -29,9 +29,15 @@ The starter boilerplate includes the following technologies:
 | [React Router Redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)               | Simple bindings to keep react-router and redux in sync                                        |
 | [ESLint](http://eslint.org)                                                       | The pluggable linting utility for JavaScript and JSX                                            |
 
+## Create dev environment
+```bash
+mv .env.example .env
+```
+
 ## Installation
 
 ```bash
+rm -rf node_modules
 npm install
 ```
 
@@ -39,6 +45,11 @@ npm install
 
 ```bash
 npm run dev
+```
+
+## Create production environment
+```bash
+mv .env.production.example .env.production
 ```
 
 ## Running Prod Server
