@@ -45,6 +45,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new Dotenv({
+      path: '.env',
       systemvars: true,
       safe: true,
       silent: true

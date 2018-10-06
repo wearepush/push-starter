@@ -1,15 +1,5 @@
 import path from 'path';
 import webpack from 'webpack';
-import Dotenv from 'dotenv-webpack';
-
-const env = process.env.NODE_ENV;
-
-if (env === 'production') {
-  const dotenv = require('dotenv');
-  dotenv.config({
-    path: '.env.production'
-  });
-}
 
 const rootFolder = path.resolve(__dirname, '..');
 const config = {
@@ -19,7 +9,7 @@ const config = {
     main: './src/client'
   },
 
-  mode: env || 'development',
+  mode: process.env.NODE_ENV || 'development',
 
   output: {
     path: path.resolve(rootFolder, 'static/assets'),
@@ -103,9 +93,6 @@ const config = {
   },
 
   plugins: [
-    new Dotenv({
-      systemvars: true
-    }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.NoEmitOnErrorsPlugin()
   ],

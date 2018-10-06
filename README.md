@@ -4,7 +4,6 @@ React boilerplate, used best practices and focus on performance
 [![Build Status](https://travis-ci.org/wearepush/redux-starter.svg?branch=master&style=flat-square)](https://travis-ci.org/wearepush/redux-starter)
 [![Dependency Status](https://david-dm.org/wearepush/redux-starter.svg?style=flat-square)](https://david-dm.org/wearepush/redux-starter)
 [![devDependency Status](https://david-dm.org/wearepush/redux-starter/dev-status.svg?style=flat-square)](https://david-dm.org/wearepush/redux-starter?type=dev)
-[![Demo on Heroku](https://img.shields.io/badge/demo-heroku-brightgreen.svg?style=flat-square)](https://wearepush-redux-starter.herokuapp.com/)
 ---
 
 ---
@@ -29,16 +28,16 @@ The starter boilerplate includes the following technologies:
 | [React Router Redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)               | Simple bindings to keep react-router and redux in sync                                        |
 | [ESLint](http://eslint.org)                                                       | The pluggable linting utility for JavaScript and JSX                                            |
 
-## Create dev environment
-```bash
-mv .env.example .env
-```
-
 ## Installation
 
 ```bash
 rm -rf node_modules
 npm install
+```
+
+## Create dev environment
+```bash
+mv .env.example .env
 ```
 
 ## Running Dev Server

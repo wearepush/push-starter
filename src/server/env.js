@@ -1,3 +1,15 @@
 import dotenv from 'dotenv';
 
-export default dotenv.config();
+const env = process.env.NODE_ENV;
+
+let dotEnvConfig = {
+  path: '.env'
+};
+
+if (env === 'production') {
+  dotEnvConfig = {
+    path: '.env.production'
+  };
+}
+
+export default dotenv.config(dotEnvConfig);

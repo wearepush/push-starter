@@ -1,10 +1,4 @@
-import dotenv from 'dotenv';
 import Dotenv from 'dotenv-webpack';
-
-dotenv.config({
-  path: '.env.production'
-});
-
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
@@ -25,7 +19,7 @@ const vendor = [
   'react-redux',
   'react-router-config',
   'react-router-dom',
-  'react-router-redux',
+  'connected-react-router',
   'history',
   'react-helmet',
   'redux-form',
