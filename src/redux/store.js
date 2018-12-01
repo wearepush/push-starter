@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 import createReducer from './reducer';
 import createMiddleware from './middleware/clientMiddleware';
 
 export default function configureStore(history, client, initialState = {}) {
-  const reducer = createReducer();
+  const reducer = createReducer({
+    history,
+  });
   const middlewares = [createMiddleware(client), routerMiddleware(history)];
 
   const composeEnhancers =
@@ -18,7 +20,7 @@ export default function configureStore(history, client, initialState = {}) {
   );
 
   const store = createStore(
-    connectRouter(history)(reducer),
+    reducer,
     initialState,
     enhancer
   );
@@ -26,13 +28,11 @@ export default function configureStore(history, client, initialState = {}) {
   if (module.hot) {
     module.hot.accept('./reducer', () => {
       const createNextReducer = require('./reducer').default;
-      const nextReducer = createNextReducer();
+      const nextReducer = createNextReducer({
+        history,
+      });
       store.replaceReducer(
-        connectRouter(
-          history
-        )(
-          nextReducer
-        )
+        nextReducer
       );
     });
   }
