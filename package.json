@@ -88,7 +88,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "browserslist": "^4.3.5",
-    "clean-webpack-plugin": "^0.1.19",
+    "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.0",
     "dotenv": "^6.1.0",
     "dotenv-webpack": "^1.5.7",
