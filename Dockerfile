@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:8
+FROM mhart/alpine-node:10
 
 # Switch to directory with sources
 WORKDIR /usr/src/app
