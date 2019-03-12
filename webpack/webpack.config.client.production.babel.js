@@ -10,6 +10,7 @@ import getBaseConfig from './webpack.config.client';
 
 const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
 const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: true });
+
 const vendor = [
   'axios',
   'react',
@@ -67,10 +68,9 @@ const config = {
       minChunks: Infinity
     }),
 
-    new CleanPlugin(
-      [path.relative(baseConfig.context, baseConfig.output.path)],
-      { root: baseConfig.context }
-    ),
+    new CleanPlugin({
+      cleanAfterEveryBuildPatterns: [path.relative(baseConfig.context, baseConfig.output.path)],
+    }),
 
     new MiniCssExtractPlugin({
       filename: "[name].css",
