@@ -2,7 +2,7 @@ import '@babel/polyfill';
 
 import React from 'react';
 import { hydrate } from 'react-dom';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory as createHistory } from 'history';
 
 import Root from './root';
 import ApiClient from '../helpers/ApiClient';
