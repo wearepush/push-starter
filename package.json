@@ -67,7 +67,7 @@
     "redbox-react": "^1.6.0",
     "redux": "^4.0.1",
     "redux-form": "^8.2.0",
-    "redux-starter-ui": "^2.0.6",
+    "redux-starter-ui": "2.0.3",
     "reselect": "^4.0.0",
     "serialize-javascript": "^1.6.1",
     "serve-favicon": "^2.5.0",
