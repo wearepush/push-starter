@@ -1,41 +1,3 @@
-export function fireEvent(node, eventName) {
-  let doc = {};
-  if (node.ownerDocument) {
-    doc = node.ownerDocument;
-  } else if (node.nodeType === 9) {
-    doc = node;
-  }
-  if (node.dispatchEvent) {
-    let eventClass = '';
-    switch (eventName) {
-      case 'click':
-      case 'mousedown':
-      case 'mouseup':
-        eventClass = 'MouseEvents';
-        break;
-      case 'focus':
-      case 'change':
-      case 'blur':
-      case 'select':
-        eventClass = 'HTMLEvents';
-        break;
-      default:
-        break;
-    }
-    const event = doc.createEvent(eventClass);
-    event.initEvent(eventName, true, true); // All events created as bubbling and cancelable.
-
-    event.synthetic = true; // allow detection of synthetic events
-    // The second parameter says go ahead with the default action
-    node.dispatchEvent(event, true);
-  } else if (node.fireEvent) {
-    // IE-old school style
-    const event = doc.createEventObject();
-    event.synthetic = true; // allow detection of synthetic events
-    node.fireEvent('on' + eventName, event);
-  }
-}
-
 export function executionEnvironment() {
   const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -66,3 +28,94 @@ export function loadImages(arr) {
 
   return Promise.all(arr.map(c => createImg(c)));
 }
+
+/**
+ * Returns data from nested object-like structure
+ * @param {object|array} obj - object-like to get data from
+ * @param {string|array} path - path to get data
+ * @param {string} separator - serapator for data if path is passed as string
+ * @example getIn(data, 'user.profile.name');
+ * @example getIn(data, 'user/profile/name', '/');
+ * @example getIn(data, ['user', 'profile', 'name']);
+ */
+export function getIn(obj = {}, path, separator = '.') {
+  const paths = path.constructor === Array ? path : path.split(separator);
+  const pathsLength = paths.length;
+  let resultData = obj;
+
+  // for-loop is much faster than something like the reduce:
+  // paths.reduce((p, c) => p && p[c], obj);
+
+  for (let i = 0; i < pathsLength; i++) {
+    const c = paths[i];
+    const curData = resultData[c];
+    if (!curData) return curData;
+
+    resultData = curData;
+  }
+
+  return resultData;
+}
+
+/* eslint-disable */
+/**
+ * Debouncing enforces that a function not be called again until a certain amount
+ * of time has passed without it being called. As in "execute this function only
+ * if 100 milliseconds have passed without it being called."
+ * @param {function} f - function that will be called
+ * @param {number} ms - timeout in ms
+ * @returns {Function}
+ * https://learn.javascript.ru/task/debounce
+ */
+export function debounce(f, ms) {
+  let timer = null;
+
+  return function(...args) {
+    const onComplete = () => {
+      f.apply(this, args);
+      timer = null;
+    };
+
+    clearTimeout(timer);
+    timer = setTimeout(onComplete, ms);
+  };
+}
+
+/**
+ * Throttling enforces a maximum number of times a function can be called
+ * over time. As in "execute this function at most once every 100 milliseconds."
+ * @param {function} func - function that will be called
+ * @param {number} ms - delay in ms
+ * @returns {Function}
+ * https://learn.javascript.ru/task/throttle
+ */
+export function throttle(func, ms) {
+  var isThrottled = false, savedArgs, savedThis;
+
+  function wrapper() {
+    if (isThrottled) {
+      savedArgs = arguments;
+      savedThis = this;
+      return;
+    }
+
+    func.apply(this, arguments);
+
+    isThrottled = true;
+
+    setTimeout(function() {
+      isThrottled = false;
+      if (savedArgs) {
+        wrapper.apply(savedThis, savedArgs);
+        savedArgs = savedThis = null;
+      }
+    }, ms);
+  }
+
+  wrapper.immediateStop = function() {
+    savedArgs = savedThis = null;
+  };
+
+  return wrapper;
+}
+/* eslint-enable */

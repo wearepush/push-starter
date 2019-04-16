@@ -43,7 +43,10 @@
     "operator-linebreak": 0,
     "no-else-return": 0,
     "import/no-cycle": 0,
-    "react/jsx-one-expression-per-line": 0
+    "react/jsx-one-expression-per-line": 0,
+    "class-methods-use-this": 0,
+    "react/require-default-props": 0,
+    "space-before-function-paren": 0
   },
   "plugins": [
     "react",

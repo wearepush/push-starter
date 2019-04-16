@@ -19,29 +19,25 @@ function formatUrl(path, directUrl = false) {
 
 class _ApiClient {
   constructor() { // we can get an access to req
-    const _this = this;
     methods.forEach((method) => {
-      _this[method] = (path, {
-        params,
+      this[method] = (path, {
         data,
-        headers,
         attachments,
         directUrl,
         handleProgress,
-        cancelToken
+        ...rest
       } = {}) => {
+        /**
+         * params,
+         * headers,
+         * cancelToken,
+         * timeout
+         */
         const requestConfig = {
           method,
-          url: formatUrl(path, directUrl)
+          url: formatUrl(path, directUrl),
+          ...rest
         };
-
-        if (params) {
-          requestConfig.params = { ...params };
-        }
-
-        if (headers) {
-          requestConfig.headers = { ...headers };
-        }
 
         if (attachments) {
           if (attachments && typeof attachments === 'object') {
@@ -59,10 +55,6 @@ class _ApiClient {
 
         if (handleProgress) {
           requestConfig.onUploadProgress = handleProgress;
-        }
-
-        if (cancelToken) {
-          requestConfig.cancelToken = cancelToken;
         }
 
         return axios(requestConfig);
