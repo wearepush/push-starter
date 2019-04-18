@@ -1,21 +1,14 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { Checkbox, Button, Radio, TextField, TextArea, Dropdown } from 'redux-starter-ui';
-
+import { HelmetWrapper } from 'elements';
 
 const UI = () => {
-  const title = 'Redux Starter. UI';
+  const title = 'UI';
   const description = 'React. UI';
+
   return (
     <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-      </Helmet>
+      <HelmetWrapper title={title} description={description} />
       <h1>This is example of ui library</h1>
       <hr />
       <h2>Button</h2>

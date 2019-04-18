@@ -3,9 +3,10 @@ import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import { ConnectedRouter } from 'connected-react-router';
-import {} from './normalize.scss';
-import {} from '../styles/layout/_base.scss';
-import {} from 'redux-starter-ui/dist/index.css';
+
+import './normalize.scss';
+import '../styles/layout/_base.scss';
+import 'redux-starter-ui/dist/index.css';
 
 const Root = ({
   history,

@@ -47,6 +47,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
     "connected-react-router": "^6.4.0",
+    "cookie-parser": "^1.4.4",
     "current-device": "^0.8.0",
     "detect-browser": "^4.4.0",
     "express": "^4.16.4",

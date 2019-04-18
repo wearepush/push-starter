@@ -4,19 +4,23 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import winston from 'winston';
 import expressWinston from 'express-winston';
-import {} from './env';
+import cookieParser from 'cookie-parser';
+
+import './env';
 import createSSR from './SSR/createSSR';
 import config from '../config';
 
 const { host, port, logLevel } = config.server;
 const app = express();
 
-export default function (parameters) {
+export default function(parameters) {
   if (config.isProd) {
     app.use(compression());
   }
   app.disable('etag');
   app.disable('x-powered-by');
+
+  app.use(cookieParser());
 
   app.use('/', express.static('static', { etag: false }));
 

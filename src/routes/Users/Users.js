@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Helmet } from 'react-helmet';
 import { array, bool, func } from 'prop-types';
+import { HelmetWrapper } from 'elements';
 import { connect } from 'react-redux';
 import { ACTIONS as usersActions, SELECTORS as usersSelectors } from 'modules';
 
@@ -48,18 +48,12 @@ class Users extends Component {
       loading,
       users,
     } = this.props;
-    const title = 'Redux Starter. Users';
-    const description = 'Redux Form. Sign In';
+    const title = 'Users';
+    const description = 'Sign In';
+
     return (
       <div>
-        <Helmet>
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="twitter:title" content={title} />
-          <meta property="twitter:description" content={description} />
-        </Helmet>
+        <HelmetWrapper title={title} description={description} />
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
         {loading &&
           <div>Loading...</div>

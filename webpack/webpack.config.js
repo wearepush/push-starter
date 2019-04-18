@@ -101,13 +101,14 @@ const config = {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
     alias: {
-      'react': path.resolve('node_modules/react'),
-      'components': path.resolve('src/components'),
-      'config': path.resolve('src/config'),
-      'helpers': path.resolve('src/helpers'),
-      'modules': path.resolve('src/redux/modules'),
-      'routes': path.resolve('src/routes'),
-      'utils': path.resolve('src/utils'),
+      react: path.resolve('node_modules/react'),
+      components: path.resolve('src/components'),
+      elements: path.resolve('src/elements'),
+      config: path.resolve('src/config'),
+      helpers: path.resolve('src/helpers'),
+      modules: path.resolve('src/redux/modules'),
+      routes: path.resolve('src/routes'),
+      utils: path.resolve('src/utils')
     }
   }
 };
