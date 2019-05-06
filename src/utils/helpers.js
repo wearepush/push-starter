@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export function executionEnvironment() {
   const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -57,7 +59,7 @@ export function getIn(obj = {}, path, separator = '.') {
   return resultData;
 }
 
-/* eslint-disable */
+
 /**
  * Debouncing enforces that a function not be called again until a certain amount
  * of time has passed without it being called. As in "execute this function only
