@@ -54,7 +54,13 @@ const config = {
       __CLIENT__: true,
       __SERVER__: false
     })
-  ]
+  ],
+
+  resolve: {
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+    }
+  }
 };
 
 export default merge(baseConfig, config);
