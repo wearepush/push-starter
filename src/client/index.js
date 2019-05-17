@@ -25,16 +25,15 @@ let renderApp = renderProps => hydrate(
 
 if (config.env === 'development') {
   const RedBox = require('redbox-react').default;
-  const RHL = require('react-hot-loader');
+  const { AppContainer } = require('react-hot-loader');
   renderApp = renderProps => hydrate(
-    <RHL.AppContainer
+    <AppContainer
       errorReporter={RedBox}
-      warnings={false}
     >
       <Root
         {...renderProps}
       />
-    </RHL.AppContainer>,
+    </AppContainer>,
     dest
   );
 }

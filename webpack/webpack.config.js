@@ -101,6 +101,7 @@ const config = {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules'],
     alias: {
+      "react-dom": "@hot-loader/react-dom",
       react: path.resolve('node_modules/react'),
       components: path.resolve('src/components'),
       elements: path.resolve('src/elements'),
