@@ -3,7 +3,7 @@ import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CleanPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import WebpackBundleAnalyzer from 'webpack-bundle-analyzer';
 import getBaseConfig from './webpack.config.client';
@@ -68,7 +68,7 @@ const config = {
       minChunks: Infinity
     }),
 
-    new CleanPlugin({
+    new CleanWebpackPlugin({
       cleanAfterEveryBuildPatterns: [path.relative(baseConfig.context, baseConfig.output.path)],
     }),
 
