@@ -55,9 +55,9 @@ class Users extends Component {
       <div>
         <HelmetWrapper title={title} description={description} />
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
-        {loading &&
+        {loading && (
           <div>Loading...</div>
-        }
+        )}
         {loaded && (
           <div>
             {
