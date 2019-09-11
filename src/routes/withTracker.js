@@ -28,7 +28,7 @@ export default function withTracker(WrappedComponent, options = {}) {
       }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
       if (googleAnaliticsId) {
         const currentPage = this.props.location.pathname;
         const nextPage = nextProps.location.pathname;
