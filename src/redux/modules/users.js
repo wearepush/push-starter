@@ -1,5 +1,3 @@
-// @flow
-
 import { createSelector } from 'reselect';
 
 export const STATE_KEY = 'users';
@@ -12,35 +10,17 @@ export const ACTIONS_TYPES = {
   LOAD_FAIL: `${STATE_KEY}/LOAD_FAIL`,
 };
 
-export type User = {
-  id: number;
-  name: string;
-};
-
-export type UsersState = {
-  error: any;
-  loading: boolean;
-  loaded: boolean;
-  records: Array<User>;
-};
-
-export const initialState: UsersState = {
+export const initialState = {
   error: null,
   loading: false,
   loaded: false,
   records: [],
 };
 
-export type UserAction = {
-  error: any;
-  result: any;
-  type: string;
-};
-
 // Reducer
 export default function reducer(
-  state: UsersState = initialState,
-  action: UserAction
+  state = initialState,
+  action
 ) {
   const { error, result, type } = action;
   switch (type) {
@@ -74,11 +54,11 @@ export default function reducer(
 * Getters
 */
 
-export const getUsers = (state: any) => state[STATE_KEY];
-export const getUsersRecords = (state: any) => getUsers(state).records;
-export const getUsersLoading = (state: any) => getUsers(state).loading;
-export const getUsersLoaded = (state: any) => getUsers(state).loaded;
-export const getUsersError = (state: any) => getUsers(state).error;
+export const getUsers = (state) => state[STATE_KEY];
+export const getUsersRecords = (state) => getUsers(state).records;
+export const getUsersLoading = (state) => getUsers(state).loading;
+export const getUsersLoaded = (state) => getUsers(state).loaded;
+export const getUsersError = (state) => getUsers(state).error;
 
 export const GETTERS = {
   getUsers,
@@ -117,7 +97,7 @@ export function clear() {
 export function load() {
   return {
     types: [ACTIONS_TYPES.LOAD, ACTIONS_TYPES.LOAD_SUCCESS, ACTIONS_TYPES.LOAD_FAIL],
-    promise: (client: any) => client.get(`/api/${STATE_KEY}`),
+    promise: (client) => client.get(`/api/${STATE_KEY}`),
   };
 }
 
