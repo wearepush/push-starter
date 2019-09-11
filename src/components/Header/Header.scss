@@ -4,7 +4,6 @@
 $Header: 'Header';
 
 .#{$Header} {
-  background-color: $white;
   padding: 16px;
   position: fixed;
   top: 0;
@@ -21,17 +20,12 @@ $Header: 'Header';
   }
 
   &__link {
-    color: $color-link;
+    color: blue;
     font-size: 13px;
     line-height: 15px;
     padding: 8px 16px;
     font-weight: 500;
     text-decoration: none;
-    transition: color $base-duration $base-timing, box-shadow $base-duration $base-timing;
-
-    &:hover {
-      color: $color-denim;
-    }
 
     &:focus {
       outline: 0;

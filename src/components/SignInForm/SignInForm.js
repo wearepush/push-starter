@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
@@ -57,13 +56,6 @@ class SignInForm extends PureComponent {
         <div className={styles.SignInForm__container}>
           <div className={styles.SignInForm__header}>
             <h1 className={styles.SignInForm__ttl}>Login into your account</h1>
-            <span className={styles.SignInForm__account_text}>Don’t have an account?</span>
-            <Link
-              to="/signup"
-              className={styles.SignInForm__link}
-            >
-              Create new
-            </Link>
           </div>
           <Form
             onSubmit={handleSubmit(this.onSubmit)}
@@ -89,12 +81,6 @@ class SignInForm extends PureComponent {
               </div>
             )}
             <div className={styles.SignInForm__footer}>
-              <Link
-                to="/reset"
-                className={styles.SignInForm__link}
-              >
-                Forget Password?
-              </Link>
               <div className={styles.SignInForm__btn_login}>
                 <Button
                   type="submit"

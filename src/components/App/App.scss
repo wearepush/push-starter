@@ -4,14 +4,8 @@
 $App: 'App';
 
 .#{$App} {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin-bottom: 48px;
-
 
   &__container {
-    flex: 1 0 auto;
     max-width: 1072px;
     padding: 0 24px;
     margin: 48px auto 0;

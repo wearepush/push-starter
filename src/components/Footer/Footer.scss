@@ -4,14 +4,9 @@
 $Footer: 'Footer';
 
 .#{$Footer} {
-  border-top: 1px solid $color-disabled;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 
   &__container {
-    color: $color-link;
+    color: blue;
     font-size: 15px;
     line-height: 17px;
     padding: 0 15px;
