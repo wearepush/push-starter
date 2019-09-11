@@ -51,8 +51,11 @@ const config = {
             {
               sourceMap: true,
               importLoaders: 2,
-              modules: true,
-              localIdentName: '[local]__[hash:base64:5]'
+              modules: {
+                mode: 'local',
+                context: path.resolve(__dirname, 'src'),
+                localIdentName: '[local]__[hash:base64:5]'
+              },
             }
           },
           {
