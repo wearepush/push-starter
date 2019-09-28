@@ -1,9 +1,9 @@
 # React Redux Styled Hot Universal
 React boilerplate, used best practices and focus on performance
 
-[![Build Status](https://travis-ci.org/wearepush/redux-starter.svg?branch=master&style=flat-square)](https://travis-ci.org/wearepush/redux-starter)
-[![Dependency Status](https://david-dm.org/wearepush/redux-starter.svg?style=flat-square)](https://david-dm.org/wearepush/redux-starter)
-[![devDependency Status](https://david-dm.org/wearepush/redux-starter/dev-status.svg?style=flat-square)](https://david-dm.org/wearepush/redux-starter?type=dev)
+[![Build Status](https://travis-ci.org/wearepush/push-starter.svg?branch=master&style=flat-square)](https://travis-ci.org/wearepush/push-starter)
+[![Dependency Status](https://david-dm.org/wearepush/push-starter.svg?style=flat-square)](https://david-dm.org/wearepush/push-starter)
+[![devDependency Status](https://david-dm.org/wearepush/push-starter/dev-status.svg?style=flat-square)](https://david-dm.org/wearepush/push-starter?type=dev)
 ---
 
 ---
