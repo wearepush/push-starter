@@ -4,12 +4,14 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
+import { HelmetProvider } from 'react-helmet-async';
 
 import getRoutes from '../../routes/routes';
 import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../redux/store';
 import config from '../../config';
+export const helmetContext = {};
 
 export default function createSSR(assets) {
   return (req, res) => {
@@ -57,14 +59,16 @@ export default function createSSR(assets) {
 
     const onEnd = (_res) => {
       const component = (
-        <Provider store={store}>
-          <StaticRouter
-            location={req.url}
-            context={context}
-          >
-            {renderRoutes(routes)}
-          </StaticRouter>
-        </Provider>
+        <HelmetProvider context={helmetContext}>
+          <Provider store={store}>
+            <StaticRouter
+              location={req.url}
+              context={context}
+            >
+              {renderRoutes(routes)}
+            </StaticRouter>
+          </Provider>
+        </HelmetProvider>
       );
 
       const content = renderToString(

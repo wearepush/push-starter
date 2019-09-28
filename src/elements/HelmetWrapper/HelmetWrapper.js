@@ -1,6 +1,6 @@
 import React from 'react';
 import { string, bool, node } from 'prop-types';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 function HelmetWrapper({
   title,
@@ -26,15 +26,15 @@ function HelmetWrapper({
 }
 
 HelmetWrapper.propTypes = {
-  title: string.isRequired,
+  children: node,
   description: string.isRequired,
-  sitePrefix: string,
   disableSitePrefix: bool,
-  children: node
+  sitePrefix: string,
+  title: string.isRequired,
 };
 
 HelmetWrapper.defaultProps = {
-  sitePrefix: 'Redux Starter'
+  sitePrefix: 'Push Starter'
 };
 
 export default HelmetWrapper;

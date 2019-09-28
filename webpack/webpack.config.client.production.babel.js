@@ -22,7 +22,7 @@ const vendor = [
   'react-router-dom',
   'connected-react-router',
   'history',
-  'react-helmet',
+  'react-helmet-async',
   'redux-form',
   'reselect',
   'lru-memoize',
