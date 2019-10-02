@@ -15,7 +15,7 @@ const options = {
   hot: true,
   publicPath: config.output.publicPath,
   headers: { 'Access-Control-Allow-Origin': '*' },
-  stats: { colors: true }
+  stats: { colors: true },
 };
 
 app.use(webpackDevMiddleware(compiler, options));

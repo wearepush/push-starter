@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
+/* eslint-disable */
+var dotenv = require ('dotenv');
+var env = process.env.NODE_ENV;
 
-const env = process.env.NODE_ENV;
-
-let dotEnvConfig = {
-  path: '.env'
+var dotEnvConfig = {
+  path: '.env',
 };
 
 if (env === 'production') {
@@ -12,4 +12,4 @@ if (env === 'production') {
   };
 }
 
-export default dotenv.config(dotEnvConfig);
+module.exports = dotenv.config(dotEnvConfig);

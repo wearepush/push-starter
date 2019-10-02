@@ -1,10 +1,11 @@
 import isUndefined from 'lodash/isUndefined';
 
 const env = process.env.NODE_ENV;
-const logLevel = process.env.LOG_LEVEL;
+const logLevel = !isUndefined(process.env.LOG_LEVEL) ? process.env.LOG_LEVEL : '';
 const ssl = !isUndefined(process.env.SSL) && +(process.env.SSL) === 1 ? 1 : 0;
 const prefix = 'http' + (ssl ? 's' : '') + '://';
 const host = prefix + (process.env.HOST || 'localhost');
+const webpackPort = !isUndefined(process.env.WEBPACKPORT) ? +(process.env.WEBPACKPORT) : 3001;
 const port = !isUndefined(process.env.PORT) ? +(process.env.PORT) : '';
 const apiSsl = !isUndefined(process.env.APISSL) && +(process.env.APISSL) === 1 ? 1 : 0;
 const prefixHost = 'http' + (apiSsl ? 's' : '') + '://';
@@ -14,6 +15,7 @@ const apiHost = (isApiHostDefined ? prefixHost : '') + (isApiHostDefined ? proce
 const ssr = !isUndefined(process.env.SSR) && +(process.env.SSR) === 1;
 export const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
 export const testHost = 'http' + process.env.TESTHOST;
+export const cdnHost = !isUndefined(process.env.CDNHOST) ? process.env.CDNHOST : '';
 
 export default {
   env,
@@ -27,6 +29,7 @@ export default {
   ssr,
   googleAnaliticsId,
   testHost,
+  cdnHost,
 
   server: {
     ssl,
@@ -41,7 +44,7 @@ export default {
     server: {
       ssl,
       host,
-      port: port || 3001,
+      port: webpackPort,
       apiSsl,
       apiPort,
       apiHost

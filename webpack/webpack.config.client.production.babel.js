@@ -10,7 +10,7 @@ import getBaseConfig from './webpack.config.client';
 
 const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
 const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: true });
-
+const cdnHost = process.env.CDN_HOST || '';
 const vendor = [
   'axios',
   'react',
@@ -39,7 +39,8 @@ const config = {
 
   output: {
     filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js'
+    chunkFilename: '[name].[chunkhash].js',
+    publicPath: cdnHost + '/assets/'
   },
 
   optimization: {

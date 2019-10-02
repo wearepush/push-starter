@@ -1,7 +1,10 @@
 import path from 'path';
 import webpack from 'webpack';
+import './../src/server/env';
 
 const rootFolder = path.resolve(__dirname, '..');
+const cdnHost = process.env.CDNHOST || '';
+
 const config = {
   context: rootFolder,
 
@@ -29,14 +32,6 @@ const config = {
         test: /\.js?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        use: 'url-loader?limit=10000'
-      },
-      {
-        test: /\.(eot|ttf|wav|mp3)$/,
-        use: 'file-loader'
       },
       {
         test: /\.(scss)$/,
@@ -96,7 +91,7 @@ const config = {
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
 
   resolve: {
@@ -114,5 +109,47 @@ const config = {
     }
   }
 };
+
+if (cdnHost) {
+  const publicPath = cdnHost + '/assets/';
+
+  config.module.rules.push({
+    test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+    use: [{
+      loader: 'url-loader',
+      options: {
+        limit: 1,
+        publicPath
+      }
+    }]
+  });
+
+  config.module.rules.push({
+    test: /\.(eot|ttf|wav|mp3)$/,
+    use: [{
+      loader: 'file-loader',
+      options: {
+        publicPath
+      }
+    }]
+  });
+} else {
+  config.module.rules.push({
+    test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+    use: [{
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+      }
+    }]
+  });
+
+  config.module.rules.push({
+    test: /\.(eot|ttf|wav|mp3)$/,
+    use: [{
+      loader: 'file-loader'
+    }]
+  });
+}
 
 export default config;

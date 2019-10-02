@@ -10,6 +10,7 @@ const baseConfig = getBaseConfig({
 });
 
 const config = {
+
   devtool: 'eval',
 
   watchOptions: {
