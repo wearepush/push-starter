@@ -10,7 +10,8 @@ import './env';
 import createSSR from './SSR/createSSR';
 import config from '../config';
 
-const { host, port, logLevel } = config.server;
+const { host, port } = config.server;
+const { logLevel } = config;
 const app = express();
 
 export default function(parameters) {
