@@ -11,7 +11,6 @@ class Home extends Component {
   render() {
     const title = 'Home';
     const description = 'Sign In';
-
     return (
       <div>
         <HelmetWrapper title={title} description={description} />

@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import './../src/server/env';
+import paths from './paths';
 
 const rootFolder = path.resolve(__dirname, '..');
 const cdnHost = process.env.CDNHOST || '';
@@ -21,6 +22,7 @@ const config = {
   },
 
   module: {
+    strictExportPresence: true,
     rules: [
       {
         enforce: 'pre',
@@ -96,7 +98,12 @@ const config = {
 
   resolve: {
     extensions: ['*', '.js'],
-    modules: ['src', 'node_modules'],
+    modules: [
+      'src',
+      'node_modules',
+      paths.appNodeModules,
+      paths.packageModules,
+    ],
     alias: {
       react: path.resolve('node_modules/react'),
       components: path.resolve('src/components'),

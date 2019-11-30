@@ -6,7 +6,6 @@ import { renderRoutes } from 'react-router-config';
 import { ConnectedRouter } from 'connected-react-router';
 import './normalize.scss';
 import '../styles/layout/index.scss';
-import 'redux-starter-ui/dist/index.css';
 
 const Root = ({
   history,
