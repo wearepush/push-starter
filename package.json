@@ -14,7 +14,7 @@
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
     "dev:server:build": "UNIVERSAL_WEBPACK_CSS_LOADER_V3=true webpack --config ./webpack/webpack.config.server.development.babel.js --watch --colors --display-error-details",
     "dev:server:delay": "run-s delay dev:server:start",
-    "dev:server:start": "nodemon ./src/server/start.babel.js --watch ./static",
+    "dev:server:start": "nodemon ./src/server/start.babel.js --watch ./static --watch ./src/server",
     "dev:client:build": "babel-node ./webpack/webpack-dev-server.js",
     "delay": "node ./node_modules/npm-delay 15000",
     "prod": "run-s prod:build prod:start",
