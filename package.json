@@ -44,7 +44,7 @@
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
-    "connected-react-router": "^6.5.2",
+    "connected-react-router": "^6.6.1",
     "cookie-parser": "^1.4.4",
     "current-device": "^0.10.0",
     "detect-browser": "^4.8.0",
