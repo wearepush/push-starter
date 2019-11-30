@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/wearepush/push-starter"
   },
-  "homepage": "https://wearepush-redux-starter.herokuapp.com",
+  "homepage": "https://wearepush-starter.herokuapp.com",
   "scripts": {
     "start": "npm run dev",
     "dev": "run-p dev:client:build dev:server:prepare dev:server:build dev:server:delay",
