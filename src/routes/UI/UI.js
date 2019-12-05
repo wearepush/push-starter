@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, Button, Radio, TextField, TextArea, Dropdown } from 'redux-starter-ui';
+import { Checkbox, Button, Radio, TextField, TextArea, Dropdown } from 'push-ui';
 import { HelmetWrapper } from 'elements';
 
 const UI = () => {

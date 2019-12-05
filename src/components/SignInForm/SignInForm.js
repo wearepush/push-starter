@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { FormTextField, Button } from 'redux-starter-ui';
+import { FormTextField, Button } from 'push-ui';
 
 import validate from './validate';
 import styles from './SignInForm.scss';
