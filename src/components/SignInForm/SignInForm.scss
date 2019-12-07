@@ -46,10 +46,6 @@ $SignInForm: 'SignInForm';
   &__btn_login {
     display: inline-block;
     vertical-align: middle;
-
-    & > button {
-      padding: 1.16em 3.9em;
-    }
   }
 
   &__footer {

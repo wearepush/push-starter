@@ -4,7 +4,8 @@
 
 html {
   background-color: #fff;
-  box-sizing: border-box;
+  font-size: 10px;
+  line-height: 1.4;
 }
 
 body {
@@ -15,12 +16,10 @@ body {
   text-rendering: optimizeLegibility;
   -moz-font-feature-settings: "liga" on;
   color: #000;
-  font-size: 20px;
-  line-height: 1.4;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-backface-visibility: hidden;
   -webkit-tap-highlight-color: transparent;
   position: relative;
+  font-size: 1.4rem;
 }

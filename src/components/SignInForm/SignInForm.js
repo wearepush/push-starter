@@ -66,6 +66,7 @@ class SignInForm extends PureComponent {
                 name="email"
                 type="email"
                 placeholder="Your Email"
+                size="md"
               />
             </div>
             <div className={styles.SignInForm__form_item}>
@@ -73,6 +74,7 @@ class SignInForm extends PureComponent {
                 name="password"
                 type="password"
                 placeholder="Type your password"
+                size="md"
               />
             </div>
             {error && (
