@@ -8,9 +8,6 @@ const Header = () => (
       <Link className={styles.Header__link} to="/">
         Home
       </Link>
-      <Link className={styles.Header__link} to="/ui">
-        UI
-      </Link>
       <Link className={styles.Header__link} to="/users">
         Users
       </Link>

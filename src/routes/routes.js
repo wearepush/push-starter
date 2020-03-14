@@ -1,5 +1,5 @@
 import { App } from 'components';
-import { Home, UI, Users, SignIn, NotFound } from 'routes';
+import { Home, Users, SignIn, NotFound } from 'routes';
 import withTracker from './withTracker';
 
 export default (store) => { // eslint-disable-line
@@ -15,10 +15,6 @@ export default (store) => { // eslint-disable-line
       {
         path: '/users',
         component: withTracker(Users)
-      },
-      {
-        path: '/ui',
-        component: withTracker(UI)
       },
       {
         path: '/signin',
