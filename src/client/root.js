@@ -7,16 +7,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import './normalize.scss';
 import '../styles/layout/index.scss';
 
-const Root = ({
-  history,
-  routes,
-  store
-}) => (
+const Root = ({ history, routes, store }) => (
   <HelmetProvider>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        {renderRoutes(routes)}
-      </ConnectedRouter>
+      <ConnectedRouter history={history}>{renderRoutes(routes)}</ConnectedRouter>
     </Provider>
   </HelmetProvider>
 );
@@ -24,10 +18,7 @@ const Root = ({
 Root.propTypes = {
   history: object.isRequired,
   store: object.isRequired,
-  routes: oneOfType([
-    array,
-    object,
-  ]).isRequired
+  routes: oneOfType([array, object]).isRequired,
 };
 
 export default Root;

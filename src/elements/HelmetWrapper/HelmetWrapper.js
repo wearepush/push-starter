@@ -2,13 +2,7 @@ import React from 'react';
 import { string, bool, node } from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 
-function HelmetWrapper({
-  title,
-  description,
-  sitePrefix,
-  disableSitePrefix,
-  children
-}) {
+function HelmetWrapper({ title, description, sitePrefix, disableSitePrefix, children }) {
   const nextTitle = !disableSitePrefix ? `${sitePrefix} | ${title}` : title;
   const nextDescr = !disableSitePrefix ? `${sitePrefix} | ${description}` : description;
 
@@ -34,7 +28,9 @@ HelmetWrapper.propTypes = {
 };
 
 HelmetWrapper.defaultProps = {
-  sitePrefix: 'Push Starter'
+  children: undefined,
+  disableSitePrefix: false,
+  sitePrefix: 'Push Starter',
 };
 
 export default HelmetWrapper;

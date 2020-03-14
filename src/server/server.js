@@ -35,7 +35,7 @@ export default function(parameters) {
   app.use((req, res, next) => {
     if (config.ssl) {
       if (req.headers['x-forwarded-proto'] !== 'https') {
-        res.redirect(302, 'https://' + req.hostname + req.originalUrl);
+        res.redirect(302, `https://${req.hostname}${req.originalUrl}`);
       } else {
         next();
       }
@@ -48,8 +48,8 @@ export default function(parameters) {
     res.json({
       records: [
         { id: 2, name: 'Justin Timberlake' },
-        { id: 1, name: 'Kanye West' }
-      ]
+        { id: 1, name: 'Kanye West' },
+      ],
     });
   });
 
@@ -59,9 +59,9 @@ export default function(parameters) {
       transports: [
         new winston.transports.Console({
           json: true,
-          colorize: true
-        })
-      ]
+          colorize: true,
+        }),
+      ],
     };
     app.use(expressWinston.logger(loggerOptions));
   }
@@ -77,6 +77,6 @@ export default function(parameters) {
 
   return {
     server,
-    app
+    app,
   };
 }

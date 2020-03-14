@@ -10,20 +10,17 @@ export default function configureStore(history, client, initialState = {}) {
   const middlewares = [createMiddleware(client), routerMiddleware(history)];
 
   const composeEnhancers =
-    (global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && process.env.REDUX_DEVTOOLS && process.env.REDUX_DEVTOOLS === 'true' &&
-    global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-    })) || compose;
+    (global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+      process.env.REDUX_DEVTOOLS &&
+      process.env.REDUX_DEVTOOLS === 'true' &&
+      global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+      })) ||
+    compose;
 
-  const enhancer = composeEnhancers(
-    applyMiddleware(...middlewares)
-  );
+  const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-  const store = createStore(
-    reducer,
-    initialState,
-    enhancer
-  );
+  const store = createStore(reducer, initialState, enhancer);
 
   if (module.hot) {
     module.hot.accept('./reducer', () => {
@@ -31,9 +28,7 @@ export default function configureStore(history, client, initialState = {}) {
       const nextReducer = createNextReducer({
         history,
       });
-      store.replaceReducer(
-        nextReducer
-      );
+      store.replaceReducer(nextReducer);
     });
   }
 

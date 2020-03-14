@@ -18,10 +18,7 @@ export const initialState = {
 };
 
 // Reducer
-export default function reducer(
-  state = initialState,
-  action
-) {
+export default function reducer(state = initialState, action) {
   const { error, result, type } = action;
   switch (type) {
     case ACTIONS_TYPES.CLEAR:
@@ -51,8 +48,8 @@ export default function reducer(
 }
 
 /*
-* Getters
-*/
+ * Getters
+ */
 
 export const getUsers = (state) => state[STATE_KEY];
 export const getUsersRecords = (state) => getUsers(state).records;
@@ -69,13 +66,13 @@ export const GETTERS = {
 };
 
 /*
-* Selectors
-*/
+ * Selectors
+ */
 
-export const usersRecords = createSelector(getUsersRecords, c => c);
-export const usersLoading = createSelector(getUsersLoading, c => c);
-export const usersLoaded = createSelector(getUsersLoaded, c => c);
-export const usersError = createSelector(getUsersError, c => c);
+export const usersRecords = createSelector(getUsersRecords, (c) => c);
+export const usersLoading = createSelector(getUsersLoading, (c) => c);
+export const usersLoaded = createSelector(getUsersLoaded, (c) => c);
+export const usersError = createSelector(getUsersError, (c) => c);
 
 export const SELECTORS = {
   usersRecords,
@@ -85,8 +82,8 @@ export const SELECTORS = {
 };
 
 /*
-* Actions
-*/
+ * Actions
+ */
 
 export function clear() {
   return {

@@ -18,15 +18,10 @@ function formatUrl(path, directUrl = false) {
 }
 
 class _ApiClient {
-  constructor() { // we can get an access to req
+  constructor() {
+    // we can get an access to req
     methods.forEach((method) => {
-      this[method] = (path, {
-        data,
-        attachments,
-        directUrl,
-        handleProgress,
-        ...rest
-      } = {}) => {
+      this[method] = (path, { data, attachments, directUrl, handleProgress, ...rest } = {}) => {
         /**
          * params,
          * headers,
@@ -36,7 +31,7 @@ class _ApiClient {
         const requestConfig = {
           method,
           url: formatUrl(path, directUrl),
-          ...rest
+          ...rest,
         };
 
         if (attachments) {

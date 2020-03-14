@@ -11,27 +11,21 @@ import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../redux/store';
 import config from '../../config';
+
 export const helmetContext = {};
 
 export default function createSSR(assets) {
   return (req, res) => {
     const context = {};
     const history = createMemoryHistory({
-      initialEntries: [req.url]
+      initialEntries: [req.url],
     });
     const client = new ApiClient(req);
     const store = configureStore(history, client);
     const routes = getRoutes(store);
 
     const hydrateOnClient = () => {
-      res.send(
-        `<!doctype html>\n${renderToString(
-          <Html
-            assets={assets}
-            store={store}
-          />
-        )}`
-      );
+      res.send(`<!doctype html>\n${renderToString(<Html assets={assets} store={store} />)}`);
     };
 
     if (!config.ssr) {
@@ -45,39 +39,33 @@ export default function createSSR(assets) {
     }
 
     const branch = matchRoutes(routes, req.url);
-    const promises = branch.map(({ route: { component: { fetchData } } }) => {
-      if (fetchData instanceof Function) {
-        return fetchData(store)
-          .then(
-            (response) => Promise.resolve(response)
-          ).catch(
-            (error) => Promise.reject(error)
-          );
+    const promises = branch.map(
+      ({
+        route: {
+          component: { fetchData },
+        },
+      }) => {
+        if (fetchData instanceof Function) {
+          return fetchData(store)
+            .then((response) => Promise.resolve(response))
+            .catch((error) => Promise.reject(error));
+        }
+        return Promise.resolve();
       }
-      return Promise.resolve();
-    });
+    );
 
     const onEnd = (_res) => {
       const component = (
         <HelmetProvider context={helmetContext}>
           <Provider store={store}>
-            <StaticRouter
-              location={req.url}
-              context={context}
-            >
+            <StaticRouter location={req.url} context={context}>
               {renderRoutes(routes)}
             </StaticRouter>
           </Provider>
         </HelmetProvider>
       );
 
-      const content = renderToString(
-        <Html
-          assets={assets}
-          component={component}
-          store={store}
-        />
-      );
+      const content = renderToString(<Html assets={assets} component={component} store={store} />);
 
       if (_res && _res.response && _res.response.status) {
         res.status(_res.response.status);
@@ -88,6 +76,8 @@ export default function createSSR(assets) {
       return res.send(`<!doctype html>\n${content}`);
     };
 
-    Promise.all(promises).then(onEnd).catch(onEnd);
+    Promise.all(promises)
+      .then(onEnd)
+      .catch(onEnd);
   };
 }

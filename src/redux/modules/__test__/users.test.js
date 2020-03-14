@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import nock from 'nock';
 import mockStore from '../../__mocks__/store';
 import config from '../../../config';
@@ -14,11 +15,9 @@ import reducer, {
 let store;
 
 beforeEach(() => {
-  store = mockStore(
-    {
-      [STATE_KEY]: initialState
-    }
-  );
+  store = mockStore({
+    [STATE_KEY]: initialState,
+  });
 });
 
 afterEach(() => {
@@ -34,57 +33,54 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return clean initial state', () => {
       const action = {
-        type: ACTIONS_TYPES.CLEAR
+        type: ACTIONS_TYPES.CLEAR,
       };
       expect(reducer(undefined, action)).toEqual(initialState);
     });
 
     it('should return loading status', () => {
       const action = {
-        type: ACTIONS_TYPES.LOAD
+        type: ACTIONS_TYPES.LOAD,
       };
-      expect(reducer(undefined, action))
-        .toEqual(
-          expect.objectContaining({
-            loading: true,
-          })
-        );
+      expect(reducer(undefined, action)).toEqual(
+        expect.objectContaining({
+          loading: true,
+        })
+      );
     });
 
     it('should return success loaded status', () => {
       const action = {
         type: ACTIONS_TYPES.LOAD_SUCCESS,
         result: {
-          records: []
-        }
+          records: [],
+        },
       };
-      expect(reducer(undefined, action))
-        .toEqual(
-          expect.objectContaining({
-            records: [],
-            loaded: true,
-            loading: false,
-          })
-        );
+      expect(reducer(undefined, action)).toEqual(
+        expect.objectContaining({
+          records: [],
+          loaded: true,
+          loading: false,
+        })
+      );
     });
 
     it('should return failed loaded status', () => {
       const action = {
         type: ACTIONS_TYPES.LOAD_FAIL,
         error: {
-          message: 'failed'
-        }
+          message: 'failed',
+        },
       };
-      expect(reducer(undefined, action))
-        .toEqual(
-          expect.objectContaining({
-            error: {
-              message: 'failed'
-            },
-            loading: false,
-            loaded: false,
-          })
-        );
+      expect(reducer(undefined, action)).toEqual(
+        expect.objectContaining({
+          error: {
+            message: 'failed',
+          },
+          loading: false,
+          loaded: false,
+        })
+      );
     });
   });
 
@@ -142,7 +138,7 @@ describe(`${STATE_KEY} module`, () => {
       store.dispatch(ACTIONS.clear());
       const actions = store.getActions();
       let data = null;
-      actions.map(action => {
+      actions.map((action) => {
         data = reducer(undefined, action);
         return true;
       });
@@ -151,20 +147,18 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return success loaded', () => {
       const payload = {
-        records: [
-          { id: 1 },
-          { id: 2 }
-        ]
+        records: [{ id: 1 }, { id: 2 }],
       };
       nock(config.testHost)
         .get('/api/users')
         .reply(200, payload);
 
-      store.dispatch(ACTIONS.load())
+      store
+        .dispatch(ACTIONS.load())
         .then(() => {
           const actions = store.getActions();
           let data = null;
-          actions.map(action => {
+          actions.map((action) => {
             data = reducer(undefined, action);
             return true;
           });
@@ -183,18 +177,19 @@ describe(`${STATE_KEY} module`, () => {
     it('should return failed loaded', () => {
       const payload = {
         error: {
-          message: 'failed'
-        }
+          message: 'failed',
+        },
       };
       nock(config.testHost)
         .get('/api/users')
         .reply(400, payload);
 
-      store.dispatch(ACTIONS.load())
+      store
+        .dispatch(ACTIONS.load())
         .then(() => {
           const actions = store.getActions();
           let data = null;
-          actions.map(action => {
+          actions.map((action) => {
             data = reducer(undefined, action);
             return true;
           });

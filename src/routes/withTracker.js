@@ -11,26 +11,24 @@ export default function withTracker(WrappedComponent, options = {}) {
   const trackPage = (page) => {
     GoogleAnalytics.set({
       page,
-      ...options
+      ...options,
     });
     GoogleAnalytics.pageview(page);
   };
 
   const HOC = class extends Component {
-    static propTypes = {
-      location: object.isRequired,
-    };
-
     componentDidMount() {
       if (googleAnaliticsId) {
-        const page = this.props.location.pathname;
+        const { location } = this.props;
+        const page = location.pathname;
         trackPage(page);
       }
     }
 
     componentDidUpdate(nextProps) {
       if (googleAnaliticsId) {
-        const currentPage = this.props.location.pathname;
+        const { location } = this.props;
+        const currentPage = location.pathname;
         const nextPage = nextProps.location.pathname;
 
         if (currentPage !== nextPage) {
@@ -47,6 +45,10 @@ export default function withTracker(WrappedComponent, options = {}) {
   if (typeof WrappedComponent.fetchData !== 'undefined') {
     HOC.fetchData = WrappedComponent.fetchData;
   }
+
+  HOC.propTypes = {
+    location: object.isRequired,
+  };
 
   return HOC;
 }

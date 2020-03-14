@@ -7,47 +7,36 @@ import { FormTextField, Button } from 'push-ui';
 import validate from './validate';
 import styles from './SignInForm.scss';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
-const mapToProps = {
-};
+const mapToProps = {};
 
 const mapToForm = {
   form: 'SignInForm',
-  validate
+  validate,
 };
 
 class SignInForm extends PureComponent {
-  static propTypes = {
-    handleSubmit: func,
-    error: string
-  };
-
-  static defaultProps = {
-    handleSubmit: undefined,
-    error: ''
-  };
-
   onSubmit = (values) => { // eslint-disable-line
     console.log(values);
     return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
         throw new SubmissionError({
           username: 'User does not exist',
-          _error: 'Login failed!'
+          _error: 'Login failed!',
         });
       } else if (values.password !== 'qwerty') {
         throw new SubmissionError({
           password: 'Wrong password',
-          _error: 'Login failed!'
+          _error: 'Login failed!',
         });
       } else {
         console.log(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
       }
     });
-  }
+  };
 
   render() {
     const { handleSubmit, error } = this.props;
@@ -57,17 +46,9 @@ class SignInForm extends PureComponent {
           <div className={styles.SignInForm__header}>
             <h1 className={styles.SignInForm__ttl}>Login into your account</h1>
           </div>
-          <Form
-            onSubmit={handleSubmit(this.onSubmit)}
-            className={styles.SignInForm__form}
-          >
+          <Form onSubmit={handleSubmit(this.onSubmit)} className={styles.SignInForm__form}>
             <div className={styles.SignInForm__form_item}>
-              <FormTextField
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                size="md"
-              />
+              <FormTextField name="email" type="email" placeholder="Your Email" size="md" />
             </div>
             <div className={styles.SignInForm__form_item}>
               <FormTextField
@@ -77,17 +58,10 @@ class SignInForm extends PureComponent {
                 size="md"
               />
             </div>
-            {error && (
-              <div>
-                {error}
-              </div>
-            )}
+            {error && <div>{error}</div>}
             <div className={styles.SignInForm__footer}>
               <div className={styles.SignInForm__btn_login}>
-                <Button
-                  type="submit"
-                  float
-                >
+                <Button type="submit" float>
                   Login
                 </Button>
               </div>
@@ -99,6 +73,14 @@ class SignInForm extends PureComponent {
   }
 }
 
-export default connect(mapStateToProps, mapToProps)(
-  reduxForm(mapToForm)(SignInForm)
-);
+SignInForm.propTypes = {
+  handleSubmit: func,
+  error: string,
+};
+
+SignInForm.defaultProps = {
+  handleSubmit: undefined,
+  error: '',
+};
+
+export default connect(mapStateToProps, mapToProps)(reduxForm(mapToForm)(SignInForm));

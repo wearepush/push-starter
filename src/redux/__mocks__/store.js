@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import configureMockStore from 'redux-mock-store';
 
 import createMiddleware from '../middleware/clientMiddleware';

@@ -10,7 +10,8 @@ export default function withDevice(WrappedComponent) {
       const versionVersion = `v${parseInt(version, 10)}`;
       const className = `${browserName} ${versionVersion}`;
       const currentClassNames = document.documentElement.className.replace(/^\s+|\s+$/g, '');
-      document.documentElement.className = (currentClassNames && currentClassNames + ' ') + className;
+      document.documentElement.className =
+        (currentClassNames && `${currentClassNames} `) + className;
     }
 
     render() {

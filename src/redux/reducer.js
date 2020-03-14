@@ -4,9 +4,7 @@ import { connectRouter } from 'connected-react-router';
 
 import users, { STATE_KEY as USERS_STATE_KEY } from './modules/users';
 
-export default function createReducer({
-  history = undefined,
-}) {
+export default function createReducer({ history = undefined }) {
   return combineReducers({
     router: connectRouter(history),
     form,

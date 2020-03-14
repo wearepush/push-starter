@@ -3,5 +3,5 @@ import env from './environment';
 
 export default {
   ...config,
-  ...env
+  ...env,
 };
