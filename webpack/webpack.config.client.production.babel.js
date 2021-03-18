@@ -11,57 +11,35 @@ import getBaseConfig from './webpack.config.client';
 const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
 const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: true });
 const cdnHost = process.env.CDN_HOST || '';
-const vendor = [
-  'axios',
-  'react',
-  'react-dom',
-  'prop-types',
-  'redux',
-  'react-redux',
-  'react-router-config',
-  'react-router-dom',
-  'connected-react-router',
-  'history',
-  'react-helmet-async',
-  'redux-form',
-  'reselect',
-  'lru-memoize',
-  'react-ga',
-  'current-device',
-  'detect-browser',
-  'classnames'
-];
 
 const config = {
   devtool: false,
 
-  entry: { vendor },
-
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: cdnHost + '/assets/'
+    publicPath: cdnHost + '/assets/',
   },
 
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
+        node_modules: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
           chunks: 'all',
         },
       },
-    }
+    },
   },
 
   plugins: [
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
         discardComments: {
-          removeAll: true
-        }
-      }
+          removeAll: true,
+        },
+      },
     }),
 
     new webpack.optimize.SplitChunksPlugin({
@@ -74,18 +52,18 @@ const config = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
 
     new Dotenv({
       systemvars: true,
-      path: '.env.production'
+      path: '.env.production',
     }),
 
     new webpack.DefinePlugin({
       __CLIENT__: true,
-      __SERVER__: false
+      __SERVER__: false,
     }),
 
     new webpack.IgnorePlugin(/redbox-react|react-hot-loader/),
@@ -119,9 +97,9 @@ const config = {
       // See more options here: https://github.com/webpack/webpack/blob/webpack-1/lib/Stats.js#L21
       statsOptions: null,
       // Log level. Can be 'info', 'warn', 'error' or 'silent'.
-      logLevel: 'info'
-    })
-  ]
+      logLevel: 'info',
+    }),
+  ],
 };
 
 export default merge(baseConfig, config);

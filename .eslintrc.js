@@ -5,13 +5,13 @@ const ignore = 0;
 module.exports = {
   root: true,
   parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'prettier'],
   plugins: ['prettier', 'import', 'jest', 'jsx-a11y', 'react', 'react-hooks', 'json', 'html'],
   rules: {
     'prettier/prettier': [
       'warn',
       {
-        printWidth: 100,
+        printWidth: 120,
         tabWidth: 2,
         bracketSpacing: true,
         trailingComma: 'es5',
@@ -33,7 +33,7 @@ module.exports = {
         arrow: false,
       },
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.stories.js'] }],
+    // 'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.stories.js'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/forbid-prop-types': ignore,
@@ -41,6 +41,8 @@ module.exports = {
     'global-require': ignore,
     'no-console': ignore,
     'no-underscore-dangle': ignore,
+    'import/no-unresolved': ignore,
+    'import/no-extraneous-dependencies': ignore,
   },
   settings: {
     'import/resolver': {

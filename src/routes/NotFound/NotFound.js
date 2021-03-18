@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import styles from './NotFound.scss';
 
 const NotFound = () => (
   <Route
@@ -9,7 +8,7 @@ const NotFound = () => (
         staticContext.status = 404; // eslint-disable-line
       }
       return (
-        <div className={styles.notfoundpage}>
+        <div>
           <h1>404 : Not Found</h1>
         </div>
       );

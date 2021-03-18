@@ -41,10 +41,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   if (
     !config.ssr &&
-    (!dest ||
-      !dest.firstChild ||
-      !dest.firstChild.attributes ||
-      !dest.firstChild.attributes['data-react-checksum'])
+    (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum'])
   ) {
     console.error('Server-side React render was discarded.');
   }
@@ -54,12 +51,7 @@ if (module.hot) {
   const isString = (string) => typeof string === 'string';
   const orgError = console.error;
   console.error = (...args) => {
-    if (
-      args &&
-      args.length === 1 &&
-      isString(args[0]) &&
-      args[0].indexOf('You cannot change <Router ') > -1
-    ) {
+    if (args && args.length === 1 && isString(args[0]) && args[0].indexOf('You cannot change <Router ') > -1) {
       // React route changed
     } else {
       // Log the error as normally

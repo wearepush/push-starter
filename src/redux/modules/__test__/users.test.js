@@ -3,14 +3,7 @@ import nock from 'nock';
 import mockStore from '../../__mocks__/store';
 import config from '../../../config';
 
-import reducer, {
-  initialState,
-  STATE_KEY,
-  ACTIONS_TYPES,
-  ACTIONS,
-  GETTERS,
-  SELECTORS,
-} from '../users';
+import reducer, { initialState, STATE_KEY, ACTIONS_TYPES, ACTIONS, GETTERS, SELECTORS } from '../users';
 
 let store;
 
@@ -149,9 +142,7 @@ describe(`${STATE_KEY} module`, () => {
       const payload = {
         records: [{ id: 1 }, { id: 2 }],
       };
-      nock(config.testHost)
-        .get('/api/users')
-        .reply(200, payload);
+      nock(config.testHost).get('/api/users').reply(200, payload);
 
       store
         .dispatch(ACTIONS.load())
@@ -180,9 +171,7 @@ describe(`${STATE_KEY} module`, () => {
           message: 'failed',
         },
       };
-      nock(config.testHost)
-        .get('/api/users')
-        .reply(400, payload);
+      nock(config.testHost).get('/api/users').reply(400, payload);
 
       store
         .dispatch(ACTIONS.load())

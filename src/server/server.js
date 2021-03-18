@@ -14,7 +14,7 @@ const { host, port } = config.server;
 const { logLevel } = config;
 const app = express();
 
-export default function(parameters) {
+export default function (parameters) { // eslint-disable-line
   if (config.isProd) {
     app.use(compression());
   }
