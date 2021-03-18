@@ -25,12 +25,6 @@ const config = {
     strictExportPresence: true,
     rules: [
       {
-        enforce: 'pre',
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
-      {
         test: /\.js?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
@@ -91,7 +85,6 @@ const config = {
   },
 
   plugins: [
-    // new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 
