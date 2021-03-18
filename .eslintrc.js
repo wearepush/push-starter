@@ -5,7 +5,7 @@ const ignore = 0;
 module.exports = {
   root: true,
   parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'prettier'],
   plugins: ['prettier', 'import', 'jest', 'jsx-a11y', 'react', 'react-hooks', 'json', 'html'],
   rules: {
     'prettier/prettier': [

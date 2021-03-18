@@ -34,5 +34,8 @@ webpack-stats.json
 # Tests
 coverage/
 
-#VS Code
+# VS Code
 .history/
+
+# Husky
+.husky/

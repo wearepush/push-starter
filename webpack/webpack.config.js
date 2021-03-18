@@ -49,8 +49,8 @@ const config = {
               sourceMap: true,
               importLoaders: 2,
               modules: {
-                mode: 'local',
-                context: path.resolve(__dirname, 'src'),
+                // mode: 'local',
+                localIdentContext: path.resolve(__dirname, "src"),
                 localIdentName: '[local]__[hash:base64:5]'
               },
             }
@@ -92,7 +92,7 @@ const config = {
   },
 
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(true),
+    // new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 
