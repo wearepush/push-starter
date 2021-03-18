@@ -76,8 +76,6 @@ export default function createSSR(assets) {
       return res.send(`<!doctype html>\n${content}`);
     };
 
-    Promise.all(promises)
-      .then(onEnd)
-      .catch(onEnd);
+    Promise.all(promises).then(onEnd).catch(onEnd);
   };
 }

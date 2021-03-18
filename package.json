@@ -23,7 +23,7 @@
     "delay": "node ./node_modules/npm-delay 15000",
     "dev": "run-p dev:client:build dev:server:prepare dev:server:build dev:server:delay",
     "dev:client:build": "babel-node ./webpack/webpack-dev-server.js",
-    "dev:server:build": "UNIVERSAL_WEBPACK_CSS_LOADER_V3=true webpack --config ./webpack/webpack.config.server.development.babel.js --watch --color",
+    "dev:server:build": "UNIVERSAL_WEBPACK_CSS_LOADER_V4=true webpack --config ./webpack/webpack.config.server.development.babel.js --watch --color",
     "dev:server:delay": "run-s delay dev:server:start",
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
     "dev:server:start": "nodemon ./src/server/start.babel.js --watch ./static --watch ./src/server",
@@ -34,7 +34,7 @@
     "prod": "run-s prod:build prod:start",
     "prod:build": "run-p prod:client:build prod:server:build",
     "prod:client:build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.client.production.babel.js --color",
-    "prod:server:build": "cross-env NODE_ENV=production UNIVERSAL_WEBPACK_CSS_LOADER_V3=true webpack --config ./webpack/webpack.config.server.production.babel.js --color",
+    "prod:server:build": "cross-env NODE_ENV=production UNIVERSAL_WEBPACK_CSS_LOADER_V4=true webpack --config ./webpack/webpack.config.server.production.babel.js --color",
     "prod:server:start": "cross-env NODE_ENV=production node ./src/server/start.babel.js",
     "prod:start": "npm-run-all prod:server:start",
     "start": "npm run dev",
@@ -100,7 +100,7 @@
     "reselect": "^4.0.0",
     "serialize-javascript": "^5.0.1",
     "serve-favicon": "^2.5.0",
-    "universal-webpack": "^0.6.12",
+    "universal-webpack": "^0.6.15",
     "winston": "^3.3.3"
   },
   "devDependencies": {

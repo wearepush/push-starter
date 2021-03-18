@@ -10,7 +10,7 @@ const config = {
   context: rootFolder,
 
   entry: {
-    main: './src/client'
+    main: './src/client',
   },
 
   mode: process.env.NODE_ENV || 'development',
@@ -18,7 +18,7 @@ const config = {
   output: {
     path: path.resolve(rootFolder, 'static/assets'),
     publicPath: '/assets/',
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
   },
 
   module: {
@@ -28,67 +28,66 @@ const config = {
         enforce: 'pre',
         test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint-loader',
       },
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.(scss)$/,
         sideEffects: true,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader : 'css-loader',
-            options:
-            {
+            loader: 'css-loader',
+            options: {
               sourceMap: true,
               importLoaders: 2,
               modules: {
                 // mode: 'local',
-                localIdentContext: path.resolve(__dirname, "src"),
-                localIdentName: '[local]__[hash:base64:5]'
+                localIdentContext: path.resolve(__dirname, 'src'),
+                localIdentName: '[local]__[hash:base64:5]',
               },
-            }
+            },
           },
           {
-            loader : 'postcss-loader',
+            loader: 'postcss-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
-            loader : 'sass-loader',
+            loader: 'sass-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(css)$/,
         sideEffects: true,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader : 'css-loader',
+            loader: 'css-loader',
             options: {
               importLoaders: 2,
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
-            loader: 'postcss-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'postcss-loader',
+          },
+        ],
+      },
+    ],
   },
 
   plugins: [
@@ -98,12 +97,7 @@ const config = {
 
   resolve: {
     extensions: ['*', '.js'],
-    modules: [
-      'src',
-      'node_modules',
-      paths.appNodeModules,
-      paths.packageModules,
-    ],
+    modules: ['src', 'node_modules', paths.appNodeModules, paths.packageModules],
     alias: {
       react: path.resolve('node_modules/react'),
       components: path.resolve('src/components'),
@@ -112,9 +106,9 @@ const config = {
       helpers: path.resolve('src/helpers'),
       modules: path.resolve('src/redux/modules'),
       routes: path.resolve('src/routes'),
-      utils: path.resolve('src/utils')
-    }
-  }
+      utils: path.resolve('src/utils'),
+    },
+  },
 };
 
 if (cdnHost) {
@@ -122,40 +116,48 @@ if (cdnHost) {
 
   config.module.rules.push({
     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-    use: [{
-      loader: 'url-loader',
-      options: {
-        limit: 1,
-        publicPath
-      }
-    }]
+    use: [
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 1,
+          publicPath,
+        },
+      },
+    ],
   });
 
   config.module.rules.push({
     test: /\.(eot|ttf|wav|mp3)$/,
-    use: [{
-      loader: 'file-loader',
-      options: {
-        publicPath
-      }
-    }]
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          publicPath,
+        },
+      },
+    ],
   });
 } else {
   config.module.rules.push({
     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-    use: [{
-      loader: 'url-loader',
-      options: {
-        limit: 10000,
-      }
-    }]
+    use: [
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        },
+      },
+    ],
   });
 
   config.module.rules.push({
     test: /\.(eot|ttf|wav|mp3)$/,
-    use: [{
-      loader: 'file-loader'
-    }]
+    use: [
+      {
+        loader: 'file-loader',
+      },
+    ],
   });
 }
 
