@@ -33,3 +33,6 @@ webpack-stats.json
 
 # Tests
 coverage/
+
+#VS Code
+.history/
