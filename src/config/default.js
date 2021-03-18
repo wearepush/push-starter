@@ -9,18 +9,12 @@ const webpackPort = !isUndefined(process.env.WEBPACKPORT) ? +process.env.WEBPACK
 const port = !isUndefined(process.env.PORT) ? +process.env.PORT : '';
 const apiSsl = !isUndefined(process.env.APISSL) && +process.env.APISSL === 1 ? 1 : 0;
 const prefixHost = `http${apiSsl ? 's' : ''}://`;
-const apiPort =
-  !isUndefined(process.env.APIPORT) && process.env.APIPORT !== 'undefined'
-    ? +process.env.APIPORT
-    : '';
+const apiPort = !isUndefined(process.env.APIPORT) && process.env.APIPORT !== 'undefined' ? +process.env.APIPORT : '';
 const isApiHostDefined = !isUndefined(process.env.APIHOST) && process.env.APIHOST !== 'undefined';
 const apiHost =
-  (isApiHostDefined ? prefixHost : '') +
-  (isApiHostDefined ? process.env.APIHOST : '') +
-  (apiPort ? `:${apiPort}` : '');
+  (isApiHostDefined ? prefixHost : '') + (isApiHostDefined ? process.env.APIHOST : '') + (apiPort ? `:${apiPort}` : '');
 const ssr = !isUndefined(process.env.SSR) && +process.env.SSR === 1;
-export const googleAnaliticsId =
-  process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
+export const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
 export const testHost = `http${process.env.TESTHOST}`;
 export const cdnHost = !isUndefined(process.env.CDNHOST) ? process.env.CDNHOST : '';
 

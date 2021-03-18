@@ -9,7 +9,7 @@ import styles from './SignInForm.scss';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const mapStateToProps = state => ({}); // eslint-disable-line
+const mapStateToProps = (state) => ({}); // eslint-disable-line
 
 const mapToProps = {};
 
@@ -19,7 +19,8 @@ const mapToForm = {
 };
 
 class SignInForm extends PureComponent {
-  onSubmit = (values) => { // eslint-disable-line
+  onSubmit = (values) => {
+    // eslint-disable-line
     console.log(values);
     return sleep(100).then(() => {
       if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
@@ -51,12 +52,7 @@ class SignInForm extends PureComponent {
               <FormTextField name="email" type="email" placeholder="Your Email" size="md" />
             </div>
             <div className={styles.SignInForm__form_item}>
-              <FormTextField
-                name="password"
-                type="password"
-                placeholder="Type your password"
-                size="md"
-              />
+              <FormTextField name="password" type="password" placeholder="Type your password" size="md" />
             </div>
             {error && <div>{error}</div>}
             <div className={styles.SignInForm__footer}>
