@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-import './../src/server/env';
+import '../src/server/env';
 import paths from './paths';
 
 const rootFolder = path.resolve(__dirname, '..');
@@ -41,11 +41,6 @@ const config = {
             options: {
               sourceMap: true,
               importLoaders: 2,
-              modules: {
-                // mode: 'local',
-                localIdentContext: path.resolve(__dirname, 'src'),
-                localIdentName: '[local]__[hash:base64:5]',
-              },
             },
           },
           {
@@ -84,9 +79,7 @@ const config = {
     ],
   },
 
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
+  plugins: [new webpack.NoEmitOnErrorsPlugin()],
 
   resolve: {
     extensions: ['*', '.js'],
@@ -105,7 +98,7 @@ const config = {
 };
 
 if (cdnHost) {
-  const publicPath = cdnHost + '/assets/';
+  const publicPath = `${cdnHost}/assets/`;
 
   config.module.rules.push({
     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,

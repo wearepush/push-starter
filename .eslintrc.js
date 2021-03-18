@@ -33,7 +33,7 @@ module.exports = {
         arrow: false,
       },
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.stories.js'] }],
+    // 'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.stories.js'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/forbid-prop-types': ignore,
@@ -41,6 +41,8 @@ module.exports = {
     'global-require': ignore,
     'no-console': ignore,
     'no-underscore-dangle': ignore,
+    'import/no-unresolved': ignore,
+    'import/no-extraneous-dependencies': ignore,
   },
   settings: {
     'import/resolver': {

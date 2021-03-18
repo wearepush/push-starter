@@ -1,17 +1,17 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
-$SignInForm: 'SignInForm';
+$sign-in-form: 'sign-in-form';
 
-.#{$SignInForm} {
+.#{$sign-in-form} {
   position: relative;
 
   &__container {
-    box-shadow: 0 0 1px 0 rgba(10,31,68,0.10), 0 18px 18px 0 rgba(10,31,68,0.12);
+    box-shadow: 0 0 1px 0 rgba(10, 31, 68, 0.1), 0 18px 18px 0 rgba(10, 31, 68, 0.12);
     padding: 56px 80px 80px;
     margin: 20px auto;
     max-width: 464px;
-    width: 100%
+    width: 100%;
   }
 
   &__header {
@@ -22,11 +22,11 @@ $SignInForm: 'SignInForm';
   &__ttl {
     font-size: 24px;
     line-height: 32px;
-    letter-spacing: .5px;
-    margin: 0 0 .4em;
+    letter-spacing: 0.5px;
+    margin: 0 0 0.4em;
   }
 
-  &__account_text {
+  &__account-text {
     font-size: 13px;
     line-height: 16px;
     padding: 0 15px 0 0;
@@ -37,13 +37,12 @@ $SignInForm: 'SignInForm';
   }
 
   &__form {
-
-    &_item {
+    &-item {
       margin-bottom: 1.7em;
     }
   }
 
-  &__btn_login {
+  &__btn-login {
     display: inline-block;
     vertical-align: middle;
   }

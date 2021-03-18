@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Footer.scss';
+import './footer.scss';
 
 const Footer = () => (
-  <div className={styles.Footer}>
-    <div className={styles.Footer__container}>Footer</div>
+  <div className="footer">
+    <div className="footer__container">Footer</div>
   </div>
 );
 

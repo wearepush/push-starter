@@ -3,9 +3,8 @@ import { reduxForm, SubmissionError, Form } from 'redux-form';
 import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { FormTextField, Button } from 'push-ui';
-
 import validate from './validate';
-import styles from './SignInForm.scss';
+import './sign_in_form.scss';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -42,21 +41,21 @@ class SignInForm extends PureComponent {
   render() {
     const { handleSubmit, error } = this.props;
     return (
-      <div className={styles.SignInForm}>
-        <div className={styles.SignInForm__container}>
-          <div className={styles.SignInForm__header}>
-            <h1 className={styles.SignInForm__ttl}>Login into your account</h1>
+      <div className="sign-in-form">
+        <div className="sign-in-form__container">
+          <div className="sign-in-form__header">
+            <h1 className="sign-in-form__ttl">Login into your account</h1>
           </div>
-          <Form onSubmit={handleSubmit(this.onSubmit)} className={styles.SignInForm__form}>
-            <div className={styles.SignInForm__form_item}>
+          <Form onSubmit={handleSubmit(this.onSubmit)} className="sign-in-form__form">
+            <div className="sign-in-form__form-item">
               <FormTextField name="email" type="email" placeholder="Your Email" size="md" />
             </div>
-            <div className={styles.SignInForm__form_item}>
+            <div className="sign-in-form__form-item">
               <FormTextField name="password" type="password" placeholder="Type your password" size="md" />
             </div>
             {error && <div>{error}</div>}
-            <div className={styles.SignInForm__footer}>
-              <div className={styles.SignInForm__btn_login}>
+            <div className="sign-in-form__footer">
+              <div className="sign-in-form__btn-login">
                 <Button type="submit" float>
                   Login
                 </Button>

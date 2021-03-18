@@ -1,26 +1,20 @@
 /* eslint-disable */
 
-export function executionEnvironment() {
-  const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-  return {
-    canUseDOM,
-    canUseWorkers: typeof Worker !== 'undefined',
-    canUseEventListeners:
-    canUseDOM && !!(window.addEventListener || window.attachEvent),
-    canUseViewport: canUseDOM && !!window.screen
-  };
+export function isServer() {
+  return typeof window === 'undefined';
 }
 
 export function loadImages(arr) {
-  if (!executionEnvironment().canUseDOM) return Promise.reject(Error('no server rendering for new Image'));
+  if (isServer()) {
+    return Promise.reject(Error('no server rendering for new Image'));
+  }
 
-  const createImg = path => {
+  const createImg = (path) => {
     const img = new Image();
     img.src = path;
     img.alt = 'img';
 
-    return new Promise(res => {
+    return new Promise((res) => {
       if (img.naturalWidth) res(img);
 
       img.onload = () => res(img);
@@ -28,7 +22,7 @@ export function loadImages(arr) {
     });
   };
 
-  return Promise.all(arr.map(c => createImg(c)));
+  return Promise.all(arr.map((c) => createImg(c)));
 }
 
 /**
@@ -59,7 +53,6 @@ export function getIn(obj = {}, path, separator = '.') {
   return resultData;
 }
 
-
 /**
  * Debouncing enforces that a function not be called again until a certain amount
  * of time has passed without it being called. As in "execute this function only
@@ -72,7 +65,7 @@ export function getIn(obj = {}, path, separator = '.') {
 export function debounce(f, ms) {
   let timer = null;
 
-  return function(...args) {
+  return function (...args) {
     const onComplete = () => {
       f.apply(this, args);
       timer = null;
@@ -92,7 +85,9 @@ export function debounce(f, ms) {
  * https://learn.javascript.ru/task/throttle
  */
 export function throttle(func, ms) {
-  var isThrottled = false, savedArgs, savedThis;
+  var isThrottled = false,
+    savedArgs,
+    savedThis;
 
   function wrapper() {
     if (isThrottled) {
@@ -105,7 +100,7 @@ export function throttle(func, ms) {
 
     isThrottled = true;
 
-    setTimeout(function() {
+    setTimeout(function () {
       isThrottled = false;
       if (savedArgs) {
         wrapper.apply(savedThis, savedArgs);
@@ -114,7 +109,7 @@ export function throttle(func, ms) {
     }, ms);
   }
 
-  wrapper.immediateStop = function() {
+  wrapper.immediateStop = function () {
     savedArgs = savedThis = null;
   };
 

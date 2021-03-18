@@ -1,9 +1,9 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-$Header: 'Header';
+$header: 'header';
 
-.#{$Header} {
+.#{$header} {
   padding: 16px;
   position: fixed;
   top: 0;
