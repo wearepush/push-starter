@@ -12,6 +12,10 @@ const Html = ({ assets, component, store }) => {
     '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
   const content = component ? renderToString(component) : null;
   const { helmet } = helmetContext;
+  const jsMap = assets?.javascript;
+  const jsList = Object.keys(jsMap);
+  const cssMap = assets?.styles;
+  const cssList = Object.keys(cssMap);
   return (
     <html lang="en">
       <head>
@@ -72,26 +76,28 @@ const Html = ({ assets, component, store }) => {
         <meta property="twitter:title" content="" />
         <meta property="twitter:description" content="" />
         */}
-        {/* styles (will be present only in production with webpack extract text plugin) */}
-        {config.isProd &&
-          assets.styles &&
-          Object.keys(assets.styles).map((c) => (
-            <link href={assets.styles[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
-          ))}
-        {/* styles will be preloaded */}
-        {config.isProd &&
-          assets.styles &&
-          Object.keys(assets.styles).map((c) => <link rel="preload" href={assets.styles[c]} key={c} as="style" />)}
-        {config.isProd && <link rel="preload" href={assets.javascript.vendor} as="script" />}
-        {config.isProd && <link rel="preload" href={assets.javascript.main} as="script" />}
+        {config?.isProd && (
+          <>
+            {cssList?.map((c) => (
+              <link rel="preload" href={cssMap[c]} key={c} as="style" />
+            ))}
+            {jsList?.map((c) => (
+              <link rel="preload" href={jsMap[c]} key={c} as="script" />
+            ))}
+          </>
+        )}
+        {cssList?.map((c) => (
+          <link href={cssMap[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
+        ))}
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />
         <div id="root" dangerouslySetInnerHTML={{ __html: content }} style={{ height: '100%' }} />
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
-        {config.isProd && <script defer src={assets.javascript.vendor} />}
-        <script defer src={assets.javascript.main} />
+        {jsList?.map((c) => (
+          <script defer src={jsMap[c]} key={c} />
+        ))}
       </body>
     </html>
   );

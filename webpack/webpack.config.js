@@ -1,19 +1,47 @@
+/* eslint-disable no-nested-ternary */
 import path from 'path';
 import webpack from 'webpack';
 import '../src/server/env';
 import paths from './paths';
+import { shouldUseSourceMap, isEnvDevelopment, isEnvProduction } from './consts';
 
 const rootFolder = path.resolve(__dirname, '..');
 const cdnHost = process.env.CDNHOST || '';
 
+let urlLoaderOptions = {
+  limit: 10000,
+};
+let fileLoaderOptions;
+
+if (cdnHost) {
+  const publicPath = `${cdnHost}/assets/`;
+  urlLoaderOptions = {
+    limit: 1,
+    publicPath,
+  };
+
+  fileLoaderOptions = {
+    publicPath,
+  };
+}
+
 const config = {
+  mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
+  // Stop compilation early in production
+  bail: isEnvProduction,
+  devtool: isEnvProduction
+    ? shouldUseSourceMap
+      ? 'source-map'
+      : false
+    : isEnvDevelopment && 'cheap-module-source-map',
+
   context: rootFolder,
 
   entry: {
     main: './src/client',
   },
 
-  mode: process.env.NODE_ENV || 'development',
+  performance: false,
 
   output: {
     path: path.resolve(rootFolder, 'static/assets'),
@@ -76,6 +104,24 @@ const config = {
           },
         ],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: urlLoaderOptions,
+          },
+        ],
+      },
+      {
+        test: /\.(eot|ttf|wav|mp3)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: fileLoaderOptions,
+          },
+        ],
+      },
     ],
   },
 
@@ -96,55 +142,5 @@ const config = {
     },
   },
 };
-
-if (cdnHost) {
-  const publicPath = `${cdnHost}/assets/`;
-
-  config.module.rules.push({
-    test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-    use: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 1,
-          publicPath,
-        },
-      },
-    ],
-  });
-
-  config.module.rules.push({
-    test: /\.(eot|ttf|wav|mp3)$/,
-    use: [
-      {
-        loader: 'file-loader',
-        options: {
-          publicPath,
-        },
-      },
-    ],
-  });
-} else {
-  config.module.rules.push({
-    test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-    use: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-        },
-      },
-    ],
-  });
-
-  config.module.rules.push({
-    test: /\.(eot|ttf|wav|mp3)$/,
-    use: [
-      {
-        loader: 'file-loader',
-      },
-    ],
-  });
-}
 
 export default config;
