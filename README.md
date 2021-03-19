@@ -2,8 +2,6 @@
 React boilerplate, used best practices and focus on performance
 
 [![Build Status](https://travis-ci.org/wearepush/push-starter.svg?branch=master&style=flat-square)](https://travis-ci.org/wearepush/push-starter)
-[![Dependency Status](https://david-dm.org/wearepush/push-starter.svg?style=flat-square)](https://david-dm.org/wearepush/push-starter)
-[![devDependency Status](https://david-dm.org/wearepush/push-starter/dev-status.svg?style=flat-square)](https://david-dm.org/wearepush/push-starter?type=dev)
 ---
 
 ---
