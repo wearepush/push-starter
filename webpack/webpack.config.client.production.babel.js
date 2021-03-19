@@ -13,8 +13,6 @@ const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: 
 const cdnHost = process.env.CDN_HOST || '';
 
 const config = {
-  devtool: false,
-
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',

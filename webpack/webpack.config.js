@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import path from 'path';
 import webpack from 'webpack';
 import '../src/server/env';
 import paths from './paths';
+import { shouldUseSourceMap, isEnvDevelopment, isEnvProduction } from './consts';
 
 const rootFolder = path.resolve(__dirname, '..');
 const cdnHost = process.env.CDNHOST || '';
@@ -24,13 +26,22 @@ if (cdnHost) {
 }
 
 const config = {
+  mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
+  // Stop compilation early in production
+  bail: isEnvProduction,
+  devtool: isEnvProduction
+    ? shouldUseSourceMap
+      ? 'source-map'
+      : false
+    : isEnvDevelopment && 'cheap-module-source-map',
+
   context: rootFolder,
 
   entry: {
     main: './src/client',
   },
 
-  mode: process.env.NODE_ENV || 'development',
+  performance: false,
 
   output: {
     path: path.resolve(rootFolder, 'static/assets'),

@@ -10,14 +10,10 @@ const baseConfig = getBaseConfig({
 });
 
 const config = {
-  devtool: 'eval',
-
   watchOptions: {
     aggregateTimeout: 500,
     ignored: ['node_modules', '__mocks__', '__test__'],
   },
-
-  performance: { hints: false },
 
   entry: {
     main: [
