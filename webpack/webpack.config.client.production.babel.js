@@ -8,7 +8,7 @@ import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import WebpackBundleAnalyzer from 'webpack-bundle-analyzer';
 import getBaseConfig from './webpack.config.client';
 
-const BundleAnalyzerPlugin = WebpackBundleAnalyzer.BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = WebpackBundleAnalyzer;
 const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: true });
 const cdnHost = process.env.CDN_HOST || '';
 
@@ -18,10 +18,14 @@ const config = {
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
-    publicPath: cdnHost + '/assets/',
+    publicPath: `${cdnHost}/assets/`,
   },
 
   optimization: {
+    chunkIds: 'total-size',
+    moduleIds: 'size',
+
+    // Automatically split vendor and commons
     splitChunks: {
       cacheGroups: {
         node_modules: {
@@ -30,6 +34,12 @@ const config = {
           chunks: 'all',
         },
       },
+    },
+    // Keep the runtime chunk separated to enable long term caching
+    // https://twitter.com/wSokra/status/969679223278505985
+    // https://github.com/facebook/create-react-app/issues/5358
+    runtimeChunk: {
+      name: (entrypoint) => `runtime-${entrypoint.name}`,
     },
   },
 
@@ -44,7 +54,7 @@ const config = {
 
     new webpack.optimize.SplitChunksPlugin({
       names: ['vendor'],
-      minChunks: Infinity
+      minChunks: Infinity,
     }),
 
     new CleanWebpackPlugin({

@@ -10,12 +10,11 @@ const baseConfig = getBaseConfig({
 });
 
 const config = {
-
   devtool: 'eval',
 
   watchOptions: {
     aggregateTimeout: 500,
-    ignored: ["node_modules", "__mocks__", "__test__"]
+    ignored: ['node_modules', '__mocks__', '__test__'],
   },
 
   performance: { hints: false },
@@ -24,12 +23,17 @@ const config = {
     main: [
       `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
       'react-hot-loader/patch',
-      baseConfig.entry.main
-    ]
+      baseConfig.entry.main,
+    ],
   },
 
   output: {
-    publicPath: `${host}:${port}${baseConfig.output.publicPath}`
+    publicPath: `${host}:${port}${baseConfig.output.publicPath}`,
+  },
+
+  optimization: {
+    moduleIds: 'named',
+    chunkIds: 'total-size',
   },
 
   module: {
@@ -37,9 +41,9 @@ const config = {
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
-    ]
+        loader: 'babel-loader',
+      },
+    ],
   },
 
   plugins: [
@@ -48,19 +52,19 @@ const config = {
       path: '.env',
       systemvars: true,
       safe: true,
-      silent: true
+      silent: true,
     }),
     new webpack.DefinePlugin({
       __CLIENT__: true,
-      __SERVER__: false
-    })
+      __SERVER__: false,
+    }),
   ],
 
   resolve: {
     alias: {
-      "react-dom": "@hot-loader/react-dom",
-    }
-  }
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
 };
 
 export default merge(baseConfig, config);
