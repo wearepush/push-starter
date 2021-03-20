@@ -23,9 +23,9 @@ export default function (parameters) { // eslint-disable-line
 
   app.use(cookieParser());
 
-  app.use('/', express.static('static', { etag: false }));
+  app.use('/', express.static('public', { etag: false }));
 
-  app.use(favicon(path.join('static', 'favicons', 'favicon.ico')));
+  app.use(favicon(path.join('public', 'favicons', 'favicon.ico')));
 
   app.use((req, res, next) => {
     res.set('X-Frame-Options', 'DENY');

@@ -20,7 +20,7 @@ yarn.lock
 
 # Dist
 build/
-static/assets
+public/assets
 
 # Webpack
 webpack-assets.json

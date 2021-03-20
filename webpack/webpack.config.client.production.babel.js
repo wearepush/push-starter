@@ -10,15 +10,8 @@ import getBaseConfig from './webpack.config.client';
 
 const { BundleAnalyzerPlugin } = WebpackBundleAnalyzer;
 const baseConfig = getBaseConfig({ development: false, useMiniCssExtractPlugin: true });
-const cdnHost = process.env.CDN_HOST || '';
 
 const config = {
-  output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
-    publicPath: `${cdnHost}/assets/`,
-  },
-
   optimization: {
     chunkIds: 'total-size',
     moduleIds: 'size',

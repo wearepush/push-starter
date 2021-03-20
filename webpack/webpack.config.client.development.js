@@ -15,14 +15,6 @@ const config = {
     ignored: ['node_modules', '__mocks__', '__test__'],
   },
 
-  entry: {
-    main: [
-      `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
-      'react-hot-loader/patch',
-      baseConfig.entry.main,
-    ],
-  },
-
   output: {
     publicPath: `${host}:${port}${baseConfig.output.publicPath}`,
   },
@@ -55,12 +47,6 @@ const config = {
       __SERVER__: false,
     }),
   ],
-
-  resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
-  },
 };
 
 export default merge(baseConfig, config);
