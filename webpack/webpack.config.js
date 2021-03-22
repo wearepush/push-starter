@@ -131,7 +131,6 @@ const config = {
     extensions: ['*', '.js'],
     modules: ['src', 'node_modules', paths.appNodeModules, paths.packageModules],
     alias: {
-      react: path.resolve('node_modules/react'),
       components: path.resolve('src/components'),
       elements: path.resolve('src/elements'),
       config: path.resolve('src/config'),
