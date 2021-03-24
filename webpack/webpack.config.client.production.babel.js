@@ -1,4 +1,3 @@
-import Dotenv from 'dotenv-webpack';
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
@@ -55,16 +54,6 @@ const config = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
-    }),
-
-    new Dotenv({
-      systemvars: true,
-      path: '.env.production',
-    }),
-
-    new webpack.DefinePlugin({
-      __CLIENT__: true,
-      __SERVER__: false,
     }),
 
     new webpack.IgnorePlugin(/redbox-react|react-hot-loader/),

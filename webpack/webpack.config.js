@@ -9,12 +9,13 @@ import modules from './modules';
 import getClientEnvironment from './env';
 import { shouldUseSourceMap, isEnvDevelopment, isEnvProduction } from './consts';
 
-const rootFolder = path.resolve(__dirname, '..');
-const publicPath = paths.publicUrlOrPath + 'assets/';
 const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+
+const rootFolder = path.resolve(__dirname, '..');
+const publicPath = paths.publicUrlOrPath + 'assets/';
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+const env = getClientEnvironment({ isClient: true, publicUrl: paths.publicUrlOrPath.slice(0, -1) });
 const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
 const config = {
@@ -128,20 +129,13 @@ const config = {
     ],
   },
 
-  plugins: [new webpack.NoEmitOnErrorsPlugin()],
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin(env.stringified),
+  ],
 
   resolve: {
-    // This allows you to set a fallback for where webpack should look for modules.
-    // We placed these paths second because we want `node_modules` to "win"
-    // if there are any conflicts. This matches Node resolution mechanism.
-    // https://github.com/facebook/create-react-app/issues/253
     modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
-    // These are the reasonable defaults supported by the Node ecosystem.
-    // We also include JSX as a common component filename extension to support
-    // some tools, although we do not recommend using it, see:
-    // https://github.com/facebook/create-react-app/issues/290
-    // `web` extension prefixes have been added for better support
-    // for React Native Web.
     extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`).filter((ext) => !ext.includes('ts')),
     alias: {
       // Allows for better profiling with ReactDevTools

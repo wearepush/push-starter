@@ -8,11 +8,10 @@ export default function configureStore(history, client, initialState = {}) {
     history,
   });
   const middlewares = [createMiddleware(client), routerMiddleware(history)];
-
   const composeEnhancers =
     (global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-      process.env.REDUX_DEVTOOLS &&
-      process.env.REDUX_DEVTOOLS === 'true' &&
+      process.env.REACT_APP_REDUX_DEVTOOLS &&
+      process.env.REACT_APP_REDUX_DEVTOOLS === 'true' &&
       global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
       })) ||

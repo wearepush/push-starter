@@ -1,9 +1,16 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
-import Dotenv from 'dotenv-webpack';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import getClientEnvironment from './env';
 import getBaseConfig from './webpack.config.client';
+import paths from './paths';
 import appConfig from '../src/config';
 
+const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
+const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+
+const env = getClientEnvironment({ isClient: true, publicUrl: paths.publicUrlOrPath.slice(0, -1) });
+const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 const { host, port } = appConfig.webpack.server;
 const baseConfig = getBaseConfig({
   development: true,
@@ -36,16 +43,14 @@ const config = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new Dotenv({
-      path: '.env',
-      systemvars: true,
-      safe: true,
-      silent: true,
-    }),
-    new webpack.DefinePlugin({
-      __CLIENT__: true,
-      __SERVER__: false,
-    }),
+    shouldUseReactRefresh &&
+      new ReactRefreshWebpackPlugin({
+        overlay: {
+          entry: webpackDevClientEntry,
+          module: reactRefreshOverlayEntry,
+          sockIntegration: false,
+        },
+      }),
   ],
 };
 
