@@ -16,7 +16,6 @@ const apiHost =
 const ssr = !isUndefined(process.env.SSR) && +process.env.SSR === 1;
 export const googleAnaliticsId = process.env.GOOGLE_ANALITICS_ID !== 'undefined' ? process.env.GOOGLE_ANALITICS_ID : '';
 export const testHost = `http${process.env.TESTHOST}`;
-export const cdnHost = !isUndefined(process.env.CDNHOST) ? process.env.CDNHOST : '';
 
 export default {
   env,
@@ -30,7 +29,6 @@ export default {
   ssr,
   googleAnaliticsId,
   testHost,
-  cdnHost,
 
   server: {
     ssl,

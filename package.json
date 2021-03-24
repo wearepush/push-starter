@@ -26,7 +26,7 @@
     "dev:server:build": "UNIVERSAL_WEBPACK_CSS_LOADER_V4=true webpack --config ./webpack/webpack.config.server.development.babel.js --watch --color",
     "dev:server:delay": "run-s delay dev:server:start",
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
-    "dev:server:start": "nodemon ./src/server/start.babel.js --watch ./static --watch ./src/server",
+    "dev:server:start": "nodemon ./src/server/start.babel.js --watch public --watch src/server",
     "heroku-postbuild": "run-p prod:build",
     "lint:fix": "cross-env NODE_ENV=production eslint --config .eslintrc.js src --ignore-pattern !.eslintrc.js --fix",
     "lint:js": "cross-env NODE_ENV=production eslint --config .eslintrc.js src --ignore-pattern !.eslintrc.js",
@@ -173,6 +173,6 @@
     "webpack-merge": "^5.7.3"
   },
   "engines": {
-    "node": "^14.16.0"
+    "node": "^14.0.0"
   }
 }

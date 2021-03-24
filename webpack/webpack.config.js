@@ -10,25 +10,7 @@ import getClientEnvironment from './env';
 import { shouldUseSourceMap, isEnvDevelopment, isEnvProduction } from './consts';
 
 const rootFolder = path.resolve(__dirname, '..');
-const cdnHost = process.env.CDNHOST || '';
-
-let urlLoaderOptions = {
-  limit: 10000,
-};
-let fileLoaderOptions;
-
-if (cdnHost) {
-  const publicPath = `${cdnHost}/assets/`;
-  urlLoaderOptions = {
-    limit: 1,
-    publicPath,
-  };
-
-  fileLoaderOptions = {
-    publicPath,
-  };
-}
-
+const publicPath = paths.publicUrlOrPath + 'assets/';
 const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
@@ -37,59 +19,27 @@ const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
 const config = {
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
-  // Stop compilation early in production
+
   bail: isEnvProduction,
+
   devtool: isEnvProduction
     ? shouldUseSourceMap
       ? 'source-map'
       : false
     : isEnvDevelopment && 'cheap-module-source-map',
 
-  entry:
-    isEnvDevelopment && !shouldUseReactRefresh
-      ? [
-          // Include an alternative client for WebpackDevServer. A client's job is to
-          // connect to WebpackDevServer by a socket and get notified about changes.
-          // When you save a file, the client will either apply hot updates (in case
-          // of CSS changes), or refresh the page (in case of JS changes). When you
-          // make a syntax error, this client will display a syntax error overlay.
-          // Note: instead of the default WebpackDevServer client, we use a custom one
-          // to bring better experience for Create React App users. You can replace
-          // the line below with these two lines if you prefer the stock client:
-          //
-          // require.resolve('webpack-dev-server/client') + '?/',
-          // require.resolve('webpack/hot/dev-server'),
-          //
-          // When using the experimental react-refresh integration,
-          // the webpack plugin takes care of injecting the dev client for us.
-          webpackDevClientEntry,
-          // Finally, this is your app's code:
-          paths.appIndexJs,
-          // We include the app code last so that if there is a runtime error during
-          // initialization, it doesn't blow up the WebpackDevServer client, and
-          // changing JS code would still trigger a refresh.
-        ]
-      : paths.appIndexJs,
+  entry: isEnvDevelopment && !shouldUseReactRefresh ? [webpackDevClientEntry, paths.appIndexJs] : paths.appIndexJs,
 
   context: rootFolder,
 
   output: {
-    // The build folder.
     path: paths.appPublic,
-    // Add /* filename */ comments to generated require()s in the output.
     pathinfo: isEnvDevelopment,
-    // There will be one main bundle, and one file per asynchronous chunk.
-    // In development, it does not produce real files.
     filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/bundle.js',
-    // There are also additional JS chunk files if you use code splitting.
     chunkFilename: isEnvProduction
       ? 'static/js/[name].[contenthash:8].chunk.js'
       : isEnvDevelopment && 'static/js/[name].chunk.js',
-    // webpack uses `publicPath` to determine where the app is being served from.
-    // It requires a trailing slash, or the file assets will get an incorrect path.
-    // We inferred the "public path" (such as / or /my-project) from homepage.
-    publicPath: paths.publicUrlOrPath + 'assets/',
-    // Point sourcemap entries to original disk location (format as URL on Windows)
+    publicPath,
     devtoolModuleFilenameTemplate: isEnvProduction
       ? (info) => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
       : isEnvDevelopment && ((info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
@@ -155,7 +105,14 @@ const config = {
         use: [
           {
             loader: 'url-loader',
-            options: urlLoaderOptions,
+            options: isEnvProduction
+              ? {
+                  limit: 1,
+                  publicPath,
+                }
+              : {
+                  limit: 10000,
+                },
           },
         ],
       },
@@ -164,7 +121,7 @@ const config = {
         use: [
           {
             loader: 'file-loader',
-            options: fileLoaderOptions,
+            options: isEnvProduction ? { publicPath } : undefined,
           },
         ],
       },
@@ -187,9 +144,6 @@ const config = {
     // for React Native Web.
     extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`).filter((ext) => !ext.includes('ts')),
     alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web',
       // Allows for better profiling with ReactDevTools
       ...(isEnvProductionProfile && {
         'react-dom$': 'react-dom/profiling',
