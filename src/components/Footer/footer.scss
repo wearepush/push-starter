@@ -13,4 +13,18 @@ $footer: 'footer';
     max-width: 1140px;
     width: 100%;
   }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+  }
+
+  &__svg-bg {
+    display: block;
+    width: 14px;
+    height: 18px;
+    margin-left: 20px;
+    background: url('../../assets/icons/arrow_down.svg') no-repeat;
+    background-size: contain;
+  }
 }
