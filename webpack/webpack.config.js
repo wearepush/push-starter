@@ -105,7 +105,7 @@ const config = {
         ],
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        test: /\.(png|jpg|jpeg|gif|woff|woff2)$/,
         use: [
           {
             loader: 'url-loader',
@@ -121,6 +121,19 @@ const config = {
             options: fileLoaderOptions,
           },
         ],
+      },
+      // import SVG as components
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+        issuer: /\.jsx?$/,
+      },
+      // import SVG in (s)css files
+      {
+        test: /\.svg$/,
+        type: 'asset',
+        use: ['svgo-loader'],
+        issuer: /\.s?css$/,
       },
     ],
   },
