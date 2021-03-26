@@ -93,7 +93,7 @@ const Html = ({ assets, component, store }) => {
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />
-        <div id="root" dangerouslySetInnerHTML={{ __html: content }} style={{ height: '100%' }} />
+        <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
         {jsList?.map((c) => (
           <script defer src={jsMap[c]} key={c} />

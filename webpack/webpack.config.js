@@ -2,7 +2,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin';
-import PnpWebpackPlugin from 'pnp-webpack-plugin';
 
 import paths from './paths';
 import modules from './modules';
@@ -11,6 +10,10 @@ import { shouldUseSourceMap, isEnvDevelopment, isEnvProduction } from './consts'
 
 const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime');
+const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
+  '@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils'
+);
 
 const rootFolder = path.resolve(__dirname, '..');
 const publicPath = paths.publicUrlOrPath + 'assets/';
@@ -44,6 +47,7 @@ const config = {
     devtoolModuleFilenameTemplate: isEnvProduction
       ? (info) => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
       : isEnvDevelopment && ((info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
+    // globalObject: 'this',
   },
 
   module: {
@@ -132,6 +136,8 @@ const config = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin(env.stringified),
+
+
   ],
 
   resolve: {
@@ -153,22 +159,17 @@ const config = {
       utils: path.resolve('src/utils'),
     },
     plugins: [
-      // Adds support for installing with Plug'n'Play, leading to faster installs and adding
-      // guards against forgotten dependencies and such.
-      PnpWebpackPlugin,
       // Prevents users from importing files from outside of src/ (or node_modules/).
       // This often causes confusion because we only process files within src/ with babel.
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson, reactRefreshOverlayEntry]),
-    ],
-  },
-  resolveLoader: {
-    plugins: [
-      // Also related to Plug'n'Play, but this time it tells webpack to load its loaders
-      // from the current package.
-      PnpWebpackPlugin.moduleLoader(module),
+      new ModuleScopePlugin(paths.appSrc, [
+        paths.appPackageJson,
+        reactRefreshRuntimeEntry,
+        reactRefreshWebpackPluginRuntimeEntry,
+        reactRefreshOverlayEntry,
+      ]),
     ],
   },
   performance: false,

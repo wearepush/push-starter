@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import { createBrowserHistory as createHistory } from 'history';
 
 import Root from './root';
@@ -22,7 +22,7 @@ if (config.env === 'development') {
   const RedBox = require('redbox-react').default;
   const { AppContainer } = require('react-hot-loader');
   renderApp = (renderProps) =>
-    hydrate(
+    render(
       <AppContainer errorReporter={RedBox}>
         <Root {...renderProps} />
       </AppContainer>,

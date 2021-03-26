@@ -47,11 +47,17 @@ const config = {
       new ReactRefreshWebpackPlugin({
         overlay: {
           entry: webpackDevClientEntry,
+          // The expected exports are slightly different from what the overlay exports,
+          // so an interop is included here to enable feedback on module-level errors.
           module: reactRefreshOverlayEntry,
+          // Since we ship a custom dev client and overlay integration,
+          // the bundled socket handling logic can be eliminated.
           sockIntegration: false,
         },
       }),
   ],
 };
+
+console.log(merge(baseConfig, config).plugins);
 
 export default merge(baseConfig, config);
