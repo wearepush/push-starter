@@ -9,7 +9,7 @@ COPY package.json package-lock.json ./
 
 # Install (local) NPM packages/dependencies
 RUN npm install
-RUN npm run prod:build
+RUN npm run production:build
 
 # Copy required stuff
 COPY . .

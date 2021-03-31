@@ -58,6 +58,4 @@ const config = {
   ],
 };
 
-console.log(merge(baseConfig, config).plugins);
-
 export default merge(baseConfig, config);
