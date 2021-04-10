@@ -4,17 +4,18 @@ const webpack = require('webpack');
 import { clientConfiguration } from 'universal-webpack';
 import settings from './universal-webpack-settings';
 import baseConfiguration from './webpack.config';
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 import { devServerConfig, setDevFileServer } from './devserver';
-const { shouldUseReactRefresh } = require('./consts');
+import { shouldUseReactRefresh } from './consts';
 
 let configuration = clientConfiguration(baseConfiguration, settings);
 
 // Fetch all files from webpack development server.
+
 configuration = setDevFileServer(configuration);
 
 // Run `webpack serve`.
@@ -33,6 +34,11 @@ configuration.plugins = [
   // Experimental hot reloading for React .
   // https://github.com/facebook/react/tree/master/packages/react-refresh
 
+  // Watcher doesn't work well if you mistype casing in a path so we use
+  // a plugin that prints an error when you attempt to do this.
+  // See https://github.com/facebook/create-react-app/issues/240
+  new CaseSensitivePathsPlugin(),
+
   shouldUseReactRefresh &&
     new ReactRefreshWebpackPlugin({
       overlay: {
@@ -45,11 +51,6 @@ configuration.plugins = [
         sockIntegration: false,
       },
     }),
-
-  // Watcher doesn't work well if you mistype casing in a path so we use
-  // a plugin that prints an error when you attempt to do this.
-  // See https://github.com/facebook/create-react-app/issues/240
-  new CaseSensitivePathsPlugin(),
-];
+].filter(Boolean);
 
 export default configuration;

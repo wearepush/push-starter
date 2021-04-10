@@ -3,7 +3,7 @@ import React from 'react';
 import { object, node } from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
-import config from '../../config';
+// import config from '../../config';
 import { helmetContext } from './createSSR';
 
 const Html = ({ assets, component, store }) => {
@@ -76,7 +76,7 @@ const Html = ({ assets, component, store }) => {
         <meta property="twitter:title" content="" />
         <meta property="twitter:description" content="" />
         */}
-        {config?.isProd && (
+        {/* {config?.isProd && (
           <>
             {cssList?.map((c) => (
               <link rel="preload" href={cssMap[c]} key={c} as="style" />
@@ -85,7 +85,7 @@ const Html = ({ assets, component, store }) => {
               <link rel="preload" href={jsMap[c]} key={c} as="script" />
             ))}
           </>
-        )}
+        )} */}
         {cssList?.map((c) => (
           <link href={cssMap[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
         ))}

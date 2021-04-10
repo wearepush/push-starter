@@ -1,11 +1,11 @@
 import axios from 'axios';
-import config from '../config';
+// import config from '../config';
 
-if (config.env === 'test') {
-  const httpAdapter = require('axios/lib/adapters/http');
-  axios.defaults.host = config.testHost;
-  axios.defaults.adapter = httpAdapter; // eslint-disable-line
-}
+// if (config.env === 'test') {
+//   const httpAdapter = require('axios/lib/adapters/http');
+//   axios.defaults.host = config.testHost;
+//   axios.defaults.adapter = httpAdapter; // eslint-disable-line
+// }
 
 const methods = ['get', 'post', 'put', 'patch', 'delete'];
 function formatUrl(path, directUrl = false) {
@@ -14,7 +14,8 @@ function formatUrl(path, directUrl = false) {
   if (path.indexOf('http') === 0) {
     return path;
   }
-  return config.apiHost + adjustedPath;
+  return adjustedPath;
+  // return config.apiHost + adjustedPath;
 }
 
 class _ApiClient {

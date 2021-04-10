@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const { publicPath, isEnvDevelopment, isEnvProduction, imageInlineSizeLimit } = require('./consts');
+const { publicPath, isEnvDevelopment, isEnvProduction, imageInlineSizeLimit, shouldUseSourceMap } = require('./consts');
 const paths = require('./paths');
 
 // style files regexes
@@ -107,6 +107,7 @@ module.exports = {
         },
       },
     },
+
     // Process application JS with Babel.
     // The preset includes JSX, Flow, TypeScript, and some ESnext features.
     {

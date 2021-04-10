@@ -1,11 +1,12 @@
-require('./env');
+require('../../config/env');
 
 if (process.env.NEWRELIC_NAME && process.env.NEWRELIC_KEY) {
   require('newrelic');
 }
 
-require('@babel/register')({
-  ignore: [/\/(build|node_modules)\//],
-});
+// ES6 polyfill.
 require('core-js/stable');
-require('./start.js');
+// `async/await` support.
+require('regenerator-runtime/runtime');
+
+require('./start');

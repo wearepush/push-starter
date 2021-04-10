@@ -2,16 +2,14 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
-const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const createEnvironmentHash = require('./createEnvironmentHash');
 const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime');
 const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
   '@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils'
 );
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
-const createEnvironmentHash = require('./createEnvironmentHash');
-
+const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
 const paths = require('./paths');
 const modules = require('./modules');
 const webpackModule = require('./webpack.module');
@@ -21,10 +19,11 @@ const {
   isEnvDevelopment,
   isEnvProduction,
   isEnvProductionProfile,
+  shouldUseSourceMap,
   shouldUseReactRefresh,
 } = require('./consts');
 
-const config = {
+module.exports = {
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
   bail: isEnvProduction,
@@ -39,21 +38,6 @@ const config = {
   entry:
     isEnvDevelopment && !shouldUseReactRefresh
       ? [
-          // Include an alternative client for WebpackDevServer. A client's job is to
-          // connect to WebpackDevServer by a socket and get notified about changes.
-          // When you save a file, the client will either apply hot updates (in case
-          // of CSS changes), or refresh the page (in case of JS changes). When you
-          // make a syntax error, this client will display a syntax error overlay.
-          // Note: instead of the default WebpackDevServer client, we use a custom one
-          // to bring better experience for Create React App users. You can replace
-          // the line below with these two lines if you prefer the stock client:
-          //
-          // require.resolve('webpack-dev-server/client') + '?/',
-          // require.resolve('webpack/hot/dev-server'),
-          //
-          // When using the experimental react-refresh integration,
-          // the webpack plugin takes care of injecting the dev client for us.
-          webpackDevClientEntry,
           // Finally, this is your app's code:
           paths.appIndexJs,
           // We include the app code last so that if there is a runtime error during
@@ -129,9 +113,6 @@ const config = {
         reactRefreshWebpackPluginRuntimeEntry,
         reactRefreshOverlayEntry,
       ]),
-
-      // This is necessary to emit hot updates (CSS and Fast Refresh):
-      // isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
     ],
   },
 
@@ -161,5 +142,3 @@ const config = {
   // our own hints via the FileSizeReporter
   performance: false,
 };
-
-export default config;

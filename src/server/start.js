@@ -1,11 +1,11 @@
-import { server } from 'universal-webpack';
-import settings from '../../config/universal-webpack-settings.json';
-import config from '../../config/webpack.config';
+// Not using ES6 `import` syntax here
+// to avoid `require()`ing `@babel/register`
+// which would parse the whole server-side bundle by default.
 
-/**
- * Define isomorphic constants.
- */
-global.__CLIENT__ = false;
-global.__SERVER__ = true;
+require('source-map-support/register');
 
-server(config, settings);
+const startServer = require('universal-webpack/server');
+const settings = require('../../config/universal-webpack-settings');
+const configuration = require('../../config/webpack.config');
+
+startServer(configuration, settings);

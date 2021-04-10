@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import GoogleAnalytics from 'react-ga';
-import { googleAnaliticsId } from '../config/default';
+// import { googleAnaliticsId } from '../config/default';
+
+let googleAnaliticsId;
 
 if (googleAnaliticsId) {
   GoogleAnalytics.initialize(googleAnaliticsId);

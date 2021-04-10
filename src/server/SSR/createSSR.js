@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -10,7 +11,7 @@ import getRoutes from '../../routes/routes';
 import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../redux/store';
-import config from '../../config';
+// import config from '../../config';
 
 export const helmetContext = {};
 
@@ -28,10 +29,10 @@ export default function createSSR(assets) {
       res.send(`<!doctype html>\n${renderToString(<Html assets={assets} store={store} />)}`);
     };
 
-    if (!config.ssr) {
-      hydrateOnClient();
-      return;
-    }
+    // if (!config.ssr) {
+    //   hydrateOnClient();
+    //   return;
+    // }
 
     if (context.status === 302) {
       res.redirect(302, context.url);

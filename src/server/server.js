@@ -1,3 +1,4 @@
+/* eslint-disable */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
@@ -6,18 +7,22 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 import cookieParser from 'cookie-parser';
 
-import './env';
+import './../../config/env';
 import createSSR from './SSR/createSSR';
-import config from '../config';
+// import config from '../config';
 
-const { host, port } = config.server;
-const { logLevel } = config;
+// const { host, port } = config.server;
+// const { logLevel } = config;
+const host = 'localhost';
+const port = 8080;
 const app = express();
 
-export default function (parameters) { // eslint-disable-line
-  if (config.isProd) {
-    app.use(compression());
-  }
+export default function (parameters) {
+
+  // eslint-disable-line
+  // if (config.isProd) {
+  //   app.use(compression());
+  // }
   app.disable('etag');
   app.disable('x-powered-by');
 
@@ -32,17 +37,17 @@ export default function (parameters) { // eslint-disable-line
     next();
   });
 
-  app.use((req, res, next) => {
-    if (config.ssl) {
-      if (req.headers['x-forwarded-proto'] !== 'https') {
-        res.redirect(302, `https://${req.hostname}${req.originalUrl}`);
-      } else {
-        next();
-      }
-    } else {
-      next();
-    }
-  });
+  // app.use((req, res, next) => {
+  //   if (config.ssl) {
+  //     if (req.headers['x-forwarded-proto'] !== 'https') {
+  //       res.redirect(302, `https://${req.hostname}${req.originalUrl}`);
+  //     } else {
+  //       next();
+  //     }
+  //   } else {
+  //     next();
+  //   }
+  // });
 
   app.get('/api/users', (req, res) => {
     res.json({
@@ -53,22 +58,23 @@ export default function (parameters) { // eslint-disable-line
     });
   });
 
-  if (logLevel) {
-    const loggerOptions = {
-      level: logLevel,
-      transports: [
-        new winston.transports.Console({
-          json: true,
-          colorize: true,
-        }),
-      ],
-    };
-    app.use(expressWinston.logger(loggerOptions));
-  }
+  // if (logLevel) {
+  //   const loggerOptions = {
+  //     level: logLevel,
+  //     transports: [
+  //       new winston.transports.Console({
+  //         json: true,
+  //         colorize: true,
+  //       }),
+  //     ],
+  //   };
+  //   app.use(expressWinston.logger(loggerOptions));
+  // }
 
   app.get('*', createSSR(parameters && parameters.chunks()));
 
-  const server = app.listen(port, (err) => { // eslint-disable-line
+  const server = app.listen(port, (err) => {
+    // eslint-disable-line
     if (err) {
       return console.error(err);
     }
