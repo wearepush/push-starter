@@ -4,7 +4,7 @@ import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { FormTextField, Button } from 'push-ui';
 import validate from './validate';
-// import './sign_in_form.scss';
+import './sign_in_form.scss';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

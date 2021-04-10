@@ -3,7 +3,7 @@ import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';
 import { Header, Footer } from '../index';
 import withDevice from './withDevice';
-// import './app.scss';
+import './app.scss';
 
 export const App = ({ route: { routes } }) => (
   <div className="app">

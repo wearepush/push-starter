@@ -4,7 +4,6 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const resolve = require('resolve');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
@@ -23,7 +22,7 @@ const getClientEnvironment = require('./env');
 const rootFolder = path.resolve(__dirname, '..');
 const publicPath = paths.publicUrlOrPath + 'assets/';
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+const env = getClientEnvironment(publicPath.slice(0, -1));
 const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
 const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000');
@@ -36,6 +35,7 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+
 const isEnvDevelopment = env.raw.NODE_ENV === 'development';
 const isEnvProduction = env.raw.NODE_ENV === 'production';
 
@@ -55,22 +55,22 @@ const hasJsxRuntime = (() => {
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
   const loaders = [
-    isEnvDevelopment && require.resolve('style-loader'),
+    isEnvDevelopment && 'style-loader',
     isEnvProduction && {
       loader: MiniCssExtractPlugin.loader,
       // css is located in `static/css`, use '../../' to locate index.html folder
-      // in production `paths.publicUrlOrPath` can be a relative path
-      options: paths.publicUrlOrPath.startsWith('.') ? { publicPath: '../../' } : {},
+      // in production `publicPath` can be a relative path
+      options: publicPath.startsWith('.') ? { publicPath: '../../' } : {},
     },
     {
-      loader: require.resolve('css-loader'),
+      loader: 'css-loader',
       options: cssOptions,
     },
     {
       // Options for PostCSS as we reference these options twice
       // Adds vendor prefixing based on your specified browser support in
       // package.json
-      loader: require.resolve('postcss-loader'),
+      loader: 'postcss-loader',
       options: {
         postcssOptions: {
           // Necessary for external CSS imports to work
@@ -100,14 +100,14 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
   if (preProcessor) {
     loaders.push(
       {
-        loader: require.resolve('resolve-url-loader'),
+        loader: 'resolve-url-loader',
         options: {
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
           root: paths.appSrc,
         },
       },
       {
-        loader: require.resolve(preProcessor),
+        loader: preProcessor,
         options: {
           sourceMap: true,
         },
@@ -282,7 +282,7 @@ const config = {
         // its runtime that would otherwise be processed through "file" loader.
         // Also exclude `html` and `json` extensions so they get processed
         // by webpacks internal loaders.
-        exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+        exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, cssRegex, cssModuleRegex, sassRegex, sassModuleRegex],
         type: 'asset/resource',
         generator: {
           filename: 'static/media/[hash][ext][query]',
@@ -325,6 +325,9 @@ const config = {
         reactRefreshWebpackPluginRuntimeEntry,
         reactRefreshOverlayEntry,
       ]),
+
+      // This is necessary to emit hot updates (CSS and Fast Refresh):
+      // isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
     ],
   },
   performance: false,
