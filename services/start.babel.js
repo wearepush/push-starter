@@ -1,4 +1,4 @@
-require('../../config/env');
+require('../config/env');
 
 if (process.env.NEWRELIC_NAME && process.env.NEWRELIC_KEY) {
   require('newrelic');

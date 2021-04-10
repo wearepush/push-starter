@@ -5,7 +5,7 @@
 require('source-map-support/register');
 
 const startServer = require('universal-webpack/server');
-const settings = require('../../config/universal-webpack-settings');
-const configuration = require('../../config/webpack.config');
+const settings = require('../config/universal-webpack-settings');
+const configuration = require('../config/webpack.config');
 
 startServer(configuration, settings);

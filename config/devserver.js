@@ -4,8 +4,6 @@ const PORT = setupConfig.webpackDevServer.port;
 
 // `webpack serve` settings.
 export const devServerConfig = {
-  hot: true,
-
   // The port to serve assets on.
   port: PORT,
 

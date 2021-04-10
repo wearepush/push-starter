@@ -6,8 +6,6 @@ const {
   isEnvProduction,
   imageInlineSizeLimit,
   shouldUseSourceMap,
-  shouldUseReactRefresh,
-  isServerWebpackConfig,
 } = require('./consts');
 const paths = require('./paths');
 
@@ -123,9 +121,6 @@ module.exports = {
       include: paths.appSrc,
       loader: 'babel-loader',
       options: {
-        plugins: [isEnvDevelopment && shouldUseReactRefresh && !isServerWebpackConfig && 'react-refresh/babel'].filter(
-          Boolean
-        ),
         // This is a feature of `babel-loader` for webpack (not Babel itself).
         // It enables caching results in ./node_modules/.cache/babel-loader/
         // directory for faster rebuilds.

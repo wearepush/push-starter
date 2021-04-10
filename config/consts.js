@@ -15,8 +15,6 @@ const isEnvProduction = env.raw.NODE_ENV === 'production';
 // passed into alias object. Uses a flag if passed into the build commandF
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
 
-const shouldUseReactRefresh = env.raw.FAST_REFRESH;
-
 const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -30,7 +28,6 @@ module.exports = {
   isEnvDevelopment,
   isEnvProduction,
   isEnvProductionProfile,
-  shouldUseReactRefresh,
   imageInlineSizeLimit,
   shouldUseSourceMap,
   isServerWebpackConfig,

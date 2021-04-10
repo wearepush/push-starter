@@ -5,13 +5,6 @@ const webpack = require('webpack');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const createEnvironmentHash = require('./createEnvironmentHash');
-const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime');
-const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
-  '@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils'
-);
-const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
-const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const paths = require('./paths');
 const modules = require('./modules');
@@ -23,12 +16,12 @@ const {
   isEnvProduction,
   isEnvProductionProfile,
   shouldUseSourceMap,
-  shouldUseReactRefresh,
-  isServerWebpackConfig,
 } = require('./consts');
 
+const ROOT_DIRECTORY = path.resolve(__dirname, '..')
+
 module.exports = {
-  target: isEnvDevelopment ? 'web' : 'browserslist',
+  context: ROOT_DIRECTORY,
 
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
@@ -41,17 +34,16 @@ module.exports = {
     : isEnvDevelopment && 'cheap-module-source-map',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
-  entry:
-    isEnvDevelopment && !shouldUseReactRefresh
-      ? [
-          webpackDevClientEntry,
-          // Finally, this is your app's code:
-          paths.appIndexJs,
-          // We include the app code last so that if there is a runtime error during
-          // initialization, it doesn't blow up the WebpackDevServer client, and
-          // changing JS code would still trigger a refresh.
-        ]
-      : paths.appIndexJs,
+  entry: isEnvDevelopment
+    ? [
+        'react-hot-loader/patch',
+        // Finally, this is your app's code:
+        paths.appIndexJs,
+        // We include the app code last so that if there is a runtime error during
+        // initialization, it doesn't blow up the WebpackDevServer client, and
+        // changing JS code would still trigger a refresh.
+      ]
+    : paths.appIndexJs,
 
   output: {
     // The build folder.
@@ -114,12 +106,7 @@ module.exports = {
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [
-        paths.appPackageJson,
-        reactRefreshRuntimeEntry,
-        reactRefreshWebpackPluginRuntimeEntry,
-        reactRefreshOverlayEntry,
-      ]),
+      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
     ],
   },
 
@@ -144,20 +131,6 @@ module.exports = {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
-
-    shouldUseReactRefresh &&
-      !isServerWebpackConfig &&
-      new ReactRefreshWebpackPlugin({
-        overlay: {
-          entry: webpackDevClientEntry,
-          // The expected exports are slightly different from what the overlay exports,
-          // so an interop is included here to enable feedback on module-level errors.
-          module: reactRefreshOverlayEntry,
-          // Since we ship a custom dev client and overlay integration,
-          // the bundled socket handling logic can be eliminated.
-          sockIntegration: false,
-        },
-      }),
   ].filter(Boolean),
   // Turn off performance processing because we utilize
   // our own hints via the FileSizeReporter
