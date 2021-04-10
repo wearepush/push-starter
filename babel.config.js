@@ -10,7 +10,7 @@ module.exports = {
     {
       include: './src',
       presets: ['@babel/preset-react'],
-      plugins: [['babel-plugin-transform-react-remove-prop-types', { removeImport: true }], 'react-hot-loader/babel'],
+      plugins: [['babel-plugin-transform-react-remove-prop-types', { removeImport: true }]],
     },
     {
       include: './services',

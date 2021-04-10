@@ -2,13 +2,12 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const createEnvironmentHash = require('./createEnvironmentHash');
 
 const paths = require('./paths');
 const modules = require('./modules');
-const webpackModule = require('./webpack.module');
+const loaders = require('./loaders');
 const {
   env,
   publicPath,
@@ -18,10 +17,8 @@ const {
   shouldUseSourceMap,
 } = require('./consts');
 
-const ROOT_DIRECTORY = path.resolve(__dirname, '..')
-
 module.exports = {
-  context: ROOT_DIRECTORY,
+  target: isEnvDevelopment ? 'web' : 'browserslist',
 
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
@@ -36,7 +33,6 @@ module.exports = {
   // This means they will be the "root" imports that are included in JS bundle.
   entry: isEnvDevelopment
     ? [
-        'react-hot-loader/patch',
         // Finally, this is your app's code:
         paths.appIndexJs,
         // We include the app code last so that if there is a runtime error during
@@ -100,17 +96,9 @@ module.exports = {
       routes: path.resolve('src/routes'),
       utils: path.resolve('src/utils'),
     },
-    plugins: [
-      // Prevents users from importing files from outside of src/ (or node_modules/).
-      // This often causes confusion because we only process files within src/ with babel.
-      // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-      // please link the files into your node_modules/ and let module-resolution kick in.
-      // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-    ],
   },
 
-  module: webpackModule,
+  module: loaders,
 
   plugins: [
     // This gives some necessary context to module not found errors, such as

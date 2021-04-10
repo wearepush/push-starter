@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { renderRoutes } from 'react-router-config';
 import { ConnectedRouter } from 'connected-react-router';
-import { hot } from 'react-hot-loader/root';
 import '../styles/index.scss';
 
 const Root = ({ history, routes, store }) => (
@@ -21,4 +20,4 @@ Root.propTypes = {
   routes: oneOfType([array, object]).isRequired,
 };
 
-export default hot(Root);
+export default Root;

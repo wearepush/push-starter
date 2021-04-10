@@ -1,12 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const {
-  publicPath,
-  isEnvDevelopment,
-  isEnvProduction,
-  imageInlineSizeLimit,
-  shouldUseSourceMap,
-} = require('./consts');
+const { publicPath, isEnvDevelopment, isEnvProduction, imageInlineSizeLimit, shouldUseSourceMap } = require('./consts');
 const paths = require('./paths');
 
 // style files regexes
@@ -117,10 +111,11 @@ module.exports = {
     // Process application JS with Babel.
     // The preset includes JSX, Flow, TypeScript, and some ESnext features.
     {
-      test: /\.(js|mjs|jsx|ts|tsx)$/,
+      test: /\.(js|mjs|jsx)$/,
       include: paths.appSrc,
       loader: 'babel-loader',
       options: {
+        plugins: [isEnvDevelopment && !process.env.WEBPACK_SERVER && 'react-refresh/babel'].filter(Boolean),
         // This is a feature of `babel-loader` for webpack (not Babel itself).
         // It enables caching results in ./node_modules/.cache/babel-loader/
         // directory for faster rebuilds.
