@@ -67,7 +67,7 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 // injected into the application via DefinePlugin in webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
 
-function getClientEnvironment({ isClient = false, publicUrl }) {
+function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
     .filter((key) => REACT_APP.test(key))
     .reduce(
@@ -97,9 +97,6 @@ function getClientEnvironment({ isClient = false, publicUrl }) {
         // which is why it's disabled by default.
         // It is defined here so it is available in the webpackHotDevClient.
         FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
-
-        __CLIENT__: isClient,
-        __SERVER__: !isClient,
       }
     );
   // Stringify all values so we can feed into webpack DefinePlugin
