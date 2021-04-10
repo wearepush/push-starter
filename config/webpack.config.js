@@ -39,6 +39,19 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 const isEnvDevelopment = env.raw.NODE_ENV === 'development';
 const isEnvProduction = env.raw.NODE_ENV === 'production';
 
+const hasJsxRuntime = (() => {
+  if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
+    return false;
+  }
+
+  try {
+    require.resolve('react/jsx-runtime');
+    return true;
+  } catch (e) {
+    return false;
+  }
+})();
+
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
   const loaders = [
@@ -140,16 +153,58 @@ const config = {
       ? (info) => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
       : isEnvDevelopment && ((info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     // this defaults to 'window', but by setting it to 'this' then
-    // module chunks which are built will work in web workers as well.F
+    // module chunks which are built will work in web workers as well.
+    // globalObject: 'this',
   },
 
   module: {
     strictExportPresence: true,
     rules: [
+      // TODO: Merge this config once `image/avif` is in the mime-db
+      // https://github.com/jshttp/mime-db
       {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
+        test: [/\.avif$/],
+        type: 'asset',
+        mimetype: 'image/avif',
+        generator: {
+          filename: 'static/media/[hash][ext][query]',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: imageInlineSizeLimit,
+          },
+        },
+      },
+      // "url" loader works like "file" loader except that it embeds assets
+      // smaller than specified limit in bytes as data URLs to avoid requests.
+      // A missing `test` is equivalent to a match.
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        type: 'asset',
+        generator: {
+          filename: 'static/media/[hash][ext][query]',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: imageInlineSizeLimit,
+          },
+        },
+      },
+      // Process application JS with Babel.
+      // The preset includes JSX, Flow, TypeScript, and some ESnext features.
+      {
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
+        include: paths.appSrc,
+        loader: require.resolve('babel-loader'),
+        options: {
+          // This is a feature of `babel-loader` for webpack (not Babel itself).
+          // It enables caching results in ./node_modules/.cache/babel-loader/
+          // directory for faster rebuilds.
+          cacheDirectory: true,
+          // See #6846 for context on why cacheCompression is disabled
+          cacheCompression: false,
+          compact: isEnvProduction,
+        },
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
