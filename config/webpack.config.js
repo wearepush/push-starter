@@ -9,7 +9,10 @@ const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime');
 const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
   '@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils'
 );
+const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const paths = require('./paths');
 const modules = require('./modules');
 const webpackModule = require('./webpack.module');
@@ -21,9 +24,12 @@ const {
   isEnvProductionProfile,
   shouldUseSourceMap,
   shouldUseReactRefresh,
+  isServerWebpackConfig,
 } = require('./consts');
 
 module.exports = {
+  target: isEnvDevelopment ? 'web' : 'browserslist',
+
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
   bail: isEnvProduction,
@@ -38,6 +44,7 @@ module.exports = {
   entry:
     isEnvDevelopment && !shouldUseReactRefresh
       ? [
+          webpackDevClientEntry,
           // Finally, this is your app's code:
           paths.appIndexJs,
           // We include the app code last so that if there is a runtime error during
@@ -137,6 +144,20 @@ module.exports = {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
+
+    shouldUseReactRefresh &&
+      !isServerWebpackConfig &&
+      new ReactRefreshWebpackPlugin({
+        overlay: {
+          entry: webpackDevClientEntry,
+          // The expected exports are slightly different from what the overlay exports,
+          // so an interop is included here to enable feedback on module-level errors.
+          module: reactRefreshOverlayEntry,
+          // Since we ship a custom dev client and overlay integration,
+          // the bundled socket handling logic can be eliminated.
+          sockIntegration: false,
+        },
+      }),
   ].filter(Boolean),
   // Turn off performance processing because we utilize
   // our own hints via the FileSizeReporter

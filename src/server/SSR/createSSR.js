@@ -30,8 +30,8 @@ export default function createSSR(assets) {
     };
 
     // if (!config.ssr) {
-    //   hydrateOnClient();
-    //   return;
+      // hydrateOnClient();
+      // return;
     // }
 
     if (context.status === 302) {

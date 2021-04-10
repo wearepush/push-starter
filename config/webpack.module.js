@@ -1,6 +1,14 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const { publicPath, isEnvDevelopment, isEnvProduction, imageInlineSizeLimit, shouldUseSourceMap } = require('./consts');
+const {
+  publicPath,
+  isEnvDevelopment,
+  isEnvProduction,
+  imageInlineSizeLimit,
+  shouldUseSourceMap,
+  shouldUseReactRefresh,
+  isServerWebpackConfig,
+} = require('./consts');
 const paths = require('./paths');
 
 // style files regexes
@@ -113,8 +121,11 @@ module.exports = {
     {
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: paths.appSrc,
-      loader: require.resolve('babel-loader'),
+      loader: 'babel-loader',
       options: {
+        plugins: [isEnvDevelopment && shouldUseReactRefresh && !isServerWebpackConfig && 'react-refresh/babel'].filter(
+          Boolean
+        ),
         // This is a feature of `babel-loader` for webpack (not Babel itself).
         // It enables caching results in ./node_modules/.cache/babel-loader/
         // directory for faster rebuilds.

@@ -4,31 +4,12 @@ const PORT = setupConfig.webpackDevServer.port;
 
 // `webpack serve` settings.
 export const devServerConfig = {
+  hot: true,
+
   // The port to serve assets on.
   port: PORT,
 
   publicPath: setupConfig.publicPath + '/',
-
-  // Chrome won't allow querying `localhost` from `localhost`
-  // so had to just proxy the `/api` path using `webpack serve`.
-  //
-  // The Chrome error was:
-  //
-  // "Failed to load http://localhost:3003/example/users:
-  //  Response to preflight request doesn't pass access control check:
-  //  No 'Access-Control-Allow-Origin' header is present on the requested resource.
-  //  Origin 'http://localhost:3000' is therefore not allowed access."
-  //
-  // https://stackoverflow.com/a/10892392/970769
-  //
-  proxy: [
-    {
-      context: (path) => {
-        return path !== '/api' && path.indexOf('/api/') !== 0;
-      },
-      target: `http://localhost:${setupConfig.pageServer.port}`,
-    },
-  ],
 
   // This is just for forcing `webpack serve`
   // to not disable proxying for root path (`/`).

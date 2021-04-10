@@ -22,6 +22,8 @@ const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
+const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
+
 module.exports = {
   publicPath,
   env,
@@ -31,4 +33,5 @@ module.exports = {
   shouldUseReactRefresh,
   imageInlineSizeLimit,
   shouldUseSourceMap,
+  isServerWebpackConfig,
 };
