@@ -4,6 +4,7 @@ const webpack = require('webpack');
 
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const createEnvironmentHash = require('./createEnvironmentHash');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const paths = require('./paths');
 const modules = require('./modules');
@@ -19,11 +20,9 @@ const {
 
 module.exports = {
   target: isEnvDevelopment ? 'web' : 'browserslist',
-
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
   bail: isEnvProduction,
-
   devtool: isEnvProduction
     ? shouldUseSourceMap
       ? 'source-map'
@@ -97,9 +96,7 @@ module.exports = {
       utils: path.resolve('src/utils'),
     },
   },
-
   module: loaders,
-
   plugins: [
     // This gives some necessary context to module not found errors, such as
     // the requesting resource.
@@ -119,6 +116,13 @@ module.exports = {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
+    isEnvProduction &&
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: 'static/css/[name].[contenthash:8].css',
+        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+      }),
   ].filter(Boolean),
   // Turn off performance processing because we utilize
   // our own hints via the FileSizeReporter

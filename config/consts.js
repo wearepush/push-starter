@@ -11,6 +11,7 @@ const env = getClientEnvironment(publicPath.slice(0, -1));
 const isEnvDevelopment = env.raw.NODE_ENV === 'development';
 const isEnvProduction = env.raw.NODE_ENV === 'production';
 
+
 // Variable used for enabling profiling in Production
 // passed into alias object. Uses a flag if passed into the build commandF
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
