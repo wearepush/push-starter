@@ -3,8 +3,8 @@ import React from 'react';
 import { object, node } from 'prop-types';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
-// import config from '../../config';
 import { helmetContext } from './createSSR';
+import { isEnvProduction } from '../../../config/consts';
 
 const Html = ({ assets, component, store }) => {
   const initialState = `window.INITIAL_STATE = ${serialize(store.getState())}`;
@@ -76,18 +76,40 @@ const Html = ({ assets, component, store }) => {
         <meta property="twitter:title" content="" />
         <meta property="twitter:description" content="" />
         */}
-        {/* {config?.isProd && (
+        {isEnvProduction && (
           <>
             {cssList?.map((c) => (
-              <link rel="preload" href={cssMap[c]} key={c} as="style" />
+              <link
+                as="style"
+                crossOrigin="anonymous"
+                href={cssMap[c]?.src}
+                integrity={cssMap[c]?.integrity}
+                key={c}
+                rel="preload"
+              />
             ))}
             {jsList?.map((c) => (
-              <link rel="preload" href={jsMap[c]} key={c} as="script" />
+              <link
+                as="script"
+                crossOrigin="anonymous"
+                href={jsMap[c]?.src}
+                integrity={jsMap[c]?.integrity}
+                key={c}
+                rel="preload"
+              />
             ))}
           </>
-        )} */}
+        )}
         {cssList?.map((c) => (
-          <link href={cssMap[c]} key={c} rel="stylesheet" type="text/css" charSet="UTF-8" />
+          <link
+            charSet="UTF-8"
+            crossOrigin="anonymous"
+            href={cssMap[c]?.src}
+            integrity={cssMap[c]?.integrity}
+            key={c}
+            rel="stylesheet"
+            type="text/css"
+          />
         ))}
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
       </head>
@@ -96,7 +118,13 @@ const Html = ({ assets, component, store }) => {
         <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
         {jsList?.map((c) => (
-          <script defer src={jsMap[c]} key={c} />
+          <script
+            crossOrigin={isEnvProduction ? 'anonymous' : undefined}
+            defer
+            integrity={isEnvProduction ? jsMap[c]?.integrity : undefined}
+            key={c}
+            src={isEnvProduction ? jsMap[c]?.src : jsMap[c]}
+          />
         ))}
       </body>
     </html>

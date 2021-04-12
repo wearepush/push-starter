@@ -1,11 +1,12 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
-import TerserPlugin from 'terser-webpack-plugin';
+const { SubresourceIntegrityPlugin } = require("webpack-subresource-integrity");
+const TerserPlugin = require('terser-webpack-plugin');
 
 import { clientConfiguration } from 'universal-webpack';
 import settings from './universal-webpack-settings';
 import baseConfiguration from './webpack.config';
+import AddSriToChunks from './addSriToChunks';
 
 const configuration = clientConfiguration(baseConfiguration, settings, {
   // Extract all CSS into separate `*.css` files (one for each chunk)
@@ -41,15 +42,19 @@ configuration.optimization = {
     new TerserPlugin({
       parallel: true,
     }),
-    // new OptimizeCSSAssetsPlugin({})
     // This is only used in production mode
     new CssMinimizerPlugin(),
   ],
 };
 
-configuration.plugins.push(
-  // Clears the output folder before building.
-  new CleanWebpackPlugin()
-);
+configuration.plugins = [
+  new CleanWebpackPlugin(),
+  new SubresourceIntegrityPlugin({
+    hashFuncNames: ['sha256'],
+    enabled: true,
+  }),
+  ...configuration.plugins,
+  new AddSriToChunks(),
+];
 
 export default configuration;

@@ -43,20 +43,6 @@ Elements folder
 ...
 ```
 
-Config folder
-```
-...
-└── config
-│  │  index.js
-│  │  environment.js
-│  │  default.js
-|  ...
-```
-
-* index.js - result of merge common and environment variables
-* environment.js - variables base on environment development / production
-* default.js -common variables
-
 Redux folder
 ```
 ...

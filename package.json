@@ -168,7 +168,8 @@
     "webpack": "5.31.2",
     "webpack-cli": "4.6.0",
     "webpack-dev-server": "3.11.2",
-    "webpack-merge": "5.7.3"
+    "webpack-merge": "5.7.3",
+    "webpack-subresource-integrity": "^5.0.0-alpha.5"
   },
   "engines": {
     "node": "^14.0.0"

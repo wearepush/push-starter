@@ -11,7 +11,6 @@ const env = getClientEnvironment(publicPath.slice(0, -1));
 const isEnvDevelopment = env.raw.NODE_ENV === 'development';
 const isEnvProduction = env.raw.NODE_ENV === 'production';
 
-
 // Variable used for enabling profiling in Production
 // passed into alias object. Uses a flag if passed into the build commandF
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
@@ -23,13 +22,16 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
 
+const isSSR = env.raw.REACT_APP_SSR === 'true';
+
 module.exports = {
-  publicPath,
   env,
+  imageInlineSizeLimit,
   isEnvDevelopment,
   isEnvProduction,
   isEnvProductionProfile,
-  imageInlineSizeLimit,
-  shouldUseSourceMap,
+  isSSR,
   isServerWebpackConfig,
+  publicPath,
+  shouldUseSourceMap,
 };
