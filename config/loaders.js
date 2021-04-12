@@ -1,9 +1,16 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const { publicPath, isEnvDevelopment, isEnvProduction, imageInlineSizeLimit, shouldUseSourceMap } = require('./consts');
+const {
+  publicPath,
+  isEnvDevelopment,
+  isEnvProduction,
+  imageInlineSizeLimit,
+  shouldUseSourceMap,
+} = require('./consts');
 const paths = require('./paths');
 
 // style files regexes
+const svgRegex = /\.svg$/;
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
@@ -103,7 +110,19 @@ module.exports = {
         },
       },
     },
-
+    // import SVG as components
+    {
+      test: svgRegex,
+      use: ['@svgr/webpack'],
+      issuer: /\.jsx?$/,
+    },
+    // import SVG in (s)css files
+    {
+      test: svgRegex,
+      type: 'asset',
+      use: ['svgo-loader'],
+      issuer: /\.s?css$/,
+    },
     // Process application JS with Babel.
     // The preset includes JSX, Flow, TypeScript, and some ESnext features.
     {
@@ -111,7 +130,9 @@ module.exports = {
       include: paths.appSrc,
       loader: 'babel-loader',
       options: {
-        plugins: [isEnvDevelopment && !process.env.WEBPACK_SERVER && 'react-refresh/babel'].filter(Boolean),
+        plugins: [isEnvDevelopment && !process.env.WEBPACK_SERVER && 'react-refresh/babel'].filter(
+          Boolean
+        ),
         // This is a feature of `babel-loader` for webpack (not Babel itself).
         // It enables caching results in ./node_modules/.cache/babel-loader/
         // directory for faster rebuilds.
@@ -197,12 +218,22 @@ module.exports = {
       // its runtime that would otherwise be processed through "file" loader.
       // Also exclude `html` and `json` extensions so they get processed
       // by webpacks internal loaders.
-      exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, cssRegex, cssModuleRegex, sassRegex, sassModuleRegex],
+      exclude: [
+        /\.(js|mjs|jsx|ts|tsx)$/,
+        /\.html$/,
+        /\.json$/,
+        cssRegex,
+        cssModuleRegex,
+        sassRegex,
+        sassModuleRegex,
+        svgRegex,
+      ],
       type: 'asset/resource',
       generator: {
         filename: 'static/media/[hash][ext][query]',
       },
     },
+
     // ** STOP ** Are you adding a new loader?
     // Make sure to add the new loader(s) before the "file" loader.
   ],

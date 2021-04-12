@@ -9,6 +9,11 @@ import ApiClient from '../helpers/ApiClient';
 import getRoutes from '../routes/routes';
 import configureStore from '../redux/store';
 
+// https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration
+if (window.history.scrollRestoration) {
+  window.history.scrollRestoration = 'manual';
+}
+
 const client = new ApiClient();
 const initialState = window.INITIAL_STATE;
 const history = createHistory();
