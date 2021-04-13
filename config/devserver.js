@@ -1,15 +1,15 @@
-import setupConfig from '../configuration/setup';
-
-const PORT = setupConfig.webpackDevServer.port;
+import { env, publicPath } from './consts';
+const port = env.raw.WDS_SOCKET_PORT;
+const host = env.raw.WDS_SOCKET_HOST;
 
 // `webpack serve` settings.
 export const devServerConfig = {
   liveReload: false,
 
   // The port to serve assets on.
-  port: PORT,
+  port,
 
-  publicPath: setupConfig.publicPath + '/',
+  publicPath,
 
   // This is just for forcing `webpack serve`
   // to not disable proxying for root path (`/`).
@@ -31,7 +31,7 @@ export function setDevFileServer(configuration) {
     ...configuration,
     output: {
       ...configuration.output,
-      publicPath: `http://localhost:${PORT}${configuration.output.publicPath}`,
+      publicPath: `http://${host}:${port}${configuration.output.publicPath}`,
     },
   };
 }
