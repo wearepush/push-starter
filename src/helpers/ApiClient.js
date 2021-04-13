@@ -1,9 +1,9 @@
 import axios from 'axios';
-// import config from '../config';
 
-// if (config.env === 'test') {
+// import { isEnvTest, host } from '../../config/consts';
+// if (isEnvTest) {
 //   const httpAdapter = require('axios/lib/adapters/http');
-//   axios.defaults.host = config.testHost;
+//   axios.defaults.host = host;
 //   axios.defaults.adapter = httpAdapter; // eslint-disable-line
 // }
 

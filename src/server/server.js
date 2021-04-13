@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable consistent-return */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
@@ -6,49 +6,33 @@ import favicon from 'serve-favicon';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import cookieParser from 'cookie-parser';
-
-import './../../config/env';
+import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
 import createSSR from './SSR/createSSR';
-// import config from '../config';
 
-// const { host, port } = config.server;
-// const { logLevel } = config;
-const host = 'localhost';
-const port = 8080;
 const app = express();
 
 export default function (parameters) {
-
-  // eslint-disable-line
-  // if (config.isProd) {
-  //   app.use(compression());
-  // }
+  if (isEnvProduction) {
+    app.use(compression());
+  }
   app.disable('etag');
   app.disable('x-powered-by');
-
   app.use(cookieParser());
-
   app.use('/', express.static('public', { etag: false }));
-
   app.use(favicon(path.join('public', 'favicons', 'favicon.ico')));
-
   app.use((req, res, next) => {
     res.set('X-Frame-Options', 'DENY');
     next();
   });
-
-  // app.use((req, res, next) => {
-  //   if (config.ssl) {
-  //     if (req.headers['x-forwarded-proto'] !== 'https') {
-  //       res.redirect(302, `https://${req.hostname}${req.originalUrl}`);
-  //     } else {
-  //       next();
-  //     }
-  //   } else {
-  //     next();
-  //   }
-  // });
-
+  if (ssl) {
+    app.use((req, res, next) => {
+      if (req.headers['x-forwarded-proto'] !== 'https') {
+        res.redirect(302, `https://${req.hostname}${req.originalUrl}`);
+      } else {
+        next();
+      }
+    });
+  }
   app.get('/api/users', (req, res) => {
     res.json({
       records: [
@@ -57,24 +41,22 @@ export default function (parameters) {
       ],
     });
   });
-
-  // if (logLevel) {
-  //   const loggerOptions = {
-  //     level: logLevel,
-  //     transports: [
-  //       new winston.transports.Console({
-  //         json: true,
-  //         colorize: true,
-  //       }),
-  //     ],
-  //   };
-  //   app.use(expressWinston.logger(loggerOptions));
-  // }
+  if (logLevel) {
+    const loggerOptions = {
+      level: logLevel,
+      transports: [
+        new winston.transports.Console({
+          json: true,
+          colorize: true,
+        }),
+      ],
+    };
+    app.use(expressWinston.logger(loggerOptions));
+  }
 
   app.get('*', createSSR(parameters && parameters.chunks()));
 
   const server = app.listen(port, (err) => {
-    // eslint-disable-line
     if (err) {
       return console.error(err);
     }

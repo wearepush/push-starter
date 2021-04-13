@@ -47,7 +47,9 @@ module.exports = {
     pathinfo: isEnvDevelopment,
     // There will be one main bundle, and one file per asynchronous chunk.
     // In development, it does not produce real files.
-    filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/bundle.js',
+    filename: isEnvProduction
+      ? 'static/js/[name].[contenthash:8].js'
+      : isEnvDevelopment && 'static/js/bundle.js',
     // There are also additional JS chunk files if you use code splitting.
     chunkFilename: isEnvProduction
       ? 'static/js/[name].[contenthash:8].chunk.js'
@@ -79,7 +81,9 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
-    extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`).filter((ext) => !ext.includes('ts')),
+    extensions: paths.moduleFileExtensions
+      .map((ext) => `.${ext}`)
+      .filter((ext) => !ext.includes('ts')),
     alias: {
       // Allows for better profiling with ReactDevTools
       ...(isEnvProductionProfile && {

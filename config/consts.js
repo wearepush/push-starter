@@ -10,6 +10,7 @@ const env = getClientEnvironment(publicPath.slice(0, -1));
 
 const isEnvDevelopment = env.raw.NODE_ENV === 'development';
 const isEnvProduction = env.raw.NODE_ENV === 'production';
+const isEnvTest = env.raw.NODE_ENV === 'test';
 
 // Variable used for enabling profiling in Production
 // passed into alias object. Uses a flag if passed into the build commandF
@@ -24,14 +25,25 @@ const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
 
 const isSSR = env.raw.REACT_APP_SSR === 'true';
 
+// Express port and host
+const port = process.env.PORT || 8080;
+const host = process.env.HOST || 'localhost';
+const ssl = process.env.SSL === 'true' || false;
+const logLevel = process.env.LOG_LEVEL || 'info';
+
 module.exports = {
   env,
+  host,
   imageInlineSizeLimit,
   isEnvDevelopment,
   isEnvProduction,
   isEnvProductionProfile,
+  isEnvTest,
   isSSR,
   isServerWebpackConfig,
+  logLevel,
+  port,
   publicPath,
   shouldUseSourceMap,
+  ssl,
 };
