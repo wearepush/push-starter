@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-// import { isEnvTest, host } from '../../config/consts';
-// if (isEnvTest) {
-//   const httpAdapter = require('axios/lib/adapters/http');
-//   axios.defaults.host = host;
-//   axios.defaults.adapter = httpAdapter; // eslint-disable-line
-// }
+if (process.env.NODE_ENV === 'test') {
+  const httpAdapter = require('axios/lib/adapters/http');
+  axios.defaults.adapter = httpAdapter; // eslint-disable-line
+}
 
 const methods = ['get', 'post', 'put', 'patch', 'delete'];
 function formatUrl(path, directUrl = false) {
@@ -15,11 +13,10 @@ function formatUrl(path, directUrl = false) {
     return path;
   }
   return adjustedPath;
-  // return config.apiHost + adjustedPath;
 }
 
 class _ApiClient {
-  constructor() {
+  constructor(props) {
     // we can get an access to req
     methods.forEach((method) => {
       this[method] = (path, { data, attachments, directUrl, handleProgress, ...rest } = {}) => {
@@ -29,7 +26,20 @@ class _ApiClient {
          * cancelToken,
          * timeout
          */
+        // compute base url to resolve an issue with request on the nodejs
+        let baseURL;
+        if (props?.host) {
+          baseURL = 'http';
+          if (props?.ssl) {
+            baseURL += 's';
+          }
+          baseURL += `://${props.host}`;
+          if (props?.port) {
+            baseURL += `:${props.port}`;
+          }
+        }
         const requestConfig = {
+          baseURL,
           method,
           url: formatUrl(path, directUrl),
           ...rest,
