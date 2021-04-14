@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
 import { array, bool, func } from 'prop-types';
-import { HelmetWrapper } from 'elements';
 import { connect } from 'react-redux';
-import { ACTIONS as usersActions, SELECTORS as usersSelectors } from 'modules';
+import { HelmetWrapper } from 'elements';
+import { getUsersLoaded, getUsersLoading, getUsersRecords } from '../../redux/modules/users/usersSelectors';
+import { clearUsers, loadUsers } from '../../redux/modules/users/users';
 
 const mapStateToProps = (state) => ({
-  loaded: usersSelectors.usersLoaded(state),
-  loading: usersSelectors.usersLoading(state),
-  users: usersSelectors.usersRecords(state),
+  loaded: getUsersLoaded(state),
+  loading: getUsersLoading(state),
+  users: getUsersRecords(state),
 });
 
 const mapDispatchToProps = {
-  clearUsers: usersActions.clear,
-  loadUsers: usersActions.load,
+  loadUsers,
+  clearUsers,
 };
 
 class Users extends Component {
   componentDidMount() {
-    const { loadUsers } = this.props;
-    loadUsers();
+    this.props.loadUsers();
   }
 
   componentWillUnmount() {
-    const { clearUsers } = this.props;
-    clearUsers();
+    this.props.clearUsers();
   }
 
   render() {
@@ -51,7 +50,7 @@ class Users extends Component {
 }
 
 Users.fetchData = ({ dispatch }) => {
-  const load = usersActions.load();
+  const load = loadUsers();
   return dispatch(load);
 };
 

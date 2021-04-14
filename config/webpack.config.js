@@ -95,8 +95,6 @@ module.exports = {
       elements: path.resolve('src/elements'),
       config: path.resolve('src/config'),
       helpers: path.resolve('src/helpers'),
-      modules: path.resolve('src/redux/modules'),
-      routes: path.resolve('src/routes'),
       utils: path.resolve('src/utils'),
     },
   },

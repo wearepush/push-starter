@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect';
-
 export const STATE_KEY = 'users';
 
 // Action types
@@ -47,58 +45,15 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-/*
- * Getters
- */
-
-export const getUsers = (state) => state[STATE_KEY];
-export const getUsersRecords = (state) => getUsers(state).records;
-export const getUsersLoading = (state) => getUsers(state).loading;
-export const getUsersLoaded = (state) => getUsers(state).loaded;
-export const getUsersError = (state) => getUsers(state).error;
-
-export const GETTERS = {
-  getUsers,
-  getUsersRecords,
-  getUsersLoading,
-  getUsersLoaded,
-  getUsersError,
-};
-
-/*
- * Selectors
- */
-
-export const usersRecords = createSelector(getUsersRecords, (c) => c);
-export const usersLoading = createSelector(getUsersLoading, (c) => c);
-export const usersLoaded = createSelector(getUsersLoaded, (c) => c);
-export const usersError = createSelector(getUsersError, (c) => c);
-
-export const SELECTORS = {
-  usersRecords,
-  usersLoading,
-  usersLoaded,
-  usersError,
-};
-
-/*
- * Actions
- */
-
-export function clear() {
+export function clearUsers() {
   return {
     type: ACTIONS_TYPES.CLEAR,
   };
 }
 
-export function load() {
+export function loadUsers() {
   return {
     types: [ACTIONS_TYPES.LOAD, ACTIONS_TYPES.LOAD_SUCCESS, ACTIONS_TYPES.LOAD_FAIL],
     promise: (client) => client.get(`/api/${STATE_KEY}`),
   };
 }
-
-export const ACTIONS = {
-  clear,
-  load,
-};
