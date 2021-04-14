@@ -26,8 +26,7 @@ const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
 const isSSR = env.raw.REACT_APP_SSR === 'true';
 
 // Express port and host
-const portEnv = process.env.PORT;
-const port = portEnv !== 'undefined' && typeof portEnv !== 'undefined' ? portEnv : undefined;
+const port = process.env.PORT;
 const host = process.env.HOST;
 const ssl = process.env.SSL === 'true' || false;
 const logLevel = process.env.LOG_LEVEL || 'info';
