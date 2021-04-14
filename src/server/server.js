@@ -60,7 +60,9 @@ export default function (parameters) {
     if (err) {
       return console.error(err);
     }
-    console.info(`Listening at ${host}:${port}`);
+    if (host && port) {
+      console.info(`Listening at ${host}:${port}`);
+    }
   });
 
   return {
