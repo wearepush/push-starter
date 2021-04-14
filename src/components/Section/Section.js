@@ -3,22 +3,22 @@ import { renderRoutes } from 'react-router-config';
 import { object } from 'prop-types';
 import { Header, Footer } from '../index';
 import withDevice from './withDevice';
-import './app.scss';
+import './section.scss';
 
-export const App = ({ route: { routes } }) => (
-  <div className="app">
+export const Section = ({ route: { routes } }) => (
+  <>
     <Header />
-    <div className="app__container">{renderRoutes(routes)}</div>
+    <section className="section">{renderRoutes(routes)}</section>
     <Footer />
-  </div>
+  </>
 );
 
-App.propTypes = {
+Section.propTypes = {
   route: object,
 };
 
-App.defaultProps = {
+Section.defaultProps = {
   route: object,
 };
 
-export default withDevice(App);
+export default withDevice(Section);

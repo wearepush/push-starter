@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
@@ -5,45 +6,33 @@ import favicon from 'serve-favicon';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import cookieParser from 'cookie-parser';
-
-import './env';
+import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
 import createSSR from './SSR/createSSR';
-import config from '../config';
 
-const { host, port } = config.server;
-const { logLevel } = config;
 const app = express();
 
-export default function (parameters) { // eslint-disable-line
-  if (config.isProd) {
+export default function (parameters) {
+  if (isEnvProduction) {
     app.use(compression());
   }
   app.disable('etag');
   app.disable('x-powered-by');
-
   app.use(cookieParser());
-
-  app.use('/', express.static('static', { etag: false }));
-
-  app.use(favicon(path.join('static', 'favicons', 'favicon.ico')));
-
+  app.use('/', express.static('public', { etag: false }));
+  app.use(favicon(path.join('public', 'favicons', 'favicon.ico')));
   app.use((req, res, next) => {
     res.set('X-Frame-Options', 'DENY');
     next();
   });
-
-  app.use((req, res, next) => {
-    if (config.ssl) {
+  if (ssl) {
+    app.use((req, res, next) => {
       if (req.headers['x-forwarded-proto'] !== 'https') {
         res.redirect(302, `https://${req.hostname}${req.originalUrl}`);
       } else {
         next();
       }
-    } else {
-      next();
-    }
-  });
-
+    });
+  }
   app.get('/api/users', (req, res) => {
     res.json({
       records: [
@@ -52,7 +41,6 @@ export default function (parameters) { // eslint-disable-line
       ],
     });
   });
-
   if (logLevel) {
     const loggerOptions = {
       level: logLevel,
@@ -68,7 +56,7 @@ export default function (parameters) { // eslint-disable-line
 
   app.get('*', createSSR(parameters && parameters.chunks()));
 
-  const server = app.listen(port, (err) => { // eslint-disable-line
+  const server = app.listen(port, (err) => {
     if (err) {
       return console.error(err);
     }

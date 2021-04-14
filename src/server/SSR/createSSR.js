@@ -10,7 +10,7 @@ import getRoutes from '../../routes/routes';
 import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../redux/store';
-import config from '../../config';
+import { isSSR, host, port, ssl } from '../../../config/consts';
 
 export const helmetContext = {};
 
@@ -20,16 +20,16 @@ export default function createSSR(assets) {
     const history = createMemoryHistory({
       initialEntries: [req.url],
     });
-    const client = new ApiClient(req);
+    const client = new ApiClient({
+      port,
+      host,
+      ssl,
+    });
     const store = configureStore(history, client);
     const routes = getRoutes(store);
 
-    const hydrateOnClient = () => {
+    if (!isSSR) {
       res.send(`<!doctype html>\n${renderToString(<Html assets={assets} store={store} />)}`);
-    };
-
-    if (!config.ssr) {
-      hydrateOnClient();
       return;
     }
 
@@ -37,7 +37,6 @@ export default function createSSR(assets) {
       res.redirect(302, context.url);
       return;
     }
-
     const branch = matchRoutes(routes, req.url);
     const promises = branch.map(
       ({

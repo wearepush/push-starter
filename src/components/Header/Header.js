@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 
 const Header = () => (
-  <div className="header">
+  <header className="header">
     <div className="header__container">
       <Link className="header__link" to="/">
         Home
@@ -12,7 +12,7 @@ const Header = () => (
         Users
       </Link>
     </div>
-  </div>
+  </header>
 );
 
 export default Header;

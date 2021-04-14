@@ -1,4 +1,4 @@
-import { App } from 'components';
+import { Section } from 'components';
 import { Home, Users, SignIn, NotFound } from 'routes';
 import withTracker from './withTracker';
 
@@ -6,7 +6,7 @@ export default (store) => { // eslint-disable-line
   // we can get an access to store
   return [
     {
-      component: App,
+      component: Section,
       routes: [
         {
           path: '/',

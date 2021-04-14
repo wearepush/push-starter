@@ -16,11 +16,10 @@ yarn.lock
 
 *.log
 .env
-.env.production
 
 # Dist
 build/
-static/assets
+public/assets
 
 # Webpack
 webpack-assets.json
