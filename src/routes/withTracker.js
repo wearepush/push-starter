@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import GoogleAnalytics from 'react-ga';
-// import { googleAnaliticsId } from '../config/default';
 
-let googleAnaliticsId;
+const googleAnaliticsId = process.env?.GOOGLE_ANALITICS_ID;
 
 if (googleAnaliticsId) {
   GoogleAnalytics.initialize(googleAnaliticsId);

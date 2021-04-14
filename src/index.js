@@ -3,11 +3,11 @@ import 'core-js/stable';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import { createBrowserHistory as createHistory } from 'history';
+import { Root } from 'components';
+import { ApiClient } from 'helpers';
 
-import Root from './root';
-import ApiClient from '../helpers/ApiClient';
-import getRoutes from '../routes/routes';
-import configureStore from '../redux/store';
+import getRoutes from './routes/routes';
+import configureStore from './redux/store';
 
 // https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration
 if (window.history.scrollRestoration) {

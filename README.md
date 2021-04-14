@@ -33,26 +33,16 @@ rm -rf node_modules
 npm install
 ```
 
-## Create dev environment
+## Running Prod Server
+
 ```bash
-mv .env.example .env
+npm start
 ```
 
 ## Running Dev Server
 
 ```bash
 npm run dev
-```
-
-## Create production environment
-```bash
-mv .env.production.example .env.production
-```
-
-## Running Prod Server
-
-```bash
-npm run prod
 ```
 
 ## Running Tests
@@ -67,7 +57,7 @@ To get this project to work on Heroku, you need to:
 
 1. Add heroku `heroku git:remote -a heroku-app-name`
 2. `heroku config:set NODE_ENV=production`
-3. `heroku config:set SSR=1`
+3. `heroku config:set REACT_APP_SSR=1`
 4. `heroku config:set SSL=1`
 5. `heroku config:set NPM_CONFIG_PRODUCTION=false`
 6. `heroku config:set NODE_MODULES_CACHE=false`

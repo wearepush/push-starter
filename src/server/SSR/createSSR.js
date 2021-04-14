@@ -54,7 +54,6 @@ export default function createSSR(assets) {
     );
 
     const onEnd = (_res) => {
-      // console.log('_res', _res);
       const component = (
         <HelmetProvider context={helmetContext}>
           <Provider store={store}>

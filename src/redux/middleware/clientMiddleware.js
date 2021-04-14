@@ -1,4 +1,3 @@
-// TODO: implement the logger
 export default function clientMiddleware(client) {
   return ({ dispatch, getState }) => (next) => (action) => {
     if (typeof action === 'function') {
