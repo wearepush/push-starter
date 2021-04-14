@@ -1,1 +1,1 @@
-web: npm start
+web: production:services

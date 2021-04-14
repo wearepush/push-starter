@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 8080
 
 # Specify default CMD
-CMD ["npm", "run", "prod:start"]
+CMD ["npm", "run", "production:services"]
