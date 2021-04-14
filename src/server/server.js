@@ -9,9 +9,9 @@ import cookieParser from 'cookie-parser';
 import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
 import createSSR from './SSR/createSSR';
 
-const app = express();
-
 export default function (parameters) {
+  const app = express();
+
   if (isEnvProduction) {
     app.use(compression());
   }
@@ -19,7 +19,7 @@ export default function (parameters) {
   app.disable('x-powered-by');
   app.use(cookieParser());
   app.use('/', express.static('public', { etag: false }));
-  app.use(favicon(path.join('public', 'favicons', 'favicon.ico')));
+  app.use(favicon(path.join('public', 'favicons', 'icon-48x48.png')));
   app.use((req, res, next) => {
     res.set('X-Frame-Options', 'DENY');
     next();

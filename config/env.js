@@ -85,9 +85,6 @@ function getClientEnvironment(publicUrl) {
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
 
-        PORT: process.env.PORT || 8080,
-        HOST: process.env.HOST || 'locahost',
-
         // We support configuring the sockjs pathname during development.
         // These settings let a developer run multiple simultaneous projects.
         // They are used as the connection `hostname`, and `port`
