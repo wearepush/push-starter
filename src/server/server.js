@@ -55,8 +55,9 @@ export default function (parameters) {
   }
 
   app.get('*', createSSR(parameters && parameters.chunks()));
-  console.log('port!!!!!!!!!!!! ', port);
-  const server = app.listen(port, (err) => {
+  console.log('port!!!!!!!!!!!! 2', port);
+  console.log('port!!!!!!!!!!!! 1', process.env.PORT);
+  const server = app.listen(process.env.PORT, (err) => {
     if (err) {
       return console.error(err);
     }
