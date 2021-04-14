@@ -1,6 +1,5 @@
 .env
-.env.docker
-.env.example
+.env.development.local
+.env.production.local
 npm-debug.log
-yarn.lock
 node_modules

@@ -1,5 +1,6 @@
 */lib/**
 push-ui
 config
-configuration
-_webpack
+services
+coverage
+public
