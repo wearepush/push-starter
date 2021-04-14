@@ -43,6 +43,7 @@ module.exports = {
     'no-underscore-dangle': ignore,
     'import/no-unresolved': ignore,
     'import/no-extraneous-dependencies': ignore,
+    'react/destructuring-assignment': ignore,
   },
   settings: {
     'import/resolver': {

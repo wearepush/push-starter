@@ -3,7 +3,8 @@ import nock from 'nock';
 import mockStore from '../../__mocks__/store';
 import { host } from '../../../../config/consts';
 
-import reducer, { initialState, STATE_KEY, ACTIONS_TYPES, ACTIONS, GETTERS, SELECTORS } from '../users';
+import reducer, { initialState, STATE_KEY, ACTIONS_TYPES, clearUsers, loadUsers } from '../users/users';
+import { getUsersError, getUsersLoaded, getUsersLoading, getUsersRecords } from '../users/usersSelectors';
 
 let store;
 
@@ -77,58 +78,31 @@ describe(`${STATE_KEY} module`, () => {
     });
   });
 
-  describe(`${STATE_KEY} getters`, () => {
-    it(`should return ${STATE_KEY} state`, () => {
-      const state = store.getState();
-      expect(GETTERS.getUsers(state)).toBe(initialState);
-    });
-
-    it(`should return ${STATE_KEY} records state`, () => {
-      const state = store.getState();
-      expect(GETTERS.getUsersRecords(state)).toBe(initialState.records);
-    });
-
-    it(`should return ${STATE_KEY} loading state`, () => {
-      const state = store.getState();
-      expect(GETTERS.getUsersLoading(state)).toBe(initialState.loading);
-    });
-
-    it(`should return ${STATE_KEY} loaded state`, () => {
-      const state = store.getState();
-      expect(GETTERS.getUsersLoaded(state)).toBe(initialState.loaded);
-    });
-
-    it(`should return ${STATE_KEY} error state`, () => {
-      const state = store.getState();
-      expect(GETTERS.getUsersError(state)).toBe(initialState.error);
-    });
-  });
-
   describe(`${STATE_KEY} selectors`, () => {
     it(`should return ${STATE_KEY} list`, () => {
       const state = store.getState();
-      expect(SELECTORS.usersRecords(state)).toEqual([]);
+      expect(getUsersRecords(state)).toEqual([]);
     });
 
     it(`should return ${STATE_KEY} loading state`, () => {
       const state = store.getState();
-      expect(SELECTORS.usersLoading(state)).toBe(false);
+      expect(getUsersLoading(state)).toBe(false);
     });
 
     it(`should return ${STATE_KEY} loaded state`, () => {
       const state = store.getState();
-      expect(SELECTORS.usersLoaded(state)).toBe(false);
+      expect(getUsersLoaded(state)).toBe(false);
     });
 
     it(`should return ${STATE_KEY} error state`, () => {
       const state = store.getState();
-      expect(SELECTORS.usersError(state)).toBe(null);
+      expect(getUsersError(state)).toBe(null);
     });
   });
 
   describe(`${STATE_KEY} actions`, () => {
     it('should return clean initial state', () => {
-      store.dispatch(ACTIONS.clear());
+      store.dispatch(clearUsers());
       const actions = store.getActions();
       let data = null;
       actions.map((action) => {
@@ -145,7 +119,7 @@ describe(`${STATE_KEY} module`, () => {
       nock(host).get('/api/users').reply(200, payload);
 
       store
-        .dispatch(ACTIONS.load())
+        .dispatch(loadUsers())
         .then(() => {
           const actions = store.getActions();
           let data = null;
@@ -174,7 +148,7 @@ describe(`${STATE_KEY} module`, () => {
       nock(host).get('/api/users').reply(400, payload);
 
       store
-        .dispatch(ACTIONS.load())
+        .dispatch(loadUsers())
         .then(() => {
           const actions = store.getActions();
           let data = null;

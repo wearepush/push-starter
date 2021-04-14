@@ -29,7 +29,7 @@ const isSSR = env.raw.REACT_APP_SSR === 'true';
 const port = process.env.PORT;
 const host = process.env.HOST;
 const ssl = process.env.SSL === 'true' || false;
-const logLevel = process.env.LOG_LEVEL || 'info';
+const logLevel = process.env.LOG_LEVEL;
 
 module.exports = {
   env,
