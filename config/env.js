@@ -68,6 +68,8 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
+  const port = process.env.PORT;
+
   const raw = Object.keys(process.env)
     .filter((key) => REACT_APP.test(key))
     .reduce(
@@ -85,7 +87,7 @@ function getClientEnvironment(publicUrl) {
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
 
-        PORT: process.env.PORT,
+        PORT: port !== 'undefined' && typeof port !== 'undefined' ? port : undefined,
         HOST: process.env.HOST,
 
         // We support configuring the sockjs pathname during development.
