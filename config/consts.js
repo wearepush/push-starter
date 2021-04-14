@@ -26,8 +26,8 @@ const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
 const isSSR = env.raw.REACT_APP_SSR === 'true';
 
 // Express port and host
-const port = process.env.PORT;
-const host = process.env.HOST;
+const port = process.env.PORT || 8080;
+const host = process.env.HOST || 'locahost';
 const ssl = process.env.SSL === 'true' || false;
 const logLevel = process.env.LOG_LEVEL;
 
