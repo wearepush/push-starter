@@ -96,7 +96,8 @@
     "serialize-javascript": "5.0.1",
     "serve-favicon": "2.5.0",
     "universal-webpack": "0.6.15",
-    "winston": "3.3.3"
+    "winston": "3.3.3",
+    "yargs": "^17.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.13.14",
@@ -174,6 +175,6 @@
     "webpack-subresource-integrity": "^5.0.0-alpha.5"
   },
   "engines": {
-    "node": "^14.0.0"
+    "node": "^14.x"
   }
 }

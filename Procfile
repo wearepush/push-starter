@@ -1,1 +1,1 @@
-web: npm run production:services
+web: npm run production:services --port $PORT

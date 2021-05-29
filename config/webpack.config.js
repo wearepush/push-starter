@@ -18,8 +18,10 @@ const {
   shouldUseSourceMap,
 } = require('./consts');
 
+console.log('env.stringified', env.stringified);
+
 module.exports = {
-  target: process.env.WEBPACK_SERVER ? 'node' : isEnvDevelopment ? 'web' : 'browserslist',
+  target: isEnvDevelopment ? 'web' : 'browserslist',
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
   bail: isEnvProduction,
