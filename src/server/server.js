@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return */
+/* eslint-disable consistent-return, no-unused-vars */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
@@ -10,8 +10,6 @@ import cookieParser from 'cookie-parser';
 import test, { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
 
 import createSSR from './SSR/createSSR';
-
-console.log('test', test);
 
 export default function (parameters) {
   const app = express();

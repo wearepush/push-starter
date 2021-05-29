@@ -23,7 +23,7 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
 
-const isSSR = env.raw.REACT_APP_SSR === 'true';
+const isSSR = env.raw.REACT_APP_SSR === '1';
 
 // Express port and host
 const port = process.env.PORT || 8080;
