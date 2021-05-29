@@ -30,7 +30,7 @@
     "production": "npm-run-all production:client:build production:client:rendering-service:build production:services",
     "production:client:build": "cross-env NODE_ENV=production webpack --mode production --color --stats-errors --config ./config/webpack.config.client.production.babel.js",
     "production:client:rendering-service:build": "cross-env NODE_ENV=production UNIVERSAL_WEBPACK_CSS_LOADER_V4=true WEBPACK_SERVER=true webpack --mode production --color --stats-errors --config ./config/webpack.config.server.production.babel.js",
-    "production:client:rendering-service": "cross-env NODE_ENV=production node ./services/index.babel.js",
+    "production:client:rendering-service": "cross-env NODE_ENV=production node ./services/index.js",
     "production:services": "npm run production:client:rendering-service",
     "production:build": "npm-run-all production:client:build production:client:rendering-service:build",
     "heroku-postbuild": "npm run production:build",

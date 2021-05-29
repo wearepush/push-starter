@@ -18,6 +18,8 @@ const {
   shouldUseSourceMap,
 } = require('./consts');
 
+console.log('env', env);
+
 module.exports = {
   target: isEnvDevelopment ? 'web' : 'browserslist',
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
