@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return, no-unused-vars */
+/* eslint-disable consistent-return */
 import path from 'path';
 import compression from 'compression';
 import express from 'express';
@@ -7,7 +7,7 @@ import winston from 'winston';
 import expressWinston from 'express-winston';
 import cookieParser from 'cookie-parser';
 
-import test, { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
+import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
 
 import createSSR from './SSR/createSSR';
 

@@ -57,11 +57,9 @@ To get this project to work on Heroku, you need to:
 
 1. Add heroku `heroku git:remote -a heroku-app-name`
 2. `heroku config:set NODE_ENV=production`
-3. `heroku config:set REACT_APP_SSR=1`
-4. `heroku config:set SSL=1`
-5. `heroku config:set NPM_CONFIG_PRODUCTION=false`
-6. `heroku config:set NODE_MODULES_CACHE=false`
-7. `heroku config:set GOOGLE_ANALITICS_ID=UA-xxxxxxxxx-x` (optional)
+3. `heroku config:set NPM_CONFIG_PRODUCTION=false`
+4. `heroku config:set SSL=true`
+5. `heroku config:set GOOGLE_ANALITICS_ID=UA-xxxxxxxxx-x` (optional)
 
 ## Docker
 
@@ -74,7 +72,7 @@ docker-compose up -d
 Build an image
 
 ```bash
-docker build -t wearepush/redux-starter .
+docker build -t wearepush/push-starter .
 ```
 
 ## Contributing

@@ -38,20 +38,15 @@ export default function createSSR(assets) {
       return;
     }
     const branch = matchRoutes(routes, req.url);
-    const promises = branch.map(
-      ({
-        route: {
-          component: { fetchData },
-        },
-      }) => {
-        if (fetchData instanceof Function) {
-          return fetchData(store)
-            .then((response) => Promise.resolve(response))
-            .catch((error) => Promise.reject(error));
-        }
-        return Promise.resolve();
+    const promises = branch.map((data) => {
+      const fetchData = data.route?.component?.fetchData;
+      if (fetchData instanceof Function) {
+        return fetchData(store)
+          .then((response) => Promise.resolve(response))
+          .catch((error) => Promise.reject(error));
       }
-    );
+      return Promise.resolve();
+    });
 
     const onEnd = (_res) => {
       const component = (

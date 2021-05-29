@@ -23,13 +23,15 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 const isServerWebpackConfig = process.env.WEBPACK_SERVER_CONFIG;
 
-const isSSR = env.raw.REACT_APP_SSR === '1';
+const isSSR = env.raw.REACT_APP_SSR !== 'false';
 
 // Express port and host
 const port = process.env.PORT || 8080;
-const host = process.env.HOST || 'locahost';
+const host = process.env.HOST || 'localhost';
 const ssl = process.env.SSL === 'true' || false;
 const logLevel = process.env.LOG_LEVEL;
+
+console.log('env', env);
 
 module.exports = {
   env,
