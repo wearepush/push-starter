@@ -19,7 +19,7 @@ const {
 } = require('./consts');
 
 module.exports = {
-  target: isEnvDevelopment ? 'web' : 'browserslist',
+  target: process.env.WEBPACK_SERVER ? 'node' : isEnvDevelopment ? 'web' : 'browserslist',
   mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
   // Stop compilation early in production
   bail: isEnvProduction,
