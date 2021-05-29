@@ -6,10 +6,12 @@ import favicon from 'serve-favicon';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import cookieParser from 'cookie-parser';
-import argv from 'yargs';
 
-import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
+import test, { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
+
 import createSSR from './SSR/createSSR';
+
+console.log('test', test);
 
 export default function (parameters) {
   const app = express();
@@ -58,8 +60,7 @@ export default function (parameters) {
 
   app.get('*', createSSR(parameters && parameters.chunks()));
 
-  // argv fixes heroku's issue
-  app.listen(argv.port || port, (err) => {
+  app.listen(port, (err) => {
     if (err) {
       return console.error(err);
     }
