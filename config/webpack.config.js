@@ -110,7 +110,7 @@ module.exports = {
     // It is absolutely essential that NODE_ENV is set to production
     // during a production build.
     // Otherwise React will be compiled in the very slow development mode.
-    new webpack.DefinePlugin(env.stringified),
+    !process.env.WEBPACK_SERVER && new webpack.DefinePlugin(env.stringified),
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how webpack interprets its code. This is a practical
     // solution that requires the user to opt into importing specific locales.

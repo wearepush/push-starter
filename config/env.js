@@ -91,8 +91,6 @@ function getClientEnvironment(publicUrl) {
         // in webpackHotDevClient.
         WDS_SOCKET_HOST: process.env.WDS_SOCKET_HOST || 'localhost',
         WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT || 3000,
-
-        PORT: process.env.PORT || 8080,
       }
     );
   // Stringify all values so we can feed into webpack DefinePlugin

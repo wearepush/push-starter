@@ -7,7 +7,7 @@ React boilerplate, used best practices and focus on performance
 ---
 
 
-## [Live Demo](https://wearepush-redux-starter.herokuapp.com) :eyes:
+## [Live Demo](https://push-starter.herokuapp.com) :eyes:
 
 ## About
 
