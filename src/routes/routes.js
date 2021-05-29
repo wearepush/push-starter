@@ -1,4 +1,4 @@
-import { Section } from 'components';
+import { Section } from '../components';
 import { Home, Users, SignIn, NotFound } from './index';
 import withTracker from './withTracker';
 

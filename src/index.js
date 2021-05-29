@@ -3,8 +3,8 @@ import 'core-js/stable';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import { createBrowserHistory as createHistory } from 'history';
-import { Root } from 'components';
-import { ApiClient } from 'helpers';
+import { Root } from './components';
+import { ApiClient } from './helpers';
 
 import getRoutes from './routes/routes';
 import configureStore from './redux/store';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { array, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
-import { HelmetWrapper } from 'elements';
+import { HelmetWrapper } from '../../elements';
 import { getUsersLoaded, getUsersLoading, getUsersRecords } from '../../redux/modules/users/usersSelectors';
 import { clearUsers, loadUsers } from '../../redux/modules/users/users';
 

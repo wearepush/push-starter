@@ -13,7 +13,7 @@ const isEnvProduction = env.raw.NODE_ENV === 'production';
 const isEnvTest = env.raw.NODE_ENV === 'test';
 
 // Variable used for enabling profiling in Production
-// passed into alias object. Uses a flag if passed into the build commandF
+// passed into alias object. Uses a flag if passed into the build command
 const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
 
 const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000');
@@ -30,8 +30,6 @@ const port = process.env.PORT || 8080;
 const host = process.env.HOST || 'localhost';
 const ssl = process.env.SSL === 'true' || false;
 const logLevel = process.env.LOG_LEVEL;
-
-console.log('env', env);
 
 module.exports = {
   env,
