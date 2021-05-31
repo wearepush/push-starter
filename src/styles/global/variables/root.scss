@@ -1,4 +1,46 @@
 :root {
-  // place css variables here
-  --text-color: pink;
+  // font family
+  --type__primary: -apple-system, 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, 'Fira Sans', 'Droid Sans', sans-serif;
+
+  // font weight
+  --type__weight--regular: 400;
+  --type__weight--semibold: 500;
+  --type__weight--bold: 700;
+  --type__weight--extrabold: 800;
+  --type__weight--black: 800;
+
+  // font sizes
+  --type__body__xsmall--fontsize: 10px;
+  --type__body__xsmall--fontweight: 400;
+  --type__body__xsmall--fontweight_strong: 500;
+  --type__body__xsmall--lineheight: 18px;
+
+  --type__body__small--fontsize: 12px;
+  --type__body__small--fontweight: 400;
+  --type__body__small--fontweight_strong: 500;
+  --type__body__small--lineheight: 20px;
+
+  --type__body__standard--fontsize: 14px;
+  --type__body__standard--fontweight: 400;
+  --type__body__standard--fontweight_strong: 500;
+  --type__body__standard--lineheight: 22px;
+
+  --type__body__large--fontsize: 16px;
+  --type__body__large--fontweight: 400;
+  --type__body__large--fontweight_strong: 500;
+  --type__body__large--lineheight: 24px;
+
+  --type__title__small--fontsize: 16px;
+  --type__title__small--fontweight: 400;
+  --type__title__small--fontweight_strong: 500;
+  --type__title__small--lineheight: 26px;
+
+  --type__title__standard--fontsize: 22px;
+  --type__title__standard--fontweight: 500;
+  --type__title__standard--lineheight: 28px;
+
+  --type__title__large--fontsize: 28px;
+  --type__title__large--fontweight: 500;
+  --type__title__large--lineheight: 36px;
 }
