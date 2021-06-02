@@ -98,7 +98,6 @@ const Html = ({ assets, component, store }) => {
             type="text/css"
           />
         ))}
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
       </head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: ie }} />
