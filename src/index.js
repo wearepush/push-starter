@@ -12,7 +12,6 @@ import configureStore from './redux/store';
 if (window.history.scrollRestoration) {
   window.history.scrollRestoration = 'manual';
 }
-
 const client = new ApiClient();
 const initialState = window.INITIAL_STATE;
 const history = createHistory();
