@@ -65,6 +65,7 @@
     "IE 10"
   ],
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "axios": "0.21.1",
     "classnames": "2.3.1",
     "compression": "1.7.4",
