@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { array, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
+
 import { HelmetWrapper } from '../../elements';
 import { getUsersLoaded, getUsersLoading, getUsersRecords } from '../../redux/reducers/users/usersSelectors';
 import { clearUsers, loadUsers } from '../../redux/reducers/users/users';
@@ -18,7 +19,9 @@ const mapDispatchToProps = {
 
 class Users extends Component {
   componentDidMount() {
-    this.props.loadUsers();
+    if (this.props.users.length === 0) {
+      this.props.loadUsers();
+    }
   }
 
   componentWillUnmount() {
@@ -46,12 +49,13 @@ class Users extends Component {
   }
 }
 
-// function* fetchData({ dispatch }) {
-//   const load = loadUsers();
-//   return dispatch(load);
-// }
+async function fetchData(store) {
+  store.dispatch(loadUsers());
+  store.dispatch(store.stopSaga());
+  await store.runSaga.toPromise();
+}
 
-// Users.fetchData = fetchData;
+Users.fetchData = fetchData;
 
 Users.propTypes = {
   clearUsers: func.isRequired,

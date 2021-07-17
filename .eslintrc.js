@@ -44,6 +44,8 @@ module.exports = {
     'import/no-unresolved': ignore,
     'import/no-extraneous-dependencies': ignore,
     'react/destructuring-assignment': ignore,
+    'no-param-reassign': ignore,
+    'no-plusplus': ignore,
   },
   settings: {
     'import/resolver': {
