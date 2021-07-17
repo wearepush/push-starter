@@ -1,9 +1,13 @@
-/* eslint-disable */
-import nock from 'nock';
 import mockStore from '../../__mocks__/store';
-import { host } from '../../../../config/consts';
 
-import reducer, { initialState, STATE_KEY, ACTIONS_TYPES, clearUsers, loadUsers } from '../users/users';
+import reducer, {
+  initialState,
+  STATE_KEY,
+  clearUsers,
+  loadUsers,
+  loadUsersSuccess,
+  loadUsersFailed,
+} from '../users/users';
 import { getUsersError, getUsersLoaded, getUsersLoading, getUsersRecords } from '../users/usersSelectors';
 
 let store;
@@ -14,11 +18,6 @@ beforeEach(() => {
   });
 });
 
-afterEach(() => {
-  nock.cleanAll();
-  nock.restore();
-});
-
 describe(`${STATE_KEY} module`, () => {
   describe(`${STATE_KEY} reducer`, () => {
     it('should return initial state', () => {
@@ -27,14 +26,14 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return clean initial state', () => {
       const action = {
-        type: ACTIONS_TYPES.CLEAR,
+        type: clearUsers.type,
       };
       expect(reducer(undefined, action)).toEqual(initialState);
     });
 
     it('should return loading status', () => {
       const action = {
-        type: ACTIONS_TYPES.LOAD,
+        type: loadUsers.type,
       };
       expect(reducer(undefined, action)).toEqual(
         expect.objectContaining({
@@ -45,8 +44,8 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return success loaded status', () => {
       const action = {
-        type: ACTIONS_TYPES.LOAD_SUCCESS,
-        result: {
+        type: loadUsersSuccess.type,
+        data: {
           records: [],
         },
       };
@@ -61,7 +60,7 @@ describe(`${STATE_KEY} module`, () => {
 
     it('should return failed loaded status', () => {
       const action = {
-        type: ACTIONS_TYPES.LOAD_FAIL,
+        type: loadUsersFailed.type,
         error: {
           message: 'failed',
         },
@@ -97,74 +96,6 @@ describe(`${STATE_KEY} module`, () => {
     it(`should return ${STATE_KEY} error state`, () => {
       const state = store.getState();
       expect(getUsersError(state)).toBe(null);
-    });
-  });
-
-  describe(`${STATE_KEY} actions`, () => {
-    it('should return clean initial state', () => {
-      store.dispatch(clearUsers());
-      const actions = store.getActions();
-      let data = null;
-      actions.map((action) => {
-        data = reducer(undefined, action);
-        return true;
-      });
-      expect(data).toEqual(initialState);
-    });
-
-    it('should return success loaded', () => {
-      const payload = {
-        records: [{ id: 1 }, { id: 2 }],
-      };
-      nock(host).get('/api/users').reply(200, payload);
-
-      store
-        .dispatch(loadUsers())
-        .then(() => {
-          const actions = store.getActions();
-          let data = null;
-          actions.map((action) => {
-            data = reducer(undefined, action);
-            return true;
-          });
-          expect(data).toEqual(
-            expect.objectContaining({
-              ...payload,
-              error: null,
-              loading: false,
-              loaded: true,
-            })
-          );
-        })
-        .catch(() => {});
-    });
-
-    it('should return failed loaded', () => {
-      const payload = {
-        error: {
-          message: 'failed',
-        },
-      };
-      nock(host).get('/api/users').reply(400, payload);
-
-      store
-        .dispatch(loadUsers())
-        .then(() => {
-          const actions = store.getActions();
-          let data = null;
-          actions.map((action) => {
-            data = reducer(undefined, action);
-            return true;
-          });
-          expect(data).toEqual(
-            expect.objectContaining({
-              ...payload,
-              loading: false,
-              loaded: false,
-            })
-          );
-        })
-        .catch(() => {});
     });
   });
 });

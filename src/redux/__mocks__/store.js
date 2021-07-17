@@ -1,12 +1,9 @@
-/* eslint-disable */
-
 /* eslint-disable import/no-extraneous-dependencies */
 import configureMockStore from 'redux-mock-store';
+import createSagaMiddleware from 'redux-saga';
 
-import createMiddleware from '../middleware/clientMiddleware';
-import ApiClient from '../../helpers/ApiClient';
-
-const client = new ApiClient();
-const middlewares = [createMiddleware(client)];
+const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware];
 const mockStore = configureMockStore(middlewares);
+
 export default mockStore;
