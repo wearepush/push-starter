@@ -1,4 +1,3 @@
-/* eslint-disable */
 import 'regenerator-runtime/runtime';
 import { routerMiddleware } from 'connected-react-router';
 import { configureStore as configureStoreToolkit } from '@reduxjs/toolkit';
@@ -18,6 +17,6 @@ export default function configureStore(history, client, initialState = {}) {
     middleware: [routeMiddleware, sagaMiddleware],
     preloadedState: initialState,
   });
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga, { client });
   return store;
 }

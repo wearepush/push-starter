@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { connectRouter } from 'connected-react-router';
-import * as reducers from './modules';
+import * as reducers from './reducers';
 
 export default function createReducer({ history = undefined }) {
   return combineReducers({

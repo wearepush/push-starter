@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable */
 import nock from 'nock';
 import mockStore from '../../__mocks__/store';
 import { host } from '../../../../config/consts';
