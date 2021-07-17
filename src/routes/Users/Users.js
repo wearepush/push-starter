@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { array, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
+
 import { HelmetWrapper } from '../../elements';
-import { getUsersLoaded, getUsersLoading, getUsersRecords } from '../../redux/modules/users/usersSelectors';
-import { clearUsers, loadUsers } from '../../redux/modules/users/users';
+import { getUsersLoaded, getUsersLoading, getUsersRecords } from '../../redux/reducers/users/usersSelectors';
+import { clearUsers, loadUsers } from '../../redux/reducers/users/users';
 
 const mapStateToProps = (state) => ({
   loaded: getUsersLoaded(state),
@@ -12,13 +13,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  loadUsers,
   clearUsers,
+  loadUsers,
 };
 
 class Users extends Component {
   componentDidMount() {
-    this.props.loadUsers();
+    if (this.props.users.length === 0) {
+      this.props.loadUsers();
+    }
   }
 
   componentWillUnmount() {
@@ -27,12 +30,9 @@ class Users extends Component {
 
   render() {
     const { loaded, loading, users } = this.props;
-    const title = 'Users';
-    const description = 'Sign In';
-
     return (
       <div>
-        <HelmetWrapper title={title} description={description} />
+        <HelmetWrapper title="Users" description="Sign In" />
         <div>This is example server page with server side rendering. Check method `fetchData`</div>
         {loading && <div>Loading...</div>}
         {loaded && (
@@ -49,10 +49,13 @@ class Users extends Component {
   }
 }
 
-Users.fetchData = ({ dispatch }) => {
-  const load = loadUsers();
-  return dispatch(load);
-};
+async function fetchData(store) {
+  store.dispatch(loadUsers());
+  store.dispatch(store.stopSaga());
+  await store.runSaga.toPromise();
+}
+
+Users.fetchData = fetchData;
 
 Users.propTypes = {
   clearUsers: func.isRequired,
