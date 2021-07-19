@@ -5,7 +5,6 @@ $footer: 'footer';
 
 .#{$footer} {
   &__container {
-    color: blue;
     font-size: 15px;
     line-height: 17px;
     padding: 0 15px;
@@ -17,6 +16,13 @@ $footer: 'footer';
   &__icons {
     display: flex;
     align-items: center;
+
+    @include media('>phone') {
+      background: #eee;
+    }
+    @include media('>=desktop') {
+      background: #aaa;
+    }
   }
 
   &__svg-bg {

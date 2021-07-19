@@ -25,6 +25,7 @@ The starter boilerplate includes the following technologies:
 | [Redux](http://redux.js.org/)                                                     | Redux is a predictable state container for JavaScript apps                           |
 | [React Router Redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)               | Simple bindings to keep react-router and redux in sync                                        |
 | [ESLint](http://eslint.org)                                                       | The pluggable linting utility for JavaScript and JSX                                            |
+| [Include-media](https://eduardoboucas.github.io/include-media/)                   | Sass library for writing CSS media queries in an easy and maintainable way                               |
 
 ## Installation
 

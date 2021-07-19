@@ -9,7 +9,6 @@ const Footer = () => (
         <ArrowDownIcon className="footer__svg-component" />
         <div className="footer__svg-bg" />
       </div>
-      <div className="footer__large-svg" />
       <div>Footer</div>
     </div>
   </footer>
