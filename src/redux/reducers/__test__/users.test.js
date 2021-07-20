@@ -45,7 +45,7 @@ describe(`${STATE_KEY} module`, () => {
     it('should return success loaded status', () => {
       const action = {
         type: loadUsersSuccess.type,
-        data: {
+        payload: {
           records: [],
         },
       };
@@ -61,8 +61,10 @@ describe(`${STATE_KEY} module`, () => {
     it('should return failed loaded status', () => {
       const action = {
         type: loadUsersFailed.type,
-        error: {
-          message: 'failed',
+        payload: {
+          error: {
+            message: 'failed',
+          },
         },
       };
       expect(reducer(undefined, action)).toEqual(
