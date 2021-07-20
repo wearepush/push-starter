@@ -23,13 +23,13 @@ export const usersSlice = createSlice({
     loadUsers: (state) => {
       state.loading = true;
     },
-    loadUsersSuccess: (state, action) => {
+    loadUsersSuccess: (state, { payload }) => {
       state.loading = false;
       state.loaded = true;
-      state.records = action.data.records;
+      state.records = payload.records;
     },
-    loadUsersFailed: (state, action) => {
-      state.error = action.error;
+    loadUsersFailed: (state, { payload }) => {
+      state.error = payload.error;
       state.loading = false;
       state.loaded = false;
     },
