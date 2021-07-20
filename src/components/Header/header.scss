@@ -15,6 +15,14 @@
     max-width: 1140px;
     width: 100%;
     text-align: right;
+
+    @include media('<=phone') {
+      background: #ddd;
+    }
+
+    @include media('>phone', '<=desktop') {
+      background: #ccc;
+    }
   }
 
   &__link {
