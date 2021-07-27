@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
@@ -12,8 +13,9 @@
   &__container {
     padding: 0 15px;
     margin: 0 auto;
-    max-width: 1140px;
-    width: 100%;
+    // just to check that new math operation works
+    max-width: math.div(1140px * 2, 2);
+    width: math.div(100% * 2, 2);
     text-align: right;
 
     @include media('<=phone') {

@@ -16,8 +16,18 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
+const sassLoaderOptions = {
+  // Prefer `dart-sass`
+  implementation: require('sass'),
+  sassOptions: {
+    // see https://webpack.js.org/loaders/sass-loader/
+    // for more info
+    fiber: require('fibers'),
+  },
+};
+
 // common function to get style loaders
-const getStyleLoaders = (cssOptions, preProcessor) => {
+const getStyleLoaders = (cssOptions, preProcessor, options) => {
   const loaders = [
     isEnvDevelopment && 'style-loader',
     isEnvProduction && {
@@ -70,6 +80,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         loader: preProcessor,
         options: {
           sourceMap: true,
+          ...options,
         },
       }
     );
@@ -185,7 +196,8 @@ module.exports = {
           importLoaders: 3,
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
-        'sass-loader'
+        'sass-loader',
+        sassLoaderOptions
       ),
       // Don't consider CSS imports dead code even if the
       // containing package claims to have no side effects.
@@ -205,7 +217,8 @@ module.exports = {
             getLocalIdent: getCSSModuleLocalIdent,
           },
         },
-        'sass-loader'
+        'sass-loader',
+        sassLoaderOptions
       ),
     },
     // "file" loader makes sure those assets get served by WebpackDevServer.
