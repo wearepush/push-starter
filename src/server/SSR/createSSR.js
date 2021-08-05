@@ -5,12 +5,12 @@ import { matchRoutes, renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 import { HelmetProvider } from 'react-helmet-async';
-
 import getRoutes from '../../routes/routes';
 import Html from './html';
 import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../redux/store';
 import { isSSR, host, port, ssl } from '../../../config/consts';
+import { initialState as usersInitialState } from '../../redux/reducers/users/users';
 
 export const helmetContext = {};
 
@@ -25,7 +25,16 @@ export default function createSSR(assets) {
       host,
       ssl,
     });
-    const store = configureStore(history, client);
+    const { cookies = {} } = req;
+    const { testData } = cookies;
+    const initialState = {
+      users: {
+        ...usersInitialState,
+        ...(testData && { testData: JSON.parse(testData) }),
+      },
+    };
+
+    const store = configureStore(history, client, initialState);
     const routes = getRoutes(store);
 
     if (!isSSR) {

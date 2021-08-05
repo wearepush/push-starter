@@ -7,6 +7,9 @@ export const initialState = {
   loading: false,
   loaded: false,
   records: [],
+  // TODO: TEMP DATA TO SET INIT STATE FROM COOKIE
+  // DO NOT FORGET TO CLEANUP createSSR.js
+  testData: null,
 };
 
 export const usersSlice = createSlice({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { array, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
-
+import Cookies from 'js-cookie';
 import { HelmetWrapper } from '../../elements';
 import { getUsersLoaded, getUsersLoading, getUsersRecords } from '../../redux/reducers/users/usersSelectors';
 import { clearUsers, loadUsers } from '../../redux/reducers/users/users';
@@ -22,6 +22,9 @@ class Users extends Component {
     if (this.props.users.length === 0) {
       this.props.loadUsers();
     }
+    // TODO: TEMP DATA TO SET INIT STATE FROM COOKIE
+    // DO NOT FORGET TO CLEANUP createSSR.js
+    Cookies.set('testData', JSON.stringify({ name: 'initial data from cookie' }));
   }
 
   componentWillUnmount() {
