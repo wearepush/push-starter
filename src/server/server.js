@@ -11,7 +11,7 @@ import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts'
 
 import createSSR from './SSR/createSSR';
 
-export default function (parameters) {
+export default function createServer(parameters) {
   const app = express();
 
   if (isEnvProduction) {

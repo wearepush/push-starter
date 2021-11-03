@@ -16,7 +16,6 @@ module.exports = {
         bracketSpacing: true,
         trailingComma: 'es5',
         singleQuote: true,
-        jsxBracketSameLine: false,
       },
     ],
     'import/prefer-default-export': ignore,
