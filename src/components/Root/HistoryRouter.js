@@ -8,6 +8,7 @@ const HistoryRouter = ({ basename, children, store }) => {
     action: history.action,
     location: history.location,
   });
+
   useLayoutEffect(() => history.listen(setState), [history]);
   return createElement(Router, { // eslint-disable-line
     basename,
