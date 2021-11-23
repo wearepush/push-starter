@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { matchRoutes, renderRoutes } from 'react-router-config';
+import { StaticRouter } from 'react-router-dom/server';
+import { matchRoutes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 import { HelmetProvider } from 'react-helmet-async';
@@ -11,6 +11,7 @@ import ApiClient from '../../helpers/ApiClient';
 import configureStore from '../../redux/store';
 import { isSSR, host, port, ssl } from '../../../config/consts';
 import { initialState as usersInitialState } from '../../redux/reducers/users/users';
+import RootRoutes from '../../components/Root/RootRoutes';
 
 export const helmetContext = {};
 
@@ -35,7 +36,6 @@ export default function createSSR(assets) {
     };
 
     const store = configureStore(history, client, initialState);
-    const routes = getRoutes(store);
 
     if (!isSSR) {
       res.send(`<!doctype html>\n${renderToString(<Html assets={assets} store={store} />)}`);
@@ -46,9 +46,10 @@ export default function createSSR(assets) {
       res.redirect(302, context.url);
       return;
     }
+    const routes = getRoutes(store);
     const branch = matchRoutes(routes, req.url);
     const promises = branch.map((data) => {
-      const fetchData = data.route?.component?.fetchData;
+      const fetchData = data.route?.element?.type?.fetchData;
       if (fetchData instanceof Function) {
         return fetchData(store)
           .then((response) => Promise.resolve(response))
@@ -62,13 +63,17 @@ export default function createSSR(assets) {
         <HelmetProvider context={helmetContext}>
           <Provider store={store}>
             <StaticRouter location={req.url} context={context}>
-              {renderRoutes(routes)}
+              <RootRoutes routes={routes} />
             </StaticRouter>
           </Provider>
         </HelmetProvider>
       );
 
-      const content = renderToString(<Html assets={assets} component={component} store={store} />);
+      const content = renderToString(
+        <StrictMode>
+          <Html assets={assets} component={component} store={store} />
+        </StrictMode>
+      );
 
       if (_res && _res.response && _res.response.status) {
         res.status(_res.response.status);

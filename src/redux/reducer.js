@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
-import { connectRouter } from 'connected-react-router';
 import * as reducers from './reducers';
 
-export default function createReducer({ history = undefined }) {
+export default function createReducer({ router }) {
   return combineReducers({
-    router: connectRouter(history),
+    router,
     form,
     ...reducers,
   });
