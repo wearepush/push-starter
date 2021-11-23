@@ -1,24 +1,26 @@
 import 'regenerator-runtime/runtime';
-import { routerMiddleware } from 'connected-react-router';
 import { configureStore as configureStoreToolkit } from '@reduxjs/toolkit';
 import createSagaMiddleware, { END } from 'redux-saga';
+import { createReduxHistoryContext } from 'redux-first-history';
 import createReducer from './reducer';
 import rootSaga from './sagas';
 
 export default function configureStore(history, client, initialState = {}) {
-  const reducer = createReducer({
+  const { createReduxHistory, routerReducer, routerMiddleware } = createReduxHistoryContext({
     history,
   });
+  const reducer = createReducer({
+    router: routerReducer,
+  });
   const sagaMiddleware = createSagaMiddleware();
-  const routeMiddleware = routerMiddleware(history);
   const store = configureStoreToolkit({
     devTools: process.env.REACT_APP_REDUX_DEVTOOLS === 'true',
     reducer,
-    middleware: [routeMiddleware, sagaMiddleware],
+    middleware: [routerMiddleware, sagaMiddleware],
     preloadedState: initialState,
   });
-
   store.runSaga = sagaMiddleware.run(rootSaga, { client });
   store.stopSaga = () => END;
+  store.createReduxHistory = createReduxHistory;
   return store;
 }

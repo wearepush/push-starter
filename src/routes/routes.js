@@ -1,29 +1,35 @@
+import React from 'react';
 import { Section } from '../components';
 import { Home, Users, SignIn, NotFound } from './index';
 import withTracker from './withTracker';
+
+const ConnectedHome = withTracker(Home);
+const ConnectedUsers = withTracker(Users);
+const ConnectedSignIn = withTracker(SignIn);
+const ConnectedNotFound = withTracker(NotFound);
 
 export default (store) => { // eslint-disable-line
   // we can get an access to store
   return [
     {
-      component: Section,
-      routes: [
+      element: <Section />,
+      children: [
         {
           path: '/',
           exact: true,
-          component: withTracker(Home),
+          element: <ConnectedHome />,
         },
         {
           path: '/users',
-          component: withTracker(Users),
+          element: <ConnectedUsers />,
         },
         {
           path: '/signin',
-          component: withTracker(SignIn),
+          element: <ConnectedSignIn />,
         },
         {
           path: '*',
-          component: withTracker(NotFound),
+          element: <ConnectedNotFound />,
         },
       ],
     },

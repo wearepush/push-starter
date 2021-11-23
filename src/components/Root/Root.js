@@ -2,26 +2,25 @@ import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
-import { renderRoutes } from 'react-router-config';
-import { ConnectedRouter } from 'connected-react-router';
 import { ScrollToTop } from '../../elements';
+import RootRoutes from './RootRoutes';
+import HistoryRouter from './HistoryRouter';
 import '../../styles/global/index.scss';
 
-const Root = ({ history, routes, store }) => (
+const Root = ({ routes, store }) => (
   <HelmetProvider>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        {renderRoutes(routes)}
+      <HistoryRouter store={store}>
+        <RootRoutes routes={routes} />
         <ScrollToTop />
-      </ConnectedRouter>
+      </HistoryRouter>
     </Provider>
   </HelmetProvider>
 );
 
 Root.propTypes = {
-  history: object.isRequired,
-  store: object.isRequired,
   routes: oneOfType([array, object]).isRequired,
+  store: object.isRequired,
 };
 
 export default Root;
