@@ -1,16 +1,12 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import { object, node } from 'prop-types';
-import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import { helmetContext } from './createSSR';
 import { isEnvProduction } from '../../../config/consts';
 
 const Html = ({ assets, component, store }) => {
   const initialState = `window.INITIAL_STATE = ${serialize(store.getState())}`;
-  const ie =
-    '<!--[if lte IE 9]><div class="browsehappy"><div class="browsehappy__inner"><div class="browsehappy__message">You are using an <strong>outdated</strong> browser.Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div></div></div><![endif]-->';
-  const content = component ? renderToString(component) : null;
   const { helmet } = helmetContext;
   const jsMap = assets?.javascript;
   const jsList = Object.keys(jsMap);
@@ -100,8 +96,7 @@ const Html = ({ assets, component, store }) => {
         ))}
       </head>
       <body>
-        <div dangerouslySetInnerHTML={{ __html: ie }} />
-        <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
+        <div id="root">{component}</div>
         <script dangerouslySetInnerHTML={{ __html: initialState }} />
         {jsList?.map((c) => (
           <script
