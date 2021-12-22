@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToNodeStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { matchRoutes } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -38,7 +38,17 @@ export default function createSSR(assets) {
     const store = configureStore(history, client, initialState);
 
     if (!isSSR) {
-      res.send(`<!doctype html>\n${renderToString(<Html assets={assets} store={store} />)}`);
+      const content = (
+        <StrictMode>
+          <Html assets={assets} store={store} />
+        </StrictMode>
+      );
+      res.write('<!doctype html>');
+      const stream = renderToNodeStream(content);
+      stream.pipe(res, { end: false });
+      stream.on('end', () => {
+        res.end();
+      });
       return;
     }
 
@@ -69,7 +79,7 @@ export default function createSSR(assets) {
         </HelmetProvider>
       );
 
-      const content = renderToString(
+      const content = (
         <StrictMode>
           <Html assets={assets} component={component} store={store} />
         </StrictMode>
@@ -81,7 +91,12 @@ export default function createSSR(assets) {
         res.status(200);
       }
 
-      return res.send(`<!doctype html>\n${content}`);
+      res.write('<!doctype html>');
+      const stream = renderToNodeStream(content);
+      stream.pipe(res, { end: false });
+      stream.on('end', () => {
+        res.end();
+      });
     };
 
     Promise.all(promises).then(onEnd).catch(onEnd);
