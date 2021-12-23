@@ -24,7 +24,7 @@
     "dev": "npm-run-all development:client:rendering-service:build:prepare development",
     "development": "npm-run-all --parallel development:client:build development:client:rendering-service:build development:client:rendering-service",
     "development:client:rendering-service:build:prepare": "universal-webpack --settings ./config/universal-webpack-settings.json prepare",
-    "development:client:build": "webpack serve --hot-only --config config/webpack.config.client.development.babel.js",
+    "development:client:build": "webpack serve --config config/webpack.config.client.development.babel.js",
     "development:client:rendering-service:build": "cross-env UNIVERSAL_WEBPACK_CSS_LOADER_V4=true WEBPACK_SERVER=true webpack --mode development --config ./config/webpack.config.server.development.babel.js --watch --color --stats-errors",
     "development:client:rendering-service": "nodemon ./services/index.babel.js --watch ./services --watch ./build/server --no-update-notifier",
     "production": "npm-run-all production:client:build production:client:rendering-service:build production:services",
@@ -138,7 +138,6 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.26.1",
     "eslint-plugin-react-hooks": "4.2.0",
-    "fibers": "5.0.0",
     "husky": "7.0.4",
     "identity-obj-proxy": "3.0.0",
     "jest": "27.3.1",
@@ -168,10 +167,11 @@
     "url": "0.11.0",
     "webpack": "5.61.0",
     "webpack-cli": "4.9.1",
+    "webpack-dev-server": "4.7.1",
     "webpack-merge": "5.8.0",
     "webpack-subresource-integrity": "^5.0.0-alpha.5"
   },
   "engines": {
-    "node": "^14.x"
+    "node": "^16.x"
   }
 }

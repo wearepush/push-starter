@@ -19,11 +19,6 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 const sassLoaderOptions = {
   // Prefer `dart-sass`
   implementation: require('sass'),
-  sassOptions: {
-    // see https://webpack.js.org/loaders/sass-loader/
-    // for more info
-    fiber: require('fibers'),
-  },
 };
 
 // common function to get style loaders
