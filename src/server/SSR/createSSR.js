@@ -45,10 +45,7 @@ export default function createSSR(assets) {
       );
       res.write('<!doctype html>');
       const stream = renderToNodeStream(content);
-      stream.pipe(res, { end: false });
-      stream.on('end', () => {
-        res.end();
-      });
+      stream.pipe(res);
       return;
     }
 
@@ -93,10 +90,7 @@ export default function createSSR(assets) {
 
       res.write('<!doctype html>');
       const stream = renderToNodeStream(content);
-      stream.pipe(res, { end: false });
-      stream.on('end', () => {
-        res.end();
-      });
+      stream.pipe(res);
     };
 
     Promise.all(promises).then(onEnd).catch(onEnd);
