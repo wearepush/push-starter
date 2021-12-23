@@ -1,4 +1,4 @@
-import { env, publicPath } from './consts';
+import { env } from './consts';
 const port = env.raw.WDS_SOCKET_PORT;
 const host = env.raw.WDS_SOCKET_HOST;
 
@@ -8,12 +8,6 @@ export const devServerConfig = {
 
   // The port to serve assets on.
   port,
-
-  publicPath,
-
-  // This is just for forcing `webpack serve`
-  // to not disable proxying for root path (`/`).
-  index: '',
 
   // Uncomment if using `index.html` instead of Server-Side Rendering.
   // https://webpack.js.org/configuration/dev-server/#devserver-historyapifallback
