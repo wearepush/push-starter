@@ -52,7 +52,7 @@ export default function createSSR(assets) {
     }
     const routes = getRoutes(store);
     const branch = matchRoutes(routes, req.url);
-    const promises = branch.map((data) => {
+    const promises = branch?.map((data) => {
       const fetchData = data.route?.element?.type?.fetchData;
       if (fetchData instanceof Function) {
         return fetchData(store)
