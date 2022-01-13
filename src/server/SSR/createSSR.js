@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react';
-import { renderToNodeStream } from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { matchRoutes } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -38,15 +38,12 @@ export default function createSSR(assets) {
     const store = configureStore(history, client, initialState);
 
     if (!isSSR) {
-      const content = (
+      const content = renderToString(
         <StrictMode>
           <Html assets={assets} store={store} />
         </StrictMode>
       );
-      res.write('<!doctype html>');
-      const stream = renderToNodeStream(content);
-      stream.pipe(res);
-      return;
+      res.send(`<!doctype html>\n${content}`);
     }
 
     if (context.status === 302) {
@@ -76,7 +73,7 @@ export default function createSSR(assets) {
         </HelmetProvider>
       );
 
-      const content = (
+      const content = renderToString(
         <StrictMode>
           <Html assets={assets} component={component} store={store} />
         </StrictMode>
@@ -88,9 +85,7 @@ export default function createSSR(assets) {
         res.status(200);
       }
 
-      res.write('<!doctype html>');
-      const stream = renderToNodeStream(content);
-      stream.pipe(res);
+      return res.send(`<!doctype html>\n${content}`);
     };
 
     Promise.all(promises).then(onEnd).catch(onEnd);
