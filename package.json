@@ -143,7 +143,7 @@
     "identity-obj-proxy": "3.0.0",
     "jest": "27.3.1",
     "lint-staged": "11.2.6",
-    "mini-css-extract-plugin": "1.6.0",
+    "mini-css-extract-plugin": "2.4.6",
     "nock": "13.1.4",
     "nodemon": "2.0.15",
     "npm-delay": "1.0.4",
