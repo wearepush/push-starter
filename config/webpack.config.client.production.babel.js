@@ -2,6 +2,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { SubresourceIntegrityPlugin } = require("webpack-subresource-integrity");
 const TerserPlugin = require('terser-webpack-plugin');
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 
 import { clientConfiguration } from 'universal-webpack';
 import settings from './universal-webpack-settings';
@@ -49,6 +50,7 @@ configuration.optimization = {
 
 configuration.plugins = [
   new CleanWebpackPlugin(),
+  new GitRevisionPlugin(),
   new SubresourceIntegrityPlugin({
     hashFuncNames: ['sha256'],
     enabled: true,
