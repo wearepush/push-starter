@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import { host, port, logLevel, isEnvProduction, ssl } from '../../config/consts';
 
 import createSSR from './SSR/createSSR';
+import { versionRouter } from './routes';
 
 export default function createServer(parameters) {
   const app = express();
@@ -35,6 +36,7 @@ export default function createServer(parameters) {
       }
     });
   }
+  app.use(versionRouter);
   app.get('/api/users', (req, res) => {
     res.json({
       records: [
