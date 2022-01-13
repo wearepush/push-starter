@@ -63,7 +63,7 @@ export default function createServer(parameters) {
       return console.error(err);
     }
     if (host && port) {
-      console.info(`Listening at ${host}:${port}`);
+      console.info(`Listening at http${ssl ? 's' : ''}://${host}:${port}`);
     }
   });
 }

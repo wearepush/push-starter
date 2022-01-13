@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { SignInForm } from '../../components';
+// import { SignInForm } from '../../components';
+import { Button } from 'push-ui';
 import { HelmetWrapper } from '../../elements';
 
 const mapStateToProps = () => ({});
@@ -13,7 +14,8 @@ const Home = () => {
   return (
     <div>
       <HelmetWrapper title={title} description={description} />
-      <SignInForm />
+      {/* <SignInForm /> */}
+      <Button>+++++++++</Button>
     </div>
   );
 };

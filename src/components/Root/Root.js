@@ -2,6 +2,7 @@ import React from 'react';
 import { object, oneOfType, array } from 'prop-types';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
+// import { GlobalStyle } from 'push-ui';
 import { ScrollToTop } from '../../elements';
 import RootRoutes from './RootRoutes';
 import HistoryRouter from './HistoryRouter';

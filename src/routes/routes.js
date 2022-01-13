@@ -1,11 +1,10 @@
 import React from 'react';
 import { Section } from '../components';
-import { Home, Users, SignIn, NotFound } from './index';
+import { Home, Users, NotFound } from './index';
 import withTracker from './withTracker';
 
 const ConnectedHome = withTracker(Home);
 const ConnectedUsers = withTracker(Users);
-const ConnectedSignIn = withTracker(SignIn);
 const ConnectedNotFound = withTracker(NotFound);
 
 export default (store) => { // eslint-disable-line
@@ -22,10 +21,6 @@ export default (store) => { // eslint-disable-line
         {
           path: '/users',
           element: <ConnectedUsers />,
-        },
-        {
-          path: '/signin',
-          element: <ConnectedSignIn />,
         },
         {
           path: '*',
