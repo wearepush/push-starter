@@ -1,13 +1,13 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { SubresourceIntegrityPlugin } = require("webpack-subresource-integrity");
+const { SubresourceIntegrityPlugin } = require('webpack-subresource-integrity');
 const TerserPlugin = require('terser-webpack-plugin');
-const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 
 import { clientConfiguration } from 'universal-webpack';
 import settings from './universal-webpack-settings';
 import baseConfiguration from './webpack.config';
 import AddSriToChunks from './addSriToChunks';
+import AddBuildGitVersion from './addBuildGitVersion';
 
 const configuration = clientConfiguration(baseConfiguration, settings, {
   // Extract all CSS into separate `*.css` files (one for each chunk)
@@ -50,13 +50,13 @@ configuration.optimization = {
 
 configuration.plugins = [
   new CleanWebpackPlugin(),
-  new GitRevisionPlugin(),
+  new AddBuildGitVersion(),
   new SubresourceIntegrityPlugin({
     hashFuncNames: ['sha256'],
     enabled: true,
   }),
   ...configuration.plugins,
   new AddSriToChunks(),
-];
+].filter(Boolean);
 
 export default configuration;
