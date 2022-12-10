@@ -68,7 +68,7 @@
     "core-js": "3.19.1",
     "current-device": "0.10.2",
     "detect-browser": "5.2.1",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "express-winston": "4.2.0",
     "history": "5.1.0",
     "js-cookie": "3.0.1",
